@@ -38,6 +38,7 @@
     "eslint-plugin-storybook": "^9.0.12",
     "husky": "9.1.6",
     "lint-staged": "15.2.10",
+    "next-view-transitions": "^0.3.4",
     "playwright": "^1.53.1",
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "0.6.8",

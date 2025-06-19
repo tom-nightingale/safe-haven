@@ -1,27 +1,19 @@
-import Link from "next/link";
+"use client";
 
-export default function Home() {
+import Header from "@/lib/components/Header/Header";
+import PageWrapper from "@/lib/components/PageWrapper/PageWrapper";
+
+export const Home = () => {
   return (
-    <div className="p-20">
-      <h1 className="">Next x Tailwind x Motion.</h1>
-
-      <div className="">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate.
-        </p>
-
-        <p>
-          Velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-          mollit anim id est laborum.
-        </p>
-
-        <Link href="/about">Go to About</Link>
-      </div>
-    </div>
+    <>
+      <Header />
+      <PageWrapper>
+        <main className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
+          Home page
+        </main>
+      </PageWrapper>
+    </>
   );
-}
+};
+
+export default Home;
