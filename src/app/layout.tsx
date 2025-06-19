@@ -1,6 +1,8 @@
+import React from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/lib/styles/globals.css";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-google-analytics-opt-out="">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <header>A header goes here.</header>
+        <ViewTransition>{children}</ViewTransition>
       </body>
     </html>
   );
