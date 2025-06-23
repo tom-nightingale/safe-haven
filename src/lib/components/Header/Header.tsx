@@ -2,9 +2,18 @@
 
 import Link from "next/link";
 import { useTransitionRouter } from "next-view-transitions";
+import type { GetNavigationByIdQuery } from "@/gql/sanity/codegen";
 
-const Header = () => {
+type Props = {
+  primaryNav: GetNavigationByIdQuery | undefined;
+  secondaryNav: GetNavigationByIdQuery | undefined;
+};
+
+const Header = ({ primaryNav, secondaryNav }: Props) => {
   const router = useTransitionRouter();
+
+  console.log(primaryNav);
+  console.log(secondaryNav);
 
   const urls = [
     {
@@ -12,8 +21,8 @@ const Header = () => {
       url: "/",
     },
     {
-      label: "About",
-      url: "/about",
+      label: "About Us",
+      url: "/about-us",
     },
   ];
   return (
@@ -38,14 +47,13 @@ const Header = () => {
 
 const pageAnimation = () => {
   document.documentElement.animate([{ opacity: 1 }, { opacity: 0 }], {
-    duration: 1000,
+    duration: 700,
     easing: "cubic-bezier(0.76, 0, 0.24, 1)",
     fill: "forwards",
     pseudoElement: "::view-transition-old(root)",
   });
-
   document.documentElement.animate([{ opacity: 0 }, { opacity: 1 }], {
-    duration: 1000,
+    duration: 700,
     easing: "cubic-bezier(0.76, 0, 0.24, 1)",
     fill: "forwards",
     pseudoElement: "::view-transition-new(root)",

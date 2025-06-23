@@ -12,7 +12,7 @@ fragment imageCrop on SanityImageCrop {
   right
 }
 
-fragment seo on Seo {
+fragment seoFragment on Seo {
   metaTitle
   metaDesc
   keywords
@@ -31,16 +31,16 @@ fragment imageAsset on SanityImageAsset {
 
 fragment NavigationSection on NavigationSection {
   target {
-      ... on Page {
-        title
-        slug {
-          current
-        }
-      }
+    ... on Page {
       title
+      slug {
+        current
+      }
     }
-    children {
-      target {
+    title
+  }
+  children {
+    target {
       ... on Page {
         title
         slug {
@@ -57,7 +57,6 @@ fragment NavigationSection on NavigationSection {
   }
 }
 
-
 query GetNavigationById($id: ID!) {
   Navigation(id: $id) {
     _id
@@ -72,15 +71,42 @@ query GetPageBySlug($slug: String) {
   allPage(where: { slug: { current: { eq: $slug } } }) {
     _type
     title
+    seo {
+      ...seoFragment
+    }
   }
 }
 
-// "sort": [ { "_createdAt": "DESC" } ]
-query GetAllPosts($sort: [PostSorting!], $limit: Int, $offset: Int) {
-  allPost(sort: $sort, offset: $offset, limit: $limit) {
+query GetCategoryBySlug($slug: String) {
+  allCategory(where: { slug: { current: { eq: $slug } } }) {
+    _id
+    title
+    slug {
+      current
+    }
+  }
+}
+
+## "sort": [ { "_createdAt": "DESC" } ]
+query GetAllPosts(
+  $where: PostFilter
+  $sort: [PostSorting!]
+  $limit: Int
+  $offset: Int
+) {
+  allPost(where: $where, sort: $sort, offset: $offset, limit: $limit) {
     title
     contentRaw
     _createdAt
+    slug {
+      current
+    }
+    category {
+      title
+      slug {
+        current
+      }
+    }
   }
 }
 
@@ -92,9 +118,15 @@ query GetPostBySlug($slug: String) {
   }
 }
 
-query GetPostsByCategorySlug($slug: String) {
-  allPost(where: {category: { slug: { current: { eq: $slug } } }}) {
+query GetPostsByCategory($slug: String) {
+  allPost(where: { category: { slug: { current: { eq: $slug } } } }) {
     title
+    category {
+      title
+      slug {
+        current
+      }
+    }
     slug {
       current
     }

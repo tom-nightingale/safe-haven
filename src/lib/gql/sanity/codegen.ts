@@ -168,6 +168,71 @@ export type CarouselSorting = {
   title?: InputMaybe<SortOrder>;
 };
 
+export type Category = Document & {
+  __typename?: "Category";
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars["DateTime"]["output"]>;
+  /** Document ID */
+  _id?: Maybe<Scalars["ID"]["output"]>;
+  _key?: Maybe<Scalars["String"]["output"]>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars["String"]["output"]>;
+  /** Document type */
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  seo?: Maybe<Seo>;
+  slug?: Maybe<Slug>;
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type CategoryFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type CategoryOrPage = Category | Page;
+
+export type CategorySlug = {
+  __typename?: "CategorySlug";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  value?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type CategorySlugFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  value?: InputMaybe<StringFilter>;
+};
+
+export type CategorySlugSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  value?: InputMaybe<SortOrder>;
+};
+
+export type CategorySorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  seo?: InputMaybe<SeoSorting>;
+  slug?: InputMaybe<SlugSorting>;
+  title?: InputMaybe<SortOrder>;
+};
+
 export type ContentBlocks = {
   __typename?: "ContentBlocks";
   _key?: Maybe<Scalars["String"]["output"]>;
@@ -281,6 +346,45 @@ export type DocumentSorting = {
   _rev?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type Feedback = Document & {
+  __typename?: "Feedback";
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars["DateTime"]["output"]>;
+  /** Document ID */
+  _id?: Maybe<Scalars["ID"]["output"]>;
+  _key?: Maybe<Scalars["String"]["output"]>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars["String"]["output"]>;
+  /** Document type */
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  contentRaw?: Maybe<Scalars["JSON"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type FeedbackFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type FeedbackSorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
 };
 
 export type File = {
@@ -625,7 +729,7 @@ export type NavigationLink = {
   _type?: Maybe<Scalars["String"]["output"]>;
   children?: Maybe<Array<Maybe<NavigationLink>>>;
   /** Description */
-  target?: Maybe<Page>;
+  target?: Maybe<CategoryOrPage>;
   /** Override title from the target. */
   title?: Maybe<Scalars["String"]["output"]>;
 };
@@ -633,7 +737,6 @@ export type NavigationLink = {
 export type NavigationLinkFilter = {
   _key?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
-  target?: InputMaybe<PageFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
@@ -674,6 +777,54 @@ export type NavigationSorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+};
+
+export type Nursery = Document & {
+  __typename?: "Nursery";
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars["DateTime"]["output"]>;
+  /** Document ID */
+  _id?: Maybe<Scalars["ID"]["output"]>;
+  _key?: Maybe<Scalars["String"]["output"]>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars["String"]["output"]>;
+  /** Document type */
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  contentRaw?: Maybe<Scalars["JSON"]["output"]>;
+  orderRank?: Maybe<Scalars["String"]["output"]>;
+  seo?: Maybe<Seo>;
+  slug?: Maybe<Slug>;
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type NurseryFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  orderRank?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type NurserySorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  orderRank?: InputMaybe<SortOrder>;
+  seo?: InputMaybe<SeoSorting>;
+  slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
 };
 
@@ -744,6 +895,8 @@ export type Post = Document & {
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   articleImage?: Maybe<ImageBlock>;
+  /** Which category does this blog post relate to? */
+  category?: Maybe<Category>;
   contentRaw?: Maybe<Scalars["JSON"]["output"]>;
   orderRank?: Maybe<Scalars["String"]["output"]>;
   seo?: Maybe<Seo>;
@@ -761,6 +914,7 @@ export type PostFilter = {
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
   articleImage?: InputMaybe<ImageBlockFilter>;
+  category?: InputMaybe<CategoryFilter>;
   orderRank?: InputMaybe<StringFilter>;
   seo?: InputMaybe<SeoFilter>;
   slug?: InputMaybe<SlugFilter>;
@@ -784,18 +938,24 @@ export type PostSorting = {
 export type RootQuery = {
   __typename?: "RootQuery";
   Banner?: Maybe<Banner>;
+  Category?: Maybe<Category>;
   Document?: Maybe<Document>;
+  Feedback?: Maybe<Feedback>;
   Global?: Maybe<Global>;
   Navigation?: Maybe<Navigation>;
+  Nursery?: Maybe<Nursery>;
   Page?: Maybe<Page>;
   Post?: Maybe<Post>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   Staff?: Maybe<Staff>;
   allBanner: Array<Banner>;
+  allCategory: Array<Category>;
   allDocument: Array<Document>;
+  allFeedback: Array<Feedback>;
   allGlobal: Array<Global>;
   allNavigation: Array<Navigation>;
+  allNursery: Array<Nursery>;
   allPage: Array<Page>;
   allPost: Array<Post>;
   allSanityFileAsset: Array<SanityFileAsset>;
@@ -807,7 +967,15 @@ export type RootQueryBannerArgs = {
   id: Scalars["ID"]["input"];
 };
 
+export type RootQueryCategoryArgs = {
+  id: Scalars["ID"]["input"];
+};
+
 export type RootQueryDocumentArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type RootQueryFeedbackArgs = {
   id: Scalars["ID"]["input"];
 };
 
@@ -816,6 +984,10 @@ export type RootQueryGlobalArgs = {
 };
 
 export type RootQueryNavigationArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type RootQueryNurseryArgs = {
   id: Scalars["ID"]["input"];
 };
 
@@ -846,11 +1018,25 @@ export type RootQueryAllBannerArgs = {
   where?: InputMaybe<BannerFilter>;
 };
 
+export type RootQueryAllCategoryArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  sort?: InputMaybe<Array<CategorySorting>>;
+  where?: InputMaybe<CategoryFilter>;
+};
+
 export type RootQueryAllDocumentArgs = {
   limit?: InputMaybe<Scalars["Int"]["input"]>;
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   sort?: InputMaybe<Array<DocumentSorting>>;
   where?: InputMaybe<DocumentFilter>;
+};
+
+export type RootQueryAllFeedbackArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  sort?: InputMaybe<Array<FeedbackSorting>>;
+  where?: InputMaybe<FeedbackFilter>;
 };
 
 export type RootQueryAllGlobalArgs = {
@@ -865,6 +1051,13 @@ export type RootQueryAllNavigationArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   sort?: InputMaybe<Array<NavigationSorting>>;
   where?: InputMaybe<NavigationFilter>;
+};
+
+export type RootQueryAllNurseryArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  sort?: InputMaybe<Array<NurserySorting>>;
+  where?: InputMaybe<NurseryFilter>;
 };
 
 export type RootQueryAllPageArgs = {
@@ -1613,7 +1806,7 @@ export type ImageCropFragment = {
   right?: number | null | undefined;
 };
 
-export type SeoFragment = {
+export type SeoFragmentFragment = {
   __typename?: "Seo";
   metaTitle?: string | null | undefined;
   metaDesc?: string | null | undefined;
@@ -1640,6 +1833,257 @@ export type ImageAssetFragment = {
   altText?: string | null | undefined;
 };
 
+export type NavigationSectionFragment = {
+  __typename?: "NavigationSection";
+  target?:
+    | {
+        __typename?: "Page";
+        title?: string | null | undefined;
+        slug?:
+          | { __typename?: "Slug"; current?: string | null | undefined }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
+  children?:
+    | Array<
+        | {
+            __typename?: "NavigationLink";
+            target?:
+              | {
+                  __typename?: "Category";
+                  title?: string | null | undefined;
+                  slug?:
+                    | {
+                        __typename?: "Slug";
+                        current?: string | null | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | {
+                  __typename?: "Page";
+                  title?: string | null | undefined;
+                  slug?:
+                    | {
+                        __typename?: "Slug";
+                        current?: string | null | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | null
+              | undefined;
+          }
+        | null
+        | undefined
+      >
+    | null
+    | undefined;
+};
+
+export type GetNavigationByIdQueryVariables = Exact<{
+  id: Scalars["ID"]["input"];
+}>;
+
+export type GetNavigationByIdQuery = {
+  __typename?: "RootQuery";
+  Navigation?:
+    | {
+        __typename?: "Navigation";
+        _id?: string | null | undefined;
+        title?: string | null | undefined;
+        sections?:
+          | Array<
+              | {
+                  __typename?: "NavigationSection";
+                  target?:
+                    | {
+                        __typename?: "Page";
+                        title?: string | null | undefined;
+                        slug?:
+                          | {
+                              __typename?: "Slug";
+                              current?: string | null | undefined;
+                            }
+                          | null
+                          | undefined;
+                      }
+                    | null
+                    | undefined;
+                  children?:
+                    | Array<
+                        | {
+                            __typename?: "NavigationLink";
+                            target?:
+                              | {
+                                  __typename?: "Category";
+                                  title?: string | null | undefined;
+                                  slug?:
+                                    | {
+                                        __typename?: "Slug";
+                                        current?: string | null | undefined;
+                                      }
+                                    | null
+                                    | undefined;
+                                }
+                              | {
+                                  __typename?: "Page";
+                                  title?: string | null | undefined;
+                                  slug?:
+                                    | {
+                                        __typename?: "Slug";
+                                        current?: string | null | undefined;
+                                      }
+                                    | null
+                                    | undefined;
+                                }
+                              | null
+                              | undefined;
+                          }
+                        | null
+                        | undefined
+                      >
+                    | null
+                    | undefined;
+                }
+              | null
+              | undefined
+            >
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
+};
+
+export type GetPageBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+}>;
+
+export type GetPageBySlugQuery = {
+  __typename?: "RootQuery";
+  allPage: Array<{
+    __typename?: "Page";
+    _type?: string | null | undefined;
+    title?: string | null | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetCategoryBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+}>;
+
+export type GetCategoryBySlugQuery = {
+  __typename?: "RootQuery";
+  allCategory: Array<{
+    __typename?: "Category";
+    _id?: string | null | undefined;
+    title?: string | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetAllPostsQueryVariables = Exact<{
+  where?: InputMaybe<PostFilter>;
+  sort?: InputMaybe<Array<PostSorting> | PostSorting>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+}>;
+
+export type GetAllPostsQuery = {
+  __typename?: "RootQuery";
+  allPost: Array<{
+    __typename?: "Post";
+    title?: string | null | undefined;
+    contentRaw?: any | null | undefined;
+    _createdAt?: any | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+    category?:
+      | {
+          __typename?: "Category";
+          title?: string | null | undefined;
+          slug?:
+            | { __typename?: "Slug"; current?: string | null | undefined }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetPostBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+}>;
+
+export type GetPostBySlugQuery = {
+  __typename?: "RootQuery";
+  allPost: Array<{
+    __typename?: "Post";
+    title?: string | null | undefined;
+    contentRaw?: any | null | undefined;
+    _createdAt?: any | null | undefined;
+  }>;
+};
+
+export type GetPostsByCategoryQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+}>;
+
+export type GetPostsByCategoryQuery = {
+  __typename?: "RootQuery";
+  allPost: Array<{
+    __typename?: "Post";
+    title?: string | null | undefined;
+    category?:
+      | {
+          __typename?: "Category";
+          title?: string | null | undefined;
+          slug?:
+            | { __typename?: "Slug"; current?: string | null | undefined }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+};
+
 export type GetAllStaffQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetAllStaffQuery = {
@@ -1647,6 +2091,7 @@ export type GetAllStaffQuery = {
   allStaff: Array<{
     __typename?: "Staff";
     _id?: string | null | undefined;
+    _type?: string | null | undefined;
     name?: string | null | undefined;
     jobTitle?: string | null | undefined;
     biographyRaw?: any | null | undefined;
@@ -1717,12 +2162,12 @@ export const ImageCropFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<ImageCropFragment, unknown>;
-export const SeoFragmentDoc = {
+export const SeoFragmentFragmentDoc = {
   kind: "Document",
   definitions: [
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "seo" },
+      name: { kind: "Name", value: "seoFragment" },
       typeCondition: {
         kind: "NamedType",
         name: { kind: "Name", value: "Seo" },
@@ -1760,7 +2205,7 @@ export const SeoFragmentDoc = {
       },
     },
   ],
-} as unknown as DocumentNode<SeoFragment, unknown>;
+} as unknown as DocumentNode<SeoFragmentFragment, unknown>;
 export const ImageAssetFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -1781,6 +2226,859 @@ export const ImageAssetFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<ImageAssetFragment, unknown>;
+export const NavigationSectionFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "NavigationSection" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "NavigationSection" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "target" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "Page" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "slug" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "current" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "children" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "target" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "Page" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "slug" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "current" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "Category" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "slug" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "current" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<NavigationSectionFragment, unknown>;
+export const GetNavigationByIdDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetNavigationById" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "Navigation" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "sections" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "NavigationSection" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "NavigationSection" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "NavigationSection" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "target" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "Page" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "slug" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "current" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "children" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "target" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "Page" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "slug" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "current" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "Category" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "slug" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "current" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetNavigationByIdQuery,
+  GetNavigationByIdQueryVariables
+>;
+export const GetPageBySlugDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetPageBySlug" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "slug" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "current" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "eq" },
+                                  value: {
+                                    kind: "Variable",
+                                    name: { kind: "Name", value: "slug" },
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_type" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPageBySlugQuery, GetPageBySlugQueryVariables>;
+export const GetCategoryBySlugDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetCategoryBySlug" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allCategory" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "slug" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "current" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "eq" },
+                                  value: {
+                                    kind: "Variable",
+                                    name: { kind: "Name", value: "slug" },
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetCategoryBySlugQuery,
+  GetCategoryBySlugQueryVariables
+>;
+export const GetAllPostsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllPosts" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "where" },
+          },
+          type: {
+            kind: "NamedType",
+            name: { kind: "Name", value: "PostFilter" },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "sort" } },
+          type: {
+            kind: "ListType",
+            type: {
+              kind: "NonNullType",
+              type: {
+                kind: "NamedType",
+                name: { kind: "Name", value: "PostSorting" },
+              },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "limit" },
+          },
+          type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "offset" },
+          },
+          type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPost" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "where" },
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "sort" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "sort" },
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "offset" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "offset" },
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "limit" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "limit" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "contentRaw" } },
+                { kind: "Field", name: { kind: "Name", value: "_createdAt" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "category" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "slug" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "current" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetAllPostsQuery, GetAllPostsQueryVariables>;
+export const GetPostBySlugDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetPostBySlug" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPost" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "slug" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "current" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "eq" },
+                                  value: {
+                                    kind: "Variable",
+                                    name: { kind: "Name", value: "slug" },
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "contentRaw" } },
+                { kind: "Field", name: { kind: "Name", value: "_createdAt" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPostBySlugQuery, GetPostBySlugQueryVariables>;
+export const GetPostsByCategoryDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetPostsByCategory" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPost" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "category" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "slug" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "current" },
+                                  value: {
+                                    kind: "ObjectValue",
+                                    fields: [
+                                      {
+                                        kind: "ObjectField",
+                                        name: { kind: "Name", value: "eq" },
+                                        value: {
+                                          kind: "Variable",
+                                          name: { kind: "Name", value: "slug" },
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "category" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "slug" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "current" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetPostsByCategoryQuery,
+  GetPostsByCategoryQueryVariables
+>;
 export const GetAllStaffDocument = {
   kind: "Document",
   definitions: [
@@ -1798,6 +3096,7 @@ export const GetAllStaffDocument = {
               kind: "SelectionSet",
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "_type" } },
                 { kind: "Field", name: { kind: "Name", value: "name" } },
                 { kind: "Field", name: { kind: "Name", value: "jobTitle" } },
                 {

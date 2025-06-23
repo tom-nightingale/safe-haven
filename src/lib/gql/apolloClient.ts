@@ -47,11 +47,11 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }: any) => {
  */
 const ssrOptions: DefaultOptions = {
   watchQuery: {
-    fetchPolicy: "cache-first",
+    fetchPolicy: "network-only",
     errorPolicy: "ignore",
   },
   query: {
-    fetchPolicy: "cache-first",
+    fetchPolicy: "network-only",
     errorPolicy: "all",
   },
 };

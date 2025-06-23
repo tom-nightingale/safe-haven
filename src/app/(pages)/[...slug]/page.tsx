@@ -6,15 +6,21 @@ import {
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
-import HomeLayout from "@/layouts/HomeLayout/HomeLayout";
+import PageWrapper from "@/components/PageWrapper/PageWrapper";
 
-export async function generateMetadata(): Promise<Metadata> {
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const { slug } = await params;
   try {
     const client = createApolloClient(fetch);
     const { data } = await client.query<GetPageBySlugQuery>({
       query: GetPageBySlugDocument,
       variables: {
-        slug: "home",
+        slug: slug.at(-1),
       },
     });
 
@@ -53,16 +59,19 @@ const GetSingularPage = async (slug: string | undefined): Promise<any> => {
   }
 };
 
-export default async function Home() {
-  const { allPage } = await GetSingularPage("home");
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
+  const { allPage } = await GetSingularPage(slug.at(-1));
   if (allPage.length < 1) {
     return notFound();
   }
   const page = allPage[0];
-  console.log(page);
+
   return (
-    <>
-      <HomeLayout />
-    </>
+    <PageWrapper>
+      <main className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 bg-blue-500 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
+        {page?.title}
+      </main>
+    </PageWrapper>
   );
 }
