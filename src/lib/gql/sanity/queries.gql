@@ -1,0 +1,119 @@
+fragment imageHotspot on SanityImageHotspot {
+  x
+  y
+  width
+  height
+}
+
+fragment imageCrop on SanityImageCrop {
+  top
+  bottom
+  left
+  right
+}
+
+fragment seo on Seo {
+  metaTitle
+  metaDesc
+  keywords
+  shareGraphic {
+    asset {
+      url
+      altText
+    }
+  }
+}
+
+fragment imageAsset on SanityImageAsset {
+  url
+  altText
+}
+
+fragment NavigationSection on NavigationSection {
+  target {
+      ... on Page {
+        title
+        slug {
+          current
+        }
+      }
+      title
+    }
+    children {
+      target {
+      ... on Page {
+        title
+        slug {
+          current
+        }
+      }
+      ... on Category {
+        title
+        slug {
+          current
+        }
+      }
+    }
+  }
+}
+
+
+query GetNavigationById($id: ID!) {
+  Navigation(id: $id) {
+    _id
+    title
+    sections {
+      ...NavigationSection
+    }
+  }
+}
+
+query GetPageBySlug($slug: String) {
+  allPage(where: { slug: { current: { eq: $slug } } }) {
+    _type
+    title
+  }
+}
+
+// "sort": [ { "_createdAt": "DESC" } ]
+query GetAllPosts($sort: [PostSorting!], $limit: Int, $offset: Int) {
+  allPost(sort: $sort, offset: $offset, limit: $limit) {
+    title
+    contentRaw
+    _createdAt
+  }
+}
+
+query GetPostBySlug($slug: String) {
+  allPost(where: { slug: { current: { eq: $slug } } }) {
+    title
+    contentRaw
+    _createdAt
+  }
+}
+
+query GetPostsByCategorySlug($slug: String) {
+  allPost(where: {category: { slug: { current: { eq: $slug } } }}) {
+    title
+    slug {
+      current
+    }
+  }
+}
+
+query GetAllStaff {
+  allStaff {
+    _id
+    _type
+    name
+    jobTitle
+    profileImage {
+      image {
+        asset {
+          ...imageAsset
+        }
+      }
+    }
+    biographyRaw
+  }
+}

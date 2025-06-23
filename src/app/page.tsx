@@ -1,19 +1,19 @@
-"use client";
+import createApolloClient from "@/gql/apolloClient";
+import {
+  GetAllStaffDocument,
+  type GetAllStaffQuery,
+} from "@/gql/sanity/codegen";
+import HomeLayout from "@/layouts/Home/Home";
 
-import Header from "@/lib/components/Header/Header";
-import PageWrapper from "@/lib/components/PageWrapper/PageWrapper";
+export default async function Home() {
+  const client = createApolloClient(fetch);
+  const { data } = await client.query<GetAllStaffQuery>({
+    query: GetAllStaffDocument,
+  });
 
-export const Home = () => {
   return (
     <>
-      <Header />
-      <PageWrapper>
-        <main className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-          Home page
-        </main>
-      </PageWrapper>
+      <HomeLayout staff={data} />
     </>
   );
-};
-
-export default Home;
+}

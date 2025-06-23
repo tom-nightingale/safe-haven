@@ -1,0 +1,15 @@
+overwrite: true
+schema: https://${NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v1/graphql/production/default
+documents: src/lib/gql/sanity/queries.gql
+generates:
+  src/lib/gql/sanity/codegen.ts:
+    config:
+      maybeValue: T | null | undefined
+      clientPath: ../apolloClient
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typed-document-node"
+  gql/shopifygen/schema.json:
+    plugins:
+      - "introspection"
