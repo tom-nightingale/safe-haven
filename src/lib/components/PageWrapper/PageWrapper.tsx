@@ -7,7 +7,6 @@ let hasLoaded = false;
 const PageWrapper = (props: HTMLMotionProps<"div">) => {
   const isFirstLoad = useRef(!hasLoaded);
   if (!hasLoaded) hasLoaded = true;
-  console.log(isFirstLoad.current);
 
   return (
     <div className="bg-white">

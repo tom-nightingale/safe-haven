@@ -1,8 +1,7 @@
 "use client";
-
-import Link from "next/link";
-import { useTransitionRouter } from "next-view-transitions";
 import type { GetNavigationByIdQuery } from "@/gql/sanity/codegen";
+import Container from "@/components/Container/Container";
+import FancyLink from "@/components/FancyLink/FancyLink";
 
 type Props = {
   primaryNav: GetNavigationByIdQuery | undefined;
@@ -10,8 +9,6 @@ type Props = {
 };
 
 const Header = ({ primaryNav, secondaryNav }: Props) => {
-  const router = useTransitionRouter();
-
   console.log(primaryNav);
   console.log(secondaryNav);
 
@@ -26,38 +23,16 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
     },
   ];
   return (
-    <nav>
-      {urls.map(route => (
-        <Link
-          key={route.label}
-          onClick={e => {
-            e.preventDefault();
-            router.push(route.url, {
-              onTransitionReady: pageAnimation,
-            });
-          }}
-          href="/"
-        >
-          {route.label}
-        </Link>
-      ))}
-    </nav>
+    <Container>
+      <nav>
+        {urls.map(route => (
+          <FancyLink key={route.label} url={route.url}>
+            {route.label}
+          </FancyLink>
+        ))}
+      </nav>
+    </Container>
   );
-};
-
-const pageAnimation = () => {
-  document.documentElement.animate([{ opacity: 1 }, { opacity: 0 }], {
-    duration: 700,
-    easing: "cubic-bezier(0.76, 0, 0.24, 1)",
-    fill: "forwards",
-    pseudoElement: "::view-transition-old(root)",
-  });
-  document.documentElement.animate([{ opacity: 0 }, { opacity: 1 }], {
-    duration: 700,
-    easing: "cubic-bezier(0.76, 0, 0.24, 1)",
-    fill: "forwards",
-    pseudoElement: "::view-transition-new(root)",
-  });
 };
 
 export default Header;

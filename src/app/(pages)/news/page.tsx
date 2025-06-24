@@ -31,8 +31,6 @@ const GetBlogPosts = async (): Promise<any> => {
 export default async function Page() {
   const data = await GetBlogPosts();
 
-  console.log(data);
-
   return (
     <>
       {(data.allPost || []).map((post: Post) => (

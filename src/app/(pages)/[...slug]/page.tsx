@@ -24,7 +24,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     });
 
-    // console.log("data", data);
     const page = data.allPage[0];
     return {
       title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
