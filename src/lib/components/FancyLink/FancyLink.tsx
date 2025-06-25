@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 
 type Props = {
   children: React.ReactNode;
-  label: string;
   url: string;
 };
 const FancyLink = ({ children, url }: Props) => {

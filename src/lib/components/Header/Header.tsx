@@ -24,7 +24,7 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
   ];
   return (
     <Container>
-      <nav>
+      <nav className="font-serif">
         {urls.map(route => (
           <FancyLink key={route.label} url={route.url}>
             {route.label}

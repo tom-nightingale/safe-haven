@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Literata, Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import createApolloClient from "@/gql/apolloClient";
@@ -10,16 +10,17 @@ import {
 } from "@/gql/sanity/codegen";
 import config from "@/config/config";
 import Header from "@/components/Header/Header";
+import { literataSerif, interSans } from "@/utils/fonts";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const literataSerif = Literata({
+//   variable: "--font-literata",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const interSans = Inter({
+//   variable: "--font-inter",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: {
@@ -56,7 +57,7 @@ export default async function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${literataSerif.variable} ${interSans.variable} antialiased`}
         >
           <Header primaryNav={primaryNav} secondaryNav={secondaryNav} />
           {children}
