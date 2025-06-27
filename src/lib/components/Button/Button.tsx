@@ -39,7 +39,9 @@ const Button = ({
             className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
             onClick={onClick}
           >
-            {iconOnly && <span className="opacity-50">{icon}</span>}
+            {iconOnly && (
+              <span className="aspect-square opacity-50">{icon}</span>
+            )}
 
             {!iconOnly && (
               <>
@@ -58,7 +60,9 @@ const Button = ({
             <button
               className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
             >
-              {iconOnly && <span className="opacity-50">{icon}</span>}
+              {iconOnly && (
+                <span className="aspect-square opacity-50">{icon}</span>
+              )}
 
               {!iconOnly && (
                 <>
@@ -78,9 +82,13 @@ const Button = ({
         // Button for no href
         <button
           onClick={onClick}
-          className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
+          className={`group button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
         >
-          {iconOnly && <span className="opacity-50">{icon}</span>}
+          {iconOnly && (
+            <span className="block aspect-square opacity-50 transition-all duration-300 will-change-transform group-hover:-rotate-360">
+              {icon}
+            </span>
+          )}
 
           {!iconOnly && (
             <>

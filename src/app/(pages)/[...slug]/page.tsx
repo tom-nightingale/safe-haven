@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
       description: page?.seo?.metaDesc ?? "",
-      keywords: page?.seo?.keywords || [config.COMPANY_NAME],
+      // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
       openGraph: {
         title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
         description: page?.seo?.metaDesc ?? "",
@@ -68,7 +68,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <PageWrapper>
-      <main className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 bg-blue-500 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
+      <main className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
         {page?.title}
       </main>
     </PageWrapper>

@@ -13,8 +13,11 @@
     "sanitygen": "graphql-codegen --config sanitygen.yml"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@sanity/asset-utils": "^2.2.1",
+    "@sanity/client": "^7.6.0",
     "@sanity/image-url": "^1.1.0",
+    "gsap": "^3.13.0",
     "motion": "^12.18.1",
     "next": "15.3.4",
     "react": "^19.0.0",
@@ -37,6 +40,7 @@
     "@storybook/addon-vitest": "^9.0.12",
     "@storybook/nextjs-vite": "^9.0.12",
     "@tailwindcss/postcss": "^4",
+    "@types/gsap": "^1.20.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

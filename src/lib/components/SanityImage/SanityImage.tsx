@@ -2,6 +2,10 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import type { FitMode } from "@sanity/image-url/lib/types/types";
 import config from "@/config/config";
+import {
+  type Image as SanityImageType,
+  type SanityImageHotspot,
+} from "@/gql/sanity/codegen";
 
 const builder = imageUrlBuilder();
 
@@ -14,7 +18,7 @@ const urlFor = (source: string, quality: number) => {
 };
 
 type Props = {
-  sourceUrl: string;
+  image: SanityImageType;
   fit?: FitMode;
   loading?: "lazy" | "eager";
   alt?: string;
@@ -25,29 +29,37 @@ type Props = {
   placeholder?: "blur" | "empty";
   width?: number;
   height?: number;
+  sizes?: string;
 };
 
+export function getPositionFromHotspot(
+  hotspot: SanityImageHotspot | null | undefined,
+) {
+  if (!hotspot || !hotspot.x || !hotspot.y) return "center";
+  return `${hotspot.x * 100}% ${hotspot.y * 100}%`;
+}
+
 const SanityImage = ({
-  sourceUrl,
+  image,
   fit = "min",
   loading = "lazy",
   alt = "",
   fill = true,
-  classes = fill ? "object-cover" : "",
+  classes = fill ? "" : "",
   quality = 100,
   priority = false,
-  placeholder = "empty",
+  placeholder = "blur",
   width,
   height,
+  sizes,
 }: Props) => {
-  const placeholderImage = urlFor(sourceUrl, 100)
-    .width(24)
-    .height(24)
-    .blur(10)
-    .url();
+  const sourceUrl = image.asset?.url;
+  const blurData = image?.asset?.metadata?.lqip;
+  const hotspotData = image?.hotspot;
+  if (!sourceUrl) return <></>;
   const imageUrl = urlFor(sourceUrl, quality).fit(fit).url();
 
-  return (
+  return imageUrl ? (
     <Image
       fill={fill}
       src={imageUrl}
@@ -58,9 +70,13 @@ const SanityImage = ({
       loading={loading}
       priority={priority}
       placeholder={placeholder}
-      blurDataURL={placeholder === "blur" ? placeholderImage : undefined}
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      blurDataURL={blurData ?? undefined}
+      sizes={sizes}
+      objectFit="contain"
+      objectPosition={getPositionFromHotspot(hotspotData)}
     />
+  ) : (
+    <></>
   );
 };
 

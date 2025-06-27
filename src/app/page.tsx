@@ -9,7 +9,7 @@ import {
 import type { Metadata } from "next";
 import config from "@/config/config";
 // import HomeLayout from "@/layouts/HomeLayout/HomeLayout";
-import SanityImage from "@/components/SanityImage/SanityImage";
+import Container from "@/components/Container/Container";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
       description: page?.seo?.metaDesc ?? "",
-      keywords: page?.seo?.keywords || [config.COMPANY_NAME],
+      // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
       openGraph: {
         title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
         description: page?.seo?.metaDesc ?? "",
@@ -76,22 +76,26 @@ export default async function Home() {
   }
   const page = allPage[0];
   console.log(page);
+  console.log("allStaff", allStaff);
   return (
     <>
-      <div className="grid grid-cols-3 gap-3">
-        {allStaff.length > 0 &&
-          allStaff.map(staff => (
-            <div className="relative aspect-square bg-gray-100" key={staff._id}>
-              {staff?.profileImage?.image?.asset?.url && (
-                <SanityImage
-                  sourceUrl={staff?.profileImage?.image?.asset?.url}
-                  placeholder="blur"
-                />
-              )}
-              {staff.name}
-            </div>
-          ))}
-      </div>
+      <Container>
+        <div className="grid grid-cols-12 gap-4">
+          {allStaff.length > 0 &&
+            allStaff.map(staff => (
+              <div className="relative col-span-2 bg-gray-100" key={staff.name}>
+                {staff && (
+                  // <Card
+                  //   image={staff?.profileImage?.image}
+                  //   title={staff.name}
+                  //   subtitle={staff.jobTitle}
+                  // />
+                  <></>
+                )}
+              </div>
+            ))}
+        </div>
+      </Container>
       {/* <HomeLayout /> */}
     </>
   );

@@ -1831,6 +1831,10 @@ export type ImageAssetFragment = {
   __typename?: "SanityImageAsset";
   url?: string | null | undefined;
   altText?: string | null | undefined;
+  metadata?:
+    | { __typename?: "SanityImageMetadata"; lqip?: string | null | undefined }
+    | null
+    | undefined;
 };
 
 export type NavigationSectionFragment = {
@@ -2106,6 +2110,33 @@ export type GetAllStaffQuery = {
                       __typename?: "SanityImageAsset";
                       url?: string | null | undefined;
                       altText?: string | null | undefined;
+                      metadata?:
+                        | {
+                            __typename?: "SanityImageMetadata";
+                            lqip?: string | null | undefined;
+                          }
+                        | null
+                        | undefined;
+                    }
+                  | null
+                  | undefined;
+                hotspot?:
+                  | {
+                      __typename?: "SanityImageHotspot";
+                      x?: number | null | undefined;
+                      y?: number | null | undefined;
+                      width?: number | null | undefined;
+                      height?: number | null | undefined;
+                    }
+                  | null
+                  | undefined;
+                crop?:
+                  | {
+                      __typename?: "SanityImageCrop";
+                      top?: number | null | undefined;
+                      bottom?: number | null | undefined;
+                      left?: number | null | undefined;
+                      right?: number | null | undefined;
                     }
                   | null
                   | undefined;
@@ -2221,6 +2252,16 @@ export const ImageAssetFragmentDoc = {
         selections: [
           { kind: "Field", name: { kind: "Name", value: "url" } },
           { kind: "Field", name: { kind: "Name", value: "altText" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "metadata" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "lqip" } },
+              ],
+            },
+          },
         ],
       },
     },
@@ -3124,6 +3165,35 @@ export const GetAllStaffDocument = {
                                 ],
                               },
                             },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "hotspot" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "FragmentSpread",
+                                    name: {
+                                      kind: "Name",
+                                      value: "imageHotspot",
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "crop" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "FragmentSpread",
+                                    name: { kind: "Name", value: "imageCrop" },
+                                  },
+                                ],
+                              },
+                            },
                           ],
                         },
                       },
@@ -3152,6 +3222,50 @@ export const GetAllStaffDocument = {
         selections: [
           { kind: "Field", name: { kind: "Name", value: "url" } },
           { kind: "Field", name: { kind: "Name", value: "altText" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "metadata" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "lqip" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "imageHotspot" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SanityImageHotspot" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "x" } },
+          { kind: "Field", name: { kind: "Name", value: "y" } },
+          { kind: "Field", name: { kind: "Name", value: "width" } },
+          { kind: "Field", name: { kind: "Name", value: "height" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "imageCrop" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SanityImageCrop" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "top" } },
+          { kind: "Field", name: { kind: "Name", value: "bottom" } },
+          { kind: "Field", name: { kind: "Name", value: "left" } },
+          { kind: "Field", name: { kind: "Name", value: "right" } },
         ],
       },
     },

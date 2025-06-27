@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import Header from "./Header";
-import { primaryNav, secondaryNav } from "@/data/navigation.data";
+import PrimaryNav from "./PrimaryNav";
+import { primaryNav as primaryNavData } from "@/data/navigation.data";
 
 const meta = {
-  title: "Components/Header",
-  component: Header,
+  title: "Components/PrimaryNav",
+  component: PrimaryNav,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    // layout: "centered",
+    layout: "centered",
     nextjs: {
       appDirectory: true,
     },
@@ -20,16 +20,13 @@ const meta = {
   //   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   //   args: { onClick: fn() },
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof PrimaryNav>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/* eslint-disable */
 export const Primary: Story = {
   args: {
-    primaryNav: primaryNav,
-    secondaryNav: secondaryNav,
+    navItems: primaryNavData,
   },
 };
-/* eslint-enable */

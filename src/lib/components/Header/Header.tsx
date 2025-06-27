@@ -1,36 +1,44 @@
 "use client";
-import type { GetNavigationByIdQuery } from "@/gql/sanity/codegen";
+import type { Navigation } from "@/gql/sanity/codegen";
 import Container from "@/components/Container/Container";
-import FancyLink from "@/components/FancyLink/FancyLink";
+import PrimaryNav from "@/components/PrimaryNav/PrimaryNav";
+import Button from "@/components/Button/Button";
+import { FaBars } from "react-icons/fa";
+import { BsTelephone } from "react-icons/bs";
 
 type Props = {
-  primaryNav: GetNavigationByIdQuery | undefined;
-  secondaryNav: GetNavigationByIdQuery | undefined;
+  primaryNav: Navigation;
+  secondaryNav: Navigation;
 };
 
 const Header = ({ primaryNav, secondaryNav }: Props) => {
   console.log(primaryNav);
   console.log(secondaryNav);
 
-  const urls = [
-    {
-      label: "Home",
-      url: "/",
-    },
-    {
-      label: "About Us",
-      url: "/about-us",
-    },
-  ];
   return (
     <Container>
-      <nav className="font-serif">
-        {urls.map(route => (
-          <FancyLink key={route.label} url={route.url}>
-            {route.label}
-          </FancyLink>
-        ))}
-      </nav>
+      <div className="flex w-full items-center justify-between gap-4 xl:gap-16">
+        <div className="flex aspect-square w-20 items-center justify-center bg-white">
+          Logo
+        </div>
+        <PrimaryNav navItems={primaryNav} />
+        <div className="flex items-center gap-3">
+          <Button
+            iconOnly
+            icon={<FaBars />}
+            classes="button-icon-only"
+            onClick={() => {
+              console.log("open secondary menu");
+            }}
+          />
+          <Button
+            label="Get In Touch"
+            iconLeft={<BsTelephone />}
+            href="tel:01623000000"
+            classes="button-primary button-peach"
+          />
+        </div>
+      </div>
     </Container>
   );
 };

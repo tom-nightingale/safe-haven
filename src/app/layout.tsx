@@ -12,16 +12,6 @@ import config from "@/config/config";
 import Header from "@/components/Header/Header";
 import { literataSerif, interSans } from "@/utils/fonts";
 
-// const literataSerif = Literata({
-//   variable: "--font-literata",
-//   subsets: ["latin"],
-// });
-
-// const interSans = Inter({
-//   variable: "--font-inter",
-//   subsets: ["latin"],
-// });
-
 export const metadata: Metadata = {
   title: {
     template: `%s | ${config.COMPANY_NAME}`,
@@ -39,9 +29,10 @@ const GetNav = async (navId: string) => {
         id: navId,
       },
     });
-    return data;
+    return data ?? undefined;
   } catch (err) {
     console.log(err);
+    return undefined;
   }
 };
 
@@ -50,8 +41,24 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const primaryNav = await GetNav(config.PRIMARY_NAV_ID);
-  const secondaryNav = await GetNav(config.SECONDARY_NAV_ID);
+  const primaryNavData = await GetNav(config.PRIMARY_NAV_ID);
+  const secondaryNavData = await GetNav(config.SECONDARY_NAV_ID);
+
+  // Assuming the Navigation object is under a property like 'navigation' in the query result
+  const primaryNav = primaryNavData?.Navigation;
+  const secondaryNav = secondaryNavData?.Navigation;
+
+  if (!primaryNav || !secondaryNav) {
+    return (
+      <html lang="en">
+        <body
+          className={`${literataSerif.variable} ${interSans.variable} antialiased`}
+        >
+          <div>Navigation data could not be loaded.</div>
+        </body>
+      </html>
+    );
+  }
 
   return (
     <ViewTransitions>

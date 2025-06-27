@@ -27,6 +27,9 @@ fragment seoFragment on Seo {
 fragment imageAsset on SanityImageAsset {
   url
   altText
+  metadata {
+    lqip
+  }
 }
 
 fragment NavigationSection on NavigationSection {
@@ -143,6 +146,12 @@ query GetAllStaff {
       image {
         asset {
           ...imageAsset
+        }
+        hotspot {
+          ...imageHotspot
+        }
+        crop {
+          ...imageCrop
         }
       }
     }
