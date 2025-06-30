@@ -1,10 +1,14 @@
 import React from "react";
 
-const Container = ({ children }: { children: React.ReactNode }) => {
+const Container = ({
+  children,
+  classes,
+}: {
+  children: React.ReactNode;
+  classes?: string;
+}) => {
   return (
-    <div className="mx-auto w-full max-w-(--breakpoint-5xl) px-4">
-      {children}
-    </div>
+    <div className={`max-w-(--breakpoint-5xl) px-4 ${classes}`}>{children}</div>
   );
 };
 

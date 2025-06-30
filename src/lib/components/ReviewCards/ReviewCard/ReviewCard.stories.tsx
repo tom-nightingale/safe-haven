@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import Header from "./Header";
-import { primaryNav, secondaryNav } from "@/data/navigation.data";
+import ReviewCard from "./ReviewCard";
 
 const meta = {
-  title: "Components/Header",
-  component: Header,
+  title: "Components/ReviewCards/ReviewCard",
+  component: ReviewCard,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     // layout: "centered",
@@ -20,14 +19,16 @@ const meta = {
   //   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   //   args: { onClick: fn() },
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof ReviewCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    primaryNav: primaryNav,
-    secondaryNav: secondaryNav,
+    review:
+      "Our Safe Haven journey has been amazing. As parents we trust the team at         Safe Haven with our most precious children and they never disappoint. Huge thank you to all, I really can't say it enough.",
+    name: "Stacey",
+    rating: 5,
   },
 };

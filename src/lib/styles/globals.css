@@ -199,7 +199,7 @@ body {
 }
 
 .text-h3 {
-  @apply font-serif text-4xl font-medium;
+  @apply font-serif text-3xl font-medium;
 }
 
 .text-h4 {
@@ -224,4 +224,15 @@ body {
 
 .text-button-2 {
   @apply font-serif text-base;
+}
+
+.swiper {
+  @apply !pb-10;
+}
+
+.swiper-scrollbar {
+  @apply !bg-cream;
+}
+.swiper-scrollbar-drag {
+  @apply !bg-peach;
 }

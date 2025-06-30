@@ -7,7 +7,6 @@ import { FlatCompat } from "@eslint/eslintrc";
 import eslint from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import tsParser from "@typescript-eslint/parser";
-// import tseslint from "typescript-eslint";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,27 +31,7 @@ const eslintConfig = [
     ],
   },
   eslint.configs.recommended,
-  // ...tseslint.configs.recommended,
   eslintConfigPrettier,
-  // {
-  //   languageOptions: {
-  //     ecmaVersion: 2020,
-  //     sourceType: "module",
-  //     // globals: {
-  //     //   ...globals.browser,
-  //     //   ...globals.es2017,
-  //     //   ...globals.node,
-  //     // },
-  //     parser: tsParser,
-  //     parserOptions: {
-  //       project: "./tsconfig.json",
-  //     },
-  //   },
-  //   rules: {
-  //     "@typescript-eslint/no-explicit-any": "off",
-  //     "@typescript-eslint/no-unused-expressions": "off",
-  //   },
-  // },
   {
     languageOptions: {
       ecmaVersion: 2020,
