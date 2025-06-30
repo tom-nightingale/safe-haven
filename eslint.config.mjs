@@ -7,6 +7,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 import eslint from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import tsParser from "@typescript-eslint/parser";
+// import tseslint from "typescript-eslint";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,6 +15,8 @@ const __dirname = dirname(__filename);
 const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
+
+const plugin = await import("@typescript-eslint/eslint-plugin");
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
@@ -29,26 +32,53 @@ const eslintConfig = [
     ],
   },
   eslint.configs.recommended,
+  // ...tseslint.configs.recommended,
   eslintConfigPrettier,
+  // {
+  //   languageOptions: {
+  //     ecmaVersion: 2020,
+  //     sourceType: "module",
+  //     // globals: {
+  //     //   ...globals.browser,
+  //     //   ...globals.es2017,
+  //     //   ...globals.node,
+  //     // },
+  //     parser: tsParser,
+  //     parserOptions: {
+  //       project: "./tsconfig.json",
+  //     },
+  //   },
+  //   rules: {
+  //     "@typescript-eslint/no-explicit-any": "off",
+  //     "@typescript-eslint/no-unused-expressions": "off",
+  //   },
+  // },
   {
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: "module",
-      // globals: {
-      //   ...globals.browser,
-      //   ...globals.es2017,
-      //   ...globals.node,
-      // },
       parser: tsParser,
       parserOptions: {
         project: "./tsconfig.json",
-        // extraFileExtensions: [".svelte"],
       },
     },
+    plugins: {
+      "@typescript-eslint": plugin.default,
+    },
     rules: {
+      // Disable base rule, enable TS-aware rule
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          vars: "all",
+          args: "after-used",
+          ignoreRestSiblings: true,
+          varsIgnorePattern: "^_",
+        },
+      ],
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-expressions": "off",
-      // "svelte/no-at-html-tags": "off",
     },
   },
   ...storybook.configs["flat/recommended"],

@@ -4,6 +4,10 @@ import Button from "@/components/Button/Button";
 import SanityImage from "@/components/SanityImage/SanityImage";
 import { type Image } from "@/gql/sanity/codegen";
 import { FaPlus } from "react-icons/fa6";
+import Typography, {
+  TypeVariant,
+  TypeComponent,
+} from "@/components/Typography/Typography";
 
 type Props = {
   href: string;
@@ -50,8 +54,12 @@ const Card = ({
 
         <div className="z-2 flex items-center justify-between gap-3 p-6">
           <div>
-            <p className="font-serif text-lg">{title}</p>
-            <p className="font-serif text-xs">{subtitle}</p>
+            <Typography variant={TypeVariant.H4} component={TypeComponent.p}>
+              {title}
+            </Typography>
+            <Typography variant={TypeVariant.H6} component={TypeComponent.p}>
+              {subtitle}
+            </Typography>
           </div>
 
           <div className="rounded-full bg-white p-0.5 md:m-0">

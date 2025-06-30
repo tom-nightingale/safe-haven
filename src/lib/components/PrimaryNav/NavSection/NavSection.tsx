@@ -1,57 +1,70 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import FancyLink from "@/components/FancyLink/FancyLink";
 import { type NavigationSection, Maybe } from "@/gql/sanity/codegen";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Typography, { TypeVariant } from "@/components/Typography/Typography";
 
 type Props = {
   section: NavigationSection | Maybe<NavigationSection>;
+  isActive: boolean;
+  setActiveSectionKey: any;
 };
-const NavSection = ({ section }: Props) => {
+
+const NavSection = ({
+  section,
+  setActiveSectionKey,
+  isActive = true,
+}: Props) => {
   const target = section?.target;
   const children = section?.children;
 
   gsap.registerPlugin(useGSAP);
   const subnav = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const { contextSafe } = useGSAP({ scope: subnav });
-  const handleHoverState = contextSafe(() => {
-    gsap.to(subnav.current, {
-      opacity: 0,
-      yPercent: 10,
-      duration: 0.3,
-      ease: "back.in(2)",
-      onComplete: () => setIsHovered(!isHovered),
-    });
-  });
 
   useGSAP(
     () => {
-      gsap.from(subnav.current, {
-        opacity: 0,
-        yPercent: 10,
-        duration: 0.3,
-        ease: "back.out(2)",
-      });
+      if (isActive && subnav.current) {
+        gsap.fromTo(
+          subnav.current,
+          { opacity: 0, yPercent: 10 },
+          {
+            opacity: 1,
+            yPercent: 0,
+            duration: 0.3,
+            ease: "back.out(2)",
+          },
+        );
+      }
     },
-    { dependencies: [isHovered], scope: subnav },
+    { dependencies: [isActive], scope: subnav },
   );
 
   return (
     <div
-      className="relative"
+      className="relative transition-opacity duration-200 group-hover:opacity-70 hover:!opacity-100"
       key={target?.slug?.current}
-      onMouseEnter={handleHoverState}
-      onMouseLeave={handleHoverState}
+      onMouseEnter={() => {
+        setActiveSectionKey(
+          typeof section?.target?.title === "string"
+            ? section.target.title
+            : null,
+        );
+      }}
+      onMouseLeave={() => {
+        setActiveSectionKey(null);
+      }}
     >
       {target?.slug?.current && (
         <FancyLink url={target?.slug?.current}>
-          <span className="flex flex-col items-center justify-center text-center">
-            <span>{target?.title}</span>
+          <span className="flex flex-col items-center justify-center py-3 text-center">
+            <Typography variant={TypeVariant.Button1} classes="">
+              {target?.title}
+            </Typography>
             {children && children?.length > 0 && (
-              <span className="pointer-events-none -mt-2 inline-block">
+              <span className="pointer-events-none absolute bottom-0 left-1/2 -mt-2 inline-block -translate-x-1/2">
                 &hellip;
               </span>
             )}
@@ -59,7 +72,7 @@ const NavSection = ({ section }: Props) => {
         </FancyLink>
       )}
 
-      {children && children?.length > 0 && isHovered && (
+      {children && children?.length > 0 && isActive && (
         <div
           className="absolute top-full left-1/2 -translate-x-1/2 before:absolute before:top-0 before:left-1/2 before:h-4 before:w-4 before:-translate-x-1/2 before:rotate-45 before:bg-white before:content-['']"
           ref={subnav}
@@ -72,7 +85,9 @@ const NavSection = ({ section }: Props) => {
                     key={child?.target?.slug?.current}
                     url={child?.target?.slug.current}
                   >
-                    <span className="block">{child?.target?.title}</span>
+                    <Typography variant={TypeVariant.Button2}>
+                      {child?.target?.title}
+                    </Typography>
                   </FancyLink>
                 ),
             )}

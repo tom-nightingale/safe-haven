@@ -2,6 +2,7 @@
 
 import { type ReactElement } from "react";
 import FancyLink from "@/components/FancyLink/FancyLink";
+import Typography, { TypeVariant } from "@/components/Typography/Typography";
 
 type Props = {
   label?: string;
@@ -13,6 +14,7 @@ type Props = {
   classes?: string;
   href?: string;
   newTab?: boolean;
+  variant?: TypeVariant;
   onClick?: () => void;
 };
 
@@ -26,6 +28,7 @@ const Button = ({
   classes,
   href,
   newTab = false,
+  variant = TypeVariant.Button1,
   onClick,
 }: Props) => {
   return (
@@ -46,7 +49,7 @@ const Button = ({
             {!iconOnly && (
               <>
                 {iconLeft && <span className="opacity-50">{iconLeft}</span>}
-                {label}
+                <Typography variant={variant}>{label}</Typography>
                 {iconRight && (
                   <span className="text-dark-green opacity-50">
                     {iconRight}
@@ -67,7 +70,7 @@ const Button = ({
               {!iconOnly && (
                 <>
                   {iconLeft && <span className="opacity-50">{iconLeft}</span>}
-                  {label}
+                  <Typography variant={variant}>{label}</Typography>
                   {iconRight && (
                     <span className="text-dark-green opacity-50">
                       {iconRight}
@@ -85,15 +88,13 @@ const Button = ({
           className={`group button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
         >
           {iconOnly && (
-            <span className="block aspect-square opacity-50 transition-all duration-300 will-change-transform group-hover:-rotate-360">
-              {icon}
-            </span>
+            <span className="block aspect-square opacity-50">{icon}</span>
           )}
 
           {!iconOnly && (
             <>
               {iconLeft && <span className="opacity-50">{iconLeft}</span>}
-              {label}
+              <Typography variant={variant}>{label}</Typography>
               {iconRight && (
                 <span className="text-dark-green opacity-50">{iconRight}</span>
               )}
