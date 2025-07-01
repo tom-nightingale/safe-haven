@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-// import { Literata, Inter } from "next/font/google";
+import { literataSerif, interSans } from "@/utils/fonts";
 import "@/styles/globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import createApolloClient from "@/gql/apolloClient";
@@ -10,7 +10,7 @@ import {
 } from "@/gql/sanity/codegen";
 import config from "@/config/config";
 import Header from "@/components/Header/Header";
-import { literataSerif, interSans } from "@/utils/fonts";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -68,6 +68,7 @@ export default async function RootLayout({
         >
           <Header primaryNav={primaryNav} secondaryNav={secondaryNav} />
           {children}
+          <Footer primaryNav={primaryNav} secondaryNav={secondaryNav} />
         </body>
       </html>
     </ViewTransitions>

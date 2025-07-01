@@ -21,9 +21,8 @@ const ReviewCards = ({ title, reviews }: Props) => {
     <div className="py-12">
       <div className="mx-auto w-full">
         <Typography variant={TypeVariant.H3} component={TypeComponent.h2}>
-          We Come Highly Recommended
+          {title ?? "We Come Highly Recommended"}
         </Typography>
-
         {reviews?.length > 0 && (
           <div className="mt-10">
             <Swiper

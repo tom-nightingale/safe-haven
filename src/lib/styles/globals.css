@@ -57,6 +57,7 @@
   --color-green: #cde0c9;
   --color-green-rgb: 205, 224, 201;
   --color-lilac: #d8cfef;
+  --color-dark-lilac: #7f7597;
   --color-lilac-rgb: 216, 207, 239;
   --color-peach: #f7c8b0;
   --color-peach-rgb: 247, 200, 176;
@@ -138,6 +139,10 @@ body {
 
   &.button-green {
     @apply bg-green text-dark-green;
+  }
+
+  &.button-lilac {
+    @apply bg-lilac text-dark-lilac;
   }
 
   &.outlined {
@@ -235,4 +240,16 @@ body {
 }
 .swiper-scrollbar-drag {
   @apply !bg-peach;
+}
+
+.scalloped-top::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: radial-gradient(circle, var(--color-taupe) 15px, transparent 10px)
+    repeat-x;
+  background-size: 30px 30px;
 }

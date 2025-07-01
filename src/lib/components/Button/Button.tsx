@@ -39,7 +39,7 @@ const Button = ({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
+            className={`${outlined ? "outlined" : ""} ${classes ?? ""}`}
             onClick={onClick}
           >
             {iconOnly && (
