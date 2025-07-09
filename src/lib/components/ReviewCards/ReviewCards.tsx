@@ -27,11 +27,23 @@ const ReviewCards = ({ title, reviews }: Props) => {
           <div className="mt-10">
             <Swiper
               modules={[Scrollbar, A11y]}
-              spaceBetween={10}
+              spaceBetween={20}
               slidesPerView={1.2}
               onSlideChange={() => console.log("slide change")}
               onSwiper={swiper => console.log(swiper)}
               scrollbar={{ draggable: true }}
+              breakpoints={{
+                600: {
+                  slidesPerView: 2.2,
+                },
+                1024: {
+                  slidesPerView: 3.2,
+                  spaceBetween: 30,
+                },
+                1280: {
+                  slidesPerView: 4,
+                },
+              }}
             >
               {reviews.map((review, i) => (
                 <SwiperSlide key={i}>
