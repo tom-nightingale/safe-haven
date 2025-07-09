@@ -127,7 +127,7 @@ body {
 }
 
 .button {
-  @apply relative flex items-center justify-center gap-2 rounded-full font-serif font-light hover:cursor-pointer;
+  @apply relative flex items-center justify-center gap-2 rounded-full text-center font-serif font-light hover:cursor-pointer;
 
   &.button-primary {
     @apply px-4 py-2;
@@ -261,4 +261,15 @@ body {
   background: radial-gradient(circle, var(--color-taupe) 15px, transparent 10px)
     repeat-x;
   background-size: 30px 30px;
+}
+
+.cloud-mask::after {
+  content: "";
+  display: block;
+  height: 100px;
+  /* background: #eee1d7; match your background color */
+  @apply bg-taupe;
+  clip-path: path(
+    "M0,100 C40,40 80,40 120,100 C160,60 200,60 240,100 C280,70 320,70 360,100 C400,80 440,80 480,100 L480,200 L0,200 Z"
+  );
 }

@@ -13,19 +13,21 @@ const FancyLink = ({ children, url }: Props) => {
   const router = useTransitionRouter();
   const pathname = usePathname();
   return (
-    <Link
-      onClick={e => {
-        e.preventDefault();
-        if (pathname !== url) {
-          router.push(url, {
-            onTransitionReady: pageAnimation,
-          });
-        }
-      }}
-      href="/"
-    >
-      {children}
-    </Link>
+    <span className="flex w-max">
+      <Link
+        onClick={e => {
+          e.preventDefault();
+          if (pathname !== url) {
+            router.push(url, {
+              onTransitionReady: pageAnimation,
+            });
+          }
+        }}
+        href="/"
+      >
+        {children}
+      </Link>
+    </span>
   );
 };
 

@@ -12,6 +12,8 @@ type Props = {
   phone: string;
   email: string;
   buttonClasses?: string;
+  centered?: boolean;
+  showMapButton?: boolean;
 };
 
 const NurseryDetails = ({
@@ -21,31 +23,37 @@ const NurseryDetails = ({
   phone,
   email,
   buttonClasses = "button-lilac",
+  centered = false,
+  showMapButton = false,
 }: Props) => {
   return (
     <>
-      <Typography
-        variant={TypeVariant.H5}
-        component={TypeComponent.p}
-        classes="mb-4 xl:mb-7.5"
-      >
-        {title}
-      </Typography>
+      {title && (
+        <Typography
+          variant={TypeVariant.H5}
+          component={TypeComponent.p}
+          classes="mb-4 xl:mb-7.5"
+        >
+          {title}
+        </Typography>
+      )}
 
       <div className="grid gap-3 xl:gap-5">
+        {subtitle && (
+          <Typography
+            variant={TypeVariant.Body1}
+            component={TypeComponent.p}
+            classes=""
+          >
+            {subtitle}
+          </Typography>
+        )}
         <Typography
           variant={TypeVariant.Body1}
           component={TypeComponent.p}
-          classes=""
+          classes={`flex gap-2 items-center ${centered ? "justify-center items-start text-center" : ""}`}
         >
-          {subtitle}
-        </Typography>
-        <Typography
-          variant={TypeVariant.Body1}
-          component={TypeComponent.p}
-          classes="flex gap-2"
-        >
-          <span className="mt-1">
+          <span className={`${centered ? "relative left-1" : ""} mt-1`}>
             <FaMapMarkerAlt />
           </span>
           <span dangerouslySetInnerHTML={{ __html: address }} />
@@ -53,7 +61,7 @@ const NurseryDetails = ({
         <Typography
           variant={TypeVariant.Body1}
           component={TypeComponent.p}
-          classes="flex gap-2 items-center"
+          classes={`flex gap-2 items-center ${centered ? "justify-center text-center" : ""}`}
         >
           <span className="rotate-90">
             <FaPhone />
@@ -63,13 +71,14 @@ const NurseryDetails = ({
             newTab
             label={phone}
             variant={TypeVariant.Body1}
+            classes="!font-sans"
           />
         </Typography>
 
         <Typography
           variant={TypeVariant.Body1}
           component={TypeComponent.p}
-          classes="flex gap-2 items-center"
+          classes={`flex font-sans gap-2 items-center ${centered ? "justify-center text-center" : ""}`}
         >
           <FaEnvelope />
           <Button
@@ -77,13 +86,27 @@ const NurseryDetails = ({
             newTab
             label={email}
             variant={TypeVariant.Body1}
+            classes="!font-sans"
           />
         </Typography>
 
-        <Button
-          label="Get Directions"
-          classes={`button-primary mr-auto mt-5 ${buttonClasses}`}
-        />
+        <div className="flex flex-col items-center justify-center md:flex-row md:gap-4">
+          <Button
+            href="/"
+            newTab
+            label="Get Directions"
+            classes={`button-primary mr-auto mt-5 ${buttonClasses}`}
+          />
+
+          {showMapButton && (
+            <Button
+              href="/"
+              newTab
+              label="View Map"
+              classes={`button-primary button-outline button-outline-blue mr-auto mt-5 ${buttonClasses}`}
+            />
+          )}
+        </div>
       </div>
     </>
   );
