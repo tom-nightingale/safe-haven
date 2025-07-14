@@ -42,39 +42,29 @@ const Button = ({
             className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
             onClick={onClick}
           >
-            {iconOnly && (
-              <span className="aspect-square opacity-50">{icon}</span>
-            )}
+            {iconOnly && <span className="aspect-square">{icon}</span>}
 
             {!iconOnly && (
               <>
-                {iconLeft && <span className="opacity-50">{iconLeft}</span>}
+                {iconLeft && <span className="">{iconLeft}</span>}
                 <Typography variant={variant}>{label}</Typography>
                 {iconRight && (
-                  <span className="text-dark-green opacity-50">
-                    {iconRight}
-                  </span>
+                  <span className="text-dark-green">{iconRight}</span>
                 )}
               </>
             )}
           </a>
         ) : (
           <FancyLink url={href}>
-            <button
-              className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
-            >
-              {iconOnly && (
-                <span className="aspect-square opacity-50">{icon}</span>
-              )}
+            <button className={`button ${classes ?? ""}`}>
+              {iconOnly && <span className="aspect-square">{icon}</span>}
 
               {!iconOnly && (
                 <>
-                  {iconLeft && <span className="opacity-50">{iconLeft}</span>}
+                  {iconLeft && <span className="">{iconLeft}</span>}
                   <Typography variant={variant}>{label}</Typography>
                   {iconRight && (
-                    <span className="text-dark-green opacity-50">
-                      {iconRight}
-                    </span>
+                    <span className="text-dark-green">{iconRight}</span>
                   )}
                 </>
               )}
@@ -87,16 +77,14 @@ const Button = ({
           onClick={onClick}
           className={`group button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
         >
-          {iconOnly && (
-            <span className="block aspect-square opacity-50">{icon}</span>
-          )}
+          {iconOnly && <span className="block aspect-square">{icon}</span>}
 
           {!iconOnly && (
             <>
-              {iconLeft && <span className="opacity-50">{iconLeft}</span>}
+              {iconLeft && <span className="">{iconLeft}</span>}
               <Typography variant={variant}>{label}</Typography>
               {iconRight && (
-                <span className="text-dark-green opacity-50">{iconRight}</span>
+                <span className="text-dark-green">{iconRight}</span>
               )}
             </>
           )}

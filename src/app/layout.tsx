@@ -10,6 +10,7 @@ import {
 } from "@/gql/sanity/codegen";
 import config from "@/config/config";
 import Header from "@/components/Header/Header";
+import Locations from "@/components/Locations/Locations";
 import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
@@ -45,20 +46,8 @@ export default async function RootLayout({
   const secondaryNavData = await GetNav(config.SECONDARY_NAV_ID);
 
   // Assuming the Navigation object is under a property like 'navigation' in the query result
-  const primaryNav = primaryNavData?.Navigation;
-  const secondaryNav = secondaryNavData?.Navigation;
-
-  if (!primaryNav || !secondaryNav) {
-    return (
-      <html lang="en">
-        <body
-          className={`${literataSerif.variable} ${interSans.variable} antialiased`}
-        >
-          <div>Navigation data could not be loaded.</div>
-        </body>
-      </html>
-    );
-  }
+  const primaryNav = primaryNavData?.Navigation ?? undefined;
+  const secondaryNav = secondaryNavData?.Navigation ?? undefined;
 
   return (
     <ViewTransitions>
@@ -68,6 +57,7 @@ export default async function RootLayout({
         >
           <Header primaryNav={primaryNav} secondaryNav={secondaryNav} />
           {children}
+          <Locations />
           <Footer primaryNav={primaryNav} secondaryNav={secondaryNav} />
         </body>
       </html>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import type { NavigationSection } from "@/gql/sanity/codegen";
+import type { NavigationSection, Maybe } from "@/gql/sanity/codegen";
 import Button from "@/components/Button/Button";
 import { FaBars, FaTimes, FaStar } from "react-icons/fa";
 import { useState, useRef } from "react";
@@ -11,7 +11,7 @@ import { useGSAP } from "@gsap/react";
 import config from "@/config/config";
 
 type Props = {
-  nav: NavigationSection[];
+  nav: NavigationSection[] | Maybe<NavigationSection>[];
 };
 
 const SecondaryNav = ({ nav }: Props) => {
@@ -21,7 +21,7 @@ const SecondaryNav = ({ nav }: Props) => {
 
   const animationScope = useRef(null);
   const menuOverlay = useRef(null);
-  const tl = useRef(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
 
   gsap.registerPlugin(useGSAP);
 
@@ -53,15 +53,15 @@ const SecondaryNav = ({ nav }: Props) => {
   const openNav = () => {
     setIsOpen(true);
     document.body.classList.add("locked");
-    tl.current.play();
+    tl.current && tl.current.play();
   };
 
   const closeNav = () => {
-    // console.log("closeNav");
     document.body.classList.remove("locked");
-    tl.current.reverse().then(() => {
-      setIsOpen(false);
-    });
+    tl.current &&
+      tl.current.reverse().then(() => {
+        setIsOpen(false);
+      });
   };
 
   return (
@@ -69,7 +69,7 @@ const SecondaryNav = ({ nav }: Props) => {
       <Button
         iconOnly
         icon={<FaBars />}
-        classes="button-icon-only"
+        classes="button-icon-only text-dark-peach before:border-peach/50"
         onClick={() => {
           openNav();
         }}
@@ -89,11 +89,11 @@ const SecondaryNav = ({ nav }: Props) => {
           className="shadow-peach bg-cream absolute top-4 right-4 bottom-4 z-10 flex h-[calc(100%-32px)] w-4/5 flex-col overflow-y-scroll rounded-3xl xl:w-5/12"
           ref={menuContainer}
         >
-          <div className="absolute top-6 right-6 z-50 cursor-pointer">
+          <div className="text-dark-peach absolute top-6 right-6 z-50 cursor-pointer">
             <Button
               iconOnly
               icon={<FaTimes />}
-              classes="button-icon-only "
+              classes="button-icon-only"
               onClick={() => {
                 closeNav();
               }}
@@ -120,7 +120,7 @@ const SecondaryNav = ({ nav }: Props) => {
                   return (
                     <div className="group" key={sect?.target?.slug?.current}>
                       <div className="group transition-all duration-200 hover:pl-1">
-                        <FancyLink url={sect?.target?.slug?.current}>
+                        <FancyLink url={sect?.target?.slug?.current ?? ""}>
                           <span className="flex items-center gap-3">
                             <span className="text-dark-peach opacity-20 transition duration-200 group-hover:opacity-100">
                               <FaStar />
@@ -138,7 +138,9 @@ const SecondaryNav = ({ nav }: Props) => {
                                 key={child?.target?.title}
                                 className="pl-2 text-sm opacity-70 transition-all duration-200 hover:pl-3 hover:opacity-100"
                               >
-                                <FancyLink url={child?.target?.slug?.current}>
+                                <FancyLink
+                                  url={`${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}
+                                >
                                   {child?.target?.title}
                                 </FancyLink>
                               </div>

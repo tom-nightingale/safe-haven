@@ -7,27 +7,26 @@ import { usePathname } from "next/navigation";
 
 type Props = {
   children: React.ReactNode;
-  url: string;
+  url?: string;
 };
 const FancyLink = ({ children, url }: Props) => {
   const router = useTransitionRouter();
   const pathname = usePathname();
   return (
-    <span className="flex w-max">
-      <Link
-        onClick={e => {
-          e.preventDefault();
-          if (pathname !== url) {
+    <Link
+      onClick={e => {
+        e.preventDefault();
+        if (pathname !== url) {
+          if (url)
             router.push(url, {
               onTransitionReady: pageAnimation,
             });
-          }
-        }}
-        href="/"
-      >
-        {children}
-      </Link>
-    </span>
+        }
+      }}
+      href={url ?? ""}
+    >
+      {children}
+    </Link>
   );
 };
 

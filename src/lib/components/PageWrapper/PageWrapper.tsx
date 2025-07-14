@@ -9,7 +9,7 @@ const PageWrapper = (props: HTMLMotionProps<"div">) => {
   if (!hasLoaded) hasLoaded = true;
 
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

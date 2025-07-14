@@ -7,18 +7,14 @@ import { FaPhone, FaFacebook } from "react-icons/fa";
 import Image from "next/image";
 import Copyright from "./Copyright";
 import NurseryDetails from "./NurseryDetails";
-import {
-  type Navigation,
-  type NavigationSection,
-  Maybe,
-} from "@/gql/sanity/codegen";
+import { type Navigation } from "@/gql/sanity/codegen";
 import FancyLink from "@/components/FancyLink/FancyLink";
 import Button from "@/components/Button/Button";
 import config from "@/config/config";
 
 type Props = {
-  primaryNav: Navigation | Maybe<NavigationSection>;
-  secondaryNav: Navigation | Maybe<NavigationSection>;
+  primaryNav?: Navigation;
+  secondaryNav?: Navigation;
 };
 
 // @TODO - Update with the nursery details from Sanity
@@ -35,16 +31,21 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
         <Container>
           <div className="border-taupe grid grid-cols-1 gap-10 border-b-2 py-8 pb-48 lg:grid-cols-2 lg:py-20 lg:pb-40 xl:grid-cols-12 xl:py-24">
             <div className="3xl:col-span-3 grid gap-8 xl:col-span-4">
-              <Typography variant={TypeVariant.H4} component={TypeComponent.p}>
-                Need more information or want to book a tour?
-              </Typography>
+              <div className="flex flex-col gap-4">
+                <Typography
+                  variant={TypeVariant.H4}
+                  component={TypeComponent.p}
+                >
+                  Need more information or want to book a tour?
+                </Typography>
 
-              <Typography
-                variant={TypeVariant.Body1}
-                component={TypeComponent.p}
-              >
-                Contact us today to speak to our friendly staff
-              </Typography>
+                <Typography
+                  variant={TypeVariant.Body1}
+                  component={TypeComponent.p}
+                >
+                  Contact us today to speak to our friendly staff
+                </Typography>
+              </div>
 
               <div className="xs:grid-cols-2 xs:gap-4 grid grid-cols-1 gap-4 xl:grid-cols-12">
                 <div className="flex flex-col justify-center xl:col-span-6">
@@ -117,6 +118,14 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                   learning experiences and that you get to be apart of their
                   time at Nursery.
                 </Typography>
+
+                <Button
+                  label="Log in to ParentAdmin"
+                  newTab
+                  variant={TypeVariant.Body1}
+                  classes="text-pink !font-sans !font-bold"
+                  href="https://uk.parentadmin.com/login.php"
+                />
               </div>
               <div className="col-span-4 flex justify-center md:col-span-3">
                 <Image
@@ -159,7 +168,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                     return (
                       <FancyLink
                         key={item?.target?.slug?.current}
-                        url={item?.target?.slug?.current}
+                        url={item?.target?.slug?.current ?? ""}
                       >
                         {item?.target?.title}
                       </FancyLink>
@@ -171,7 +180,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                     return (
                       <FancyLink
                         key={item?.target?.slug?.current}
-                        url={item?.target?.slug?.current}
+                        url={item?.target?.slug?.current ?? ""}
                       >
                         {item?.target?.title}
                       </FancyLink>

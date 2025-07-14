@@ -4,13 +4,11 @@ import Typography, {
 } from "@/components/Typography/Typography";
 import Container from "@/components/Container/Container";
 import NurseryDetails from "@/components/Footer/NurseryDetails";
-// import Image from "next/image";
-// import config from "@/config/config";
 import CloudsVector from "@/components/CloudsVector/CloudsVector";
 
 const Locations = () => {
   return (
-    <>
+    <div className="relative pb-40">
       <CloudsVector
         fill="white"
         classes="absolute w-[200%] lg:w-[150%] 3xl:w-full top-1"
@@ -59,7 +57,7 @@ const Locations = () => {
                     address="43 Church Street, South Normanton, DE55 2BT"
                     phone="01773 000 000"
                     email="info@safehavennursery.co.uk"
-                    buttonClasses="button-peach font-sans mx-auto md:mx-0"
+                    buttonClasses="button-green font-sans mx-auto md:mx-0"
                     centered
                     showMapButton
                   />
@@ -90,7 +88,7 @@ const Locations = () => {
                     address="43 Church Street, South Normanton, DE55 2BT"
                     phone="01773 000 000"
                     email="info@safehavennursery.co.uk"
-                    buttonClasses="button-peach font-sans mx-auto md:mx-0"
+                    buttonClasses="button-blue font-sans mx-auto md:mx-0"
                     centered
                     showMapButton
                   />
@@ -100,7 +98,7 @@ const Locations = () => {
           </div>
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 

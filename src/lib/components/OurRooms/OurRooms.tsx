@@ -7,6 +7,7 @@ import Typography, {
 import Container from "@/components/Container/Container";
 import Card from "@/components/Card/Card";
 import { type Image } from "@/gql/sanity/codegen";
+import { CardImageType } from "@/utils/propTypes";
 
 type Room = {
   href: string;
@@ -18,13 +19,27 @@ type Room = {
   buttonText?: string;
   buttonStyle?: "full" | "icon-only";
   buttonClass?: string;
-  style?: "profile" | "full";
+  style?: CardImageType;
 };
 type Props = {
   rooms: Room[];
 };
 
 const OurRooms = ({ rooms }: Props) => {
+  const bgColors = ["bg-green", "bg-lilac", "bg-yellow", "bg-blue"];
+  const buttonClasses = [
+    "button-outline-green text-green",
+    "button-outline-lilac text-lilac",
+    "button-outline-yellow text-yellow",
+    "button-outline-blue text-blue",
+  ];
+  const shadowClasses = [
+    "bg-green/10",
+    "bg-lilac/10",
+    "bg-yellow/10",
+    "bg-blue/10",
+  ];
+
   return (
     <div className="scalloped-top relative mt-8">
       <div className="from-taupe to-cream relative bg-gradient-to-b py-10 xl:py-15">
@@ -39,8 +54,19 @@ const OurRooms = ({ rooms }: Props) => {
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 xl:grid-cols-4">
-            {rooms.map(room => {
-              return <Card key={room.title} {...room} />;
+            {rooms.map((room, i) => {
+              return (
+                <Card
+                  style={CardImageType.FULL}
+                  key={room.title}
+                  {...room}
+                  containerClass={bgColors[i] || "bg-blue"}
+                  buttonClass={
+                    buttonClasses[i] || "button-outline-blue text-blue"
+                  }
+                  shadowClass={shadowClasses[i] || "bg-blue/10"}
+                />
+              );
             })}
           </div>
         </Container>

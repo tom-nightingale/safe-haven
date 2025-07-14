@@ -14,9 +14,7 @@ const meta = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {
-    label: { control: "text" },
-  },
+  argTypes: {},
 } satisfies Meta<typeof Typography>;
 
 export default meta;
@@ -88,6 +86,9 @@ export const Button1: Story = {
 };
 
 export const Primary: Story = {
+  args: {
+    children: null,
+  },
   render: () => {
     return (
       <>

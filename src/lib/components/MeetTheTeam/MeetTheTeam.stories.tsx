@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import MeetTheTeam from "./MeetTheTeam";
+import { CardImageType } from "@/utils/propTypes";
 
 const meta = {
   title: "Components/MeetTheTeam",
@@ -33,7 +34,7 @@ export const Primary: Story = {
         shadowClass: "bg-green/20",
         buttonText: "",
         buttonStyle: "icon-only",
-        style: "profile",
+        style: CardImageType.PROFILE,
         href: "/",
         image: {
           __typename: "Image",
@@ -68,7 +69,7 @@ export const Primary: Story = {
         shadowClass: "bg-green/20",
         buttonText: "",
         buttonStyle: "icon-only",
-        style: "profile",
+        style: CardImageType.PROFILE,
         href: "/",
         image: {
           __typename: "Image",
@@ -103,7 +104,7 @@ export const Primary: Story = {
         shadowClass: "bg-green/20",
         buttonText: "",
         buttonStyle: "icon-only",
-        style: "profile",
+        style: CardImageType.PROFILE,
         href: "/",
         image: {
           __typename: "Image",
