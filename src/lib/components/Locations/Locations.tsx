@@ -10,7 +10,7 @@ import CloudsVector from "@/components/CloudsVector/CloudsVector";
 
 const Locations = () => {
   return (
-    <>
+    <div className="relative pb-40">
       <CloudsVector
         fill="white"
         classes="absolute w-[200%] lg:w-[150%] 3xl:w-full top-1"
@@ -100,7 +100,7 @@ const Locations = () => {
           </div>
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 

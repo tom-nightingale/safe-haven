@@ -51,7 +51,7 @@ const NurseryDetails = ({
         <Typography
           variant={TypeVariant.Body1}
           component={TypeComponent.p}
-          classes={`flex gap-2 items-center ${centered ? "justify-center items-start text-center" : ""}`}
+          classes={`flex gap-2 items-start ${centered ? "justify-center items-start text-center" : ""}`}
         >
           <span className={`${centered ? "relative left-1" : ""} mt-1`}>
             <FaMapMarkerAlt />

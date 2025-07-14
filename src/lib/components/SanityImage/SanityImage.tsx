@@ -30,6 +30,7 @@ type Props = {
   width?: number;
   height?: number;
   sizes?: string;
+  objectFit?: string;
 };
 
 export function getPositionFromHotspot(
@@ -52,6 +53,7 @@ const SanityImage = ({
   width,
   height,
   sizes,
+  objectFit = "contain",
 }: Props) => {
   const sourceUrl = image.asset?.url;
   const blurData = image?.asset?.metadata?.lqip;
@@ -72,7 +74,7 @@ const SanityImage = ({
       placeholder={placeholder}
       blurDataURL={blurData ?? undefined}
       sizes={sizes}
-      objectFit="contain"
+      objectFit={objectFit}
       objectPosition={getPositionFromHotspot(hotspotData)}
     />
   ) : (

@@ -60,6 +60,8 @@ const GetSingularPage = async (slug: string | undefined): Promise<any> => {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
+
+  // console.log("slug", slug);
   const { allPage } = await GetSingularPage(slug.at(-1));
   if (allPage.length < 1) {
     return notFound();

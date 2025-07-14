@@ -12,7 +12,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 
 type Props = {
-  title: string;
+  title?: string;
   reviews: { review: string; name: string; rating: 1 | 2 | 3 | 4 | 5 }[];
 };
 

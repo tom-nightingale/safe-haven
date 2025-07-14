@@ -8,8 +8,7 @@ import {
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
-// import HomeLayout from "@/layouts/HomeLayout/HomeLayout";
-import Container from "@/components/Container/Container";
+import HomeLayout from "@/layouts/HomeLayout/HomeLayout";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -76,27 +75,10 @@ export default async function Home() {
   }
   const page = allPage[0];
   console.log(page);
-  console.log("allStaff", allStaff);
+  // console.log("allStaff", allStaff);
   return (
     <>
-      <Container>
-        <div className="grid grid-cols-12 gap-4">
-          {allStaff.length > 0 &&
-            allStaff.map(staff => (
-              <div className="relative col-span-2 bg-gray-100" key={staff.name}>
-                {staff && (
-                  // <Card
-                  //   image={staff?.profileImage?.image}
-                  //   title={staff.name}
-                  //   subtitle={staff.jobTitle}
-                  // />
-                  <></>
-                )}
-              </div>
-            ))}
-        </div>
-      </Container>
-      {/* <HomeLayout /> */}
+      <HomeLayout />
     </>
   );
 }

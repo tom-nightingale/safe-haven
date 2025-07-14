@@ -39,8 +39,32 @@ const OurRooms = ({ rooms }: Props) => {
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 xl:grid-cols-4">
-            {rooms.map(room => {
-              return <Card key={room.title} {...room} />;
+            {rooms.map((room, i) => {
+              return (
+                <Card
+                  style="full"
+                  key={room.title}
+                  {...room}
+                  containerClass={
+                    i === 0
+                      ? "bg-pink"
+                      : i === 1
+                        ? "bg-lilac"
+                        : i === 2
+                          ? "bg-yellow"
+                          : "bg-blue"
+                  }
+                  shadowClass={
+                    i === 0
+                      ? "bg-pink/10"
+                      : i === 1
+                        ? "bg-lilac/10"
+                        : i === 2
+                          ? "bg-yellow/10"
+                          : "bg-blue/10"
+                  }
+                />
+              );
             })}
           </div>
         </Container>
