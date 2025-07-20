@@ -5,8 +5,13 @@ import Typography, {
 import Container from "@/components/Container/Container";
 import NurseryDetails from "@/components/Footer/NurseryDetails";
 import CloudsVector from "@/components/CloudsVector/CloudsVector";
+import { type Nursery } from "@/gql/sanity/codegen";
 
-const Locations = () => {
+type Props = {
+  nurseries?: Nursery[];
+};
+
+const Locations = ({ nurseries }: Props) => {
   return (
     <div className="relative pb-40">
       <CloudsVector
@@ -34,66 +39,42 @@ const Locations = () => {
             </div>
 
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-              <div className="flex flex-col items-center rounded-3xl bg-white p-10 xl:p-14">
-                <div className="flex flex-col items-center gap-3 text-center">
-                  <Typography
-                    variant={TypeVariant.H4}
-                    component={TypeComponent.p}
+              {nurseries &&
+                nurseries.length > 0 &&
+                nurseries.map((nursery: Nursery, i: number) => (
+                  <div
+                    className="flex flex-col items-center rounded-3xl bg-white p-10 xl:p-14"
+                    key={nursery.title}
                   >
-                    Safe Haven Day Nursery & The Den
-                  </Typography>
-                  <Typography
-                    variant={TypeVariant.H6}
-                    component={TypeComponent.p}
-                  >
-                    Mansfield Woodhouse
-                  </Typography>
-                </div>
+                    <div className="flex flex-col items-center gap-3 text-center">
+                      <Typography
+                        variant={TypeVariant.H4}
+                        component={TypeComponent.p}
+                      >
+                        {nursery.title}
+                      </Typography>
+                      <Typography
+                        variant={TypeVariant.H6}
+                        component={TypeComponent.p}
+                      >
+                        {nursery.location}
+                      </Typography>
+                    </div>
 
-                <div className="mt-6 flex flex-col md:max-w-4/5">
-                  <NurseryDetails
-                    title=""
-                    subtitle=""
-                    address="43 Church Street, South Normanton, DE55 2BT"
-                    phone="01773 000 000"
-                    email="info@safehavennursery.co.uk"
-                    buttonClasses="button-green font-sans mx-auto md:mx-0"
-                    centered
-                    showMapButton
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center rounded-3xl bg-white p-10 xl:p-14">
-                <div className="flex flex-col items-center gap-3 text-center">
-                  <Typography
-                    variant={TypeVariant.H4}
-                    component={TypeComponent.p}
-                  >
-                    Safe Haven At <br />
-                    The Old School House
-                  </Typography>
-                  <Typography
-                    variant={TypeVariant.H6}
-                    component={TypeComponent.p}
-                  >
-                    South Normanton
-                  </Typography>
-                </div>
-
-                <div className="mt-6 flex flex-col md:max-w-4/5">
-                  <NurseryDetails
-                    title=""
-                    subtitle=""
-                    address="43 Church Street, South Normanton, DE55 2BT"
-                    phone="01773 000 000"
-                    email="info@safehavennursery.co.uk"
-                    buttonClasses="button-blue font-sans mx-auto md:mx-0"
-                    centered
-                    showMapButton
-                  />
-                </div>
-              </div>
+                    <div className="mt-6 flex flex-col md:max-w-4/5">
+                      <NurseryDetails
+                        title=""
+                        subtitle=""
+                        address={nursery.address ?? ""}
+                        phone={nursery.phoneNumber ?? ""}
+                        email={nursery.email ?? ""}
+                        buttonClasses={`${i === 0 ? "button-green" : "button-blue"} font-sans mx-auto md:mx-0`}
+                        centered
+                        showMapButton
+                      />
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
         </Container>

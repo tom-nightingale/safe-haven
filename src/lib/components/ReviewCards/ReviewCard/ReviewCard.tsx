@@ -4,11 +4,14 @@ import Typography, {
 } from "@/components/Typography/Typography";
 import { FaStar } from "react-icons/fa";
 import Button from "@/components/Button/Button";
+import { Maybe } from "@/gql/sanity/codegen";
+import { toPlainText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 
 type Props = {
-  review: string;
-  name: string;
-  rating: 1 | 2 | 3 | 4 | 5;
+  review: PortableTextBlock[]; // or the correct type expected by toPlainText
+  name: string | Maybe<string>;
+  rating: 1 | 2 | 3 | 4 | 5 | Maybe<number>;
 };
 
 const truncateWords = (str: string, wordLimit: number) => {
@@ -17,13 +20,13 @@ const truncateWords = (str: string, wordLimit: number) => {
 
 const ReviewCard = ({ review, name, rating }: Props) => {
   return (
-    <div className="flex flex-col justify-center gap-2 rounded-3xl bg-white p-8 xl:px-12 xl:py-18">
+    <div className="flex h-full flex-col justify-center gap-2 rounded-3xl bg-white p-8 xl:px-12 xl:py-18">
       <Typography
         variant={TypeVariant.Body1}
         component={TypeComponent.p}
         classes=""
       >
-        {truncateWords(review, 32)}
+        {truncateWords(toPlainText(review), 29)}
       </Typography>
 
       <Button
@@ -41,7 +44,7 @@ const ReviewCard = ({ review, name, rating }: Props) => {
         {name}
       </Typography>
       <div className="text-yellow flex items-center gap-1">
-        {Array.from({ length: rating }).map((_, i) => (
+        {Array.from({ length: Number(rating) }).map((_, i) => (
           <span key={i}>
             <FaStar />
           </span>

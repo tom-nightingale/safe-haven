@@ -11,8 +11,8 @@ import { CardImageType } from "@/utils/propTypes";
 
 type Room = {
   href: string;
-  image: Image;
-  title: string;
+  image?: Image;
+  title: string | undefined;
   subtitle: string;
   containerClass?: string;
   shadowClass?: string;
@@ -40,6 +40,7 @@ const OurRooms = ({ rooms }: Props) => {
     "bg-blue/10",
   ];
 
+  console.log("rooms", rooms);
   return (
     <div className="scalloped-top relative mt-8">
       <div className="from-taupe to-cream relative bg-gradient-to-b py-10 xl:py-15">

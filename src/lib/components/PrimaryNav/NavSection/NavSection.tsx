@@ -58,7 +58,7 @@ const NavSection = ({
       }}
     >
       {target?.slug?.current && (
-        <FancyLink url={target?.slug?.current}>
+        <FancyLink url={`/${target?.slug?.current}`}>
           <span className="flex flex-col items-center justify-center py-3 text-center">
             <Typography variant={TypeVariant.Button1} classes="">
               {target?.title}
@@ -83,7 +83,7 @@ const NavSection = ({
                 child?.target?.slug?.current && (
                   <FancyLink
                     key={child?.target?.slug?.current}
-                    url={`${target?.slug?.current}/${child?.target?.slug.current}`}
+                    url={`/${target?.slug?.current}/${child?.target?.slug.current}`}
                   >
                     <Typography variant={TypeVariant.Button2}>
                       {child?.target?.title}

@@ -1,313 +1,48 @@
-// "use client";
+"use client";
 
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import Container from "@/components/Container/Container";
 import ReviewCards from "@/components/ReviewCards/ReviewCards";
 import MeetTheTeam from "@/components/MeetTheTeam/MeetTheTeam";
 import OurRooms from "@/components/OurRooms/OurRooms";
-import { CardImageType } from "@/utils/propTypes";
+import { useGlobalContext } from "@/context/GlobalContext";
+import Locations from "@/components/Locations/Locations";
+import type { Staff, Page } from "@/gql/sanity/codegen";
 
-export const HomeLayout = () => {
-  const reviews: { review: string; name: string; rating: 1 | 2 | 3 | 4 | 5 }[] =
-    [
-      {
-        review:
-          "Our Safe Haven journey has been amazing. As parents we trust the team at         Safe Haven with our most precious children and they never disappoint. Huge thank you to all, I really can't say it enough.",
-        name: "",
-        rating: 5,
-      },
-      {
-        review:
-          "Our Safe Haven journey has been amazing. As parents we trust the team at         Safe Haven with our most precious children and they never disappoint. Huge thank you to all, I really can't say it enough.",
-        name: "",
-        rating: 5,
-      },
-      {
-        review:
-          "Our Safe Haven journey has been amazing. As parents we trust the team at         Safe Haven with our most precious children and they never disappoint. Huge thank you to all, I really can't say it enough.",
-        name: "",
-        rating: 5,
-      },
-      {
-        review:
-          "Our Safe Haven journey has been amazing. As parents we trust the team at         Safe Haven with our most precious children and they never disappoint. Huge thank you to all, I really can't say it enough.",
-        name: "",
-        rating: 5,
-      },
-      {
-        review:
-          "Our Safe Haven journey has been amazing. As parents we trust the team at         Safe Haven with our most precious children and they never disappoint. Huge thank you to all, I really can't say it enough.",
-        name: "",
-        rating: 5,
-      },
-    ];
+type Props = {
+  staff?: Staff[];
+  rooms?: Page[];
+  page?: Page;
+};
+export const HomeLayout = ({ staff, rooms, page }: Props) => {
+  const { nurseries } = useGlobalContext();
 
-  const profiles = [
-    {
-      title: "Sarah Atkins",
-      subtitle: "Owner",
-      shadowClass: "bg-green/20",
-      buttonText: "",
-      buttonStyle: "icon-only" as const,
-      style: CardImageType.PROFILE,
-      href: "/",
-      image: {
-        __typename: "Image" as const,
-        asset: {
-          __typename: "SanityImageAsset" as const,
-          url: "https://cdn.sanity.io/images/smb7rd2w/production/35818a08a34e0646e86ee7247d28de833b1c62bf-1400x2100.jpg",
-          altText: null,
-          metadata: {
-            __typename: "SanityImageMetadata",
-            lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAgCBgcD/8QAKhAAAgEDAgQEBwAAAAAAAAAAAQIDAAQFBhEHEiFBCBMUURUiMTNhcYH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAMBAQEBAAAAAAAAAAAAAAACAwESMUH/2gAMAwEAAhEDEQA/AGVz2Tjw2KmvJFL8g+VB9WPYVVNK69lyea+HZTHGyeQbwvzcyt+P3XDjZew2OmYJbiQrGJ132NUCC6hhyuMufMeRgVlHKdwRUlbMj5nwsjBXlrb6MLRUIJBLCkgBAZQetFVkZkHiIvbMYewxlx9+9cpGey+5NYVqDXUeI9PjcXyz+kUIZj3Ye1Wvxb3co1JiYVYhUgLDY9yaXtmJkG+/U70LRV260ZbMi84Plwr1uNTaMs8hcqkc+5jdQem60VinBGeVdFbK5A9S/T+LRTAn/9k=",
-          },
-        },
-        hotspot: {
-          __typename: "SanityImageHotspot",
-          x: 0.49024108406607053,
-          y: 0.3203306764325722,
-          width: 0.6702003442990581,
-          height: 0.41493968117190866,
-        },
-        crop: {
-          __typename: "SanityImageCrop",
-          top: 0.11286083584661782,
-          bottom: 0.21402412753123654,
-          left: 0,
-          right: 0,
-        },
-      },
-    },
-    {
-      title: "Sarah Atkins",
-      subtitle: "Owner",
-      shadowClass: "bg-green/20",
-      buttonText: "",
-      buttonStyle: "icon-only" as const,
-      style: CardImageType.PROFILE,
-      href: "/",
-      image: {
-        __typename: "Image" as const,
-        asset: {
-          __typename: "SanityImageAsset" as const,
-          url: "https://cdn.sanity.io/images/smb7rd2w/production/35818a08a34e0646e86ee7247d28de833b1c62bf-1400x2100.jpg",
-          altText: null,
-          metadata: {
-            __typename: "SanityImageMetadata",
-            lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAgCBgcD/8QAKhAAAgEDAgQEBwAAAAAAAAAAAQIDAAQFBhEHEiFBCBMUURUiMTNhcYH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAMBAQEBAAAAAAAAAAAAAAACAwESMUH/2gAMAwEAAhEDEQA/AGVz2Tjw2KmvJFL8g+VB9WPYVVNK69lyea+HZTHGyeQbwvzcyt+P3XDjZew2OmYJbiQrGJ132NUCC6hhyuMufMeRgVlHKdwRUlbMj5nwsjBXlrb6MLRUIJBLCkgBAZQetFVkZkHiIvbMYewxlx9+9cpGey+5NYVqDXUeI9PjcXyz+kUIZj3Ye1Wvxb3co1JiYVYhUgLDY9yaXtmJkG+/U70LRV260ZbMi84Plwr1uNTaMs8hcqkc+5jdQem60VinBGeVdFbK5A9S/T+LRTAn/9k=",
-          },
-        },
-        hotspot: {
-          __typename: "SanityImageHotspot",
-          x: 0.49024108406607053,
-          y: 0.3203306764325722,
-          width: 0.6702003442990581,
-          height: 0.41493968117190866,
-        },
-        crop: {
-          __typename: "SanityImageCrop",
-          top: 0.11286083584661782,
-          bottom: 0.21402412753123654,
-          left: 0,
-          right: 0,
-        },
-      },
-    },
-    {
-      title: "Sarah Atkins",
-      subtitle: "Owner",
-      shadowClass: "bg-green/20",
-      buttonText: "",
-      buttonStyle: "icon-only" as const,
-      style: CardImageType.PROFILE,
-      href: "/",
-      image: {
-        __typename: "Image" as const,
-        asset: {
-          __typename: "SanityImageAsset" as const,
-          url: "https://cdn.sanity.io/images/smb7rd2w/production/35818a08a34e0646e86ee7247d28de833b1c62bf-1400x2100.jpg",
-          altText: null,
-          metadata: {
-            __typename: "SanityImageMetadata",
-            lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAgCBgcD/8QAKhAAAgEDAgQEBwAAAAAAAAAAAQIDAAQFBhEHEiFBCBMUURUiMTNhcYH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAMBAQEBAAAAAAAAAAAAAAACAwESMUH/2gAMAwEAAhEDEQA/AGVz2Tjw2KmvJFL8g+VB9WPYVVNK69lyea+HZTHGyeQbwvzcyt+P3XDjZew2OmYJbiQrGJ132NUCC6hhyuMufMeRgVlHKdwRUlbMj5nwsjBXlrb6MLRUIJBLCkgBAZQetFVkZkHiIvbMYewxlx9+9cpGey+5NYVqDXUeI9PjcXyz+kUIZj3Ye1Wvxb3co1JiYVYhUgLDY9yaXtmJkG+/U70LRV260ZbMi84Plwr1uNTaMs8hcqkc+5jdQem60VinBGeVdFbK5A9S/T+LRTAn/9k=",
-          },
-        },
-        hotspot: {
-          __typename: "SanityImageHotspot",
-          x: 0.49024108406607053,
-          y: 0.3203306764325722,
-          width: 0.6702003442990581,
-          height: 0.41493968117190866,
-        },
-        crop: {
-          __typename: "SanityImageCrop",
-          top: 0.11286083584661782,
-          bottom: 0.21402412753123654,
-          left: 0,
-          right: 0,
-        },
-      },
-    },
-  ];
-
-  const rooms = [
-    {
-      title: "Discoverers",
-      subtitle: "2-4 Year Olds",
+  const filteredRooms = (rooms ?? [])
+    .filter(room => room?.slug?.current !== "the-den")
+    .map(room => ({
+      ...room,
+      title: room?.title?.split("(")[0],
+      subtitle: `(${room?.title?.split("(")[1]}`,
       buttonText: "View Room",
-      containerClass: "bg-lilac",
-      shadowClass: "bg-lilac/20",
-      buttonClass: "button-outline-lilac text-lilac",
-      href: "/",
-      image: {
-        __typename: "Image" as const,
-        asset: {
-          __typename: "SanityImageAsset" as const,
-          url: "https://cdn.sanity.io/images/smb7rd2w/production/79019ce6c262365291ad7206f5f819d82c933466-1400x1200.jpg",
-          altText: null,
-          metadata: {
-            __typename: "SanityImageMetadata" as const,
-            lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAARABQDASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAAAAQGBwMF/8QAJxAAAQUAAQIEBwAAAAAAAAAAAQACAwQFERIxBhNBUSEyMzRxcoH/xAAWAQEBAQAAAAAAAAAAAAAAAAAEBQH/xAAbEQADAAMBAQAAAAAAAAAAAAAAAQIRITEDQf/aAAwDAQACEQMRAD8Am3N+pfqV2BobK9vlkc88D0aq0X288SSackTHOJbH0+rfZdTr5dGSKOnlWH2AQXOHxC9LW8QV5BDDdw3NLe0jh1d1HqbzrhUXpK19MN170r9Kw6KNwYXnhFZ9vOhn055azSInO5A9kVCWsII5rJpuT9H+BTLPyu/CIg11iDObP3Mv7FERKRh//9k=",
-          },
-        },
-        hotspot: {
-          __typename: "SanityImageHotspot" as const,
-          x: 0.4801690998053508,
-          y: 0.3609037450996747,
-          width: 0.6361802852978059,
-          height: 0.7218074901993494,
-        },
-        crop: {
-          __typename: "SanityImageCrop" as const,
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        },
-      },
-    },
-    {
-      title: "Discoverers",
-      subtitle: "2-4 Year Olds",
-      buttonText: "View Room",
-      containerClass: "bg-lilac",
-      shadowClass: "bg-lilac/20",
-      buttonClass: "button-outline-lilac text-lilac",
-      href: "/",
-      image: {
-        __typename: "Image" as const,
-        asset: {
-          __typename: "SanityImageAsset" as const,
-          url: "https://cdn.sanity.io/images/smb7rd2w/production/79019ce6c262365291ad7206f5f819d82c933466-1400x1200.jpg",
-          altText: null,
-          metadata: {
-            __typename: "SanityImageMetadata" as const,
-            lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAARABQDASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAAAAQGBwMF/8QAJxAAAQUAAQIEBwAAAAAAAAAAAQACAwQFERIxBhNBUSEyMzRxcoH/xAAWAQEBAQAAAAAAAAAAAAAAAAAEBQH/xAAbEQADAAMBAQAAAAAAAAAAAAAAAQIRITEDQf/aAAwDAQACEQMRAD8Am3N+pfqV2BobK9vlkc88D0aq0X288SSackTHOJbH0+rfZdTr5dGSKOnlWH2AQXOHxC9LW8QV5BDDdw3NLe0jh1d1HqbzrhUXpK19MN170r9Kw6KNwYXnhFZ9vOhn055azSInO5A9kVCWsII5rJpuT9H+BTLPyu/CIg11iDObP3Mv7FERKRh//9k=",
-          },
-        },
-        hotspot: {
-          __typename: "SanityImageHotspot" as const,
-          x: 0.4801690998053508,
-          y: 0.3609037450996747,
-          width: 0.6361802852978059,
-          height: 0.7218074901993494,
-        },
-        crop: {
-          __typename: "SanityImageCrop" as const,
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        },
-      },
-    },
-    {
-      title: "Discoverers",
-      subtitle: "2-4 Year Olds",
-      buttonText: "View Room",
-      containerClass: "bg-lilac",
-      shadowClass: "bg-lilac/20",
-      buttonClass: "button-outline-lilac text-lilac",
-      href: "/",
-      image: {
-        __typename: "Image" as const,
-        asset: {
-          __typename: "SanityImageAsset" as const,
-          url: "https://cdn.sanity.io/images/smb7rd2w/production/79019ce6c262365291ad7206f5f819d82c933466-1400x1200.jpg",
-          altText: null,
-          metadata: {
-            __typename: "SanityImageMetadata" as const,
-            lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAARABQDASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAAAAQGBwMF/8QAJxAAAQUAAQIEBwAAAAAAAAAAAQACAwQFERIxBhNBUSEyMzRxcoH/xAAWAQEBAQAAAAAAAAAAAAAAAAAEBQH/xAAbEQADAAMBAQAAAAAAAAAAAAAAAQIRITEDQf/aAAwDAQACEQMRAD8Am3N+pfqV2BobK9vlkc88D0aq0X288SSackTHOJbH0+rfZdTr5dGSKOnlWH2AQXOHxC9LW8QV5BDDdw3NLe0jh1d1HqbzrhUXpK19MN170r9Kw6KNwYXnhFZ9vOhn055azSInO5A9kVCWsII5rJpuT9H+BTLPyu/CIg11iDObP3Mv7FERKRh//9k=",
-          },
-        },
-        hotspot: {
-          __typename: "SanityImageHotspot" as const,
-          x: 0.4801690998053508,
-          y: 0.3609037450996747,
-          width: 0.6361802852978059,
-          height: 0.7218074901993494,
-        },
-        crop: {
-          __typename: "SanityImageCrop" as const,
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        },
-      },
-    },
-    {
-      title: "Discoverers",
-      subtitle: "2-4 Year Olds",
-      buttonText: "View Room",
-      containerClass: "bg-lilac",
-      shadowClass: "bg-lilac/20",
-      buttonClass: "button-outline-lilac text-lilac",
-      href: "/",
-      image: {
-        __typename: "Image" as const,
-        asset: {
-          __typename: "SanityImageAsset" as const,
-          url: "https://cdn.sanity.io/images/smb7rd2w/production/79019ce6c262365291ad7206f5f819d82c933466-1400x1200.jpg",
-          altText: null,
-          metadata: {
-            __typename: "SanityImageMetadata" as const,
-            lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAARABQDASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAAAAQGBwMF/8QAJxAAAQUAAQIEBwAAAAAAAAAAAQACAwQFERIxBhNBUSEyMzRxcoH/xAAWAQEBAQAAAAAAAAAAAAAAAAAEBQH/xAAbEQADAAMBAQAAAAAAAAAAAAAAAQIRITEDQf/aAAwDAQACEQMRAD8Am3N+pfqV2BobK9vlkc88D0aq0X288SSackTHOJbH0+rfZdTr5dGSKOnlWH2AQXOHxC9LW8QV5BDDdw3NLe0jh1d1HqbzrhUXpK19MN170r9Kw6KNwYXnhFZ9vOhn055azSInO5A9kVCWsII5rJpuT9H+BTLPyu/CIg11iDObP3Mv7FERKRh//9k=",
-          },
-        },
-        hotspot: {
-          __typename: "SanityImageHotspot" as const,
-          x: 0.4801690998053508,
-          y: 0.3609037450996747,
-          width: 0.6361802852978059,
-          height: 0.7218074901993494,
-        },
-        crop: {
-          __typename: "SanityImageCrop" as const,
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        },
-      },
-    },
-  ];
-
+      href: `/our-rooms/${room?.slug?.current}`,
+    }));
+  console.log("filteredRooms", filteredRooms);
   return (
     <PageWrapper>
       <main className="">
-        <OurRooms rooms={rooms} />
+        <OurRooms rooms={filteredRooms} />
         <Container>Main content</Container>
         <div className="scalloped-bottom relative mb-20">
           <div className="from-taupe to-cream relative bg-gradient-to-t py-20">
             <Container>
-              <ReviewCards reviews={reviews} />
+              <ReviewCards />
             </Container>
           </div>
         </div>
         <Container>
-          <MeetTheTeam profiles={profiles} />
+          <MeetTheTeam profiles={staff} />
         </Container>
+        <Locations nurseries={nurseries} />
         Gallery goes here.
       </main>
     </PageWrapper>

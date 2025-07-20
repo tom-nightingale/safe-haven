@@ -6,25 +6,11 @@ import Typography, {
 } from "@/components/Typography/Typography";
 
 import Card from "@/components/Card/Card";
-// import { type Image } from "@/gql/sanity/codegen";
 import Button from "@/components/Button/Button";
-import { CardImageType } from "@/utils/propTypes";
-
-type Profile = {
-  href: string;
-  image: any;
-  title: string;
-  subtitle: string;
-  containerClass?: string;
-  shadowClass?: string;
-  buttonText?: string;
-  buttonStyle?: string;
-  buttonClass?: string;
-  style?: CardImageType;
-};
+import type { Staff } from "@/gql/sanity/codegen";
 
 type Props = {
-  profiles: Profile[];
+  profiles: Staff[] | undefined;
 };
 
 const MeetTheTeam = ({ profiles }: Props) => {
@@ -49,26 +35,31 @@ const MeetTheTeam = ({ profiles }: Props) => {
         </div>
       </div>
       <div className="col-span-1 grid md:col-span-12 md:grid-cols-12 md:gap-6 xl:col-span-8">
-        {profiles.map((profile, i) => {
-          return (
-            <div className="md:col-span-4" key={profile.title}>
-              <Card
-                {...profile}
-                containerClass={
-                  i === 0 ? "bg-green" : i === 1 ? "bg-lilac" : "bg-yellow"
-                }
-                shadowClass={
-                  i === 0
-                    ? "bg-green/10"
-                    : i === 1
-                      ? "bg-lilac/10"
-                      : "bg-yellow/10"
-                }
-                imageFit="contain"
-              />
-            </div>
-          );
-        })}
+        {profiles &&
+          profiles.map((profile, i) => {
+            return (
+              <div className="md:col-span-4" key={profile.name}>
+                <Card
+                  href="/"
+                  image={profile?.profileImage?.image}
+                  title={profile.name}
+                  subtitle={profile?.jobTitle}
+                  buttonStyle="icon-only"
+                  containerClass={
+                    i === 0 ? "bg-green" : i === 1 ? "bg-lilac" : "bg-yellow"
+                  }
+                  shadowClass={
+                    i === 0
+                      ? "bg-green/10"
+                      : i === 1
+                        ? "bg-lilac/10"
+                        : "bg-yellow/10"
+                  }
+                  imageFit="contain"
+                />
+              </div>
+            );
+          })}
       </div>
     </div>
   );

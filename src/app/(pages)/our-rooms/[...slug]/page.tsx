@@ -6,7 +6,7 @@ import {
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
-import PageLayout from "@/layouts/PageLayout/PageLayout";
+import SingleRoomLayout from "@/layouts/SingleRoomLayout/SingleRoomLayout";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -68,7 +68,7 @@ export default async function Page({ params }: Props) {
   const page = allPage[0];
   return (
     <>
-      <PageLayout title={page?.title} />
+      <SingleRoomLayout title={page?.title} />
     </>
   );
 }

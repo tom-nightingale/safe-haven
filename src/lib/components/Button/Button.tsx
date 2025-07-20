@@ -15,6 +15,7 @@ type Props = {
   href?: string;
   newTab?: boolean;
   variant?: TypeVariant;
+  typeClasses?: string;
   onClick?: () => void;
 };
 
@@ -29,6 +30,7 @@ const Button = ({
   href,
   newTab = false,
   variant = TypeVariant.Button1,
+  typeClasses = "",
   onClick,
 }: Props) => {
   return (
@@ -43,13 +45,14 @@ const Button = ({
             onClick={onClick}
           >
             {iconOnly && <span className="aspect-square">{icon}</span>}
-
             {!iconOnly && (
               <>
                 {iconLeft && <span className="">{iconLeft}</span>}
                 <Typography variant={variant}>{label}</Typography>
                 {iconRight && (
-                  <span className="text-dark-green">{iconRight}</span>
+                  <span className="text-dark-green block text-center">
+                    {iconRight}
+                  </span>
                 )}
               </>
             )}
@@ -62,9 +65,13 @@ const Button = ({
               {!iconOnly && (
                 <>
                   {iconLeft && <span className="">{iconLeft}</span>}
-                  <Typography variant={variant}>{label}</Typography>
+                  <Typography classes={typeClasses} variant={variant}>
+                    {label}
+                  </Typography>
                   {iconRight && (
-                    <span className="text-dark-green">{iconRight}</span>
+                    <span className="text-dark-green block text-center">
+                      {iconRight}
+                    </span>
                   )}
                 </>
               )}
@@ -73,18 +80,20 @@ const Button = ({
         )
       ) : (
         // Button for no href
+
         <button
           onClick={onClick}
           className={`group button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
         >
           {iconOnly && <span className="block aspect-square">{icon}</span>}
-
           {!iconOnly && (
             <>
               {iconLeft && <span className="">{iconLeft}</span>}
               <Typography variant={variant}>{label}</Typography>
               {iconRight && (
-                <span className="text-dark-green">{iconRight}</span>
+                <span className="text-dark-green block text-center">
+                  {iconRight}
+                </span>
               )}
             </>
           )}

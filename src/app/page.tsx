@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
 import createApolloClient from "@/gql/apolloClient";
 import {
-  GetPageBySlugDocument,
-  type GetPageBySlugQuery,
-  GetAllStaffDocument,
-  type GetAllStaffQuery,
+  GetHomepageDocument,
+  type GetHomepageQuery,
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
@@ -13,14 +11,16 @@ import HomeLayout from "@/layouts/HomeLayout/HomeLayout";
 export async function generateMetadata(): Promise<Metadata> {
   try {
     const client = createApolloClient(fetch);
-    const { data } = await client.query<GetPageBySlugQuery>({
-      query: GetPageBySlugDocument,
+    const { data } = await client.query<GetHomepageQuery>({
+      query: GetHomepageDocument,
       variables: {
         slug: "home",
       },
     });
 
-    const page = data.allPage[0];
+    // console.log("data", data);
+
+    const page = data.page[0];
     return {
       title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
       description: page?.seo?.metaDesc ?? "",
@@ -38,11 +38,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const GetSingularPage = async (slug: string | undefined): Promise<any> => {
+const GetHomepage = async (slug: string | undefined): Promise<any> => {
   try {
     const client = createApolloClient(fetch);
-    const { data } = await client.query<GetPageBySlugQuery>({
-      query: GetPageBySlugDocument,
+    const { data } = await client.query<GetHomepageQuery>({
+      query: GetHomepageDocument,
       variables: {
         slug: slug,
       },
@@ -54,31 +54,14 @@ const GetSingularPage = async (slug: string | undefined): Promise<any> => {
   }
 };
 
-const GetAllStaff = async (): Promise<GetAllStaffQuery> => {
-  try {
-    const client = createApolloClient(fetch);
-    const { data } = await client.query<GetAllStaffQuery>({
-      query: GetAllStaffDocument,
-    });
-    return data;
-  } catch (err) {
-    console.log("err", err);
-    return notFound();
-  }
-};
-
 export default async function Home() {
-  const { allPage } = await GetSingularPage("home");
-  const { allStaff } = await GetAllStaff();
-  if (allPage.length < 1) {
+  const { rooms, page, staff } = await GetHomepage("home");
+  if (!page) {
     return notFound();
   }
-  const page = allPage[0];
-  console.log(page);
-  // console.log("allStaff", allStaff);
   return (
     <>
-      <HomeLayout />
+      <HomeLayout staff={staff} rooms={rooms} page={page} />
     </>
   );
 }

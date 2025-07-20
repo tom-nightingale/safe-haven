@@ -11,20 +11,23 @@ import { type Navigation } from "@/gql/sanity/codegen";
 import FancyLink from "@/components/FancyLink/FancyLink";
 import Button from "@/components/Button/Button";
 import config from "@/config/config";
+import { type Nursery } from "@/gql/sanity/codegen";
 
 type Props = {
   primaryNav?: Navigation;
   secondaryNav?: Navigation;
+  nurseries?: Nursery[];
 };
 
 // @TODO - Update with the nursery details from Sanity
-const Footer = ({ primaryNav, secondaryNav }: Props) => {
+const Footer = async ({ primaryNav, secondaryNav, nurseries }: Props) => {
   const navColumn1 = [
     ...(primaryNav?.sections ?? []),
     ...(secondaryNav?.sections?.slice(0, 1) ?? []),
   ];
 
   const navColumn2 = [...(secondaryNav?.sections?.slice(1) ?? [])];
+
   return (
     <div className="scalloped-top relative mt-8">
       <div className="from-taupe to-cream relative bg-gradient-to-b">
@@ -48,57 +51,37 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
               </div>
 
               <div className="xs:grid-cols-2 xs:gap-4 grid grid-cols-1 gap-4 xl:grid-cols-12">
-                <div className="flex flex-col justify-center xl:col-span-6">
-                  <Typography
-                    variant={TypeVariant.Body1}
-                    component={TypeComponent.p}
-                    classes="font-medium"
-                  >
-                    Mansfield Woodhouse
-                  </Typography>
-
-                  <Typography
-                    variant={TypeVariant.Body1}
-                    component={TypeComponent.p}
-                    classes="flex gap-2 items-center"
-                  >
-                    <span className="text-peach inline-block rotate-90">
-                      <FaPhone />
-                    </span>
-                    <Button
-                      href={`tel:01623480554`}
-                      newTab
-                      label="01623 480 554"
-                      variant={TypeVariant.Body1}
-                    />
-                  </Typography>
-                </div>
-
-                <div className="flex flex-col justify-center xl:col-span-6">
-                  <Typography
-                    variant={TypeVariant.Body1}
-                    component={TypeComponent.p}
-                    classes="font-medium"
-                  >
-                    South Normanton
-                  </Typography>
-
-                  <Typography
-                    variant={TypeVariant.Body1}
-                    component={TypeComponent.p}
-                    classes="flex gap-2 items-center"
-                  >
-                    <span className="text-peach inline-block rotate-90">
-                      <FaPhone />
-                    </span>
-                    <Button
-                      href={`tel:01773000000`}
-                      newTab
-                      label="01773 000 000"
-                      variant={TypeVariant.Body1}
-                    />
-                  </Typography>
-                </div>
+                {nurseries &&
+                  nurseries.length > 0 &&
+                  nurseries.map((nursery: Nursery) => (
+                    <div
+                      className="flex flex-col justify-center xl:col-span-6"
+                      key={nursery.title}
+                    >
+                      <Typography
+                        variant={TypeVariant.Body1}
+                        component={TypeComponent.p}
+                        classes="font-medium"
+                      >
+                        {nursery.location}
+                      </Typography>
+                      <Typography
+                        variant={TypeVariant.Body1}
+                        component={TypeComponent.p}
+                        classes="flex gap-2 items-center"
+                      >
+                        <span className="text-peach inline-block rotate-90">
+                          <FaPhone />
+                        </span>
+                        <Button
+                          href={`tel:${nursery.phoneNumber}`}
+                          newTab
+                          label={nursery.phoneNumber ?? ""}
+                          variant={TypeVariant.Body1}
+                        />
+                      </Typography>
+                    </div>
+                  ))}
               </div>
             </div>
             <div className="grid grid-cols-12 items-center gap-4 rounded-3xl bg-white px-7 py-10 lg:col-span-1 xl:col-span-5 xl:col-start-7">
@@ -208,26 +191,22 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
               </Typography>
             </div>
 
-            <div className="sm:border-taupe sm:border-r xl:col-span-4">
-              <NurseryDetails
-                title="Mansfield Woodhouse"
-                subtitle="Safe Haven Day Nursery & The Den"
-                address="61 High Street <br /> Mansfield Woodhouse <br /> NG19 8BB"
-                phone="01623 480 554"
-                email="info@safehavennursery.co.uk"
-              />
-            </div>
-
-            <div className="xl:col-span-4">
-              <NurseryDetails
-                title="South Normanton"
-                subtitle="Safe Haven at The Old School House"
-                address="43 Church Street <br /> South Normanton <br /> DE55 2BT"
-                phone="01773 000 000"
-                email="info@safehavennursery.co.uk"
-                buttonClasses="button-peach"
-              />
-            </div>
+            {nurseries &&
+              nurseries.length > 0 &&
+              nurseries.map((nursery: any, i) => (
+                <div
+                  className={` ${i === 0 ? "sm:border-taupe sm:border-r" : ""} xl:col-span-4`}
+                  key={nursery.title}
+                >
+                  <NurseryDetails
+                    title={nursery.location}
+                    subtitle={nursery.title}
+                    address={nursery.address}
+                    phone={nursery.phoneNumber}
+                    email={nursery.email}
+                  />
+                </div>
+              ))}
           </div>
           <div className="mt-8">
             <Copyright />

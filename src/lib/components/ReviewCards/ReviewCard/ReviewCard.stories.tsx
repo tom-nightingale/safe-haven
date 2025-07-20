@@ -26,8 +26,22 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    review:
-      "Our Safe Haven journey has been amazing. As parents we trust the team at         Safe Haven with our most precious children and they never disappoint. Huge thank you to all, I really can't say it enough.",
+    review: [
+      {
+        _key: "9ec4555da632",
+        markDefs: [],
+        children: [
+          {
+            _type: "span",
+            marks: [],
+            text: "My child loves her days at this nursery. The staff are so caring and I feel very happy to leave my child in their car. They take the time to up strong relationships with the children they look after and know them so well. I also feel that the nursery has helped my child to develop in many ways.",
+            _key: "ed9e2dcaf6fe",
+          },
+        ],
+        _type: "block",
+        style: "normal",
+      },
+    ],
     name: "Stacey",
     rating: 5,
   },

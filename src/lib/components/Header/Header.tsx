@@ -23,7 +23,7 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
     <div className="relative">
       <Container>
         <div className="flex w-full justify-between gap-4 py-8">
-          <div className="w-20 mix-blend-multiply sm:w-30 xl:w-auto">
+          <div className="w-20 mix-blend-multiply sm:w-30 xl:w-40">
             <FancyLink url="/">
               <Image
                 src="/logo.png"

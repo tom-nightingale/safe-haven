@@ -200,26 +200,7 @@ export type CategoryFilter = {
   title?: InputMaybe<StringFilter>;
 };
 
-export type CategoryOrPage = Category | Page;
-
-export type CategorySlug = {
-  __typename?: "CategorySlug";
-  _key?: Maybe<Scalars["String"]["output"]>;
-  _type?: Maybe<Scalars["String"]["output"]>;
-  value?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type CategorySlugFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  value?: InputMaybe<StringFilter>;
-};
-
-export type CategorySlugSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  value?: InputMaybe<SortOrder>;
-};
+export type CategoryOrNurseryOrPage = Category | Nursery | Page;
 
 export type CategorySorting = {
   _createdAt?: InputMaybe<SortOrder>;
@@ -363,6 +344,7 @@ export type Feedback = Document & {
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   contentRaw?: Maybe<Scalars["JSON"]["output"]>;
   name?: Maybe<Scalars["String"]["output"]>;
+  starRating?: Maybe<Scalars["Float"]["output"]>;
 };
 
 export type FeedbackFilter = {
@@ -375,6 +357,7 @@ export type FeedbackFilter = {
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
   name?: InputMaybe<StringFilter>;
+  starRating?: InputMaybe<FloatFilter>;
 };
 
 export type FeedbackSorting = {
@@ -385,6 +368,7 @@ export type FeedbackSorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  starRating?: InputMaybe<SortOrder>;
 };
 
 export type File = {
@@ -729,7 +713,7 @@ export type NavigationLink = {
   _type?: Maybe<Scalars["String"]["output"]>;
   children?: Maybe<Array<Maybe<NavigationLink>>>;
   /** Description */
-  target?: Maybe<CategoryOrPage>;
+  target?: Maybe<CategoryOrNurseryOrPage>;
   /** Override title from the target. */
   title?: Maybe<Scalars["String"]["output"]>;
 };
@@ -793,8 +777,14 @@ export type Nursery = Document & {
   _type?: Maybe<Scalars["String"]["output"]>;
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  address?: Maybe<Scalars["String"]["output"]>;
   contentRaw?: Maybe<Scalars["JSON"]["output"]>;
+  directionsLink?: Maybe<Scalars["String"]["output"]>;
+  email?: Maybe<Scalars["String"]["output"]>;
+  location?: Maybe<Scalars["String"]["output"]>;
+  mapsLink?: Maybe<Scalars["String"]["output"]>;
   orderRank?: Maybe<Scalars["String"]["output"]>;
+  phoneNumber?: Maybe<Scalars["String"]["output"]>;
   seo?: Maybe<Seo>;
   slug?: Maybe<Slug>;
   title?: Maybe<Scalars["String"]["output"]>;
@@ -809,7 +799,13 @@ export type NurseryFilter = {
   _rev?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
+  address?: InputMaybe<StringFilter>;
+  directionsLink?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  location?: InputMaybe<StringFilter>;
+  mapsLink?: InputMaybe<StringFilter>;
   orderRank?: InputMaybe<StringFilter>;
+  phoneNumber?: InputMaybe<StringFilter>;
   seo?: InputMaybe<SeoFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
@@ -822,7 +818,13 @@ export type NurserySorting = {
   _rev?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
+  address?: InputMaybe<SortOrder>;
+  directionsLink?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
+  location?: InputMaybe<SortOrder>;
+  mapsLink?: InputMaybe<SortOrder>;
   orderRank?: InputMaybe<SortOrder>;
+  phoneNumber?: InputMaybe<SortOrder>;
   seo?: InputMaybe<SeoSorting>;
   slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
@@ -842,7 +844,7 @@ export type Page = Document & {
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   contentBlocks?: Maybe<ContentBlocks>;
-  orderRank?: Maybe<Scalars["String"]["output"]>;
+  pageType?: Maybe<Scalars["String"]["output"]>;
   seo?: Maybe<Seo>;
   slug?: Maybe<Slug>;
   subtitle?: Maybe<Scalars["String"]["output"]>;
@@ -859,7 +861,7 @@ export type PageFilter = {
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
   contentBlocks?: InputMaybe<ContentBlocksFilter>;
-  orderRank?: InputMaybe<StringFilter>;
+  pageType?: InputMaybe<StringFilter>;
   seo?: InputMaybe<SeoFilter>;
   slug?: InputMaybe<SlugFilter>;
   subtitle?: InputMaybe<StringFilter>;
@@ -874,7 +876,7 @@ export type PageSorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   contentBlocks?: InputMaybe<ContentBlocksSorting>;
-  orderRank?: InputMaybe<SortOrder>;
+  pageType?: InputMaybe<SortOrder>;
   seo?: InputMaybe<SeoSorting>;
   slug?: InputMaybe<SlugSorting>;
   subtitle?: InputMaybe<SortOrder>;
@@ -1596,6 +1598,7 @@ export type Staff = Document & {
   nursery?: Maybe<Scalars["String"]["output"]>;
   orderRank?: Maybe<Scalars["String"]["output"]>;
   profileImage?: Maybe<ImageBlock>;
+  room?: Maybe<Page>;
 };
 
 export type StaffFilter = {
@@ -1612,6 +1615,7 @@ export type StaffFilter = {
   nursery?: InputMaybe<StringFilter>;
   orderRank?: InputMaybe<StringFilter>;
   profileImage?: InputMaybe<ImageBlockFilter>;
+  room?: InputMaybe<PageFilter>;
 };
 
 export type StaffSorting = {
@@ -1854,9 +1858,21 @@ export type NavigationSectionFragment = {
     | Array<
         | {
             __typename?: "NavigationLink";
+            title?: string | null | undefined;
             target?:
               | {
                   __typename?: "Category";
+                  title?: string | null | undefined;
+                  slug?:
+                    | {
+                        __typename?: "Slug";
+                        current?: string | null | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | {
+                  __typename?: "Nursery";
                   title?: string | null | undefined;
                   slug?:
                     | {
@@ -1920,9 +1936,21 @@ export type GetNavigationByIdQuery = {
                     | Array<
                         | {
                             __typename?: "NavigationLink";
+                            title?: string | null | undefined;
                             target?:
                               | {
                                   __typename?: "Category";
+                                  title?: string | null | undefined;
+                                  slug?:
+                                    | {
+                                        __typename?: "Slug";
+                                        current?: string | null | undefined;
+                                      }
+                                    | null
+                                    | undefined;
+                                }
+                              | {
+                                  __typename?: "Nursery";
                                   title?: string | null | undefined;
                                   slug?:
                                     | {
@@ -2012,6 +2040,29 @@ export type GetCategoryBySlugQuery = {
       | { __typename?: "Slug"; current?: string | null | undefined }
       | null
       | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
   }>;
 };
 
@@ -2058,6 +2109,29 @@ export type GetPostBySlugQuery = {
     title?: string | null | undefined;
     contentRaw?: any | null | undefined;
     _createdAt?: any | null | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
   }>;
 };
 
@@ -2083,6 +2157,29 @@ export type GetPostsByCategoryQuery = {
       | undefined;
     slug?:
       | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
       | null
       | undefined;
   }>;
@@ -2137,6 +2234,180 @@ export type GetAllStaffQuery = {
                       bottom?: number | null | undefined;
                       left?: number | null | undefined;
                       right?: number | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetAllFeedbackQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllFeedbackQuery = {
+  __typename?: "RootQuery";
+  allFeedback: Array<{
+    __typename?: "Feedback";
+    _id?: string | null | undefined;
+    name?: string | null | undefined;
+    starRating?: number | null | undefined;
+    contentRaw?: any | null | undefined;
+  }>;
+};
+
+export type GetAllNurseriesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllNurseriesQuery = {
+  __typename?: "RootQuery";
+  allNursery: Array<{
+    __typename?: "Nursery";
+    _id?: string | null | undefined;
+    title?: string | null | undefined;
+    location?: string | null | undefined;
+    address?: string | null | undefined;
+    phoneNumber?: string | null | undefined;
+    email?: string | null | undefined;
+    directionsLink?: string | null | undefined;
+    mapsLink?: string | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetAllRoomsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllRoomsQuery = {
+  __typename?: "RootQuery";
+  allPage: Array<{
+    __typename?: "Page";
+    _id?: string | null | undefined;
+    title?: string | null | undefined;
+    subtitle?: string | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetHomepageQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+}>;
+
+export type GetHomepageQuery = {
+  __typename?: "RootQuery";
+  rooms: Array<{
+    __typename?: "Page";
+    _id?: string | null | undefined;
+    title?: string | null | undefined;
+    subtitle?: string | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+  staff: Array<{
+    __typename?: "Staff";
+    _id?: string | null | undefined;
+    name?: string | null | undefined;
+    jobTitle?: string | null | undefined;
+    biographyRaw?: any | null | undefined;
+    profileImage?:
+      | {
+          __typename?: "ImageBlock";
+          image?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                      metadata?:
+                        | {
+                            __typename?: "SanityImageMetadata";
+                            lqip?: string | null | undefined;
+                          }
+                        | null
+                        | undefined;
+                    }
+                  | null
+                  | undefined;
+                hotspot?:
+                  | {
+                      __typename?: "SanityImageHotspot";
+                      x?: number | null | undefined;
+                      y?: number | null | undefined;
+                      width?: number | null | undefined;
+                      height?: number | null | undefined;
+                    }
+                  | null
+                  | undefined;
+                crop?:
+                  | {
+                      __typename?: "SanityImageCrop";
+                      top?: number | null | undefined;
+                      bottom?: number | null | undefined;
+                      left?: number | null | undefined;
+                      right?: number | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+  }>;
+  page: Array<{
+    __typename?: "Page";
+    _id?: string | null | undefined;
+    _type?: string | null | undefined;
+    title?: string | null | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
                     }
                   | null
                   | undefined;
@@ -2322,6 +2593,7 @@ export const NavigationSectionFragmentDoc = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "target" },
@@ -2362,6 +2634,35 @@ export const NavigationSectionFragmentDoc = {
                         typeCondition: {
                           kind: "NamedType",
                           name: { kind: "Name", value: "Category" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "slug" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "current" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "Nursery" },
                         },
                         selectionSet: {
                           kind: "SelectionSet",
@@ -2506,6 +2807,7 @@ export const GetNavigationByIdDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "target" },
@@ -2546,6 +2848,35 @@ export const GetNavigationByIdDocument = {
                         typeCondition: {
                           kind: "NamedType",
                           name: { kind: "Name", value: "Category" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "slug" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "current" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "Nursery" },
                         },
                         selectionSet: {
                           kind: "SelectionSet",
@@ -2781,6 +3112,58 @@ export const GetCategoryBySlugDocument = {
                     ],
                   },
                 },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -2995,6 +3378,58 @@ export const GetPostBySlugDocument = {
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 { kind: "Field", name: { kind: "Name", value: "contentRaw" } },
                 { kind: "Field", name: { kind: "Name", value: "_createdAt" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -3105,6 +3540,58 @@ export const GetPostsByCategoryDocument = {
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
                       },
                     ],
                   },
@@ -3271,3 +3758,578 @@ export const GetAllStaffDocument = {
     },
   ],
 } as unknown as DocumentNode<GetAllStaffQuery, GetAllStaffQueryVariables>;
+export const GetAllFeedbackDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllFeedback" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allFeedback" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "starRating" } },
+                { kind: "Field", name: { kind: "Name", value: "contentRaw" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetAllFeedbackQuery, GetAllFeedbackQueryVariables>;
+export const GetAllNurseriesDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllNurseries" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allNursery" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "sort" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "location" },
+                      value: { kind: "EnumValue", value: "ASC" },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "location" } },
+                { kind: "Field", name: { kind: "Name", value: "address" } },
+                { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "directionsLink" },
+                },
+                { kind: "Field", name: { kind: "Name", value: "mapsLink" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetAllNurseriesQuery,
+  GetAllNurseriesQueryVariables
+>;
+export const GetAllRoomsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllRooms" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "pageType" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "eq" },
+                            value: {
+                              kind: "StringValue",
+                              value: "room",
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "subtitle" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetAllRoomsQuery, GetAllRoomsQueryVariables>;
+export const GetHomepageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetHomepage" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "rooms" },
+            name: { kind: "Name", value: "allPage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "pageType" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "eq" },
+                            value: {
+                              kind: "StringValue",
+                              value: "room",
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "subtitle" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "staff" },
+            name: { kind: "Name", value: "allStaff" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "name" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "in" },
+                            value: {
+                              kind: "ListValue",
+                              values: [
+                                {
+                                  kind: "StringValue",
+                                  value: "Sarah",
+                                  block: false,
+                                },
+                                {
+                                  kind: "StringValue",
+                                  value: "Shellby",
+                                  block: false,
+                                },
+                                {
+                                  kind: "StringValue",
+                                  value: "Paula",
+                                  block: false,
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "jobTitle" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "profileImage" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "image" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "asset" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "FragmentSpread",
+                                    name: { kind: "Name", value: "imageAsset" },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "hotspot" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "FragmentSpread",
+                                    name: {
+                                      kind: "Name",
+                                      value: "imageHotspot",
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "crop" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "FragmentSpread",
+                                    name: { kind: "Name", value: "imageCrop" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "biographyRaw" },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "page" },
+            name: { kind: "Name", value: "allPage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "slug" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "current" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "eq" },
+                                  value: {
+                                    kind: "Variable",
+                                    name: { kind: "Name", value: "slug" },
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "_type" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "imageAsset" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SanityImageAsset" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "url" } },
+          { kind: "Field", name: { kind: "Name", value: "altText" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "metadata" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "lqip" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "imageHotspot" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SanityImageHotspot" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "x" } },
+          { kind: "Field", name: { kind: "Name", value: "y" } },
+          { kind: "Field", name: { kind: "Name", value: "width" } },
+          { kind: "Field", name: { kind: "Name", value: "height" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "imageCrop" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SanityImageCrop" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "top" } },
+          { kind: "Field", name: { kind: "Name", value: "bottom" } },
+          { kind: "Field", name: { kind: "Name", value: "left" } },
+          { kind: "Field", name: { kind: "Name", value: "right" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetHomepageQuery, GetHomepageQueryVariables>;

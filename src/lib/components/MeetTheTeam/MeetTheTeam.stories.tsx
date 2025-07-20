@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import MeetTheTeam from "./MeetTheTeam";
-import { CardImageType } from "@/utils/propTypes";
 
 const meta = {
   title: "Components/MeetTheTeam",
@@ -29,109 +28,79 @@ export const Primary: Story = {
   args: {
     profiles: [
       {
-        title: "Sarah Atkins",
-        subtitle: "Owner",
-        shadowClass: "bg-green/20",
-        buttonText: "",
-        buttonStyle: "icon-only",
-        style: CardImageType.PROFILE,
-        href: "/",
-        image: {
-          __typename: "Image",
-          asset: {
-            __typename: "SanityImageAsset",
-            url: "https://cdn.sanity.io/images/smb7rd2w/production/35818a08a34e0646e86ee7247d28de833b1c62bf-1400x2100.jpg",
-            altText: null,
-            metadata: {
-              __typename: "SanityImageMetadata",
-              lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAgCBgcD/8QAKhAAAgEDAgQEBwAAAAAAAAAAAQIDAAQFBhEHEiFBCBMUURUiMTNhcYH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAMBAQEBAAAAAAAAAAAAAAACAwESMUH/2gAMAwEAAhEDEQA/AGVz2Tjw2KmvJFL8g+VB9WPYVVNK69lyea+HZTHGyeQbwvzcyt+P3XDjZew2OmYJbiQrGJ132NUCC6hhyuMufMeRgVlHKdwRUlbMj5nwsjBXlrb6MLRUIJBLCkgBAZQetFVkZkHiIvbMYewxlx9+9cpGey+5NYVqDXUeI9PjcXyz+kUIZj3Ye1Wvxb3co1JiYVYhUgLDY9yaXtmJkG+/U70LRV260ZbMi84Plwr1uNTaMs8hcqkc+5jdQem60VinBGeVdFbK5A9S/T+LRTAn/9k=",
+        __typename: "Staff",
+        _id: "5f3db94c-5088-477a-8c3f-18c0f2d679a9",
+        _type: "staff",
+        name: "Paula",
+        jobTitle: "Nursery Manager",
+        profileImage: {
+          __typename: "ImageBlock",
+          image: {
+            __typename: "Image",
+            asset: {
+              __typename: "SanityImageAsset",
+              url: "https://cdn.sanity.io/images/smb7rd2w/production/699e5ce074967d54a98aa8f8c907902cf7d18981-1400x2100.jpg",
+              altText: null,
+              metadata: {
+                __typename: "SanityImageMetadata",
+                lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAgCBgcD/8QAKhAAAgEDAgQEBwAAAAAAAAAAAQIDAAQFBhEHEiFBCBMUURUiMTNhcYH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAMBAQEAAAAAAAAAAAAAAAABAgMSMf/aAAwDAQACEQMRAD8AZXPZSPDYua8kUvyD5UH1Y9hVU0rr2XJ5r4dlMcbJ5BvC/NzK34/dcONl7DY6ZgluJCkYnXfY1QYLqGHK4y58x5GUrKOU7gipNdqi0l4W44TeTp+jCUVCCQSwpIAQGUHrRVZEZB4iL2zGHsMXP9+9cpGey+5NYXqDXUeI9PjcXyz+kUIZj3Ye1Wrxb3cq6jxMKsQqQFhse5NL2W3kG+5670NYzVdMad6ieUPlwr1uNTaMs8hdKkc+5jdQem60VinBGeVdFbK5A9S/T+LRTAn/2Q==",
+              },
             },
-          },
-          hotspot: {
-            __typename: "SanityImageHotspot",
-            x: 0.49024108406607053,
-            y: 0.3203306764325722,
-            width: 0.6702003442990581,
-            height: 0.41493968117190866,
-          },
-          crop: {
-            __typename: "SanityImageCrop",
-            top: 0.11286083584661782,
-            bottom: 0.21402412753123654,
-            left: 0,
-            right: 0,
+            hotspot: null,
+            crop: null,
           },
         },
+        biographyRaw: null,
       },
       {
-        title: "Sarah Atkins",
-        subtitle: "Owner",
-        shadowClass: "bg-green/20",
-        buttonText: "",
-        buttonStyle: "icon-only",
-        style: CardImageType.PROFILE,
-        href: "/",
-        image: {
-          __typename: "Image",
-          asset: {
-            __typename: "SanityImageAsset",
-            url: "https://cdn.sanity.io/images/smb7rd2w/production/35818a08a34e0646e86ee7247d28de833b1c62bf-1400x2100.jpg",
-            altText: null,
-            metadata: {
-              __typename: "SanityImageMetadata",
-              lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAgCBgcD/8QAKhAAAgEDAgQEBwAAAAAAAAAAAQIDAAQFBhEHEiFBCBMUURUiMTNhcYH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAMBAQEBAAAAAAAAAAAAAAACAwESMUH/2gAMAwEAAhEDEQA/AGVz2Tjw2KmvJFL8g+VB9WPYVVNK69lyea+HZTHGyeQbwvzcyt+P3XDjZew2OmYJbiQrGJ132NUCC6hhyuMufMeRgVlHKdwRUlbMj5nwsjBXlrb6MLRUIJBLCkgBAZQetFVkZkHiIvbMYewxlx9+9cpGey+5NYVqDXUeI9PjcXyz+kUIZj3Ye1Wvxb3co1JiYVYhUgLDY9yaXtmJkG+/U70LRV260ZbMi84Plwr1uNTaMs8hcqkc+5jdQem60VinBGeVdFbK5A9S/T+LRTAn/9k=",
+        __typename: "Staff",
+        _id: "6eb04e27-239b-4b11-9ae7-efdd8e0b31b7",
+        _type: "staff",
+        name: "Shellby",
+        jobTitle: "Early Years Assistant Deputy",
+        profileImage: {
+          __typename: "ImageBlock",
+          image: {
+            __typename: "Image",
+            asset: {
+              __typename: "SanityImageAsset",
+              url: "https://cdn.sanity.io/images/smb7rd2w/production/17f2f890624a1ee4da5462288b10294ae0c9cf67-1680x2520.jpg",
+              altText: null,
+              metadata: {
+                __typename: "SanityImageMetadata",
+                lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGgAAAQUBAAAAAAAAAAAAAAAAAAEEBgcIBf/EACYQAAEDAwMEAgMAAAAAAAAAAAECAwQABREGBxIhIjFBE0IkUWH/xAAVAQEBAAAAAAAAAAAAAAAAAAAEAv/EABkRAAMBAQEAAAAAAAAAAAAAAAABAhEDMf/aAAwDAQACEQMRAD8A0lqi+MWC1LlvgrVni22PK1HwBUI03uRMkaiatt+tZgpknDDucgn9Gl3YuTCLvY7e4FKLi1OHH1wOhNQfWcwwYEeUoLdcZeQUYGeIz5o19WrxC+fCa5un6aFophZLixc7VGlxnAtt1AIIP8opKehCkNztUxo0hmRMxyfeDSTjqlHuuiypuVFb7EradRnuHqq31RGF83JtVsfP48Zv5iD9j5qykL4qS2lIGegx6FEcrUxc08crwdQVLgRwxDWthoHPBBwAaKFnirFFVhJ//9k=",
+              },
             },
-          },
-          hotspot: {
-            __typename: "SanityImageHotspot",
-            x: 0.49024108406607053,
-            y: 0.3203306764325722,
-            width: 0.6702003442990581,
-            height: 0.41493968117190866,
-          },
-          crop: {
-            __typename: "SanityImageCrop",
-            top: 0.11286083584661782,
-            bottom: 0.21402412753123654,
-            left: 0,
-            right: 0,
+            hotspot: null,
+            crop: null,
           },
         },
+        biographyRaw: null,
       },
       {
-        title: "Sarah Atkins",
-        subtitle: "Owner",
-        shadowClass: "bg-green/20",
-        buttonText: "",
-        buttonStyle: "icon-only",
-        style: CardImageType.PROFILE,
-        href: "/",
-        image: {
-          __typename: "Image",
-          asset: {
-            __typename: "SanityImageAsset",
-            url: "https://cdn.sanity.io/images/smb7rd2w/production/35818a08a34e0646e86ee7247d28de833b1c62bf-1400x2100.jpg",
-            altText: null,
-            metadata: {
-              __typename: "SanityImageMetadata",
-              lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAgCBgcD/8QAKhAAAgEDAgQEBwAAAAAAAAAAAQIDAAQFBhEHEiFBCBMUURUiMTNhcYH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAMBAQEBAAAAAAAAAAAAAAACAwESMUH/2gAMAwEAAhEDEQA/AGVz2Tjw2KmvJFL8g+VB9WPYVVNK69lyea+HZTHGyeQbwvzcyt+P3XDjZew2OmYJbiQrGJ132NUCC6hhyuMufMeRgVlHKdwRUlbMj5nwsjBXlrb6MLRUIJBLCkgBAZQetFVkZkHiIvbMYewxlx9+9cpGey+5NYVqDXUeI9PjcXyz+kUIZj3Ye1Wvxb3co1JiYVYhUgLDY9yaXtmJkG+/U70LRV260ZbMi84Plwr1uNTaMs8hcqkc+5jdQem60VinBGeVdFbK5A9S/T+LRTAn/9k=",
+        __typename: "Staff",
+        _id: "dcbe64c0-e84e-4d7a-bccb-171d13753d48",
+        _type: "staff",
+        name: "Sarah",
+        jobTitle: "Nursery Owner",
+        profileImage: {
+          __typename: "ImageBlock",
+          image: {
+            __typename: "Image",
+            asset: {
+              __typename: "SanityImageAsset",
+              url: "https://cdn.sanity.io/images/smb7rd2w/production/dee9958f56c7e022218a231b668c1e5ae5458c71-1680x2520.jpg",
+              altText: null,
+              metadata: {
+                __typename: "SanityImageMetadata",
+                lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAeABQDASIAAhEBAxEB/8QAGQAAAwADAAAAAAAAAAAAAAAAAAYIBAUH/8QAJhAAAQMDAwQCAwAAAAAAAAAAAQIDBAAFEQYSEwchMWEUQUJRof/EABUBAQEAAAAAAAAAAAAAAAAAAAQD/8QAHREAAgICAwEAAAAAAAAAAAAAAQIAAxIhBBExQf/aAAwDAQACEQMRAD8ApbUd4ZsVqdmyAVBPZKB5UT4FJdi6kOSr01CuttVDQ+cMubsgn3TJru1pudm2qVgtK5AM4yRXF7y8IsyCXJB5kOJ40HyaJda6PryN49CWVkn2UWO9FY9vc5YLDh/JAP8AKKUD2IKTT1w1rPl6tVbrfKdajRFBG1tWApfulWe5KjrRc33lOzuyWwv694pTenrm3V2ZJyt1S+RWT5NbP5b0yWt11ZOBhIP0KM6ZMCYqp8QQPsp7p5r2NdtLxnp6kNyUEtLA7DIx3oqYm5smHubYdUlBO7A/dFXBhyu5/9k=",
+              },
             },
-          },
-          hotspot: {
-            __typename: "SanityImageHotspot",
-            x: 0.49024108406607053,
-            y: 0.3203306764325722,
-            width: 0.6702003442990581,
-            height: 0.41493968117190866,
-          },
-          crop: {
-            __typename: "SanityImageCrop",
-            top: 0.11286083584661782,
-            bottom: 0.21402412753123654,
-            left: 0,
-            right: 0,
+            hotspot: null,
+            crop: null,
           },
         },
+        biographyRaw: null,
       },
     ],
   },

@@ -268,6 +268,7 @@ body {
   @apply font-serif text-base;
 }
 
+/* swiper */
 .swiper {
   @apply !pb-10;
 }
@@ -279,6 +280,11 @@ body {
   @apply !bg-peach;
 }
 
+.swiper-slide {
+  height: auto;
+}
+
+/* Scalloped top & bottom */
 .scalloped-top::before {
   content: "";
   position: absolute;

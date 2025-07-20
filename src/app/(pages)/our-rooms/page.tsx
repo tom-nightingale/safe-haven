@@ -6,21 +6,15 @@ import {
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
-import PageLayout from "@/layouts/PageLayout/PageLayout";
+import OurRoomsLayout from "@/layouts/OurRoomsLayout/OurRoomsLayout";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // read route params
-  const { slug } = await params;
+export async function generateMetadata(): Promise<Metadata> {
   try {
     const client = createApolloClient(fetch);
     const { data } = await client.query<GetPageBySlugQuery>({
       query: GetPageBySlugDocument,
       variables: {
-        slug: slug.at(-1),
+        slug: "our-rooms",
       },
     });
 
@@ -58,17 +52,16 @@ const GetSingularPage = async (slug: string | undefined): Promise<any> => {
   }
 };
 
-export default async function Page({ params }: Props) {
-  const { slug } = await params;
+export default async function Page() {
+  const { allPage } = await GetSingularPage("our-rooms");
 
-  const { allPage } = await GetSingularPage(slug.at(-1));
   if (allPage.length < 1) {
     return notFound();
   }
   const page = allPage[0];
   return (
     <>
-      <PageLayout title={page?.title} />
+      <OurRoomsLayout title={page?.title} />
     </>
   );
 }

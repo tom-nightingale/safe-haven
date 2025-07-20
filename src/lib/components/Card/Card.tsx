@@ -10,13 +10,15 @@ import Typography, {
 } from "@/components/Typography/Typography";
 import FancyLink from "@/components/FancyLink/FancyLink";
 import { CardImageType } from "@/utils/propTypes";
+import { Maybe } from "@/gql/sanity/codegen";
+import config from "@/config/config";
 
 type Props = {
-  href: string;
-  image: Image;
+  href?: string;
+  image?: Image | Maybe<Image>;
   imageFit?: string;
-  title: string;
-  subtitle: string;
+  title: string | Maybe<string>;
+  subtitle?: string | Maybe<string>;
   containerClass?: string;
   shadowClass?: string;
   buttonText?: string;
@@ -39,24 +41,28 @@ const Card = ({
   style = CardImageType.FULL,
 }: Props) => {
   return (
-    <div className="relative">
+    <div className="relative h-full">
       <div
         className={`pointer-events-none absolute -top-2 -left-2 z-0 h-full w-full rounded-3xl ${shadowClass}`}
       ></div>
 
       <FancyLink url={href}>
         <div
-          className={`group relative flex flex-col overflow-hidden rounded-3xl text-white ${containerClass}`}
+          className={`group relative flex flex-col overflow-hidden rounded-3xl text-white ${containerClass} h-full`}
         >
           <div className="relative flex aspect-[2/1.5] items-start justify-center overflow-hidden bg-white">
             <div className="h-full w-full transition-all duration-200 group-hover:scale-105">
               {image && style === CardImageType.PROFILE ? (
-                <SanityImage image={image} alt={title} loading="lazy" />
+                <SanityImage
+                  image={image}
+                  alt={title ?? config.COMPANY_NAME}
+                  loading="lazy"
+                />
               ) : (
                 <>
                   <SanityImage
                     image={image}
-                    alt={title}
+                    alt={title ?? config.COMPANY_NAME}
                     loading="lazy"
                     objectFit={imageFit}
                   />
@@ -65,8 +71,8 @@ const Card = ({
             </div>
           </div>
 
-          <div className="z-2 flex items-center justify-between gap-3 p-6">
-            <div>
+          <div className="z-2 grid grid-cols-12 items-center justify-between gap-3 p-6">
+            <div className="col-span-7">
               <Typography variant={TypeVariant.H4} component={TypeComponent.p}>
                 {title}
               </Typography>
@@ -75,23 +81,27 @@ const Card = ({
               </Typography>
             </div>
 
-            <div className="rounded-full bg-white p-0.5 md:m-0">
-              {buttonStyle === "full" ? (
-                <Button
-                  classes={`button-primary button-outline text-xs ${buttonClass}`}
-                  outlined={true}
-                  label={buttonText}
-                  // href={href}
-                />
-              ) : (
-                <Button
-                  classes={`p-3 button-outline button-icon-only ${buttonClass}`}
-                  label={buttonText}
-                  iconOnly
-                  icon={<FaPlus />}
-                  // href={href}
-                />
-              )}
+            <div className="col-span-5 md:m-0">
+              <div className="ml-auto flex w-max rounded-full bg-white p-0.5">
+                {buttonStyle === "full" ? (
+                  <Button
+                    classes={`button-primary button-outline text-xs ${buttonClass}`}
+                    outlined={true}
+                    label={buttonText}
+                    href={href}
+                    typeClasses="text-center block mx-auto !text-sm"
+                  />
+                ) : (
+                  <Button
+                    classes={`p-3 button-outline button-icon-only ${buttonClass}`}
+                    label={buttonText}
+                    iconOnly
+                    icon={<FaPlus />}
+                    href={href}
+                    typeClasses=""
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>

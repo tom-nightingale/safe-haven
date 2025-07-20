@@ -43,6 +43,7 @@ fragment NavigationSection on NavigationSection {
     title
   }
   children {
+    title
     target {
       ... on Page {
         title
@@ -51,6 +52,12 @@ fragment NavigationSection on NavigationSection {
         }
       }
       ... on Category {
+        title
+        slug {
+          current
+        }
+      }
+      ... on Nursery {
         title
         slug {
           current
@@ -87,6 +94,9 @@ query GetCategoryBySlug($slug: String) {
     slug {
       current
     }
+    seo {
+      ...seoFragment
+    }
   }
 }
 
@@ -118,6 +128,9 @@ query GetPostBySlug($slug: String) {
     title
     contentRaw
     _createdAt
+    seo {
+      ...seoFragment
+    }
   }
 }
 
@@ -132,6 +145,9 @@ query GetPostsByCategory($slug: String) {
     }
     slug {
       current
+    }
+    seo {
+      ...seoFragment
     }
   }
 }
@@ -156,5 +172,82 @@ query GetAllStaff {
       }
     }
     biographyRaw
+  }
+}
+
+query GetAllFeedback {
+  allFeedback {
+    _id
+    name
+    starRating
+    contentRaw
+  }
+}
+
+query GetAllNurseries {
+  allNursery(sort: { location: ASC }) {
+    _id
+    title
+    location
+    address
+    phoneNumber
+    email
+    directionsLink
+    mapsLink
+    slug {
+      current
+    }
+    seo {
+      ...seoFragment
+    }
+  }
+}
+
+query GetAllRooms {
+  allPage(where: { pageType: { eq: "room" } }) {
+    _id
+    title
+    subtitle
+    slug {
+      current
+    }
+  }
+}
+
+query GetHomepage($slug: String) {
+  rooms: allPage(where: { pageType: { eq: "room" } }) {
+    _id
+    title
+    subtitle
+    slug {
+      current
+    }
+  }
+  staff: allStaff(where: { name: { in: ["Sarah", "Shellby", "Paula"] } }) {
+    _id
+    name
+    jobTitle
+    profileImage {
+      image {
+        asset {
+          ...imageAsset
+        }
+        hotspot {
+          ...imageHotspot
+        }
+        crop {
+          ...imageCrop
+        }
+      }
+    }
+    biographyRaw
+  }
+  page: allPage(where: { slug: { current: { eq: $slug } } }) {
+    _id
+    _type
+    title
+    seo {
+      ...seoFragment
+    }
   }
 }

@@ -6,12 +6,19 @@ import { ViewTransitions } from "next-view-transitions";
 import createApolloClient from "@/gql/apolloClient";
 import {
   GetNavigationByIdDocument,
+  GetAllFeedbackDocument,
+  GetAllStaffDocument,
+  GetAllNurseriesDocument,
   type GetNavigationByIdQuery,
+  type GetAllFeedbackQuery,
+  type GetAllStaffQuery,
+  type GetAllNurseriesQuery,
 } from "@/gql/sanity/codegen";
 import config from "@/config/config";
 import Header from "@/components/Header/Header";
-import Locations from "@/components/Locations/Locations";
+
 import Footer from "@/components/Footer/Footer";
+import { GlobalContextProvider } from "@/context/GlobalContext";
 
 export const metadata: Metadata = {
   title: {
@@ -37,6 +44,45 @@ const GetNav = async (navId: string) => {
   }
 };
 
+const GetReviews = async () => {
+  try {
+    const client = createApolloClient(fetch);
+    const { data } = await client.query<GetAllFeedbackQuery>({
+      query: GetAllFeedbackDocument,
+    });
+    return data ?? undefined;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};
+
+const GetAllStaff = async () => {
+  try {
+    const client = createApolloClient(fetch);
+    const { data } = await client.query<GetAllStaffQuery>({
+      query: GetAllStaffDocument,
+    });
+    return data ?? undefined;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};
+
+const GetAllNurseries = async () => {
+  try {
+    const client = createApolloClient(fetch);
+    const { data } = await client.query<GetAllNurseriesQuery>({
+      query: GetAllNurseriesDocument,
+    });
+    return data ?? undefined;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -45,7 +91,10 @@ export default async function RootLayout({
   const primaryNavData = await GetNav(config.PRIMARY_NAV_ID);
   const secondaryNavData = await GetNav(config.SECONDARY_NAV_ID);
 
-  // Assuming the Navigation object is under a property like 'navigation' in the query result
+  const reviews = await GetReviews();
+  const nurseries = await GetAllNurseries();
+  const staff = await GetAllStaff();
+
   const primaryNav = primaryNavData?.Navigation ?? undefined;
   const secondaryNav = secondaryNavData?.Navigation ?? undefined;
 
@@ -55,10 +104,20 @@ export default async function RootLayout({
         <body
           className={`${literataSerif.variable} ${interSans.variable} antialiased`}
         >
-          <Header primaryNav={primaryNav} secondaryNav={secondaryNav} />
-          {children}
-          <Locations />
-          <Footer primaryNav={primaryNav} secondaryNav={secondaryNav} />
+          <GlobalContextProvider
+            reviews={reviews?.allFeedback}
+            staff={staff?.allStaff}
+            nurseries={nurseries?.allNursery}
+          >
+            <Header primaryNav={primaryNav} secondaryNav={secondaryNav} />
+            {children}
+
+            <Footer
+              primaryNav={primaryNav}
+              secondaryNav={secondaryNav}
+              nurseries={nurseries?.allNursery}
+            />
+          </GlobalContextProvider>
         </body>
       </html>
     </ViewTransitions>

@@ -3,6 +3,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { FitMode } from "@sanity/image-url/lib/types/types";
 import config from "@/config/config";
 import {
+  Maybe,
   type Image as SanityImageType,
   type SanityImageHotspot,
 } from "@/gql/sanity/codegen";
@@ -18,7 +19,7 @@ const urlFor = (source: string, quality: number) => {
 };
 
 type Props = {
-  image: SanityImageType;
+  image: Maybe<SanityImageType>;
   fit?: FitMode;
   loading?: "lazy" | "eager";
   alt?: string;
@@ -55,7 +56,7 @@ const SanityImage = ({
   sizes,
   objectFit = "contain",
 }: Props) => {
-  const sourceUrl = image.asset?.url;
+  const sourceUrl = image?.asset?.url;
   const blurData = image?.asset?.metadata?.lqip;
   const hotspotData = image?.hotspot;
   if (!sourceUrl) return <></>;
