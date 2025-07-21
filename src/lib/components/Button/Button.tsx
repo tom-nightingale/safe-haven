@@ -3,16 +3,17 @@
 import { type ReactElement } from "react";
 import FancyLink from "@/components/FancyLink/FancyLink";
 import Typography, { TypeVariant } from "@/components/Typography/Typography";
+import type { Maybe } from "@/gql/sanity/codegen";
 
 type Props = {
-  label?: string;
+  label?: string | Maybe<string>;
   iconOnly?: boolean;
   icon?: ReactElement;
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
   outlined?: boolean;
   classes?: string;
-  href?: string;
+  href?: string | Maybe<string>;
   newTab?: boolean;
   variant?: TypeVariant;
   typeClasses?: string;
@@ -69,7 +70,7 @@ const Button = ({
                     {label}
                   </Typography>
                   {iconRight && (
-                    <span className="text-dark-green block text-center">
+                    <span className="block text-center text-inherit opacity-50">
                       {iconRight}
                     </span>
                   )}
@@ -80,7 +81,6 @@ const Button = ({
         )
       ) : (
         // Button for no href
-
         <button
           onClick={onClick}
           className={`group button ${outlined ? "outlined" : ""} ${classes ?? ""}`}

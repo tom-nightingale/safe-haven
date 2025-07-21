@@ -165,6 +165,10 @@ body {
     @apply bg-blue text-white;
   }
 
+  &.button-white {
+    @apply bg-white;
+  }
+
   &.button-peach {
     @apply bg-peach text-white;
   }
@@ -199,7 +203,7 @@ body {
   }
 
   &.button-outline-blue {
-    @apply text-dark-blue;
+    @apply text-blue;
 
     &:after {
       @apply border-blue;
@@ -233,30 +237,30 @@ body {
 }
 
 .text-h1 {
-  @apply font-serif text-6xl font-light;
+  @apply 3xl:text-6xl 3xl:leading-18 font-serif text-3xl leading-9 font-light md:leading-10 xl:text-5xl xl:leading-14;
 }
 
 .text-h2 {
-  @apply font-serif text-5xl font-medium;
+  @apply font-serif text-5xl;
 }
 
 .text-h3 {
-  @apply font-serif text-3xl font-medium;
+  @apply font-serif text-3xl;
 }
 
 .text-h4 {
-  @apply font-serif text-2xl font-medium;
+  @apply font-serif text-2xl;
 }
 
 .text-h5 {
-  @apply font-serif text-xl font-medium;
+  @apply font-serif text-xl;
 }
 
 .text-h6 {
   @apply font-serif;
 }
 
-.text-body1 {
+.text-body-1 {
   @apply font-sans text-lg;
 }
 

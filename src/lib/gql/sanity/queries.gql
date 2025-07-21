@@ -207,7 +207,6 @@ query GetAllRooms {
   allPage(where: { pageType: { eq: "room" } }) {
     _id
     title
-    subtitle
     slug {
       current
     }
@@ -218,7 +217,6 @@ query GetHomepage($slug: String) {
   rooms: allPage(where: { pageType: { eq: "room" } }) {
     _id
     title
-    subtitle
     slug {
       current
     }
@@ -227,25 +225,140 @@ query GetHomepage($slug: String) {
     _id
     name
     jobTitle
-    profileImage {
-      image {
-        asset {
-          ...imageAsset
-        }
-        hotspot {
-          ...imageHotspot
-        }
-        crop {
-          ...imageCrop
-        }
-      }
-    }
-    biographyRaw
   }
   page: allPage(where: { slug: { current: { eq: $slug } } }) {
     _id
     _type
     title
+    contentBlocks {
+      ... on ContentBlocks {
+        contentblocks {
+          ... on Hero {
+            titleRaw
+            subtitleRaw
+            heroImage {
+              image {
+                asset {
+                  ...imageAsset
+                  metadata {
+                    lqip
+                  }
+                }
+                hotspot {
+                  ...imageHotspot
+                }
+                crop {
+                  ...imageCrop
+                }
+              }
+            }
+            heroCards {
+              title
+              subtitle
+              colourTheme
+              link {
+                label
+                href
+              }
+            }
+            buttons {
+              label
+              href
+            }
+          }
+          ... on CardList {
+            title
+            subtitle
+            scallopedTop
+            cards {
+              title
+              subtitle
+              image {
+                image {
+                  asset {
+                    ...imageAsset
+                    metadata {
+                      lqip
+                    }
+                  }
+                  hotspot {
+                    ...imageHotspot
+                  }
+                  crop {
+                    ...imageCrop
+                  }
+                }
+              }
+              link {
+                label
+                href
+              }
+            }
+          }
+          ... on TextWithImage {
+            scallopedTop
+            textRaw
+            links {
+              label
+              href
+            }
+            image {
+              image {
+                asset {
+                  ...imageAsset
+                  metadata {
+                    lqip
+                  }
+                }
+                hotspot {
+                  ...imageHotspot
+                }
+                crop {
+                  ...imageCrop
+                }
+              }
+            }
+          }
+          ... on ReviewsCarousel {
+            scallopedTop
+            scallopedBottom
+            title
+          }
+          ... on StaffCards {
+            title
+            textRaw
+            links {
+              label
+              href
+            }
+            staffProfiles {
+              ... on Staff {
+                name
+                jobTitle
+                biographyRaw
+                profileImage {
+                  image {
+                    asset {
+                      ...imageAsset
+                    }
+                    hotspot {
+                      ...imageHotspot
+                    }
+                    crop {
+                      ...imageCrop
+                    }
+                  }
+                }
+              }
+            }
+          }
+          ... on LocationDetails {
+            title
+            textRaw
+          }
+        }
+      }
+    }
     seo {
       ...seoFragment
     }

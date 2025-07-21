@@ -4,7 +4,7 @@ import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import Container from "@/components/Container/Container";
 import ReviewCards from "@/components/ReviewCards/ReviewCards";
 import MeetTheTeam from "@/components/MeetTheTeam/MeetTheTeam";
-import OurRooms from "@/components/OurRooms/OurRooms";
+import OurRooms from "@/components/CardList/CardList";
 import { useGlobalContext } from "@/context/GlobalContext";
 import Locations from "@/components/Locations/Locations";
 

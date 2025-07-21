@@ -6,6 +6,8 @@ import {
   Maybe,
   type Image as SanityImageType,
   type SanityImageHotspot,
+  // type Image,
+  type ImageBlock,
 } from "@/gql/sanity/codegen";
 
 const builder = imageUrlBuilder();
@@ -19,7 +21,7 @@ const urlFor = (source: string, quality: number) => {
 };
 
 type Props = {
-  image: Maybe<SanityImageType>;
+  image: SanityImageType | Maybe<ImageBlock> | Maybe<SanityImageType>;
   fit?: FitMode;
   loading?: "lazy" | "eager";
   alt?: string;

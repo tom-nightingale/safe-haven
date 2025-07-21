@@ -48,55 +48,55 @@ const Typography = ({
 }: Props) => {
   return component === TypeComponent.h1 ? (
     <h1
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </h1>
   ) : component === TypeComponent.h2 ? (
     <h2
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </h2>
   ) : component === TypeComponent.h3 ? (
     <h3
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </h3>
   ) : component === TypeComponent.h4 ? (
     <h4
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </h4>
   ) : component === TypeComponent.h5 ? (
     <h5
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </h5>
   ) : component === TypeComponent.h6 ? (
     <h6
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </h6>
   ) : component === TypeComponent.p ? (
     <p
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </p>
   ) : component === TypeComponent.span ? (
     <span
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </span>
   ) : (
     <p
-      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-bold"} ${strikeThrough && "line-through"}`}
+      className={`${variant} ${classes} ${uppercase && "uppercase"} ${underline && "underline"} ${italic && "italic"} ${bold && "font-medium"} ${strikeThrough && "line-through"}`}
     >
       {children}
     </p>

@@ -26,7 +26,7 @@ const ReviewCard = ({ review, name, rating }: Props) => {
         component={TypeComponent.p}
         classes=""
       >
-        {truncateWords(toPlainText(review), 29)}
+        {truncateWords(toPlainText(review), 25)}
       </Typography>
 
       <Button

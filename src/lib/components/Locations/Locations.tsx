@@ -1,3 +1,5 @@
+"use client";
+
 import Typography, {
   TypeVariant,
   TypeComponent,
@@ -6,12 +8,11 @@ import Container from "@/components/Container/Container";
 import NurseryDetails from "@/components/Footer/NurseryDetails";
 import CloudsVector from "@/components/CloudsVector/CloudsVector";
 import { type Nursery } from "@/gql/sanity/codegen";
+import { useGlobalContext } from "@/context/GlobalContext";
 
-type Props = {
-  nurseries?: Nursery[];
-};
+const Locations = () => {
+  const { nurseries } = useGlobalContext();
 
-const Locations = ({ nurseries }: Props) => {
   return (
     <div className="relative pb-40">
       <CloudsVector

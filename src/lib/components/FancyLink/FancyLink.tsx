@@ -4,10 +4,11 @@ import React from "react";
 import Link from "next/link";
 import { useTransitionRouter } from "next-view-transitions";
 import { usePathname } from "next/navigation";
+import { Maybe } from "@/gql/sanity/codegen";
 
 type Props = {
   children: React.ReactNode;
-  url?: string;
+  url?: string | Maybe<string>;
 };
 const FancyLink = ({ children, url }: Props) => {
   const router = useTransitionRouter();

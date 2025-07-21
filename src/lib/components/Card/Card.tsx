@@ -2,29 +2,27 @@
 
 import Button from "@/components/Button/Button";
 import SanityImage from "@/components/SanityImage/SanityImage";
-import { type Image } from "@/gql/sanity/codegen";
+import type { Image, ImageBlock } from "@/gql/sanity/codegen";
 import { FaPlus } from "react-icons/fa6";
 import Typography, {
   TypeVariant,
   TypeComponent,
 } from "@/components/Typography/Typography";
 import FancyLink from "@/components/FancyLink/FancyLink";
-import { CardImageType } from "@/utils/propTypes";
 import { Maybe } from "@/gql/sanity/codegen";
 import config from "@/config/config";
 
 type Props = {
-  href?: string;
-  image?: Image | Maybe<Image>;
+  href?: string | Maybe<string>;
+  image?: Image | Maybe<Image> | Maybe<ImageBlock>;
   imageFit?: string;
   title: string | Maybe<string>;
   subtitle?: string | Maybe<string>;
   containerClass?: string;
   shadowClass?: string;
-  buttonText?: string;
+  buttonText?: string | Maybe<string>;
   buttonStyle?: string;
   buttonClass?: string;
-  style?: CardImageType;
 };
 
 const Card = ({
@@ -38,7 +36,6 @@ const Card = ({
   containerClass = "bg-green",
   shadowClass = "",
   buttonClass = "button-outline-green text-white",
-  style = CardImageType.FULL,
 }: Props) => {
   return (
     <div className="relative h-full">
@@ -52,27 +49,21 @@ const Card = ({
         >
           <div className="relative flex aspect-[2/1.5] items-start justify-center overflow-hidden bg-white">
             <div className="h-full w-full transition-all duration-200 group-hover:scale-105">
-              {image && style === CardImageType.PROFILE ? (
+              {image && (
                 <SanityImage
                   image={image}
                   alt={title ?? config.COMPANY_NAME}
                   loading="lazy"
+                  objectFit={imageFit}
                 />
-              ) : (
-                <>
-                  <SanityImage
-                    image={image}
-                    alt={title ?? config.COMPANY_NAME}
-                    loading="lazy"
-                    objectFit={imageFit}
-                  />
-                </>
               )}
             </div>
           </div>
 
           <div className="z-2 grid grid-cols-12 items-center justify-between gap-3 p-6">
-            <div className="col-span-7">
+            <div
+              className={`${buttonStyle === "icon-only" ? "col-span-8" : "col-span-6"}`}
+            >
               <Typography variant={TypeVariant.H4} component={TypeComponent.p}>
                 {title}
               </Typography>
@@ -81,15 +72,16 @@ const Card = ({
               </Typography>
             </div>
 
-            <div className="col-span-5 md:m-0">
+            <div
+              className={`${buttonStyle === "icon-only" ? "col-span-4" : "col-span-6"} md:m-0`}
+            >
               <div className="ml-auto flex w-max rounded-full bg-white p-0.5">
                 {buttonStyle === "full" ? (
                   <Button
-                    classes={`button-primary button-outline text-xs ${buttonClass}`}
+                    classes={`button-primary button-outline text-sm ${buttonClass}`}
                     outlined={true}
                     label={buttonText}
-                    href={href}
-                    typeClasses="text-center block mx-auto !text-sm"
+                    typeClasses="text-center block mx-auto"
                   />
                 ) : (
                   <Button
@@ -97,7 +89,7 @@ const Card = ({
                     label={buttonText}
                     iconOnly
                     icon={<FaPlus />}
-                    href={href}
+                    // href={href}
                     typeClasses=""
                   />
                 )}

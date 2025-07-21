@@ -18,8 +18,6 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     });
 
-    // console.log("data", data);
-
     const page = data.page[0];
     return {
       title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
@@ -55,13 +53,14 @@ const GetHomepage = async (slug: string | undefined): Promise<any> => {
 };
 
 export default async function Home() {
-  const { rooms, page, staff } = await GetHomepage("home");
+  const { page } = await GetHomepage("home");
   if (!page) {
     return notFound();
   }
+
   return (
     <>
-      <HomeLayout staff={staff} rooms={rooms} page={page} />
+      <HomeLayout page={Array.isArray(page) && page[0]} />
     </>
   );
 }

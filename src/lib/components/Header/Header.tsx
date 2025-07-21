@@ -32,6 +32,7 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
                 loading="eager"
                 quality={100}
                 alt={config.COMPANY_NAME}
+                priority
               />
             </FancyLink>
           </div>
