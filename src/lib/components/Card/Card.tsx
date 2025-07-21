@@ -14,7 +14,7 @@ import config from "@/config/config";
 
 type Props = {
   href?: string | Maybe<string>;
-  image?: Image | Maybe<Image> | Maybe<ImageBlock>;
+  image?: Maybe<ImageBlock>;
   imageFit?: string;
   title: string | Maybe<string>;
   subtitle?: string | Maybe<string>;
@@ -51,7 +51,7 @@ const Card = ({
             <div className="h-full w-full transition-all duration-200 group-hover:scale-105">
               {image && (
                 <SanityImage
-                  image={image}
+                  image={image?.image}
                   alt={title ?? config.COMPANY_NAME}
                   loading="lazy"
                   objectFit={imageFit}

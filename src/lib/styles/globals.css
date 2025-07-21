@@ -237,11 +237,11 @@ body {
 }
 
 .text-h1 {
-  @apply 3xl:text-6xl 3xl:leading-18 font-serif text-3xl leading-9 font-light md:leading-10 xl:text-5xl xl:leading-14;
+  @apply 3xl:text-6xl 3xl:leading-18 font-serif text-3xl leading-9 md:leading-10 xl:text-5xl xl:leading-14;
 }
 
 .text-h2 {
-  @apply font-serif text-5xl;
+  @apply font-serif text-4xl;
 }
 
 .text-h3 {
@@ -322,4 +322,12 @@ body {
   clip-path: path(
     "M0,100 C40,40 80,40 120,100 C160,60 200,60 240,100 C280,70 320,70 360,100 C400,80 440,80 480,100 L480,200 L0,200 Z"
   );
+}
+
+.block-content {
+  @apply grid gap-2;
+}
+
+.image-mask {
+  clip-path: polygon(19.5% 13.5%, 80% 0, 100% 100%, 0% 100%);
 }

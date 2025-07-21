@@ -9,8 +9,16 @@ import NurseryDetails from "@/components/Footer/NurseryDetails";
 import CloudsVector from "@/components/CloudsVector/CloudsVector";
 import { type Nursery } from "@/gql/sanity/codegen";
 import { useGlobalContext } from "@/context/GlobalContext";
+import type { Maybe } from "@/gql/sanity/codegen";
+import { PortableText } from "@portabletext/react";
+import type { TypedObject } from "@portabletext/types";
 
-const Locations = () => {
+type Props = {
+  title?: Maybe<string>;
+  text?: TypedObject | TypedObject[];
+};
+
+const Locations = ({ title, text }: Props) => {
   const { nurseries } = useGlobalContext();
 
   return (
@@ -28,7 +36,7 @@ const Locations = () => {
           <div className="py-10">
             <div className="flex flex-col justify-center gap-6 pb-10 text-center">
               <Typography variant={TypeVariant.H3} component={TypeComponent.p}>
-                Our Locations
+                {title ?? "Our Locations"}
               </Typography>
 
               <Typography

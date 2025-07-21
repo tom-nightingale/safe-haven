@@ -73,13 +73,12 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                   {cards.map((card, i) => {
                     return (
                       <Card
-                        style={CardImageType.FULL}
                         key={card?.title}
                         buttonText={card?.link?.label}
                         href={card?.link?.href}
                         title={card?.title}
                         subtitle={card?.subtitle}
-                        image={card?.image?.image}
+                        image={card?.image}
                         containerClass={bgColors[i] || "bg-blue"}
                         buttonClass={
                           buttonClasses[i] || "button-outline-blue text-blue"
@@ -119,13 +118,12 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                 {cards.map((card, i) => {
                   return (
                     <Card
-                      style={CardImageType.FULL}
                       key={card?.title}
                       buttonText={card?.link?.label}
                       href={card?.link?.href}
                       title={card?.title}
                       subtitle={card?.subtitle}
-                      image={card?.image?.image}
+                      image={card?.image}
                       containerClass={bgColors[i] || "bg-blue"}
                       buttonClass={
                         buttonClasses[i] || "button-outline-blue text-blue"

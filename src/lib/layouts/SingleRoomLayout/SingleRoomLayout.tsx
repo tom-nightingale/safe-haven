@@ -39,7 +39,6 @@ export const SingleRoomLayout = ({ title }: Props) => {
         {/* <Container>
           <MeetTheTeam profiles={filteredStaff} />
         </Container> */}
-        <Locations nurseries={nurseries} />
         Gallery goes here.
       </main>
     </PageWrapper>

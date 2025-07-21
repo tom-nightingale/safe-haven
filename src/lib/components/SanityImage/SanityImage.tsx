@@ -21,7 +21,7 @@ const urlFor = (source: string, quality: number) => {
 };
 
 type Props = {
-  image: SanityImageType | Maybe<ImageBlock> | Maybe<SanityImageType>;
+  image: Maybe<SanityImageType>;
   fit?: FitMode;
   loading?: "lazy" | "eager";
   alt?: string;

@@ -29,17 +29,9 @@ export const OurRoomsLayout = ({ title }: Props) => {
             <Container>
               Our Rooms - {title}
               {/* <ReviewCards /> */}
-              <MeetTheTeam profiles={filteredStaff} />
             </Container>
           </div>
         </div>
-        {/* <div className="scalloped-bottom relative mb-20">
-          <div className="from-taupe to-cream relative bg-gradient-to-t py-20"></div>
-        </div> */}
-        {/* <Container>
-          <MeetTheTeam profiles={filteredStaff} />
-        </Container> */}
-        <Locations nurseries={nurseries} />
         Gallery goes here.
       </main>
     </PageWrapper>

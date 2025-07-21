@@ -67,7 +67,7 @@ const MeetTheTeam = ({ title, text, links, profiles }: Props) => {
                 <div className="md:col-span-4" key={profile?.name}>
                   <Card
                     href="/"
-                    image={profile?.profileImage?.image}
+                    image={profile?.profileImage}
                     title={profile?.name}
                     subtitle={profile?.jobTitle}
                     buttonStyle="icon-only"
