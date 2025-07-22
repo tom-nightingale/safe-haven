@@ -15,11 +15,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/scrollbar";
+import RabbitSvg from "@/icons/rabbitSvg";
+import TrainSvg from "@/icons/trainSvg";
 
 type Props = {
   title?: string | Maybe<string>;
   reviews?: { review: string; name: string; rating: 1 | 2 | 3 | 4 | 5 }[];
-  // scallopedTop?: Maybe<boolean>;
   scallopedBottom?: Maybe<boolean>;
 };
 
@@ -27,12 +28,12 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
   const { reviews } = useGlobalContext();
 
   return (
-    <>
+    <div className="relative">
       {scallopedBottom ? (
         <>
           <ScallopedBottom>
             <Container>
-              <div className="mx-auto w-full py-12">
+              <div className="relative z-1 mx-auto w-full py-12">
                 <Typography
                   variant={TypeVariant.H3}
                   component={TypeComponent.h2}
@@ -41,7 +42,8 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                   {title}
                 </Typography>
                 {reviews && reviews?.length > 0 && (
-                  <div className="mt-10">
+                  <div className="relative mt-10">
+                    {/* <div className="from-taupe via-taupe absolute top-0 right-0 z-10 h-[95%] w-1/12 bg-gradient-to-l to-transparent"></div> */}
                     <Swiper
                       modules={[Scrollbar, A11y]}
                       spaceBetween={20}
@@ -58,6 +60,9 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                         1280: {
                           slidesPerView: 4,
                         },
+                      }}
+                      onReachEnd={() => {
+                        console.log("end");
                       }}
                     >
                       {reviews.map(review => (
@@ -78,7 +83,7 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
         </>
       ) : (
         <Container>
-          <div className="mx-auto w-full py-12">
+          <div className="relative z-1 mx-auto w-full py-12">
             <Typography
               variant={TypeVariant.H3}
               component={TypeComponent.h2}
@@ -121,7 +126,10 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
           </div>
         </Container>
       )}
-    </>
+
+      <RabbitSvg classes="absolute top-[0%] right-[5%] pointer-events-none" />
+      <TrainSvg classes="absolute top-[15%] left-1/2 -translate-x-1/2 pointer-events-none" />
+    </div>
   );
 };
 

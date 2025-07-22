@@ -36,8 +36,9 @@ const Footer = async ({ primaryNav, secondaryNav, nurseries }: Props) => {
             <div className="3xl:col-span-3 grid gap-8 xl:col-span-4">
               <div className="flex flex-col gap-4">
                 <Typography
-                  variant={TypeVariant.H4}
+                  variant={TypeVariant.H3}
                   component={TypeComponent.p}
+                  bold
                 >
                   Need more information or want to book a tour?
                 </Typography>
@@ -140,6 +141,7 @@ const Footer = async ({ primaryNav, secondaryNav, nurseries }: Props) => {
               <Typography
                 variant={TypeVariant.H5}
                 component={TypeComponent.p}
+                bold
                 classes="mb-4 xl:mb-7.5"
               >
                 Explore
@@ -178,6 +180,7 @@ const Footer = async ({ primaryNav, secondaryNav, nurseries }: Props) => {
                 variant={TypeVariant.H5}
                 component={TypeComponent.p}
                 classes="mb-4 xl:mb-7.5"
+                bold
               >
                 Social
               </Typography>

@@ -9,6 +9,8 @@ import Card from "@/components/Card/Card";
 import type { Image, Maybe, CardListCard } from "@/gql/sanity/codegen";
 import { CardImageType } from "@/utils/propTypes";
 import ScallopedTop from "@/components/ScallopedTop/ScallopedTop";
+import JigsawSvg from "@/icons/jigsawSvg";
+import MobileSvg from "@/icons/mobileSvg";
 
 type Card = {
   href: string;
@@ -45,50 +47,52 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
   ];
 
   return (
-    <>
+    <div className="relative">
       {scallopedTop ? (
         <>
           <ScallopedTop>
             <Container>
-              {(title || subtitle) && (
-                <div className="flex flex-col justify-center gap-6 text-center">
-                  <Typography
-                    variant={TypeVariant.H2}
-                    component={TypeComponent.h2}
-                    bold
-                  >
-                    {title}
-                  </Typography>
-                  <Typography
-                    variant={TypeVariant.Body1}
-                    component={TypeComponent.p}
-                  >
-                    {subtitle}
-                  </Typography>
-                </div>
-              )}
+              <div className="py-4">
+                {(title || subtitle) && (
+                  <div className="flex flex-col justify-center gap-6 text-center">
+                    <Typography
+                      variant={TypeVariant.H2}
+                      component={TypeComponent.h2}
+                      bold
+                    >
+                      {title}
+                    </Typography>
+                    <Typography
+                      variant={TypeVariant.Body1}
+                      component={TypeComponent.p}
+                    >
+                      {subtitle}
+                    </Typography>
+                  </div>
+                )}
 
-              {cards && (
-                <div className="mx-auto mt-10 grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 xl:grid-cols-4">
-                  {cards.map((card, i) => {
-                    return (
-                      <Card
-                        key={card?.title}
-                        buttonText={card?.link?.label}
-                        href={card?.link?.href}
-                        title={card?.title}
-                        subtitle={card?.subtitle}
-                        image={card?.image}
-                        containerClass={bgColors[i] || "bg-blue"}
-                        buttonClass={
-                          buttonClasses[i] || "button-outline-blue text-blue"
-                        }
-                        shadowClass={shadowClasses[i] || "bg-blue/10"}
-                      />
-                    );
-                  })}
-                </div>
-              )}
+                {cards && (
+                  <div className="mx-auto grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 xl:grid-cols-4">
+                    {cards.map((card, i) => {
+                      return (
+                        <Card
+                          key={card?.title}
+                          buttonText={card?.link?.label}
+                          href={card?.link?.href}
+                          title={card?.title}
+                          subtitle={card?.subtitle}
+                          image={card?.image}
+                          containerClass={bgColors[i] || "bg-blue"}
+                          buttonClass={
+                            buttonClasses[i] || "button-outline-blue text-blue"
+                          }
+                          shadowClass={shadowClasses[i] || "bg-blue/10"}
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </Container>
           </ScallopedTop>
         </>
@@ -137,7 +141,16 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
           </Container>
         </div>
       )}
-    </>
+
+      <JigsawSvg
+        stroke="white"
+        classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
+      />
+      <MobileSvg
+        stroke="white"
+        classes="absolute top-0 right-[2.5%] pointer-events-none opacity-50"
+      />
+    </div>
   );
 };
 

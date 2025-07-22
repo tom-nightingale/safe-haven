@@ -5,6 +5,7 @@ import TextWithImage from "@/components/TextWithImage/TextWithImage";
 import ReviewCards from "@/components/ReviewCards/ReviewCards";
 import MeetTheTeam from "@/components/MeetTheTeam/MeetTheTeam";
 import Locations from "@/components/Locations/Locations";
+import Gallery from "@/components/Gallery/Gallery";
 
 type Props = {
   contentBlocks: ContentBlocks | Maybe<ContentBlocks>;
@@ -75,8 +76,8 @@ const ContentBlockDigester = ({ contentBlocks }: Props) => {
               <Locations key={idx} title={block?.title} text={block?.textRaw} />
             );
 
-          //   case "ImageGallery":
-          //     return <ImageGalleryComponent key={idx} data={block} />;
+          case "Gallery":
+            return <Gallery key={idx} images={block?.images} />;
 
           default:
             return null;

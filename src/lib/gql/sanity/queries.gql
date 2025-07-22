@@ -356,6 +356,22 @@ query GetHomepage($slug: String) {
             title
             textRaw
           }
+          ... on Gallery {
+            images {
+              image {
+                _key
+                asset {
+                  ...imageAsset
+                }
+                hotspot {
+                  ...imageHotspot
+                }
+                crop {
+                  ...imageCrop
+                }
+              }
+            }
+          }
         }
       }
     }

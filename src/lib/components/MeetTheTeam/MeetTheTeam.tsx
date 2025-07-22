@@ -19,6 +19,13 @@ type Props = {
 };
 
 const MeetTheTeam = ({ title, text, links, profiles }: Props) => {
+  const buttonClasses = [
+    "text-green",
+    "text-lilac",
+    "text-yellow",
+    "text-blue",
+  ];
+
   return (
     <Container>
       <div className="grid grid-cols-1 gap-6 py-10 md:grid-cols-12 md:gap-10">
@@ -59,7 +66,7 @@ const MeetTheTeam = ({ title, text, links, profiles }: Props) => {
             </div>
           </div>
         )}
-        <div className="col-span-1 grid md:col-span-12 md:grid-cols-12 md:gap-6 xl:col-span-8">
+        <div className="col-span-1 grid gap-6 md:col-span-12 md:grid-cols-12 xl:col-span-8">
           {profiles &&
             profiles.length > 0 &&
             profiles.map((profile, i) => {
@@ -70,6 +77,9 @@ const MeetTheTeam = ({ title, text, links, profiles }: Props) => {
                     image={profile?.profileImage}
                     title={profile?.name}
                     subtitle={profile?.jobTitle}
+                    buttonClass={
+                      buttonClasses[i] || "button-outline-blue text-blue"
+                    }
                     buttonStyle="icon-only"
                     containerClass={
                       i === 0 ? "bg-green" : i === 1 ? "bg-lilac" : "bg-yellow"

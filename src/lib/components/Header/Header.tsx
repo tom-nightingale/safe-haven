@@ -20,7 +20,7 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
     ...(secondaryNav?.sections ?? []),
   ];
   return (
-    <div className="relative">
+    <div className="relative z-30">
       <Container>
         <div className="flex w-full justify-between gap-4 py-8">
           <div className="w-20 mix-blend-multiply sm:w-30 xl:w-40">

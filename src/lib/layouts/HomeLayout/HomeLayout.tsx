@@ -13,7 +13,6 @@ export const HomeLayout = ({ page }: Props) => {
     <PageWrapper>
       <main className="">
         <ContentBlockDigester contentBlocks={contentBlocks} />
-        Gallery goes here.
       </main>
     </PageWrapper>
   );

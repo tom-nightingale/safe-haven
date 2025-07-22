@@ -12,6 +12,8 @@ import { useGlobalContext } from "@/context/GlobalContext";
 import type { Maybe } from "@/gql/sanity/codegen";
 import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
+import KiteSvg from "@/icons/kiteSvg";
+import StarsSvg from "@/icons/starsSvg";
 
 type Props = {
   title?: Maybe<string>;
@@ -33,7 +35,7 @@ const Locations = ({ title, text }: Props) => {
       />
       <div className="from-taupe to-cream 3xl:top-30 4xl:top-40 5xl:top-44 xs:top-20 relative top-16 z-10 w-full bg-linear-to-b sm:top-24 md:top-30 xl:top-40">
         <Container classes="max-w-(--breakpoint-xl)">
-          <div className="py-10">
+          <div className="relative z-1 py-10">
             <div className="flex flex-col justify-center gap-6 pb-10 text-center">
               <Typography variant={TypeVariant.H3} component={TypeComponent.p}>
                 {title ?? "Our Locations"}
@@ -87,6 +89,12 @@ const Locations = ({ title, text }: Props) => {
             </div>
           </div>
         </Container>
+        <KiteSvg classes="absolute top-[2.4%] left-[5%] pointer-events-none" />
+        <StarsSvg
+          classes="absolute top-[2.4%] right-[5%] pointer-events-none"
+          stroke="white"
+        />
+        <StarsSvg classes="absolute top-[50%] left-[5%] pointer-events-none" />
       </div>
     </div>
   );

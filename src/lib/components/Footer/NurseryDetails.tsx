@@ -33,6 +33,7 @@ const NurseryDetails = ({
           variant={TypeVariant.H5}
           component={TypeComponent.p}
           classes="mb-4 xl:mb-7.5"
+          bold
         >
           {title}
         </Typography>

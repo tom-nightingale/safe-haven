@@ -6,8 +6,8 @@ import type { TypedObject } from "@portabletext/types";
 import type { Link, Maybe, ImageBlock } from "@/gql/sanity/codegen";
 import ScallopedTop from "@/components/ScallopedTop/ScallopedTop";
 import BlockContent from "@/components/BlockContent/BlockContent";
-import SanityImage from "@/components/SanityImage/SanityImage";
-import config from "@/config/config";
+// import SanityImage from "@/components/SanityImage/SanityImage";
+// import config from "@/config/config";
 import Button from "@/components/Button/Button";
 import Typography, {
   TypeVariant,
@@ -15,6 +15,9 @@ import Typography, {
 } from "@/components/Typography/Typography";
 import { useGlobalContext } from "@/context/GlobalContext";
 import { FaPhone } from "react-icons/fa";
+import WandSvg from "@/icons/wandSvg";
+import StarsSvg from "@/icons/starsSvg";
+import RocketSvg from "@/icons/rocketSvg";
 
 type Props = {
   scallopedTop?: Maybe<boolean>;
@@ -26,7 +29,7 @@ const TextWithImage = ({ scallopedTop, text, image, links }: Props) => {
   const { nurseries } = useGlobalContext();
   const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
   return (
-    <>
+    <div className="relative">
       {scallopedTop ? (
         <ScallopedTop>
           <Container>
@@ -78,9 +81,8 @@ const TextWithImage = ({ scallopedTop, text, image, links }: Props) => {
             </div>
 
             <div className="relative col-span-12 min-h-80 bg-red-500/10 lg:col-span-6">
-              <div className="absolute top-0 left-0 h-full w-full">
+              {/* <div className="absolute top-0 left-0 h-full w-full">
                 <div className="relative h-full w-full">
-                  {/* <!-- Clipped Image SVG --> */}
                   <svg
                     className="relative z-10 mx-auto h-full"
                     width="100%"
@@ -96,7 +98,6 @@ const TextWithImage = ({ scallopedTop, text, image, links }: Props) => {
                         <rect x="15%" y="17%" width="70.2%" height="66%" />
                       </clipPath>
                     </defs>
-                    {/* <!-- Image with clipping applied --> */}
                     <image
                       width="100%"
                       height="100%"
@@ -106,7 +107,6 @@ const TextWithImage = ({ scallopedTop, text, image, links }: Props) => {
                     />
                   </svg>
 
-                  {/* <!-- Frame/Border SVG (positioned on top) --> */}
                   <div className="pointer-events-none absolute top-0 left-0 h-full w-full -rotate-10">
                     <Image
                       fill={true}
@@ -119,18 +119,22 @@ const TextWithImage = ({ scallopedTop, text, image, links }: Props) => {
                   </div>
                 </div>
 
-                {/* <SanityImage
+                <SanityImage
                   image={image?.image}
                   alt={image?.altText ?? config.COMPANY_NAME}
                   loading="lazy"
                   objectFit="cover"
-                /> */}
-              </div>
+                />
+              </div> */}
             </div>
           </div>
         </Container>
       )}
-    </>
+
+      <StarsSvg classes="absolute top-[10%] left-0 pointer-events-none opacity-50" />
+      <RocketSvg classes="absolute top-0 right-[2.5%] pointer-events-none opacity-50" />
+      <WandSvg classes="absolute top-[5%] left-[43%] pointer-events-none opacity-50" />
+    </div>
   );
 };
 
