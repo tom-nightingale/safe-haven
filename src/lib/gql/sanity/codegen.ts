@@ -151,13 +151,14 @@ export type CardListFilter = {
   title?: InputMaybe<StringFilter>;
 };
 
-export type CardListOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrStaffCardsOrTextWithImage =
+export type CardListOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage =
 
     | CardList
     | Gallery
     | Hero
     | LocationDetails
     | ReviewsCarousel
+    | SimpleHero
     | StaffCards
     | TextWithImage;
 
@@ -286,7 +287,7 @@ export type ContentBlocks = {
   _type?: Maybe<Scalars["String"]["output"]>;
   contentblocks?: Maybe<
     Array<
-      Maybe<CardListOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrStaffCardsOrTextWithImage>
+      Maybe<CardListOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage>
     >
   >;
 };
@@ -1649,6 +1650,35 @@ export type SeoSorting = {
   shareGraphic?: InputMaybe<ImageSorting>;
 };
 
+export type SimpleHero = {
+  __typename?: "SimpleHero";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  buttons?: Maybe<Array<Maybe<Link>>>;
+  /** Subtitle */
+  subtitle?: Maybe<Scalars["String"]["output"]>;
+  /** Title */
+  title?: Maybe<Scalars["String"]["output"]>;
+  /** Top Line */
+  topLine?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type SimpleHeroFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  topLine?: InputMaybe<StringFilter>;
+};
+
+export type SimpleHeroSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  subtitle?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  topLine?: InputMaybe<SortOrder>;
+};
+
 export type SimplerColor = {
   __typename?: "SimplerColor";
   _key?: Maybe<Scalars["String"]["output"]>;
@@ -2603,6 +2633,24 @@ export type GetPageBySlugQuery = {
                     scallopedTop?: boolean | null | undefined;
                     scallopedBottom?: boolean | null | undefined;
                     title?: string | null | undefined;
+                  }
+                | {
+                    __typename?: "SimpleHero";
+                    topLine?: string | null | undefined;
+                    title?: string | null | undefined;
+                    subtitle?: string | null | undefined;
+                    buttons?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
                   }
                 | {
                     __typename?: "StaffCards";
@@ -5195,6 +5243,68 @@ export const GetPageBySlugDocument = {
                                           name: {
                                             kind: "Name",
                                             value: "textRaw",
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: {
+                                        kind: "Name",
+                                        value: "SimpleHero",
+                                      },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "topLine",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "title",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "subtitle",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "buttons",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "label",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "href",
+                                                },
+                                              },
+                                            ],
                                           },
                                         },
                                       ],

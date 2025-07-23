@@ -9,8 +9,9 @@ import { Maybe } from "@/gql/sanity/codegen";
 type Props = {
   children: React.ReactNode;
   url?: string | Maybe<string>;
+  onClick?: () => void; // Make onClick optional
 };
-const FancyLink = ({ children, url }: Props) => {
+const FancyLink = ({ children, url, onClick }: Props) => {
   const router = useTransitionRouter();
   const pathname = usePathname();
   return (
@@ -22,6 +23,10 @@ const FancyLink = ({ children, url }: Props) => {
             router.push(url, {
               onTransitionReady: pageAnimation,
             });
+        }
+        // pass the click function to parent component
+        if (onClick) {
+          onClick(); // Call the optional click function
         }
       }}
       href={url ?? ""}

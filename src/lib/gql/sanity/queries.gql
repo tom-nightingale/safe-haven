@@ -339,6 +339,15 @@ query GetPageBySlug($slug: String) {
             title
             textRaw
           }
+          ... on SimpleHero {
+            topLine
+            title
+            subtitle
+            buttons {
+              label
+              href
+            }
+          }
           ... on Gallery {
             images {
               label

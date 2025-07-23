@@ -121,6 +121,7 @@ const SecondaryNav = ({ nav }: Props) => {
                       <div className="group transition-all duration-200 hover:pl-1">
                         <FancyLink
                           url={`/${sect?.target?.slug?.current ?? ""}`}
+                          onClick={closeNav}
                         >
                           <span className="flex items-center gap-3">
                             <span className="text-dark-peach opacity-20 transition duration-200 group-hover:opacity-100">
@@ -141,6 +142,7 @@ const SecondaryNav = ({ nav }: Props) => {
                               >
                                 <FancyLink
                                   url={`/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}
+                                  onClick={closeNav}
                                 >
                                   {child?.title
                                     ? child?.title

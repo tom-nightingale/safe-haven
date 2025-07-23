@@ -29,12 +29,12 @@ const BlockContent = ({ content }: Props) => {
         </Typography>
       ),
       h3: ({ children }: PortableTextComponentProps<any>) => (
-        <Typography variant={TypeVariant.H3} component={TypeComponent.h3}>
+        <Typography variant={TypeVariant.H3} component={TypeComponent.h3} bold>
           {children}
         </Typography>
       ),
       h4: ({ children }: PortableTextComponentProps<any>) => (
-        <Typography variant={TypeVariant.H4} component={TypeComponent.h4}>
+        <Typography variant={TypeVariant.H4} component={TypeComponent.h4} bold>
           {children}
         </Typography>
       ),

@@ -1,5 +1,6 @@
 import type { ContentBlocks, Maybe } from "@/gql/sanity/codegen";
 import Hero from "@/components/Hero/Hero";
+import SimpleHero from "@/components/SimpleHero/SimpleHero";
 import CardList from "@/components/CardList/CardList";
 import TextWithImage from "@/components/TextWithImage/TextWithImage";
 import ReviewCards from "@/components/ReviewCards/ReviewCards";
@@ -26,6 +27,17 @@ const ContentBlockDigester = ({ contentBlocks }: Props) => {
                 cards={block?.heroCards}
                 buttons={block?.buttons}
                 image={block?.heroImage}
+              />
+            );
+
+          case "SimpleHero":
+            return (
+              <SimpleHero
+                key={idx}
+                title={block?.title}
+                subtitle={block?.subtitle}
+                topLine={block?.topLine}
+                buttons={block?.buttons}
               />
             );
 

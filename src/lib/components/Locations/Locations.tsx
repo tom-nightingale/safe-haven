@@ -24,7 +24,7 @@ const Locations = ({ title, text }: Props) => {
   const { nurseries } = useGlobalContext();
 
   return (
-    <div className="relative pb-40">
+    <div className="relative overflow-hidden pb-20 md:pb-40">
       <CloudsVector
         fill="white"
         classes="absolute w-[200%] lg:w-[150%] 3xl:w-full top-1"
@@ -37,7 +37,11 @@ const Locations = ({ title, text }: Props) => {
         <Container classes="max-w-(--breakpoint-xl)">
           <div className="relative z-1 py-10">
             <div className="flex flex-col justify-center gap-6 pb-10 text-center">
-              <Typography variant={TypeVariant.H3} component={TypeComponent.p}>
+              <Typography
+                variant={TypeVariant.H3}
+                component={TypeComponent.p}
+                bold
+              >
                 {title ?? "Our Locations"}
               </Typography>
 

@@ -93,7 +93,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
           </div>
 
           {image && (
-            <div className="transiton-all pointer-events-none absolute -top-4 right-0 z-2 h-[120%] w-full opacity-50 duration-200 md:-right-8 md:h-[150%] md:w-2/3 md:opacity-100 lg:-top-12 lg:right-0 lg:h-[145%] xl:-top-12 2xl:-right-16 2xl:h-[130%]">
+            <div className="transiton-all 3xl:-right-16 pointer-events-none absolute -top-4 right-0 z-2 h-[120%] w-full opacity-50 duration-200 md:-right-8 md:h-[150%] md:w-2/3 md:opacity-100 lg:-top-12 lg:right-0 lg:h-[145%] xl:-top-12 2xl:h-[130%]">
               <SanityImage
                 image={image?.image}
                 alt={image?.altText ?? config.COMPANY_NAME}

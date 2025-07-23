@@ -237,39 +237,39 @@ body {
 }
 
 .text-h1 {
-  @apply 3xl:text-6xl 3xl:leading-18 font-serif text-3xl leading-9 md:leading-10 xl:text-5xl xl:leading-14;
+  @apply 3xl:text-6xl 3xl:leading-18 font-serif text-3xl leading-9 text-pretty md:leading-10 xl:text-5xl xl:leading-14;
 }
 
 .text-h2 {
-  @apply font-serif text-4xl;
+  @apply font-serif text-4xl text-pretty;
 }
 
 .text-h3 {
-  @apply font-serif text-3xl;
+  @apply font-serif text-3xl text-pretty;
 }
 
 .text-h4 {
-  @apply font-serif text-xl;
+  @apply font-serif text-xl text-pretty;
 }
 
 .text-h5 {
-  @apply font-serif text-xl;
+  @apply font-serif text-xl text-pretty;
 }
 
 .text-h6 {
-  @apply font-serif;
+  @apply font-serif text-pretty;
 }
 
 .text-body-1 {
-  @apply font-sans text-lg;
+  @apply font-sans text-lg text-pretty;
 }
 
 .text-button-1 {
-  @apply font-serif font-light 2xl:text-lg;
+  @apply font-serif font-light text-pretty 2xl:text-lg;
 }
 
 .text-button-2 {
-  @apply font-serif text-base;
+  @apply font-serif text-base text-pretty;
 }
 
 /* swiper */
@@ -328,6 +328,10 @@ body {
   @apply grid gap-2;
 
   p {
+    @apply my-3;
+  }
+
+  ul {
     @apply my-3;
   }
 }
