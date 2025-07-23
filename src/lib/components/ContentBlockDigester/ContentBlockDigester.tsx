@@ -84,9 +84,7 @@ const ContentBlockDigester = ({ contentBlocks }: Props) => {
             );
 
           case "LocationDetails":
-            return (
-              <Locations key={idx} title={block?.title} text={block?.textRaw} />
-            );
+            return <Locations key={idx} title={block?.title} />;
 
           case "Gallery":
             return <Gallery key={idx} images={block?.images} />;

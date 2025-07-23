@@ -43,6 +43,8 @@ export function getPositionFromHotspot(
   return `${hotspot.x * 100}% ${hotspot.y * 100}%`;
 }
 
+type ObjectFit = "contain" | "cover" | "fill" | "none" | "scale-down";
+
 const SanityImage = ({
   image,
   fit = "min",
@@ -77,8 +79,16 @@ const SanityImage = ({
       placeholder={placeholder}
       blurDataURL={blurData ?? undefined}
       sizes={sizes}
-      objectFit={objectFit}
-      objectPosition={getPositionFromHotspot(hotspotData)}
+      style={{
+        objectFit: objectFit as
+          | "cover"
+          | "contain"
+          | "fill"
+          | "none"
+          | "scale-down",
+      }}
+      // objectFit={objectFit}
+      // objectPosition={getPositionFromHotspot(hotspotData)}
     />
   ) : (
     <></>

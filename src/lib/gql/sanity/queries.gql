@@ -337,7 +337,6 @@ query GetPageBySlug($slug: String) {
           }
           ... on LocationDetails {
             title
-            textRaw
           }
           ... on SimpleHero {
             topLine

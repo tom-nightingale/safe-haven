@@ -49,20 +49,28 @@ const Hero = ({ topLine, title, subtitle, buttons }: Props) => {
             {title}
           </Typography>
 
-          {buttons && buttons.length > 0 && (
-            <>
-              {buttons.map((button: Maybe<Link>) => {
-                return (
-                  <Button
-                    key={button?.label}
-                    classes="button-primary button-peach inline-block mt-6"
-                    label={button?.label}
-                    href={button?.href}
-                  />
-                );
-              })}
-            </>
-          )}
+          <div className="mt-6">
+            {buttons && buttons.length > 0 ? (
+              <>
+                {buttons.map((button: Maybe<Link>, i: number) => {
+                  return (
+                    <Button
+                      key={button?.label}
+                      classes={"button-primary button-peach inline-block"}
+                      label={button?.label}
+                      href={button?.href}
+                    />
+                  );
+                })}
+              </>
+            ) : (
+              <Button
+                classes={"button-primary button-peach inline-block"}
+                label="Book A Viewing"
+                href="/our-nurseries"
+              />
+            )}
+          </div>
 
           <a href={`tel:${nurseryPhoneNumber}`} className="mt-6 mb-10">
             <Typography

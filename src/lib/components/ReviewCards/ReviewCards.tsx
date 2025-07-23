@@ -49,6 +49,7 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                       spaceBetween={20}
                       slidesPerView={1.2}
                       scrollbar={{ draggable: true }}
+                      slidesOffsetAfter={32}
                       breakpoints={{
                         600: {
                           slidesPerView: 2.2,
@@ -57,7 +58,7 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                           slidesPerView: 3.2,
                           spaceBetween: 30,
                         },
-                        1280: {
+                        1600: {
                           slidesPerView: 4,
                         },
                       }}

@@ -4,6 +4,7 @@ import Typography, {
 } from "@/components/Typography/Typography";
 import { FaPhone, FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import Button from "@/components/Button/Button";
+import { Maybe } from "@/gql/sanity/codegen";
 
 type Props = {
   title: string;
@@ -14,6 +15,8 @@ type Props = {
   buttonClasses?: string;
   centered?: boolean;
   showMapButton?: boolean;
+  mapsLink?: string | Maybe<string>;
+  directionsLink?: string | Maybe<string>;
 };
 
 const NurseryDetails = ({
@@ -25,6 +28,8 @@ const NurseryDetails = ({
   buttonClasses = "button-lilac",
   centered = false,
   showMapButton = false,
+  mapsLink,
+  directionsLink,
 }: Props) => {
   return (
     <>
@@ -41,11 +46,7 @@ const NurseryDetails = ({
 
       <div className="grid gap-3 xl:gap-5">
         {subtitle && (
-          <Typography
-            variant={TypeVariant.Body1}
-            component={TypeComponent.p}
-            classes=""
-          >
+          <Typography variant={TypeVariant.Body1} component={TypeComponent.p}>
             {subtitle}
           </Typography>
         )}
@@ -93,7 +94,7 @@ const NurseryDetails = ({
 
         <div className="flex flex-col items-center justify-center md:flex-row md:gap-4">
           <Button
-            href="/"
+            href={directionsLink}
             newTab
             label="Get Directions"
             classes={`button-primary mr-auto mt-5 ${buttonClasses}`}
@@ -101,7 +102,7 @@ const NurseryDetails = ({
 
           {showMapButton && (
             <Button
-              href="/"
+              href={mapsLink}
               newTab
               label="View Map"
               classes={`button-primary button-outline button-outline-blue mr-auto mt-5 ${buttonClasses}`}

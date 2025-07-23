@@ -1,3 +1,5 @@
+"use client";
+
 import Container from "@/components/Container/Container";
 import Typography, {
   TypeVariant,
@@ -12,6 +14,7 @@ import FancyLink from "@/components/FancyLink/FancyLink";
 import Button from "@/components/Button/Button";
 import config from "@/config/config";
 import { type Nursery } from "@/gql/sanity/codegen";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 type Props = {
   primaryNav?: Navigation;
@@ -20,13 +23,15 @@ type Props = {
 };
 
 // @TODO - Update with the nursery details from Sanity
-const Footer = async ({ primaryNav, secondaryNav, nurseries }: Props) => {
+const Footer = ({ primaryNav, secondaryNav }: Props) => {
   const navColumn1 = [
     ...(primaryNav?.sections ?? []),
     ...(secondaryNav?.sections?.slice(0, 1) ?? []),
   ];
 
   const navColumn2 = [...(secondaryNav?.sections?.slice(1) ?? [])];
+
+  const { nurseries } = useGlobalContext();
 
   return (
     <div className="scalloped-top relative mt-8">
@@ -190,7 +195,13 @@ const Footer = async ({ primaryNav, secondaryNav, nurseries }: Props) => {
                 component={TypeComponent.p}
                 classes="flex items-center gap-2"
               >
-                <FaFacebook /> Follow us on Facebook
+                <a
+                  href="https://www.facebook.com/SafeHavenDayNursery"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaFacebook /> Follow us on Facebook
+                </a>
               </Typography>
             </div>
 
@@ -207,6 +218,11 @@ const Footer = async ({ primaryNav, secondaryNav, nurseries }: Props) => {
                     address={nursery.address}
                     phone={nursery.phoneNumber}
                     email={nursery.email}
+                    mapsLink={nursery?.mapsLink}
+                    directionsLink={nursery?.directionsLink}
+                    buttonClasses={
+                      i !== 0 ? "bg-peach text-white" : "bg-lilac text-white"
+                    }
                   />
                 </div>
               ))}

@@ -76,7 +76,7 @@ const SecondaryNav = ({ nav }: Props) => {
 
       <div
         ref={animationScope}
-        className={`absolute top-0 left-0 z-3 h-screen w-full ${isOpen ? "block" : "hidden"}`}
+        className={`absolute top-0 left-0 z-50 h-screen w-full ${isOpen ? "block" : "hidden"}`}
       >
         <div
           ref={menuOverlay}

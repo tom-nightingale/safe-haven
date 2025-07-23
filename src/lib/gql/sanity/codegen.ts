@@ -585,8 +585,6 @@ export type Hero = {
   buttons?: Maybe<Array<Maybe<Link>>>;
   heroCards?: Maybe<Array<Maybe<HeroCard>>>;
   heroImage?: Maybe<ImageBlock>;
-  /** Hero Type (Default has an image, simple does not) */
-  heroType?: Maybe<Scalars["String"]["output"]>;
   subtitleRaw?: Maybe<Scalars["JSON"]["output"]>;
   titleRaw?: Maybe<Scalars["JSON"]["output"]>;
 };
@@ -627,7 +625,6 @@ export type HeroFilter = {
   _type?: InputMaybe<StringFilter>;
   ageGroup?: InputMaybe<StringFilter>;
   heroImage?: InputMaybe<ImageBlockFilter>;
-  heroType?: InputMaybe<StringFilter>;
 };
 
 export type HeroImage = {
@@ -652,7 +649,6 @@ export type HeroSorting = {
   _type?: InputMaybe<SortOrder>;
   ageGroup?: InputMaybe<SortOrder>;
   heroImage?: InputMaybe<ImageBlockSorting>;
-  heroType?: InputMaybe<SortOrder>;
 };
 
 export type HighlightColor = {
@@ -784,7 +780,6 @@ export type LocationDetails = {
   __typename?: "LocationDetails";
   _key?: Maybe<Scalars["String"]["output"]>;
   _type?: Maybe<Scalars["String"]["output"]>;
-  textRaw?: Maybe<Scalars["JSON"]["output"]>;
   /** Text */
   title?: Maybe<Scalars["String"]["output"]>;
 };
@@ -2626,7 +2621,6 @@ export type GetPageBySlugQuery = {
                 | {
                     __typename?: "LocationDetails";
                     title?: string | null | undefined;
-                    textRaw?: any | null | undefined;
                   }
                 | {
                     __typename?: "ReviewsCarousel";
@@ -5236,13 +5230,6 @@ export const GetPageBySlugDocument = {
                                           name: {
                                             kind: "Name",
                                             value: "title",
-                                          },
-                                        },
-                                        {
-                                          kind: "Field",
-                                          name: {
-                                            kind: "Name",
-                                            value: "textRaw",
                                           },
                                         },
                                       ],

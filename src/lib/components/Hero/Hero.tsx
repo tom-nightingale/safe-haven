@@ -54,7 +54,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
             </Typography>
 
             <div className="xs:flex-row xs:flex-wrap mt-3 flex flex-col gap-6 lg:mt-10">
-              {buttons && buttons.length > 0 && (
+              {buttons && buttons.length > 0 ? (
                 <>
                   {buttons.map((button: Maybe<Link>, i: number) => {
                     return (
@@ -71,6 +71,12 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
                     );
                   })}
                 </>
+              ) : (
+                <Button
+                  classes={"button-primary button-peach inline-block"}
+                  label="Book A Viewing"
+                  href="/our-nurseries"
+                />
               )}
 
               <a

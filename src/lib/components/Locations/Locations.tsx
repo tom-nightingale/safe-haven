@@ -10,7 +10,7 @@ import CloudsVector from "@/components/CloudsVector/CloudsVector";
 import { type Nursery } from "@/gql/sanity/codegen";
 import { useGlobalContext } from "@/context/GlobalContext";
 import type { Maybe } from "@/gql/sanity/codegen";
-import { PortableText } from "@portabletext/react";
+// import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
 import KiteSvg from "@/icons/kiteSvg";
 import StarsSvg from "@/icons/starsSvg";
@@ -84,6 +84,8 @@ const Locations = ({ title, text }: Props) => {
                         phone={nursery.phoneNumber ?? ""}
                         email={nursery.email ?? ""}
                         buttonClasses={`${i === 0 ? "button-green" : "button-blue"} font-sans mx-auto md:mx-0`}
+                        mapsLink={nursery?.mapsLink}
+                        directionsLink={nursery?.directionsLink}
                         centered
                         showMapButton
                       />
