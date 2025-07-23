@@ -1,18 +1,18 @@
 import { notFound } from "next/navigation";
 import createApolloClient from "@/gql/apolloClient";
 import {
-  GetHomepageDocument,
-  type GetHomepageQuery,
+  GetPageBySlugDocument,
+  type GetPageBySlugQuery,
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
-import HomeLayout from "@/layouts/HomeLayout/HomeLayout";
+import DefaultLayout from "@/layouts/DefaultLayout/DefaultLayout";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
     const client = createApolloClient(fetch);
-    const { data } = await client.query<GetHomepageQuery>({
-      query: GetHomepageDocument,
+    const { data } = await client.query<GetPageBySlugQuery>({
+      query: GetPageBySlugDocument,
       variables: {
         slug: "home",
       },
@@ -36,11 +36,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const GetHomepage = async (slug: string | undefined): Promise<any> => {
+const GetPage = async (slug: string | undefined): Promise<any> => {
   try {
     const client = createApolloClient(fetch);
-    const { data } = await client.query<GetHomepageQuery>({
-      query: GetHomepageDocument,
+    const { data } = await client.query<GetPageBySlugQuery>({
+      query: GetPageBySlugDocument,
       variables: {
         slug: slug,
       },
@@ -53,14 +53,10 @@ const GetHomepage = async (slug: string | undefined): Promise<any> => {
 };
 
 export default async function Home() {
-  const { page } = await GetHomepage("home");
+  const { page } = await GetPage("home");
   if (!page) {
     return notFound();
   }
 
-  return (
-    <>
-      <HomeLayout page={Array.isArray(page) && page[0]} />
-    </>
-  );
+  return <DefaultLayout page={Array.isArray(page) && page[0]} />;
 }

@@ -6,6 +6,11 @@ import React, { useState } from "react";
 import FsLightbox from "fslightbox-react";
 import SanityImage from "@/components/SanityImage/SanityImage";
 import config from "@/config/config";
+import Typography, {
+  TypeVariant,
+  TypeComponent,
+} from "@/components/Typography/Typography";
+import { FaMapPin } from "react-icons/fa";
 
 type Props = {
   images?: Maybe<Maybe<ImageBlock>[]>;
@@ -60,14 +65,24 @@ const Gallery = ({ images }: Props) => {
                       className={`relative col-span-2 aspect-square cursor-pointer rounded-3xl ${index === 4 ? "col-start-2 md:col-start-auto" : ""} bg-white transition-all duration-200 ${tiltClasses[index]} ${hoverClasses[index]}`}
                     >
                       <span className="bg-peach/3 pointer-events0none absolute top-1 -left-1 z-0 block h-full w-full rounded-3xl"></span>
-                      <div className="relative block aspect-square h-full w-full rounded-3xl bg-white">
+                      <div className="relative block aspect-square h-full w-full overflow-hidden rounded-3xl bg-white">
                         <SanityImage
                           image={image?.image}
-                          alt={
-                            image?.image?.asset?.altText ?? config.COMPANY_NAME
-                          }
+                          alt={image?.altText ?? config.COMPANY_NAME}
                           loading="lazy"
+                          fit="fill"
+                          fill={true}
+                          objectFit="cover"
                         />
+                        {image?.label && (
+                          <Typography
+                            variant={TypeVariant.Button1}
+                            component={TypeComponent.p}
+                            classes="absolute hidden xl:flex items-center gap-1 z-10 bottom-3 left-3 !text-sm text-white"
+                          >
+                            <FaMapPin /> {image?.label}
+                          </Typography>
+                        )}
                       </div>
                     </button>
                   );

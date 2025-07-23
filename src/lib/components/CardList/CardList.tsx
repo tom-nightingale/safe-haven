@@ -32,19 +32,23 @@ type Props = {
 };
 
 const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
-  const bgColors = ["bg-green", "bg-lilac", "bg-yellow", "bg-blue"];
+  const bgColors = ["bg-green", "bg-lilac", "bg-yellow", "bg-blue", "bg-peach"];
   const buttonClasses = [
     "button-outline-green text-green",
     "button-outline-lilac text-lilac",
     "button-outline-yellow text-yellow",
     "button-outline-blue text-blue",
+    "button-outline-peach text-peach",
   ];
   const shadowClasses = [
     "bg-green/10",
     "bg-lilac/10",
     "bg-yellow/10",
     "bg-blue/10",
+    "bg-peach/10",
   ];
+
+  const cardLayout = cards && cards?.length % 5 === 0 ? "slim" : "default";
 
   return (
     <div className="relative">
@@ -52,7 +56,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
         <>
           <ScallopedTop>
             <Container>
-              <div className="py-4">
+              <div className="relative z-1 py-4">
                 {(title || subtitle) && (
                   <div className="flex flex-col justify-center gap-6 text-center">
                     <Typography
@@ -72,7 +76,9 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                 )}
 
                 {cards && (
-                  <div className="mx-auto grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 xl:grid-cols-4">
+                  <div
+                    className={`mx-auto grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 ${cardLayout === "slim" ? "xl:grid-cols-5" : "xl:grid-cols-4"}`}
+                  >
                     {cards.map((card, i) => {
                       return (
                         <Card
@@ -97,7 +103,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
           </ScallopedTop>
         </>
       ) : (
-        <div className="py-10 xl:py-15">
+        <div className="relative z-1 py-10 xl:py-15">
           <Container>
             {(title || subtitle) && (
               <div className="flex flex-col justify-center gap-6 text-center">
@@ -118,7 +124,9 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
             )}
 
             {cards && (
-              <div className="mx-auto mt-10 grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 xl:grid-cols-4">
+              <div
+                className={`mx-auto mt-10 grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 ${cardLayout === "slim" ? "xl:grid-cols-5" : "xl:grid-cols-4"}`}
+              >
                 {cards.map((card, i) => {
                   return (
                     <Card
@@ -133,6 +141,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                         buttonClasses[i] || "button-outline-blue text-blue"
                       }
                       shadowClass={shadowClasses[i] || "bg-blue/10"}
+                      slim={cardLayout === "slim"}
                     />
                   );
                 })}

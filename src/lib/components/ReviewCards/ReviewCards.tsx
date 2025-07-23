@@ -77,6 +77,9 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                     </Swiper>
                   </div>
                 )}
+
+                <RabbitSvg classes="absolute top-[0%] right-[5%] pointer-events-none" />
+                <TrainSvg classes="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
               </div>
             </Container>
           </ScallopedBottom>
@@ -123,12 +126,12 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                 </Swiper>
               </div>
             )}
+
+            <RabbitSvg classes="absolute top-[0%] right-[5%] pointer-events-none" />
+            <TrainSvg classes="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
           </div>
         </Container>
       )}
-
-      <RabbitSvg classes="absolute top-[0%] right-[5%] pointer-events-none" />
-      <TrainSvg classes="absolute top-[15%] left-1/2 -translate-x-1/2 pointer-events-none" />
     </div>
   );
 };

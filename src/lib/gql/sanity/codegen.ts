@@ -703,6 +703,8 @@ export type ImageBlock = {
   /** Alt text to use for the image */
   altText?: Maybe<Scalars["String"]["output"]>;
   image?: Maybe<Image>;
+  /** Label to use for the image */
+  label?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type ImageBlockFilter = {
@@ -710,6 +712,7 @@ export type ImageBlockFilter = {
   _type?: InputMaybe<StringFilter>;
   altText?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
+  label?: InputMaybe<StringFilter>;
 };
 
 export type ImageBlockSorting = {
@@ -717,6 +720,7 @@ export type ImageBlockSorting = {
   _type?: InputMaybe<SortOrder>;
   altText?: InputMaybe<SortOrder>;
   image?: InputMaybe<ImageSorting>;
+  label?: InputMaybe<SortOrder>;
 };
 
 export type ImageFilter = {
@@ -2036,42 +2040,6 @@ export type GetNavigationByIdQuery = {
     | undefined;
 };
 
-export type GetPageBySlugQueryVariables = Exact<{
-  slug?: InputMaybe<Scalars["String"]["input"]>;
-}>;
-
-export type GetPageBySlugQuery = {
-  __typename?: "RootQuery";
-  allPage: Array<{
-    __typename?: "Page";
-    _type?: string | null | undefined;
-    title?: string | null | undefined;
-    seo?:
-      | {
-          __typename?: "Seo";
-          metaTitle?: string | null | undefined;
-          metaDesc?: string | null | undefined;
-          keywords?: Array<string | null | undefined> | null | undefined;
-          shareGraphic?:
-            | {
-                __typename?: "Image";
-                asset?:
-                  | {
-                      __typename?: "SanityImageAsset";
-                      url?: string | null | undefined;
-                      altText?: string | null | undefined;
-                    }
-                  | null
-                  | undefined;
-              }
-            | null
-            | undefined;
-        }
-      | null
-      | undefined;
-  }>;
-};
-
 export type GetCategoryBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars["String"]["input"]>;
 }>;
@@ -2364,21 +2332,12 @@ export type GetAllRoomsQuery = {
   }>;
 };
 
-export type GetHomepageQueryVariables = Exact<{
+export type GetPageBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars["String"]["input"]>;
 }>;
 
-export type GetHomepageQuery = {
+export type GetPageBySlugQuery = {
   __typename?: "RootQuery";
-  rooms: Array<{
-    __typename?: "Page";
-    _id?: string | null | undefined;
-    title?: string | null | undefined;
-    slug?:
-      | { __typename?: "Slug"; current?: string | null | undefined }
-      | null
-      | undefined;
-  }>;
   staff: Array<{
     __typename?: "Staff";
     _id?: string | null | undefined;
@@ -2495,6 +2454,8 @@ export type GetHomepageQuery = {
                       | Array<
                           | {
                               __typename?: "ImageBlock";
+                              label?: string | null | undefined;
+                              altText?: string | null | undefined;
                               image?:
                                 | {
                                     __typename?: "Image";
@@ -3334,128 +3295,6 @@ export const GetNavigationByIdDocument = {
   GetNavigationByIdQuery,
   GetNavigationByIdQueryVariables
 >;
-export const GetPageBySlugDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "GetPageBySlug" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
-          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "allPage" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "slug" },
-                      value: {
-                        kind: "ObjectValue",
-                        fields: [
-                          {
-                            kind: "ObjectField",
-                            name: { kind: "Name", value: "current" },
-                            value: {
-                              kind: "ObjectValue",
-                              fields: [
-                                {
-                                  kind: "ObjectField",
-                                  name: { kind: "Name", value: "eq" },
-                                  value: {
-                                    kind: "Variable",
-                                    name: { kind: "Name", value: "slug" },
-                                  },
-                                },
-                              ],
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "_type" } },
-                { kind: "Field", name: { kind: "Name", value: "title" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "seo" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "FragmentSpread",
-                        name: { kind: "Name", value: "seoFragment" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    {
-      kind: "FragmentDefinition",
-      name: { kind: "Name", value: "seoFragment" },
-      typeCondition: {
-        kind: "NamedType",
-        name: { kind: "Name", value: "Seo" },
-      },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
-          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
-          { kind: "Field", name: { kind: "Name", value: "keywords" } },
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "shareGraphic" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "asset" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "url" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "altText" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetPageBySlugQuery, GetPageBySlugQueryVariables>;
 export const GetCategoryBySlugDocument = {
   kind: "Document",
   definitions: [
@@ -4392,13 +4231,13 @@ export const GetAllRoomsDocument = {
     },
   ],
 } as unknown as DocumentNode<GetAllRoomsQuery, GetAllRoomsQueryVariables>;
-export const GetHomepageDocument = {
+export const GetPageBySlugDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "GetHomepage" },
+      name: { kind: "Name", value: "GetPageBySlug" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -4409,60 +4248,6 @@ export const GetHomepageDocument = {
       selectionSet: {
         kind: "SelectionSet",
         selections: [
-          {
-            kind: "Field",
-            alias: { kind: "Name", value: "rooms" },
-            name: { kind: "Name", value: "allPage" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "pageType" },
-                      value: {
-                        kind: "ObjectValue",
-                        fields: [
-                          {
-                            kind: "ObjectField",
-                            name: { kind: "Name", value: "eq" },
-                            value: {
-                              kind: "StringValue",
-                              value: "room",
-                              block: false,
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "_id" } },
-                { kind: "Field", name: { kind: "Name", value: "title" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "slug" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "current" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
           {
             kind: "Field",
             alias: { kind: "Name", value: "staff" },
@@ -5437,6 +5222,20 @@ export const GetHomepageDocument = {
                                                 kind: "Field",
                                                 name: {
                                                   kind: "Name",
+                                                  value: "label",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "altText",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
                                                   value: "image",
                                                 },
                                                 selectionSet: {
@@ -5645,4 +5444,4 @@ export const GetHomepageDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetHomepageQuery, GetHomepageQueryVariables>;
+} as unknown as DocumentNode<GetPageBySlugQuery, GetPageBySlugQueryVariables>;

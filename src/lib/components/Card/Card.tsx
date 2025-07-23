@@ -23,6 +23,7 @@ type Props = {
   buttonText?: string | Maybe<string>;
   buttonStyle?: string;
   buttonClass?: string;
+  slim?: boolean;
 };
 
 const Card = ({
@@ -36,6 +37,7 @@ const Card = ({
   containerClass = "bg-green",
   shadowClass = "",
   buttonClass = "button-outline-green text-white",
+  slim = false,
 }: Props) => {
   return (
     <div className="relative h-full">
@@ -60,7 +62,9 @@ const Card = ({
             </div>
           </div>
 
-          <div className="z-2 grid grid-cols-12 items-center justify-between gap-3 p-6">
+          <div
+            className={`z-2 ${slim ? "text-center" : "grid-cols-12"} grid items-center justify-between gap-3 p-6`}
+          >
             <div
               className={`${buttonStyle === "icon-only" ? "col-span-8" : "col-span-6"}`}
             >
@@ -75,7 +79,9 @@ const Card = ({
             <div
               className={`${buttonStyle === "icon-only" ? "col-span-4" : "col-span-6"} md:m-0`}
             >
-              <div className="ml-auto flex w-max rounded-full bg-white p-0.5">
+              <div
+                className={`${slim ? "mx-auto" : "ml-auto"} flex w-max rounded-full bg-white p-0.5`}
+              >
                 {buttonStyle === "full" ? (
                   <Button
                     classes={`button-primary button-outline text-sm ${buttonClass}`}

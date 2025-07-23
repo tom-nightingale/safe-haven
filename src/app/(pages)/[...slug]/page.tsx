@@ -6,7 +6,7 @@ import {
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
-import PageLayout from "@/layouts/PageLayout/PageLayout";
+import DefaultLayout from "@/layouts/DefaultLayout/DefaultLayout";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     });
 
-    const page = data.allPage[0];
+    const page = data.page[0];
     return {
       title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
       description: page?.seo?.metaDesc ?? "",
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const GetSingularPage = async (slug: string | undefined): Promise<any> => {
+const GetPage = async (slug: string | undefined): Promise<any> => {
   try {
     const client = createApolloClient(fetch);
     const { data } = await client.query<GetPageBySlugQuery>({
@@ -61,14 +61,10 @@ const GetSingularPage = async (slug: string | undefined): Promise<any> => {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
-  const { allPage } = await GetSingularPage(slug.at(-1));
-  if (allPage.length < 1) {
+  const { page } = await GetPage(slug.at(-1));
+  if (!page) {
     return notFound();
   }
-  const page = allPage[0];
-  return (
-    <>
-      <PageLayout title={page?.title} />
-    </>
-  );
+
+  return <DefaultLayout page={Array.isArray(page) && page[0]} />;
 }

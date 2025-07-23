@@ -249,7 +249,7 @@ body {
 }
 
 .text-h4 {
-  @apply font-serif text-2xl;
+  @apply font-serif text-xl;
 }
 
 .text-h5 {
@@ -326,6 +326,10 @@ body {
 
 .block-content {
   @apply grid gap-2;
+
+  p {
+    @apply my-3;
+  }
 }
 
 .image-mask {

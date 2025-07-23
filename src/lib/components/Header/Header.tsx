@@ -8,6 +8,7 @@ import { BsTelephone } from "react-icons/bs";
 import SecondaryNav from "@/components/SecondaryNav/SecondaryNav";
 import config from "@/config/config";
 import FancyLink from "@/components/FancyLink/FancyLink";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 type Props = {
   primaryNav?: Navigation;
@@ -19,8 +20,11 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
     ...(primaryNav?.sections ?? []),
     ...(secondaryNav?.sections ?? []),
   ];
+
+  const { nurseries } = useGlobalContext();
+  const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
   return (
-    <div className="relative z-30">
+    <div className="relative">
       <Container>
         <div className="flex w-full justify-between gap-4 py-8">
           <div className="w-20 mix-blend-multiply sm:w-30 xl:w-40">
@@ -36,14 +40,14 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
               />
             </FancyLink>
           </div>
-          <div className="flex items-center justify-between gap-10 xl:items-start xl:py-12">
+          <div className="z-100 flex items-center justify-between gap-10 xl:items-start xl:py-12">
             <PrimaryNav navItems={primaryNav} />
             <div className="flex items-center gap-3">
               <SecondaryNav nav={combinedNav} />
               <Button
                 label="Get In Touch"
                 iconLeft={<BsTelephone />}
-                href="tel:01623000000"
+                href={`tel:${nurseryPhoneNumber}`}
                 classes="button-primary button-peach"
               />
             </div>
