@@ -68,12 +68,22 @@ const Card = ({
             <div
               className={`${buttonStyle === "icon-only" ? "col-span-8" : "col-span-6"}`}
             >
-              <Typography variant={TypeVariant.H4} component={TypeComponent.p}>
-                {title}
-              </Typography>
-              <Typography variant={TypeVariant.H6} component={TypeComponent.p}>
-                {subtitle}
-              </Typography>
+              {title && (
+                <Typography
+                  variant={TypeVariant.H4}
+                  component={TypeComponent.p}
+                >
+                  {title}
+                </Typography>
+              )}
+              {subtitle && (
+                <Typography
+                  variant={TypeVariant.H6}
+                  component={TypeComponent.p}
+                >
+                  {subtitle}
+                </Typography>
+              )}
             </div>
 
             <div

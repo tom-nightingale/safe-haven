@@ -114,6 +114,7 @@ const NavSection = ({
                         variant={TypeVariant.Button2}
                         classes={
                           slug !== "" &&
+                          slug !== target?.slug?.current &&
                           `${target?.slug?.current}/${child.target.slug.current}`.includes(
                             slug,
                           )

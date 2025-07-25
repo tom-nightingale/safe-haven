@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const page = data.page[0];
     return {
-      title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
+      title: `${page?.seo?.metaTitle ? page?.seo?.metaTitle : page?.title} | ${config.COMPANY_NAME}`,
       description: page?.seo?.metaDesc ?? "",
       // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
       openGraph: {
@@ -57,6 +57,15 @@ const GetPage = async (slug: string | undefined): Promise<any> => {
     return notFound();
   }
 };
+
+// un-comment this to statically generate pages at build time.
+export async function generateStaticParams() {
+  const slugs = [["our-rooms"]];
+
+  return slugs.map(slugArray => ({
+    slug: slugArray.map(String),
+  }));
+}
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;

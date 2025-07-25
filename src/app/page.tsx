@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     const page = data.page[0];
     return {
-      title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
+      title: `${page?.seo?.metaTitle ? page?.seo?.metaTitle : page?.title} | ${config.COMPANY_NAME}`,
       description: page?.seo?.metaDesc ?? "",
       // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
       openGraph: {
