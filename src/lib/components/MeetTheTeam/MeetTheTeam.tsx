@@ -14,6 +14,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar, A11y } from "swiper/modules";
 import "swiper/css/scrollbar";
 import "swiper/css";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import { FaTimes } from "react-icons/fa";
+import BlockContent from "@/components/BlockContent/BlockContent";
 
 type Props = {
   title?: Maybe<string>;
@@ -35,7 +39,17 @@ const MeetTheTeam = ({
     "text-blue",
   ];
 
-  console.log("text", text);
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+    if (!showModal) {
+      document.body.classList.add("locked");
+    } else {
+      document.body.classList.remove("locked");
+    }
+  };
+
   return (
     <div className="mx-auto max-w-(--breakpoint-3xl)">
       <div className="grid grid-cols-1 gap-10 py-10 md:grid-cols-12 md:gap-10">
@@ -103,7 +117,6 @@ const MeetTheTeam = ({
                       className="!h-auto"
                     >
                       <Card
-                        href="/"
                         image={profile?.profileImage}
                         title={profile?.name}
                         subtitle={profile?.jobTitle}
@@ -126,11 +139,42 @@ const MeetTheTeam = ({
                               : "bg-yellow/10"
                         }
                         imageFit="contain"
+                        modalContent={profile?.biographyRaw}
+                        toggleModal={toggleModal}
                       />
                     </SwiperSlide>
                   );
                 })}
               </Swiper>
+
+              {showModal &&
+                createPortal(
+                  <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/80 p-8">
+                    <div className="rounded-3xl bg-white p-4">
+                      <button className="cursor-pointer" onClick={toggleModal}>
+                        <FaTimes />
+                      </button>
+
+                      <Typography
+                        variant={TypeVariant.H4}
+                        component={TypeComponent.p}
+                        bold
+                      >
+                        Name
+                      </Typography>
+
+                      <Typography
+                        variant={TypeVariant.H4}
+                        component={TypeComponent.p}
+                      >
+                        Job title
+                      </Typography>
+
+                      <BlockContent content={[]} />
+                    </div>
+                  </div>,
+                  document.body,
+                )}
             </>
           )}
         </div>

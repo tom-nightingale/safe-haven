@@ -63,6 +63,7 @@ const SanityImage = ({
   const sourceUrl = image?.asset?.url;
   const blurData = image?.asset?.metadata?.lqip;
   const hotspotData = image?.hotspot;
+
   if (!sourceUrl) return <></>;
   const imageUrl = urlFor(sourceUrl, quality).fit(fit).url();
 
@@ -87,8 +88,8 @@ const SanityImage = ({
           | "none"
           | "scale-down",
       }}
-      // objectFit={objectFit}
-      // objectPosition={getPositionFromHotspot(hotspotData)}
+      objectFit={objectFit}
+      objectPosition={getPositionFromHotspot(hotspotData)}
     />
   ) : (
     <></>
