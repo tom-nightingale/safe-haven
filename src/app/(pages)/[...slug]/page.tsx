@@ -25,9 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 
     const page = data.page[0];
+
     return {
       title: `${page?.seo?.metaTitle ? page?.seo?.metaTitle : page?.title} | ${config.COMPANY_NAME}`,
-      description: page?.seo?.metaDesc ?? "",
+      description:
+        page?.seo?.metaDesc ??
+        "Safe Haven Day Nursery | Mansfield Woodhouse &amp; South Normanton",
       // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
       openGraph: {
         title: page?.seo?.metaTitle ?? config.COMPANY_NAME,

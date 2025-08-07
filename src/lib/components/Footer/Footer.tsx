@@ -95,6 +95,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                 <Typography
                   variant={TypeVariant.H4}
                   component={TypeComponent.p}
+                  bold
                 >
                   Keeping up to date with your child&lsquo;s progress
                 </Typography>

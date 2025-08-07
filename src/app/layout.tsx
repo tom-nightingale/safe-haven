@@ -1,5 +1,4 @@
 import React from "react";
-import type { Metadata } from "next";
 import { literataSerif, interSans } from "@/utils/fonts";
 import "@/styles/globals.css";
 import { ViewTransitions } from "next-view-transitions";
@@ -19,15 +18,6 @@ import Header from "@/components/Header/Header";
 
 import Footer from "@/components/Footer/Footer";
 import { GlobalContextProvider } from "@/context/GlobalContext";
-
-export const metadata: Metadata = {
-  title: {
-    template: `%s | ${config.COMPANY_NAME}`,
-    default: config.COMPANY_NAME,
-  },
-  description:
-    "Safe Haven Day Nursery | Mansfield Woodhouse &amp; South Normanton",
-};
 
 const GetNav = async (navId: string) => {
   try {

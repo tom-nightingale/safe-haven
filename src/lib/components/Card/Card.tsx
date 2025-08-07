@@ -49,7 +49,9 @@ const CardInner = ({
       className={`group relative flex flex-col overflow-hidden rounded-3xl text-white ${containerClass} h-full`}
     >
       <div className="relative flex aspect-[2/1.5] items-start justify-center overflow-hidden bg-white">
-        <div className="h-full w-full transition-all duration-200 group-hover:scale-105">
+        <div
+          className={`h-full w-full transition-all duration-200 ${href || modalContent ? "group-hover:scale-105" : ""}`}
+        >
           {image && (
             <SanityImage
               image={image?.image}

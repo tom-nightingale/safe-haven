@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import Typography, {
   TypeVariant,
   TypeComponent,
@@ -11,6 +12,10 @@ import { CardImageType } from "@/utils/propTypes";
 import ScallopedTop from "@/components/ScallopedTop/ScallopedTop";
 import JigsawSvg from "@/icons/jigsawSvg";
 import MobileSvg from "@/icons/mobileSvg";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 type Card = {
   href: string;
@@ -50,13 +55,39 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
 
   const cardLayout = cards && cards?.length % 5 === 0 ? "slim" : "default";
 
+  const cardContainer = useRef(null);
+  gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+  useGSAP(
+    () => {
+      const boxes = gsap.utils.toArray(".box");
+      boxes.forEach((box: any, i: number) => {
+        gsap.fromTo(
+          box,
+          { y: 50 },
+          {
+            duration: 0.4,
+            delay: i / 20,
+            y: 0,
+            ease: "back.out(2)",
+            scrollTrigger: {
+              trigger: box,
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+    },
+    { scope: cardContainer },
+  );
+
   return (
     <div className="relative">
       {scallopedTop ? (
         <>
           <ScallopedTop>
             <Container>
-              <div className="relative z-1 py-4">
+              <div className="relative z-1 py-4" ref={cardContainer}>
                 {(title || subtitle) && (
                   <div className="flex flex-col justify-center gap-6 text-center">
                     <Typography
@@ -74,26 +105,27 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                     </Typography>
                   </div>
                 )}
-
                 {cards && (
                   <div
                     className={`mx-auto grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 ${cardLayout === "slim" ? "xl:grid-cols-5" : "xl:grid-cols-4"}`}
                   >
                     {cards.map((card, i) => {
                       return (
-                        <Card
-                          key={card?.title}
-                          buttonText={card?.link?.label}
-                          href={card?.link?.href}
-                          title={card?.title}
-                          subtitle={card?.subtitle}
-                          image={card?.image}
-                          containerClass={bgColors[i] || "bg-blue"}
-                          buttonClass={
-                            buttonClasses[i] || "button-outline-blue text-blue"
-                          }
-                          shadowClass={shadowClasses[i] || "bg-blue/10"}
-                        />
+                        <div className="box" key={card?.title}>
+                          <Card
+                            buttonText={card?.link?.label}
+                            href={card?.link?.href}
+                            title={card?.title}
+                            subtitle={card?.subtitle}
+                            image={card?.image}
+                            containerClass={bgColors[i] || "bg-blue"}
+                            buttonClass={
+                              buttonClasses[i] ||
+                              "button-outline-blue text-blue"
+                            }
+                            shadowClass={shadowClasses[i] || "bg-blue/10"}
+                          />
+                        </div>
                       );
                     })}
                   </div>
@@ -103,7 +135,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
           </ScallopedTop>
         </>
       ) : (
-        <div className="relative z-1 py-10 xl:py-15">
+        <div className="relative z-1 py-10 xl:py-15" ref={cardContainer}>
           <Container>
             {(title || subtitle) && (
               <div className="flex flex-col justify-center gap-6 text-center">
@@ -129,20 +161,21 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
               >
                 {cards.map((card, i) => {
                   return (
-                    <Card
-                      key={card?.title}
-                      buttonText={card?.link?.label}
-                      href={card?.link?.href}
-                      title={card?.title}
-                      subtitle={card?.subtitle}
-                      image={card?.image}
-                      containerClass={bgColors[i] || "bg-blue"}
-                      buttonClass={
-                        buttonClasses[i] || "button-outline-blue text-blue"
-                      }
-                      shadowClass={shadowClasses[i] || "bg-blue/10"}
-                      slim={cardLayout === "slim"}
-                    />
+                    <div className="box" key={card?.title}>
+                      <Card
+                        buttonText={card?.link?.label}
+                        href={card?.link?.href}
+                        title={card?.title}
+                        subtitle={card?.subtitle}
+                        image={card?.image}
+                        containerClass={bgColors[i] || "bg-blue"}
+                        buttonClass={
+                          buttonClasses[i] || "button-outline-blue text-blue"
+                        }
+                        shadowClass={shadowClasses[i] || "bg-blue/10"}
+                        slim={cardLayout === "slim"}
+                      />
+                    </div>
                   );
                 })}
               </div>

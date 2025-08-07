@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import FancyLink from "@/components/FancyLink/FancyLink";
 import { type NavigationSection, Maybe } from "@/gql/sanity/codegen";
 import gsap from "gsap";
@@ -24,8 +24,6 @@ const NavSection = ({
 
   gsap.registerPlugin(useGSAP);
   const subnav = useRef(null);
-
-  const [isHovered, setIsHovered] = useState(false);
 
   useGSAP(
     () => {
@@ -54,10 +52,6 @@ const NavSection = ({
 
   return (
     <>
-      {/* <div
-        className={`pointer-events-none absolute top-0 left-0 z-10 min-h-screen w-full transition-all duration-300 ${isHovered ? "bg-peach/5" : "bg-transparent"}`}
-      ></div> */}
-
       <div
         className="relative z-20 transition-opacity duration-200 group-hover:opacity-70 hover:!opacity-100"
         key={target?.slug?.current}
@@ -67,11 +61,9 @@ const NavSection = ({
               ? section.target.title
               : null,
           );
-          setIsHovered(true);
         }}
         onMouseLeave={() => {
           setActiveSectionKey(null);
-          setIsHovered(false);
         }}
       >
         {target?.slug?.current && (

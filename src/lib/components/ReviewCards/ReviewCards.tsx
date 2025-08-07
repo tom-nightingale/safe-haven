@@ -28,12 +28,12 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
   const { reviews } = useGlobalContext();
 
   return (
-    <div className="relative">
+    <div className="relative z-1">
       {scallopedBottom ? (
         <>
           <ScallopedBottom>
             <Container>
-              <div className="relative z-1 mx-auto w-full py-12">
+              <div className="relative z-10 mx-auto w-full py-12">
                 <Typography
                   variant={TypeVariant.H3}
                   component={TypeComponent.h2}
@@ -78,10 +78,9 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                     </Swiper>
                   </div>
                 )}
-
-                <RabbitSvg classes="absolute top-[0%] right-[5%] pointer-events-none" />
-                <TrainSvg classes="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
               </div>
+              <RabbitSvg classes="absolute top-[0%] right-[5%] pointer-events-none" />
+              <TrainSvg classes="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
             </Container>
           </ScallopedBottom>
         </>
@@ -127,10 +126,10 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                 </Swiper>
               </div>
             )}
-
-            <RabbitSvg classes="absolute top-[0%] right-[5%] pointer-events-none" />
-            <TrainSvg classes="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
           </div>
+
+          <RabbitSvg classes="absolute z-0 top-[0%] right-[5%] pointer-events-none" />
+          <TrainSvg classes="absolute z-0 top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
         </Container>
       )}
     </div>

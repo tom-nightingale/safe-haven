@@ -7,7 +7,9 @@ import Typography, {
 // import Container from "@/components/Container/Container";
 import Card from "@/components/Card/Card";
 import Button from "@/components/Button/Button";
-import type { Staff, Maybe, Link } from "@/gql/sanity/codegen";
+import type { Staff, Maybe, Link, ImageBlock } from "@/gql/sanity/codegen";
+import SanityImage from "@/components/SanityImage/SanityImage";
+
 import type { TypedObject } from "@portabletext/types";
 import { PortableText } from "@portabletext/react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -26,6 +28,13 @@ type Props = {
   profiles?: Maybe<Maybe<Staff>[]> | undefined | null;
 };
 
+type ProfileContent = {
+  name: string | null;
+  jobTitle: string | null;
+  biography: TypedObject | TypedObject[] | null;
+  image: Maybe<ImageBlock>;
+};
+
 const MeetTheTeam = ({
   title = "Meet The Team",
   text,
@@ -40,8 +49,23 @@ const MeetTheTeam = ({
   ];
 
   const [showModal, setShowModal] = useState(false);
+  const [profileContent, setProfileContent] = useState<ProfileContent>({
+    name: null,
+    jobTitle: null,
+    biography: null,
+    image: null,
+  });
 
-  const toggleModal = () => {
+  const toggleModal = ({
+    name,
+    jobTitle,
+    biography,
+    image,
+  }: ProfileContent): void => {
+    console.log(name, jobTitle, image);
+
+    setProfileContent({ name, jobTitle, biography, image });
+
     setShowModal(!showModal);
     if (!showModal) {
       document.body.classList.add("locked");
@@ -140,7 +164,14 @@ const MeetTheTeam = ({
                         }
                         imageFit="contain"
                         modalContent={profile?.biographyRaw}
-                        toggleModal={toggleModal}
+                        toggleModal={() =>
+                          toggleModal({
+                            name: profile?.name || null,
+                            jobTitle: profile?.jobTitle || null,
+                            biography: profile?.biographyRaw || null,
+                            image: profile?.profileImage ?? null,
+                          })
+                        }
                       />
                     </SwiperSlide>
                   );
@@ -149,28 +180,56 @@ const MeetTheTeam = ({
 
               {showModal &&
                 createPortal(
-                  <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/80 p-8">
-                    <div className="rounded-3xl bg-white p-4">
-                      <button className="cursor-pointer" onClick={toggleModal}>
+                  <div className="fixed top-0 left-0 z-50 flex h-full w-full justify-center bg-black/80 p-8">
+                    <div className="bg-cream relative flex max-h-min w-full max-w-100 flex-col items-center gap-6 overflow-scroll rounded-3xl px-8 pt-16 pb-8">
+                      <button
+                        className="absolute top-6 right-6 cursor-pointer"
+                        onClick={() =>
+                          toggleModal({
+                            name: null,
+                            jobTitle: null,
+                            biography: null,
+                            image: null,
+                          })
+                        }
+                      >
                         <FaTimes />
                       </button>
 
-                      <Typography
-                        variant={TypeVariant.H4}
-                        component={TypeComponent.p}
-                        bold
-                      >
-                        Name
-                      </Typography>
+                      <div className="border-taupe relative aspect-square min-h-40 min-w-40 overflow-hidden rounded-full border-2 bg-white p-2">
+                        <SanityImage
+                          image={profileContent?.image?.image}
+                          alt={profileContent?.name ?? ""}
+                          loading="lazy"
+                          objectFit="scale-down"
+                          classes="mt-2"
+                        />
+                      </div>
 
-                      <Typography
-                        variant={TypeVariant.H4}
-                        component={TypeComponent.p}
-                      >
-                        Job title
-                      </Typography>
+                      <div className="flex flex-col items-center gap-1">
+                        <Typography
+                          variant={TypeVariant.H4}
+                          component={TypeComponent.p}
+                          bold
+                        >
+                          {profileContent?.name}
+                        </Typography>
 
-                      <BlockContent content={[]} />
+                        <Typography
+                          variant={TypeVariant.H4}
+                          component={TypeComponent.p}
+                        >
+                          {profileContent?.jobTitle}
+                        </Typography>
+
+                        {profileContent?.biography && (
+                          <div className="mt-4 text-center">
+                            <BlockContent
+                              content={profileContent?.biography ?? []}
+                            />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>,
                   document.body,

@@ -65,6 +65,7 @@ const Locations = ({ title, text }: Props) => {
                       <Typography
                         variant={TypeVariant.H4}
                         component={TypeComponent.p}
+                        bold
                       >
                         {nursery.title}
                       </Typography>
