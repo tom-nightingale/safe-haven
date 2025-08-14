@@ -2,17 +2,21 @@
 
 import { type ReactElement } from "react";
 import FancyLink from "@/components/FancyLink/FancyLink";
+import Typography, { TypeVariant } from "@/components/Typography/Typography";
+import type { Maybe } from "@/gql/sanity/codegen";
 
 type Props = {
-  label?: string;
+  label?: string | Maybe<string>;
   iconOnly?: boolean;
   icon?: ReactElement;
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
   outlined?: boolean;
   classes?: string;
-  href?: string;
+  href?: string | Maybe<string>;
   newTab?: boolean;
+  variant?: TypeVariant;
+  typeClasses?: string;
   onClick?: () => void;
 };
 
@@ -26,6 +30,8 @@ const Button = ({
   classes,
   href,
   newTab = false,
+  variant = TypeVariant.Button1,
+  typeClasses = "",
   onClick,
 }: Props) => {
   return (
@@ -39,16 +45,13 @@ const Button = ({
             className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
             onClick={onClick}
           >
-            {iconOnly && (
-              <span className="aspect-square opacity-50">{icon}</span>
-            )}
-
+            {iconOnly && <span className="aspect-square">{icon}</span>}
             {!iconOnly && (
               <>
-                {iconLeft && <span className="opacity-50">{iconLeft}</span>}
-                {label}
+                {iconLeft && <span className="">{iconLeft}</span>}
+                <Typography variant={variant}>{label}</Typography>
                 {iconRight && (
-                  <span className="text-dark-green opacity-50">
+                  <span className="text-dark-green block text-center">
                     {iconRight}
                   </span>
                 )}
@@ -57,19 +60,17 @@ const Button = ({
           </a>
         ) : (
           <FancyLink url={href}>
-            <button
-              className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
-            >
-              {iconOnly && (
-                <span className="aspect-square opacity-50">{icon}</span>
-              )}
+            <button className={`button ${classes ?? ""}`}>
+              {iconOnly && <span className="aspect-square">{icon}</span>}
 
               {!iconOnly && (
                 <>
-                  {iconLeft && <span className="opacity-50">{iconLeft}</span>}
-                  {label}
+                  {iconLeft && <span className="">{iconLeft}</span>}
+                  <Typography classes={typeClasses} variant={variant}>
+                    {label}
+                  </Typography>
                   {iconRight && (
-                    <span className="text-dark-green opacity-50">
+                    <span className="block text-center text-inherit opacity-50">
                       {iconRight}
                     </span>
                   )}
@@ -84,18 +85,15 @@ const Button = ({
           onClick={onClick}
           className={`group button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
         >
-          {iconOnly && (
-            <span className="block aspect-square opacity-50 transition-all duration-300 will-change-transform group-hover:-rotate-360">
-              {icon}
-            </span>
-          )}
-
+          {iconOnly && <span className="block aspect-square">{icon}</span>}
           {!iconOnly && (
             <>
-              {iconLeft && <span className="opacity-50">{iconLeft}</span>}
-              {label}
+              {iconLeft && <span className="">{iconLeft}</span>}
+              <Typography variant={variant}>{label}</Typography>
               {iconRight && (
-                <span className="text-dark-green opacity-50">{iconRight}</span>
+                <span className="text-dark-green block text-center">
+                  {iconRight}
+                </span>
               )}
             </>
           )}

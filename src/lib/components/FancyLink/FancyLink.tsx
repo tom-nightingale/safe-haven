@@ -4,12 +4,14 @@ import React from "react";
 import Link from "next/link";
 import { useTransitionRouter } from "next-view-transitions";
 import { usePathname } from "next/navigation";
+import { Maybe } from "@/gql/sanity/codegen";
 
 type Props = {
   children: React.ReactNode;
-  url: string;
+  url?: string | Maybe<string>;
+  onClick?: () => void; // Make onClick optional
 };
-const FancyLink = ({ children, url }: Props) => {
+const FancyLink = ({ children, url, onClick }: Props) => {
   const router = useTransitionRouter();
   const pathname = usePathname();
   return (
@@ -17,12 +19,17 @@ const FancyLink = ({ children, url }: Props) => {
       onClick={e => {
         e.preventDefault();
         if (pathname !== url) {
-          router.push(url, {
-            onTransitionReady: pageAnimation,
-          });
+          if (url)
+            router.push(url, {
+              onTransitionReady: pageAnimation,
+            });
+        }
+        // pass the click function to parent component
+        if (onClick) {
+          onClick(); // Call the optional click function
         }
       }}
-      href="/"
+      href={url ?? ""}
     >
       {children}
     </Link>

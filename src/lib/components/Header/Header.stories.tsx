@@ -25,11 +25,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/* eslint-disable */
 export const Primary: Story = {
   args: {
     primaryNav: primaryNav,
     secondaryNav: secondaryNav,
   },
 };
-/* eslint-enable */

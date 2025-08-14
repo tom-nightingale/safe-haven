@@ -15,6 +15,8 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+const plugin = await import("@typescript-eslint/eslint-plugin");
+
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
@@ -34,21 +36,28 @@ const eslintConfig = [
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: "module",
-      // globals: {
-      //   ...globals.browser,
-      //   ...globals.es2017,
-      //   ...globals.node,
-      // },
       parser: tsParser,
       parserOptions: {
         project: "./tsconfig.json",
-        // extraFileExtensions: [".svelte"],
       },
     },
+    plugins: {
+      "@typescript-eslint": plugin.default,
+    },
     rules: {
+      // Disable base rule, enable TS-aware rule
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          vars: "all",
+          args: "after-used",
+          ignoreRestSiblings: true,
+          varsIgnorePattern: "^_",
+        },
+      ],
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-expressions": "off",
-      // "svelte/no-at-html-tags": "off",
     },
   },
   ...storybook.configs["flat/recommended"],

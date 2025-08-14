@@ -100,6 +100,76 @@ export type BooleanFilter = {
   neq?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+export type CardList = {
+  __typename?: "CardList";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  cards?: Maybe<Array<Maybe<CardListCard>>>;
+  /** Does this block need a scalloped top? */
+  scallopedTop?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Subtitle */
+  subtitle?: Maybe<Scalars["String"]["output"]>;
+  /** Title */
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type CardListCard = {
+  __typename?: "CardListCard";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  image?: Maybe<ImageBlock>;
+  link?: Maybe<Link>;
+  /** Subtitle of the card */
+  subtitle?: Maybe<Scalars["String"]["output"]>;
+  /** Title of the card */
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type CardListCardFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageBlockFilter>;
+  link?: InputMaybe<LinkFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type CardListCardSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  image?: InputMaybe<ImageBlockSorting>;
+  link?: InputMaybe<LinkSorting>;
+  subtitle?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+};
+
+export type CardListFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  scallopedTop?: InputMaybe<BooleanFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type CardListOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage =
+
+    | CardList
+    | Gallery
+    | Hero
+    | LocationDetails
+    | ReviewsCarousel
+    | SimpleHero
+    | StaffCards
+    | TextWithImage;
+
+export type CardListSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  scallopedTop?: InputMaybe<SortOrder>;
+  subtitle?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+};
+
 export type Carousel = {
   __typename?: "Carousel";
   _key?: Maybe<Scalars["String"]["output"]>;
@@ -157,9 +227,6 @@ export type CarouselFilter = {
   title?: InputMaybe<StringFilter>;
 };
 
-export type CarouselOrHeroOrSpacerOrTextWithCtaOrTextWithImageOrTwoImageHeroOrVideo =
-  Carousel | Hero | Spacer | TextWithCta | TextWithImage | TwoImageHero | Video;
-
 export type CarouselSorting = {
   _key?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
@@ -200,26 +267,7 @@ export type CategoryFilter = {
   title?: InputMaybe<StringFilter>;
 };
 
-export type CategoryOrPage = Category | Page;
-
-export type CategorySlug = {
-  __typename?: "CategorySlug";
-  _key?: Maybe<Scalars["String"]["output"]>;
-  _type?: Maybe<Scalars["String"]["output"]>;
-  value?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type CategorySlugFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  value?: InputMaybe<StringFilter>;
-};
-
-export type CategorySlugSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  value?: InputMaybe<SortOrder>;
-};
+export type CategoryOrNurseryOrPage = Category | Nursery | Page;
 
 export type CategorySorting = {
   _createdAt?: InputMaybe<SortOrder>;
@@ -239,7 +287,7 @@ export type ContentBlocks = {
   _type?: Maybe<Scalars["String"]["output"]>;
   contentblocks?: Maybe<
     Array<
-      Maybe<CarouselOrHeroOrSpacerOrTextWithCtaOrTextWithImageOrTwoImageHeroOrVideo>
+      Maybe<CardListOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage>
     >
   >;
 };
@@ -363,6 +411,7 @@ export type Feedback = Document & {
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   contentRaw?: Maybe<Scalars["JSON"]["output"]>;
   name?: Maybe<Scalars["String"]["output"]>;
+  starRating?: Maybe<Scalars["Float"]["output"]>;
 };
 
 export type FeedbackFilter = {
@@ -375,6 +424,7 @@ export type FeedbackFilter = {
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
   name?: InputMaybe<StringFilter>;
+  starRating?: InputMaybe<FloatFilter>;
 };
 
 export type FeedbackSorting = {
@@ -385,6 +435,7 @@ export type FeedbackSorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  starRating?: InputMaybe<SortOrder>;
 };
 
 export type File = {
@@ -420,6 +471,31 @@ export type FloatFilter = {
   lte?: InputMaybe<Scalars["Float"]["input"]>;
   /** Checks if the value is not equal to the given input. */
   neq?: InputMaybe<Scalars["Float"]["input"]>;
+};
+
+export type Gallery = {
+  __typename?: "Gallery";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  images?: Maybe<Array<Maybe<ImageBlock>>>;
+  /** Does this block need a scalloped bottom? */
+  scallopedBottom?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Does this block need a scalloped top? */
+  scallopedTop?: Maybe<Scalars["Boolean"]["output"]>;
+};
+
+export type GalleryFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  scallopedBottom?: InputMaybe<BooleanFilter>;
+  scallopedTop?: InputMaybe<BooleanFilter>;
+};
+
+export type GallerySorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  scallopedBottom?: InputMaybe<SortOrder>;
+  scallopedTop?: InputMaybe<SortOrder>;
 };
 
 export type Geopoint = {
@@ -504,31 +580,51 @@ export type Hero = {
   __typename?: "Hero";
   _key?: Maybe<Scalars["String"]["output"]>;
   _type?: Maybe<Scalars["String"]["output"]>;
-  /** The text colour theme to use */
+  /** Age group */
+  ageGroup?: Maybe<Scalars["String"]["output"]>;
+  buttons?: Maybe<Array<Maybe<Link>>>;
+  heroCards?: Maybe<Array<Maybe<HeroCard>>>;
+  heroImage?: Maybe<ImageBlock>;
+  subtitleRaw?: Maybe<Scalars["JSON"]["output"]>;
+  titleRaw?: Maybe<Scalars["JSON"]["output"]>;
+};
+
+export type HeroCard = {
+  __typename?: "HeroCard";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Subtitle */
   colourTheme?: Maybe<Scalars["String"]["output"]>;
-  image?: Maybe<HeroImage>;
-  links?: Maybe<Array<Maybe<Link>>>;
-  mediaType?: Maybe<Scalars["String"]["output"]>;
+  link?: Maybe<Link>;
   /** Subtitle */
   subtitle?: Maybe<Scalars["String"]["output"]>;
-  /** Text alignment */
-  textAlignment?: Maybe<Scalars["String"]["output"]>;
-  textRaw?: Maybe<Scalars["JSON"]["output"]>;
   /** Title */
   title?: Maybe<Scalars["String"]["output"]>;
-  video?: Maybe<File>;
+};
+
+export type HeroCardFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  colourTheme?: InputMaybe<StringFilter>;
+  link?: InputMaybe<LinkFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type HeroCardSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  colourTheme?: InputMaybe<SortOrder>;
+  link?: InputMaybe<LinkSorting>;
+  subtitle?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
 export type HeroFilter = {
   _key?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
-  colourTheme?: InputMaybe<StringFilter>;
-  image?: InputMaybe<HeroImageFilter>;
-  mediaType?: InputMaybe<StringFilter>;
-  subtitle?: InputMaybe<StringFilter>;
-  textAlignment?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
-  video?: InputMaybe<FileFilter>;
+  ageGroup?: InputMaybe<StringFilter>;
+  heroImage?: InputMaybe<ImageBlockFilter>;
 };
 
 export type HeroImage = {
@@ -551,13 +647,8 @@ export type HeroImageSorting = {
 export type HeroSorting = {
   _key?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
-  colourTheme?: InputMaybe<SortOrder>;
-  image?: InputMaybe<HeroImageSorting>;
-  mediaType?: InputMaybe<SortOrder>;
-  subtitle?: InputMaybe<SortOrder>;
-  textAlignment?: InputMaybe<SortOrder>;
-  title?: InputMaybe<SortOrder>;
-  video?: InputMaybe<FileSorting>;
+  ageGroup?: InputMaybe<SortOrder>;
+  heroImage?: InputMaybe<ImageBlockSorting>;
 };
 
 export type HighlightColor = {
@@ -609,6 +700,8 @@ export type ImageBlock = {
   /** Alt text to use for the image */
   altText?: Maybe<Scalars["String"]["output"]>;
   image?: Maybe<Image>;
+  /** Label to use for the image */
+  label?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type ImageBlockFilter = {
@@ -616,6 +709,7 @@ export type ImageBlockFilter = {
   _type?: InputMaybe<StringFilter>;
   altText?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
+  label?: InputMaybe<StringFilter>;
 };
 
 export type ImageBlockSorting = {
@@ -623,6 +717,7 @@ export type ImageBlockSorting = {
   _type?: InputMaybe<SortOrder>;
   altText?: InputMaybe<SortOrder>;
   image?: InputMaybe<ImageSorting>;
+  label?: InputMaybe<SortOrder>;
 };
 
 export type ImageFilter = {
@@ -661,35 +756,44 @@ export type Link = {
   __typename?: "Link";
   _key?: Maybe<Scalars["String"]["output"]>;
   _type?: Maybe<Scalars["String"]["output"]>;
-  backgroundColour?: Maybe<SimplerColor>;
-  /** Use a dark text theme for CTA text? */
-  darkTextTheme?: Maybe<Scalars["Boolean"]["output"]>;
   /** Link destination */
   href?: Maybe<Scalars["String"]["output"]>;
   /** Label to use for the link */
   label?: Maybe<Scalars["String"]["output"]>;
-  /** Should this link open in new window */
-  targetBlank?: Maybe<Scalars["Boolean"]["output"]>;
 };
 
 export type LinkFilter = {
   _key?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
-  backgroundColour?: InputMaybe<SimplerColorFilter>;
-  darkTextTheme?: InputMaybe<BooleanFilter>;
   href?: InputMaybe<StringFilter>;
   label?: InputMaybe<StringFilter>;
-  targetBlank?: InputMaybe<BooleanFilter>;
 };
 
 export type LinkSorting = {
   _key?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
-  backgroundColour?: InputMaybe<SimplerColorSorting>;
-  darkTextTheme?: InputMaybe<SortOrder>;
   href?: InputMaybe<SortOrder>;
   label?: InputMaybe<SortOrder>;
-  targetBlank?: InputMaybe<SortOrder>;
+};
+
+export type LocationDetails = {
+  __typename?: "LocationDetails";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Text */
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type LocationDetailsFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type LocationDetailsSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
 export type Navigation = Document & {
@@ -729,7 +833,7 @@ export type NavigationLink = {
   _type?: Maybe<Scalars["String"]["output"]>;
   children?: Maybe<Array<Maybe<NavigationLink>>>;
   /** Description */
-  target?: Maybe<CategoryOrPage>;
+  target?: Maybe<CategoryOrNurseryOrPage>;
   /** Override title from the target. */
   title?: Maybe<Scalars["String"]["output"]>;
 };
@@ -793,8 +897,14 @@ export type Nursery = Document & {
   _type?: Maybe<Scalars["String"]["output"]>;
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  address?: Maybe<Scalars["String"]["output"]>;
   contentRaw?: Maybe<Scalars["JSON"]["output"]>;
+  directionsLink?: Maybe<Scalars["String"]["output"]>;
+  email?: Maybe<Scalars["String"]["output"]>;
+  location?: Maybe<Scalars["String"]["output"]>;
+  mapsLink?: Maybe<Scalars["String"]["output"]>;
   orderRank?: Maybe<Scalars["String"]["output"]>;
+  phoneNumber?: Maybe<Scalars["String"]["output"]>;
   seo?: Maybe<Seo>;
   slug?: Maybe<Slug>;
   title?: Maybe<Scalars["String"]["output"]>;
@@ -809,7 +919,13 @@ export type NurseryFilter = {
   _rev?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
+  address?: InputMaybe<StringFilter>;
+  directionsLink?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  location?: InputMaybe<StringFilter>;
+  mapsLink?: InputMaybe<StringFilter>;
   orderRank?: InputMaybe<StringFilter>;
+  phoneNumber?: InputMaybe<StringFilter>;
   seo?: InputMaybe<SeoFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
@@ -822,7 +938,13 @@ export type NurserySorting = {
   _rev?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
+  address?: InputMaybe<SortOrder>;
+  directionsLink?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
+  location?: InputMaybe<SortOrder>;
+  mapsLink?: InputMaybe<SortOrder>;
   orderRank?: InputMaybe<SortOrder>;
+  phoneNumber?: InputMaybe<SortOrder>;
   seo?: InputMaybe<SeoSorting>;
   slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
@@ -842,10 +964,9 @@ export type Page = Document & {
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   contentBlocks?: Maybe<ContentBlocks>;
-  orderRank?: Maybe<Scalars["String"]["output"]>;
+  pageType?: Maybe<Scalars["String"]["output"]>;
   seo?: Maybe<Seo>;
   slug?: Maybe<Slug>;
-  subtitle?: Maybe<Scalars["String"]["output"]>;
   title?: Maybe<Scalars["String"]["output"]>;
 };
 
@@ -859,10 +980,9 @@ export type PageFilter = {
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
   contentBlocks?: InputMaybe<ContentBlocksFilter>;
-  orderRank?: InputMaybe<StringFilter>;
+  pageType?: InputMaybe<StringFilter>;
   seo?: InputMaybe<SeoFilter>;
   slug?: InputMaybe<SlugFilter>;
-  subtitle?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
@@ -874,10 +994,9 @@ export type PageSorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   contentBlocks?: InputMaybe<ContentBlocksSorting>;
-  orderRank?: InputMaybe<SortOrder>;
+  pageType?: InputMaybe<SortOrder>;
   seo?: InputMaybe<SeoSorting>;
   slug?: InputMaybe<SlugSorting>;
-  subtitle?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
 };
 
@@ -932,6 +1051,34 @@ export type PostSorting = {
   orderRank?: InputMaybe<SortOrder>;
   seo?: InputMaybe<SeoSorting>;
   slug?: InputMaybe<SlugSorting>;
+  title?: InputMaybe<SortOrder>;
+};
+
+export type ReviewsCarousel = {
+  __typename?: "ReviewsCarousel";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Does this block need a scalloped bottom? */
+  scallopedBottom?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Does this block need a scalloped top? */
+  scallopedTop?: Maybe<Scalars["Boolean"]["output"]>;
+  /** title */
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type ReviewsCarouselFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  scallopedBottom?: InputMaybe<BooleanFilter>;
+  scallopedTop?: InputMaybe<BooleanFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type ReviewsCarouselSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  scallopedBottom?: InputMaybe<SortOrder>;
+  scallopedTop?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
 };
 
@@ -1498,6 +1645,35 @@ export type SeoSorting = {
   shareGraphic?: InputMaybe<ImageSorting>;
 };
 
+export type SimpleHero = {
+  __typename?: "SimpleHero";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  buttons?: Maybe<Array<Maybe<Link>>>;
+  /** Subtitle */
+  subtitle?: Maybe<Scalars["String"]["output"]>;
+  /** Title */
+  title?: Maybe<Scalars["String"]["output"]>;
+  /** Top Line */
+  topLine?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type SimpleHeroFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  topLine?: InputMaybe<StringFilter>;
+};
+
+export type SimpleHeroSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  subtitle?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  topLine?: InputMaybe<SortOrder>;
+};
+
 export type SimplerColor = {
   __typename?: "SimplerColor";
   _key?: Maybe<Scalars["String"]["output"]>;
@@ -1549,26 +1725,6 @@ export enum SortOrder {
   Desc = "DESC",
 }
 
-export type Spacer = {
-  __typename?: "Spacer";
-  _key?: Maybe<Scalars["String"]["output"]>;
-  _type?: Maybe<Scalars["String"]["output"]>;
-  /** Size of the spacer to be used */
-  spacerSize?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type SpacerFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  spacerSize?: InputMaybe<StringFilter>;
-};
-
-export type SpacerSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  spacerSize?: InputMaybe<SortOrder>;
-};
-
 export type Span = {
   __typename?: "Span";
   _key?: Maybe<Scalars["String"]["output"]>;
@@ -1596,6 +1752,30 @@ export type Staff = Document & {
   nursery?: Maybe<Scalars["String"]["output"]>;
   orderRank?: Maybe<Scalars["String"]["output"]>;
   profileImage?: Maybe<ImageBlock>;
+  room?: Maybe<Page>;
+};
+
+export type StaffCards = {
+  __typename?: "StaffCards";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  links?: Maybe<Array<Maybe<Link>>>;
+  staffProfiles?: Maybe<Array<Maybe<Staff>>>;
+  textRaw?: Maybe<Scalars["JSON"]["output"]>;
+  /** Title */
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type StaffCardsFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type StaffCardsSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
 export type StaffFilter = {
@@ -1612,6 +1792,7 @@ export type StaffFilter = {
   nursery?: InputMaybe<StringFilter>;
   orderRank?: InputMaybe<StringFilter>;
   profileImage?: InputMaybe<ImageBlockFilter>;
+  room?: InputMaybe<PageFilter>;
 };
 
 export type StaffSorting = {
@@ -1663,131 +1844,29 @@ export type TextColorSorting = {
   value?: InputMaybe<SortOrder>;
 };
 
-export type TextWithCta = {
-  __typename?: "TextWithCta";
-  _key?: Maybe<Scalars["String"]["output"]>;
-  _type?: Maybe<Scalars["String"]["output"]>;
-  links?: Maybe<Array<Maybe<Link>>>;
-  /** Text alignment */
-  textAlignment?: Maybe<Scalars["String"]["output"]>;
-  textRaw?: Maybe<Scalars["JSON"]["output"]>;
-  /** Title */
-  title?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type TextWithCtaFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  textAlignment?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
-};
-
-export type TextWithCtaSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  textAlignment?: InputMaybe<SortOrder>;
-  title?: InputMaybe<SortOrder>;
-};
-
 export type TextWithImage = {
   __typename?: "TextWithImage";
   _key?: Maybe<Scalars["String"]["output"]>;
   _type?: Maybe<Scalars["String"]["output"]>;
-  /** The text colour theme to use */
-  colourTheme?: Maybe<Scalars["String"]["output"]>;
   image?: Maybe<ImageBlock>;
   links?: Maybe<Array<Maybe<Link>>>;
-  /** Text alignment */
-  textAlignment?: Maybe<Scalars["String"]["output"]>;
+  /** Does this block need a scalloped top? */
+  scallopedTop?: Maybe<Scalars["Boolean"]["output"]>;
   textRaw?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type TextWithImageFilter = {
   _key?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
-  colourTheme?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageBlockFilter>;
-  textAlignment?: InputMaybe<StringFilter>;
+  scallopedTop?: InputMaybe<BooleanFilter>;
 };
 
 export type TextWithImageSorting = {
   _key?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
-  colourTheme?: InputMaybe<SortOrder>;
   image?: InputMaybe<ImageBlockSorting>;
-  textAlignment?: InputMaybe<SortOrder>;
-};
-
-export type TwoImageHero = {
-  __typename?: "TwoImageHero";
-  _key?: Maybe<Scalars["String"]["output"]>;
-  _type?: Maybe<Scalars["String"]["output"]>;
-  blocks?: Maybe<Array<Maybe<TwoImageHeroBlock>>>;
-};
-
-export type TwoImageHeroBlock = {
-  __typename?: "TwoImageHeroBlock";
-  _key?: Maybe<Scalars["String"]["output"]>;
-  _type?: Maybe<Scalars["String"]["output"]>;
-  image?: Maybe<ImageBlock>;
-  link?: Maybe<Link>;
-  /** Title of the block */
-  title?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type TwoImageHeroBlockFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  image?: InputMaybe<ImageBlockFilter>;
-  link?: InputMaybe<LinkFilter>;
-  title?: InputMaybe<StringFilter>;
-};
-
-export type TwoImageHeroBlockSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  image?: InputMaybe<ImageBlockSorting>;
-  link?: InputMaybe<LinkSorting>;
-  title?: InputMaybe<SortOrder>;
-};
-
-export type TwoImageHeroFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-};
-
-export type TwoImageHeroSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-};
-
-export type Video = {
-  __typename?: "Video";
-  _key?: Maybe<Scalars["String"]["output"]>;
-  _type?: Maybe<Scalars["String"]["output"]>;
-  coverImage?: Maybe<Image>;
-  /** Title */
-  title?: Maybe<Scalars["String"]["output"]>;
-  videoLg?: Maybe<File>;
-  videoSm?: Maybe<File>;
-};
-
-export type VideoFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  coverImage?: InputMaybe<ImageFilter>;
-  title?: InputMaybe<StringFilter>;
-  videoLg?: InputMaybe<FileFilter>;
-  videoSm?: InputMaybe<FileFilter>;
-};
-
-export type VideoSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  coverImage?: InputMaybe<ImageSorting>;
-  title?: InputMaybe<SortOrder>;
-  videoLg?: InputMaybe<FileSorting>;
-  videoSm?: InputMaybe<FileSorting>;
+  scallopedTop?: InputMaybe<SortOrder>;
 };
 
 export type ImageHotspotFragment = {
@@ -1854,9 +1933,21 @@ export type NavigationSectionFragment = {
     | Array<
         | {
             __typename?: "NavigationLink";
+            title?: string | null | undefined;
             target?:
               | {
                   __typename?: "Category";
+                  title?: string | null | undefined;
+                  slug?:
+                    | {
+                        __typename?: "Slug";
+                        current?: string | null | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | {
+                  __typename?: "Nursery";
                   title?: string | null | undefined;
                   slug?:
                     | {
@@ -1920,9 +2011,21 @@ export type GetNavigationByIdQuery = {
                     | Array<
                         | {
                             __typename?: "NavigationLink";
+                            title?: string | null | undefined;
                             target?:
                               | {
                                   __typename?: "Category";
+                                  title?: string | null | undefined;
+                                  slug?:
+                                    | {
+                                        __typename?: "Slug";
+                                        current?: string | null | undefined;
+                                      }
+                                    | null
+                                    | undefined;
+                                }
+                              | {
+                                  __typename?: "Nursery";
                                   title?: string | null | undefined;
                                   slug?:
                                     | {
@@ -1962,16 +2065,20 @@ export type GetNavigationByIdQuery = {
     | undefined;
 };
 
-export type GetPageBySlugQueryVariables = Exact<{
+export type GetCategoryBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars["String"]["input"]>;
 }>;
 
-export type GetPageBySlugQuery = {
+export type GetCategoryBySlugQuery = {
   __typename?: "RootQuery";
-  allPage: Array<{
-    __typename?: "Page";
-    _type?: string | null | undefined;
+  allCategory: Array<{
+    __typename?: "Category";
+    _id?: string | null | undefined;
     title?: string | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
     seo?:
       | {
           __typename?: "Seo";
@@ -1993,23 +2100,6 @@ export type GetPageBySlugQuery = {
             | null
             | undefined;
         }
-      | null
-      | undefined;
-  }>;
-};
-
-export type GetCategoryBySlugQueryVariables = Exact<{
-  slug?: InputMaybe<Scalars["String"]["input"]>;
-}>;
-
-export type GetCategoryBySlugQuery = {
-  __typename?: "RootQuery";
-  allCategory: Array<{
-    __typename?: "Category";
-    _id?: string | null | undefined;
-    title?: string | null | undefined;
-    slug?:
-      | { __typename?: "Slug"; current?: string | null | undefined }
       | null
       | undefined;
   }>;
@@ -2058,6 +2148,29 @@ export type GetPostBySlugQuery = {
     title?: string | null | undefined;
     contentRaw?: any | null | undefined;
     _createdAt?: any | null | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
   }>;
 };
 
@@ -2083,6 +2196,29 @@ export type GetPostsByCategoryQuery = {
       | undefined;
     slug?:
       | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
       | null
       | undefined;
   }>;
@@ -2137,6 +2273,563 @@ export type GetAllStaffQuery = {
                       bottom?: number | null | undefined;
                       left?: number | null | undefined;
                       right?: number | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetAllFeedbackQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllFeedbackQuery = {
+  __typename?: "RootQuery";
+  allFeedback: Array<{
+    __typename?: "Feedback";
+    _id?: string | null | undefined;
+    name?: string | null | undefined;
+    starRating?: number | null | undefined;
+    contentRaw?: any | null | undefined;
+  }>;
+};
+
+export type GetAllNurseriesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllNurseriesQuery = {
+  __typename?: "RootQuery";
+  allNursery: Array<{
+    __typename?: "Nursery";
+    _id?: string | null | undefined;
+    title?: string | null | undefined;
+    location?: string | null | undefined;
+    address?: string | null | undefined;
+    phoneNumber?: string | null | undefined;
+    email?: string | null | undefined;
+    directionsLink?: string | null | undefined;
+    mapsLink?: string | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetAllRoomsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllRoomsQuery = {
+  __typename?: "RootQuery";
+  allPage: Array<{
+    __typename?: "Page";
+    _id?: string | null | undefined;
+    title?: string | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetPageBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+}>;
+
+export type GetPageBySlugQuery = {
+  __typename?: "RootQuery";
+  staff: Array<{
+    __typename?: "Staff";
+    _id?: string | null | undefined;
+    name?: string | null | undefined;
+    jobTitle?: string | null | undefined;
+  }>;
+  page: Array<{
+    __typename?: "Page";
+    _id?: string | null | undefined;
+    _type?: string | null | undefined;
+    title?: string | null | undefined;
+    contentBlocks?:
+      | {
+          __typename?: "ContentBlocks";
+          contentblocks?:
+            | Array<
+                | {
+                    __typename?: "CardList";
+                    title?: string | null | undefined;
+                    subtitle?: string | null | undefined;
+                    scallopedTop?: boolean | null | undefined;
+                    cards?:
+                      | Array<
+                          | {
+                              __typename?: "CardListCard";
+                              title?: string | null | undefined;
+                              subtitle?: string | null | undefined;
+                              image?:
+                                | {
+                                    __typename?: "ImageBlock";
+                                    image?:
+                                      | {
+                                          __typename?: "Image";
+                                          asset?:
+                                            | {
+                                                __typename?: "SanityImageAsset";
+                                                url?: string | null | undefined;
+                                                altText?:
+                                                  | string
+                                                  | null
+                                                  | undefined;
+                                                metadata?:
+                                                  | {
+                                                      __typename?: "SanityImageMetadata";
+                                                      lqip?:
+                                                        | string
+                                                        | null
+                                                        | undefined;
+                                                    }
+                                                  | null
+                                                  | undefined;
+                                              }
+                                            | null
+                                            | undefined;
+                                          hotspot?:
+                                            | {
+                                                __typename?: "SanityImageHotspot";
+                                                x?: number | null | undefined;
+                                                y?: number | null | undefined;
+                                                width?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                                height?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                              }
+                                            | null
+                                            | undefined;
+                                          crop?:
+                                            | {
+                                                __typename?: "SanityImageCrop";
+                                                top?: number | null | undefined;
+                                                bottom?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                                left?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                                right?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                              }
+                                            | null
+                                            | undefined;
+                                        }
+                                      | null
+                                      | undefined;
+                                  }
+                                | null
+                                | undefined;
+                              link?:
+                                | {
+                                    __typename?: "Link";
+                                    label?: string | null | undefined;
+                                    href?: string | null | undefined;
+                                  }
+                                | null
+                                | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "Gallery";
+                    images?:
+                      | Array<
+                          | {
+                              __typename?: "ImageBlock";
+                              label?: string | null | undefined;
+                              altText?: string | null | undefined;
+                              image?:
+                                | {
+                                    __typename?: "Image";
+                                    _key?: string | null | undefined;
+                                    asset?:
+                                      | {
+                                          __typename?: "SanityImageAsset";
+                                          url?: string | null | undefined;
+                                          altText?: string | null | undefined;
+                                          metadata?:
+                                            | {
+                                                __typename?: "SanityImageMetadata";
+                                                lqip?:
+                                                  | string
+                                                  | null
+                                                  | undefined;
+                                              }
+                                            | null
+                                            | undefined;
+                                        }
+                                      | null
+                                      | undefined;
+                                    hotspot?:
+                                      | {
+                                          __typename?: "SanityImageHotspot";
+                                          x?: number | null | undefined;
+                                          y?: number | null | undefined;
+                                          width?: number | null | undefined;
+                                          height?: number | null | undefined;
+                                        }
+                                      | null
+                                      | undefined;
+                                    crop?:
+                                      | {
+                                          __typename?: "SanityImageCrop";
+                                          top?: number | null | undefined;
+                                          bottom?: number | null | undefined;
+                                          left?: number | null | undefined;
+                                          right?: number | null | undefined;
+                                        }
+                                      | null
+                                      | undefined;
+                                  }
+                                | null
+                                | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "Hero";
+                    titleRaw?: any | null | undefined;
+                    subtitleRaw?: any | null | undefined;
+                    heroImage?:
+                      | {
+                          __typename?: "ImageBlock";
+                          image?:
+                            | {
+                                __typename?: "Image";
+                                asset?:
+                                  | {
+                                      __typename?: "SanityImageAsset";
+                                      url?: string | null | undefined;
+                                      altText?: string | null | undefined;
+                                      metadata?:
+                                        | {
+                                            __typename?: "SanityImageMetadata";
+                                            lqip?: string | null | undefined;
+                                          }
+                                        | null
+                                        | undefined;
+                                    }
+                                  | null
+                                  | undefined;
+                                hotspot?:
+                                  | {
+                                      __typename?: "SanityImageHotspot";
+                                      x?: number | null | undefined;
+                                      y?: number | null | undefined;
+                                      width?: number | null | undefined;
+                                      height?: number | null | undefined;
+                                    }
+                                  | null
+                                  | undefined;
+                                crop?:
+                                  | {
+                                      __typename?: "SanityImageCrop";
+                                      top?: number | null | undefined;
+                                      bottom?: number | null | undefined;
+                                      left?: number | null | undefined;
+                                      right?: number | null | undefined;
+                                    }
+                                  | null
+                                  | undefined;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined;
+                    heroCards?:
+                      | Array<
+                          | {
+                              __typename?: "HeroCard";
+                              title?: string | null | undefined;
+                              subtitle?: string | null | undefined;
+                              colourTheme?: string | null | undefined;
+                              link?:
+                                | {
+                                    __typename?: "Link";
+                                    label?: string | null | undefined;
+                                    href?: string | null | undefined;
+                                  }
+                                | null
+                                | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                    buttons?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "LocationDetails";
+                    title?: string | null | undefined;
+                  }
+                | {
+                    __typename?: "ReviewsCarousel";
+                    scallopedTop?: boolean | null | undefined;
+                    scallopedBottom?: boolean | null | undefined;
+                    title?: string | null | undefined;
+                  }
+                | {
+                    __typename?: "SimpleHero";
+                    topLine?: string | null | undefined;
+                    title?: string | null | undefined;
+                    subtitle?: string | null | undefined;
+                    buttons?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "StaffCards";
+                    title?: string | null | undefined;
+                    textRaw?: any | null | undefined;
+                    links?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                    staffProfiles?:
+                      | Array<
+                          | {
+                              __typename?: "Staff";
+                              name?: string | null | undefined;
+                              jobTitle?: string | null | undefined;
+                              biographyRaw?: any | null | undefined;
+                              profileImage?:
+                                | {
+                                    __typename?: "ImageBlock";
+                                    image?:
+                                      | {
+                                          __typename?: "Image";
+                                          asset?:
+                                            | {
+                                                __typename?: "SanityImageAsset";
+                                                url?: string | null | undefined;
+                                                altText?:
+                                                  | string
+                                                  | null
+                                                  | undefined;
+                                                metadata?:
+                                                  | {
+                                                      __typename?: "SanityImageMetadata";
+                                                      lqip?:
+                                                        | string
+                                                        | null
+                                                        | undefined;
+                                                    }
+                                                  | null
+                                                  | undefined;
+                                              }
+                                            | null
+                                            | undefined;
+                                          hotspot?:
+                                            | {
+                                                __typename?: "SanityImageHotspot";
+                                                x?: number | null | undefined;
+                                                y?: number | null | undefined;
+                                                width?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                                height?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                              }
+                                            | null
+                                            | undefined;
+                                          crop?:
+                                            | {
+                                                __typename?: "SanityImageCrop";
+                                                top?: number | null | undefined;
+                                                bottom?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                                left?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                                right?:
+                                                  | number
+                                                  | null
+                                                  | undefined;
+                                              }
+                                            | null
+                                            | undefined;
+                                        }
+                                      | null
+                                      | undefined;
+                                  }
+                                | null
+                                | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "TextWithImage";
+                    scallopedTop?: boolean | null | undefined;
+                    textRaw?: any | null | undefined;
+                    links?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                    image?:
+                      | {
+                          __typename?: "ImageBlock";
+                          image?:
+                            | {
+                                __typename?: "Image";
+                                asset?:
+                                  | {
+                                      __typename?: "SanityImageAsset";
+                                      url?: string | null | undefined;
+                                      altText?: string | null | undefined;
+                                      metadata?:
+                                        | {
+                                            __typename?: "SanityImageMetadata";
+                                            lqip?: string | null | undefined;
+                                          }
+                                        | null
+                                        | undefined;
+                                    }
+                                  | null
+                                  | undefined;
+                                hotspot?:
+                                  | {
+                                      __typename?: "SanityImageHotspot";
+                                      x?: number | null | undefined;
+                                      y?: number | null | undefined;
+                                      width?: number | null | undefined;
+                                      height?: number | null | undefined;
+                                    }
+                                  | null
+                                  | undefined;
+                                crop?:
+                                  | {
+                                      __typename?: "SanityImageCrop";
+                                      top?: number | null | undefined;
+                                      bottom?: number | null | undefined;
+                                      left?: number | null | undefined;
+                                      right?: number | null | undefined;
+                                    }
+                                  | null
+                                  | undefined;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined;
+                  }
+                | null
+                | undefined
+              >
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+    seo?:
+      | {
+          __typename?: "Seo";
+          metaTitle?: string | null | undefined;
+          metaDesc?: string | null | undefined;
+          keywords?: Array<string | null | undefined> | null | undefined;
+          shareGraphic?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      url?: string | null | undefined;
+                      altText?: string | null | undefined;
                     }
                   | null
                   | undefined;
@@ -2322,6 +3015,7 @@ export const NavigationSectionFragmentDoc = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "target" },
@@ -2362,6 +3056,35 @@ export const NavigationSectionFragmentDoc = {
                         typeCondition: {
                           kind: "NamedType",
                           name: { kind: "Name", value: "Category" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "slug" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "current" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "Nursery" },
                         },
                         selectionSet: {
                           kind: "SelectionSet",
@@ -2506,6 +3229,7 @@ export const GetNavigationByIdDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "target" },
@@ -2570,6 +3294,35 @@ export const GetNavigationByIdDocument = {
                           ],
                         },
                       },
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "Nursery" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "slug" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "current" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
                     ],
                   },
                 },
@@ -2584,128 +3337,6 @@ export const GetNavigationByIdDocument = {
   GetNavigationByIdQuery,
   GetNavigationByIdQueryVariables
 >;
-export const GetPageBySlugDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "GetPageBySlug" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
-          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "allPage" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "slug" },
-                      value: {
-                        kind: "ObjectValue",
-                        fields: [
-                          {
-                            kind: "ObjectField",
-                            name: { kind: "Name", value: "current" },
-                            value: {
-                              kind: "ObjectValue",
-                              fields: [
-                                {
-                                  kind: "ObjectField",
-                                  name: { kind: "Name", value: "eq" },
-                                  value: {
-                                    kind: "Variable",
-                                    name: { kind: "Name", value: "slug" },
-                                  },
-                                },
-                              ],
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "_type" } },
-                { kind: "Field", name: { kind: "Name", value: "title" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "seo" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "FragmentSpread",
-                        name: { kind: "Name", value: "seoFragment" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    {
-      kind: "FragmentDefinition",
-      name: { kind: "Name", value: "seoFragment" },
-      typeCondition: {
-        kind: "NamedType",
-        name: { kind: "Name", value: "Seo" },
-      },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
-          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
-          { kind: "Field", name: { kind: "Name", value: "keywords" } },
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "shareGraphic" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "asset" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "url" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "altText" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetPageBySlugQuery, GetPageBySlugQueryVariables>;
 export const GetCategoryBySlugDocument = {
   kind: "Document",
   definitions: [
@@ -2777,6 +3408,58 @@ export const GetCategoryBySlugDocument = {
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
                       },
                     ],
                   },
@@ -2995,6 +3678,58 @@ export const GetPostBySlugDocument = {
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 { kind: "Field", name: { kind: "Name", value: "contentRaw" } },
                 { kind: "Field", name: { kind: "Name", value: "_createdAt" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -3105,6 +3840,58 @@ export const GetPostsByCategoryDocument = {
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
                       },
                     ],
                   },
@@ -3271,3 +4058,1487 @@ export const GetAllStaffDocument = {
     },
   ],
 } as unknown as DocumentNode<GetAllStaffQuery, GetAllStaffQueryVariables>;
+export const GetAllFeedbackDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllFeedback" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allFeedback" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "starRating" } },
+                { kind: "Field", name: { kind: "Name", value: "contentRaw" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetAllFeedbackQuery, GetAllFeedbackQueryVariables>;
+export const GetAllNurseriesDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllNurseries" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allNursery" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "sort" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "location" },
+                      value: { kind: "EnumValue", value: "ASC" },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "location" } },
+                { kind: "Field", name: { kind: "Name", value: "address" } },
+                { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "directionsLink" },
+                },
+                { kind: "Field", name: { kind: "Name", value: "mapsLink" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetAllNurseriesQuery,
+  GetAllNurseriesQueryVariables
+>;
+export const GetAllRoomsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllRooms" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "pageType" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "eq" },
+                            value: {
+                              kind: "StringValue",
+                              value: "room",
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetAllRoomsQuery, GetAllRoomsQueryVariables>;
+export const GetPageBySlugDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetPageBySlug" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "slug" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "staff" },
+            name: { kind: "Name", value: "allStaff" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "name" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "in" },
+                            value: {
+                              kind: "ListValue",
+                              values: [
+                                {
+                                  kind: "StringValue",
+                                  value: "Sarah",
+                                  block: false,
+                                },
+                                {
+                                  kind: "StringValue",
+                                  value: "Shellby",
+                                  block: false,
+                                },
+                                {
+                                  kind: "StringValue",
+                                  value: "Paula",
+                                  block: false,
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "jobTitle" } },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "page" },
+            name: { kind: "Name", value: "allPage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "slug" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "current" },
+                            value: {
+                              kind: "ObjectValue",
+                              fields: [
+                                {
+                                  kind: "ObjectField",
+                                  name: { kind: "Name", value: "eq" },
+                                  value: {
+                                    kind: "Variable",
+                                    name: { kind: "Name", value: "slug" },
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "_type" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "contentBlocks" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "InlineFragment",
+                        typeCondition: {
+                          kind: "NamedType",
+                          name: { kind: "Name", value: "ContentBlocks" },
+                        },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "contentblocks" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "Hero" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "titleRaw",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "subtitleRaw",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "heroImage",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "image",
+                                                },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "asset",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageAsset",
+                                                            },
+                                                          },
+                                                          {
+                                                            kind: "Field",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value: "metadata",
+                                                            },
+                                                            selectionSet: {
+                                                              kind: "SelectionSet",
+                                                              selections: [
+                                                                {
+                                                                  kind: "Field",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "lqip",
+                                                                  },
+                                                                },
+                                                              ],
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "hotspot",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageHotspot",
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "crop",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageCrop",
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "heroCards",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "title",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "subtitle",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "colourTheme",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "link",
+                                                },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "label",
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "href",
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "buttons",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "label",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "href",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "CardList" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "title",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "subtitle",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "scallopedTop",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "cards",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "title",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "subtitle",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "image",
+                                                },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "image",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "Field",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value: "asset",
+                                                            },
+                                                            selectionSet: {
+                                                              kind: "SelectionSet",
+                                                              selections: [
+                                                                {
+                                                                  kind: "FragmentSpread",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "imageAsset",
+                                                                  },
+                                                                },
+                                                                {
+                                                                  kind: "Field",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "metadata",
+                                                                  },
+                                                                  selectionSet:
+                                                                    {
+                                                                      kind: "SelectionSet",
+                                                                      selections:
+                                                                        [
+                                                                          {
+                                                                            kind: "Field",
+                                                                            name: {
+                                                                              kind: "Name",
+                                                                              value:
+                                                                                "lqip",
+                                                                            },
+                                                                          },
+                                                                        ],
+                                                                    },
+                                                                },
+                                                              ],
+                                                            },
+                                                          },
+                                                          {
+                                                            kind: "Field",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value: "hotspot",
+                                                            },
+                                                            selectionSet: {
+                                                              kind: "SelectionSet",
+                                                              selections: [
+                                                                {
+                                                                  kind: "FragmentSpread",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "imageHotspot",
+                                                                  },
+                                                                },
+                                                              ],
+                                                            },
+                                                          },
+                                                          {
+                                                            kind: "Field",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value: "crop",
+                                                            },
+                                                            selectionSet: {
+                                                              kind: "SelectionSet",
+                                                              selections: [
+                                                                {
+                                                                  kind: "FragmentSpread",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "imageCrop",
+                                                                  },
+                                                                },
+                                                              ],
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "link",
+                                                },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "label",
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "href",
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: {
+                                        kind: "Name",
+                                        value: "TextWithImage",
+                                      },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "scallopedTop",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "textRaw",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "links",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "label",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "href",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "image",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "image",
+                                                },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "asset",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageAsset",
+                                                            },
+                                                          },
+                                                          {
+                                                            kind: "Field",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value: "metadata",
+                                                            },
+                                                            selectionSet: {
+                                                              kind: "SelectionSet",
+                                                              selections: [
+                                                                {
+                                                                  kind: "Field",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "lqip",
+                                                                  },
+                                                                },
+                                                              ],
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "hotspot",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageHotspot",
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "crop",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageCrop",
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: {
+                                        kind: "Name",
+                                        value: "ReviewsCarousel",
+                                      },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "scallopedTop",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "scallopedBottom",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "title",
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: {
+                                        kind: "Name",
+                                        value: "StaffCards",
+                                      },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "title",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "textRaw",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "links",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "label",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "href",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "staffProfiles",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "InlineFragment",
+                                                typeCondition: {
+                                                  kind: "NamedType",
+                                                  name: {
+                                                    kind: "Name",
+                                                    value: "Staff",
+                                                  },
+                                                },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "name",
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "jobTitle",
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "biographyRaw",
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "profileImage",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "Field",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value: "image",
+                                                            },
+                                                            selectionSet: {
+                                                              kind: "SelectionSet",
+                                                              selections: [
+                                                                {
+                                                                  kind: "Field",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "asset",
+                                                                  },
+                                                                  selectionSet:
+                                                                    {
+                                                                      kind: "SelectionSet",
+                                                                      selections:
+                                                                        [
+                                                                          {
+                                                                            kind: "FragmentSpread",
+                                                                            name: {
+                                                                              kind: "Name",
+                                                                              value:
+                                                                                "imageAsset",
+                                                                            },
+                                                                          },
+                                                                        ],
+                                                                    },
+                                                                },
+                                                                {
+                                                                  kind: "Field",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "hotspot",
+                                                                  },
+                                                                  selectionSet:
+                                                                    {
+                                                                      kind: "SelectionSet",
+                                                                      selections:
+                                                                        [
+                                                                          {
+                                                                            kind: "FragmentSpread",
+                                                                            name: {
+                                                                              kind: "Name",
+                                                                              value:
+                                                                                "imageHotspot",
+                                                                            },
+                                                                          },
+                                                                        ],
+                                                                    },
+                                                                },
+                                                                {
+                                                                  kind: "Field",
+                                                                  name: {
+                                                                    kind: "Name",
+                                                                    value:
+                                                                      "crop",
+                                                                  },
+                                                                  selectionSet:
+                                                                    {
+                                                                      kind: "SelectionSet",
+                                                                      selections:
+                                                                        [
+                                                                          {
+                                                                            kind: "FragmentSpread",
+                                                                            name: {
+                                                                              kind: "Name",
+                                                                              value:
+                                                                                "imageCrop",
+                                                                            },
+                                                                          },
+                                                                        ],
+                                                                    },
+                                                                },
+                                                              ],
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: {
+                                        kind: "Name",
+                                        value: "LocationDetails",
+                                      },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "title",
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: {
+                                        kind: "Name",
+                                        value: "SimpleHero",
+                                      },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "topLine",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "title",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "subtitle",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "buttons",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "label",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "href",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "Gallery" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "images",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "label",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "altText",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "image",
+                                                },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "_key",
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "asset",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageAsset",
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "hotspot",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageHotspot",
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: "Field",
+                                                      name: {
+                                                        kind: "Name",
+                                                        value: "crop",
+                                                      },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          {
+                                                            kind: "FragmentSpread",
+                                                            name: {
+                                                              kind: "Name",
+                                                              value:
+                                                                "imageCrop",
+                                                            },
+                                                          },
+                                                        ],
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "seo" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "imageAsset" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SanityImageAsset" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "url" } },
+          { kind: "Field", name: { kind: "Name", value: "altText" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "metadata" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "lqip" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "imageHotspot" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SanityImageHotspot" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "x" } },
+          { kind: "Field", name: { kind: "Name", value: "y" } },
+          { kind: "Field", name: { kind: "Name", value: "width" } },
+          { kind: "Field", name: { kind: "Name", value: "height" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "imageCrop" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "SanityImageCrop" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "top" } },
+          { kind: "Field", name: { kind: "Name", value: "bottom" } },
+          { kind: "Field", name: { kind: "Name", value: "left" } },
+          { kind: "Field", name: { kind: "Name", value: "right" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "seoFragment" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Seo" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "metaTitle" } },
+          { kind: "Field", name: { kind: "Name", value: "metaDesc" } },
+          { kind: "Field", name: { kind: "Name", value: "keywords" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "shareGraphic" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "asset" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "url" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPageBySlugQuery, GetPageBySlugQueryVariables>;

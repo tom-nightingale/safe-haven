@@ -3,8 +3,11 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { FitMode } from "@sanity/image-url/lib/types/types";
 import config from "@/config/config";
 import {
+  Maybe,
   type Image as SanityImageType,
   type SanityImageHotspot,
+  // type Image,
+  type ImageBlock,
 } from "@/gql/sanity/codegen";
 
 const builder = imageUrlBuilder();
@@ -18,7 +21,7 @@ const urlFor = (source: string, quality: number) => {
 };
 
 type Props = {
-  image: SanityImageType;
+  image: Maybe<SanityImageType>;
   fit?: FitMode;
   loading?: "lazy" | "eager";
   alt?: string;
@@ -30,6 +33,7 @@ type Props = {
   width?: number;
   height?: number;
   sizes?: string;
+  objectFit?: string;
 };
 
 export function getPositionFromHotspot(
@@ -38,6 +42,8 @@ export function getPositionFromHotspot(
   if (!hotspot || !hotspot.x || !hotspot.y) return "center";
   return `${hotspot.x * 100}% ${hotspot.y * 100}%`;
 }
+
+type ObjectFit = "contain" | "cover" | "fill" | "none" | "scale-down";
 
 const SanityImage = ({
   image,
@@ -52,10 +58,12 @@ const SanityImage = ({
   width,
   height,
   sizes,
+  objectFit = "contain",
 }: Props) => {
-  const sourceUrl = image.asset?.url;
+  const sourceUrl = image?.asset?.url;
   const blurData = image?.asset?.metadata?.lqip;
   const hotspotData = image?.hotspot;
+
   if (!sourceUrl) return <></>;
   const imageUrl = urlFor(sourceUrl, quality).fit(fit).url();
 
@@ -72,7 +80,15 @@ const SanityImage = ({
       placeholder={placeholder}
       blurDataURL={blurData ?? undefined}
       sizes={sizes}
-      objectFit="contain"
+      style={{
+        objectFit: objectFit as
+          | "cover"
+          | "contain"
+          | "fill"
+          | "none"
+          | "scale-down",
+      }}
+      objectFit={objectFit}
       objectPosition={getPositionFromHotspot(hotspotData)}
     />
   ) : (

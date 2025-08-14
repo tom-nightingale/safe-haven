@@ -14,15 +14,18 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@portabletext/react": "^3.2.1",
     "@sanity/asset-utils": "^2.2.1",
     "@sanity/client": "^7.6.0",
     "@sanity/image-url": "^1.1.0",
+    "fslightbox-react": "^1.8.0",
     "gsap": "^3.13.0",
     "motion": "^12.18.1",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@apollo/client": "^3.10.4",
@@ -40,10 +43,13 @@
     "@storybook/addon-vitest": "^9.0.12",
     "@storybook/nextjs-vite": "^9.0.12",
     "@tailwindcss/postcss": "^4",
+    "@types/fslightbox-react": "^1.8.0",
     "@types/gsap": "^1.20.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "8.15.0",
     "@vitest/browser": "^3.2.4",
     "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9",

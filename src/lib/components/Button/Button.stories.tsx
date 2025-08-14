@@ -4,6 +4,7 @@ import { BsTelephone } from "react-icons/bs";
 import { FaCaretRight } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 import { fn } from "storybook/test";
+import { TypeVariant } from "@/components/Typography/Typography";
 
 const meta = {
   title: "Components/Button",
@@ -47,6 +48,7 @@ export const Shadow: Story = {
   args: {
     label: "View Location",
     classes: "button-shadow shadow-peach",
+    variant: TypeVariant.Button2,
     iconRight: <FaCaretRight />,
   },
 };

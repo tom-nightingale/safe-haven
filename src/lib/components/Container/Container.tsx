@@ -1,8 +1,14 @@
 import React from "react";
 
-const Container = ({ children }: { children: React.ReactNode }) => {
+const Container = ({
+  children,
+  classes,
+}: {
+  children: React.ReactNode;
+  classes?: string;
+}) => {
   return (
-    <div className="mx-auto w-full max-w-(--breakpoint-5xl) px-4">
+    <div className={`mx-auto max-w-(--breakpoint-3xl) px-6 ${classes}`}>
       {children}
     </div>
   );
