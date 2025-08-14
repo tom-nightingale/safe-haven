@@ -13,8 +13,9 @@ import SanityImage from "@/components/SanityImage/SanityImage";
 import type { TypedObject } from "@portabletext/types";
 import { PortableText } from "@portabletext/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Scrollbar, A11y } from "swiper/modules";
+import { Scrollbar, A11y, Pagination } from "swiper/modules";
 import "swiper/css/scrollbar";
+import "swiper/css/pagination";
 import "swiper/css";
 import { useState } from "react";
 import { createPortal } from "react-dom";
@@ -127,26 +128,28 @@ const MeetTheTeam = ({
           </div>
         )}
         <div
-          className={`relative col-span-12 gap-6 pl-6 ${layout !== "stacked" ? "xl:col-span-8" : "xl:col-span-12"}`}
+          className={`relative col-span-12 gap-6 ${layout !== "stacked" ? "xl:col-span-8" : "xl:col-span-12"}`}
         >
           {profiles && profiles?.length > 0 && (
             <>
               <Swiper
-                modules={[Scrollbar, A11y]}
+                modules={[Scrollbar, A11y, Pagination]}
                 spaceBetween={20}
-                slidesPerView={layout !== "stacked" ? 1.2 : 2.2}
-                scrollbar={{ draggable: true }}
+                slidesPerView={layout !== "stacked" ? 1.2 : 2}
+                scrollbar={layout === "stacked" ? false : { draggable: true }}
+                pagination={layout === "stacked" && profiles.length > 2}
                 breakpoints={{
                   600: {
-                    slidesPerView: 2.2,
+                    slidesPerView: 2,
                     slidesOffsetAfter: 36,
                   },
                   1024: {
-                    slidesPerView: layout !== "stacked" ? 3.2 : 4.2,
-                    slidesOffsetAfter: 50,
+                    slidesPerView: layout !== "stacked" ? 3.2 : 4,
+                    spaceBetween: 40,
                   },
                 }}
-                wrapperClass="p-2"
+                wrapperClass={`py-2 ${profiles.length < 4 ? "lg:justify-center" : ""}`}
+                className="team-swiper"
               >
                 {profiles?.map((profile, i) => {
                   return (

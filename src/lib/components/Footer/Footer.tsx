@@ -113,7 +113,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                   label="Log in to ParentAdmin"
                   newTab
                   variant={TypeVariant.Body1}
-                  classes="text-pink !font-sans !font-bold"
+                  classes="text-pink !font-sans !font-bold opacity-90 hover:opacity-100"
                   href="https://uk.parentadmin.com/login.php"
                 />
               </div>

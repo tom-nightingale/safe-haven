@@ -10,6 +10,7 @@ import Typography, {
   TypeComponent,
 } from "@/components/Typography/Typography";
 import { FaStar } from "react-icons/fa";
+import ReactPlayer from "react-player";
 
 type Props = {
   content: TypedObject | TypedObject[];
@@ -86,6 +87,14 @@ const BlockContent = ({ content }: Props) => {
           </Typography>
         </li>
       ),
+    },
+    types: {
+      youtube: ({ value }) => {
+        const { url } = value;
+        return (
+          <ReactPlayer url={url} width="100%" style={{ margin: "1rem 0" }} />
+        );
+      },
     },
   };
   return <PortableText value={content} components={components} />;
