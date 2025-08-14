@@ -80,6 +80,7 @@ const ContentBlockDigester = ({ contentBlocks }: Props) => {
                 text={block?.textRaw}
                 links={block?.links}
                 profiles={block?.staffProfiles}
+                layout={block?.layout}
               />
             );
 

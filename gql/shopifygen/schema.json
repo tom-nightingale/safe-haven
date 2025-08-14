@@ -4453,18 +4453,6 @@
             "deprecationReason": null
           },
           {
-            "name": "ageGroup",
-            "description": "Age group",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "buttons",
             "description": null,
             "args": [],
@@ -4822,18 +4810,6 @@
             "deprecationReason": null
           },
           {
-            "name": "ageGroup",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "heroImage",
             "description": null,
             "type": {
@@ -4995,18 +4971,6 @@
           },
           {
             "name": "_type",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "ageGroup",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -14660,6 +14624,18 @@
             "deprecationReason": null
           },
           {
+            "name": "layout",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "links",
             "description": null,
             "args": [],
@@ -14753,6 +14729,18 @@
             "deprecationReason": null
           },
           {
+            "name": "layout",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "type": {
@@ -14790,6 +14778,18 @@
           },
           {
             "name": "_type",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "layout",
             "description": null,
             "type": {
               "kind": "ENUM",

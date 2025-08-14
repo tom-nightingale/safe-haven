@@ -314,6 +314,7 @@ query GetPageBySlug($slug: String) {
               label
               href
             }
+            layout
             staffProfiles {
               ... on Staff {
                 name

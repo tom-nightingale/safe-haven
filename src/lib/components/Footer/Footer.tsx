@@ -194,12 +194,12 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
               <Typography
                 variant={TypeVariant.Body1}
                 component={TypeComponent.p}
-                classes="flex items-center gap-2"
               >
                 <a
                   href="https://www.facebook.com/SafeHavenDayNursery"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex w-full items-center gap-2"
                 >
                   <FaFacebook /> Follow us on Facebook
                 </a>

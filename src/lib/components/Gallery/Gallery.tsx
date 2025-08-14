@@ -39,7 +39,7 @@ const Gallery = ({ images }: Props) => {
   return (
     <>
       {images && images.length > 0 && (
-        <div className="py-8 lg:py-20">
+        <div className="py-8">
           <Container>
             <Swiper
               modules={[A11y]}
@@ -48,22 +48,22 @@ const Gallery = ({ images }: Props) => {
               breakpoints={{
                 600: {
                   slidesPerView: 3.5,
-                  spaceBetween: 30,
+                  spaceBetween: 20,
                 },
                 768: {
                   slidesPerView: 4.2,
-                  spaceBetween: 30,
+                  spaceBetween: 20,
                 },
                 1024: {
                   slidesPerView: 4.2,
-                  spaceBetween: 30,
+                  spaceBetween: 20,
                 },
                 1280: {
-                  slidesPerView: 5,
+                  slidesPerView: 5.05,
                   spaceBetween: 30,
                 },
               }}
-              wrapperClass="py-2"
+              wrapperClass="py-2 px-2"
             >
               {images.map((image: Maybe<ImageBlock>, index: number) => {
                 return (
@@ -73,7 +73,7 @@ const Gallery = ({ images }: Props) => {
                       key={`${image?.image?.asset?.url}-${index}`}
                       className={`relative aspect-square h-full w-full cursor-pointer rounded-3xl bg-white transition-all duration-200 ${index % 2 === 0 ? "-rotate-2 hover:rotate-2" : "rotate-2 hover:-rotate-2"}`}
                     >
-                      <span className="bg-peach/10 pointer-events-none absolute top-1 -left-1 z-0 block h-full w-full rounded-3xl"></span>
+                      <span className="bg-peach/40 pointer-events-none absolute top-1 -left-1 z-0 block h-full w-full rounded-3xl"></span>
                       <div className="relative z-10 h-full w-full overflow-hidden rounded-3xl">
                         <SanityImage
                           image={image?.image}

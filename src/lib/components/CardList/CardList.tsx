@@ -46,11 +46,11 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
     "button-outline-peach text-peach",
   ];
   const shadowClasses = [
-    "bg-green/10",
-    "bg-lilac/10",
-    "bg-yellow/10",
-    "bg-blue/10",
-    "bg-peach/10",
+    "bg-green/40",
+    "bg-lilac/40",
+    "bg-yellow/40",
+    "bg-blue/40",
+    "bg-peach/40",
   ];
 
   const cardLayout = cards && cards?.length % 5 === 0 ? "slim" : "default";

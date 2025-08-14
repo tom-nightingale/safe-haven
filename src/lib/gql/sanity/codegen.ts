@@ -580,8 +580,6 @@ export type Hero = {
   __typename?: "Hero";
   _key?: Maybe<Scalars["String"]["output"]>;
   _type?: Maybe<Scalars["String"]["output"]>;
-  /** Age group */
-  ageGroup?: Maybe<Scalars["String"]["output"]>;
   buttons?: Maybe<Array<Maybe<Link>>>;
   heroCards?: Maybe<Array<Maybe<HeroCard>>>;
   heroImage?: Maybe<ImageBlock>;
@@ -623,7 +621,6 @@ export type HeroCardSorting = {
 export type HeroFilter = {
   _key?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
-  ageGroup?: InputMaybe<StringFilter>;
   heroImage?: InputMaybe<ImageBlockFilter>;
 };
 
@@ -647,7 +644,6 @@ export type HeroImageSorting = {
 export type HeroSorting = {
   _key?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
-  ageGroup?: InputMaybe<SortOrder>;
   heroImage?: InputMaybe<ImageBlockSorting>;
 };
 
@@ -1759,6 +1755,7 @@ export type StaffCards = {
   __typename?: "StaffCards";
   _key?: Maybe<Scalars["String"]["output"]>;
   _type?: Maybe<Scalars["String"]["output"]>;
+  layout?: Maybe<Scalars["String"]["output"]>;
   links?: Maybe<Array<Maybe<Link>>>;
   staffProfiles?: Maybe<Array<Maybe<Staff>>>;
   textRaw?: Maybe<Scalars["JSON"]["output"]>;
@@ -1769,12 +1766,14 @@ export type StaffCards = {
 export type StaffCardsFilter = {
   _key?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
+  layout?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
 export type StaffCardsSorting = {
   _key?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
+  layout?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
 };
 
@@ -2650,6 +2649,7 @@ export type GetPageBySlugQuery = {
                     __typename?: "StaffCards";
                     title?: string | null | undefined;
                     textRaw?: any | null | undefined;
+                    layout?: string | null | undefined;
                     links?:
                       | Array<
                           | {
@@ -5067,6 +5067,13 @@ export const GetPageBySlugDocument = {
                                                 },
                                               },
                                             ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "layout",
                                           },
                                         },
                                         {
