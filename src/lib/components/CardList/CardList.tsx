@@ -81,6 +81,8 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
     { scope: cardContainer },
   );
 
+  const widthClasses = ["w-1/4", "w-1/4", "w-1/4", "w-1/4", "w-1/5"];
+
   return (
     <div className="relative">
       {scallopedTop ? (
@@ -106,9 +108,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                   </div>
                 )}
                 {cards && (
-                  <div
-                    className={`mx-auto grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 ${cardLayout === "slim" ? "xl:grid-cols-5" : "xl:grid-cols-4"}`}
-                  >
+                  <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) justify-center gap-8 xl:mt-15">
                     {cards.map((card, i) => {
                       return (
                         <div className="box" key={card?.title}>
@@ -135,7 +135,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
           </ScallopedTop>
         </>
       ) : (
-        <div className="relative z-1 py-10 xl:py-15" ref={cardContainer}>
+        <div className="relative z-10 pb-10 xl:pb-15" ref={cardContainer}>
           <Container>
             {(title || subtitle) && (
               <div className="flex flex-col justify-center gap-6 text-center">
@@ -156,12 +156,13 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
             )}
 
             {cards && (
-              <div
-                className={`mx-auto mt-10 grid max-w-(--breakpoint-3xl) grid-cols-1 gap-8 md:grid-cols-2 xl:mt-15 ${cardLayout === "slim" ? "xl:grid-cols-5" : "xl:grid-cols-4"}`}
-              >
+              <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) justify-center gap-8 xl:mt-15">
                 {cards.map((card, i) => {
                   return (
-                    <div className="box" key={card?.title}>
+                    <div
+                      className={`box ${widthClasses[cards.length - 1]}`}
+                      key={card?.title}
+                    >
                       <Card
                         buttonText={card?.link?.label}
                         href={card?.link?.href}

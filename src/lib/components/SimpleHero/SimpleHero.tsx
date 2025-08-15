@@ -15,13 +15,22 @@ import DuckSvg from "@/icons/duckSvg";
 import BlocksSvg from "@/icons/blocksSvg";
 
 type Props = {
-  topLine: string | Maybe<string>;
+  topLine?: string | Maybe<string>;
   title: string | Maybe<string>;
-  subtitle: string | Maybe<string>;
+  subtitle?: string | Maybe<string>;
   buttons?: Maybe<Maybe<Link>[]>;
+  phoneNumber?: Maybe<string> | null;
+  hideContactDetails?: boolean;
 };
 
-const Hero = ({ topLine, title, subtitle, buttons }: Props) => {
+const Hero = ({
+  topLine,
+  title,
+  subtitle,
+  buttons,
+  phoneNumber,
+  hideContactDetails = false,
+}: Props) => {
   const { nurseries } = useGlobalContext();
   const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
 
@@ -49,42 +58,48 @@ const Hero = ({ topLine, title, subtitle, buttons }: Props) => {
             {title}
           </Typography>
 
-          <div className="mt-6">
-            {buttons && buttons.length > 0 ? (
-              <>
-                {buttons.map((button: Maybe<Link>, i: number) => {
-                  return (
-                    <Button
-                      key={button?.label}
-                      classes={"button-primary button-peach inline-block"}
-                      label={button?.label}
-                      href={button?.href}
-                    />
-                  );
-                })}
-              </>
-            ) : (
-              <Button
-                classes={"button-primary button-peach inline-block"}
-                label="Book A Viewing"
-                href="/our-nurseries"
-              />
-            )}
-          </div>
+          {!hideContactDetails && (
+            <>
+              <div className="mt-6">
+                {buttons && buttons.length > 0 ? (
+                  <>
+                    {buttons.map((button: Maybe<Link>, i: number) => {
+                      return (
+                        <Button
+                          key={button?.label}
+                          classes={"button-primary button-peach inline-block"}
+                          label={button?.label}
+                          href={button?.href}
+                        />
+                      );
+                    })}
+                  </>
+                ) : (
+                  <Button
+                    classes={"button-primary button-peach inline-block"}
+                    label="Book A Viewing"
+                    href="/our-nurseries"
+                  />
+                )}
+              </div>
 
-          <a href={`tel:${nurseryPhoneNumber}`} className="mt-6 mb-10">
-            <Typography
-              variant={TypeVariant.Button1}
-              component={TypeComponent.p}
-              classes="flex items-center gap-1"
-            >
-              <span className="mr-1 rotate-90 text-[#7Da8A4]">
-                <FaPhone />
-              </span>
-              Call us on
-              <span className="font-medium">{nurseryPhoneNumber}</span>
-            </Typography>
-          </a>
+              <a href={`tel:${nurseryPhoneNumber}`} className="mt-6 mb-10">
+                <Typography
+                  variant={TypeVariant.Button1}
+                  component={TypeComponent.p}
+                  classes="flex items-center gap-1"
+                >
+                  <span className="mr-1 rotate-90 text-[#7Da8A4]">
+                    <FaPhone />
+                  </span>
+                  Call us on
+                  <span className="font-medium">
+                    {phoneNumber ?? nurseryPhoneNumber}
+                  </span>
+                </Typography>
+              </a>
+            </>
+          )}
         </div>
       </Container>
 

@@ -1,12 +1,47 @@
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
+import { notFound } from "next/navigation";
 import createApolloClient from "@/gql/apolloClient";
 import {
   GetAllPostsDocument,
   type GetAllPostsQuery,
-  type Post,
 } from "@/gql/sanity/codegen";
-import Link from "next/link";
+import BlogArchiveLayout from "@/layouts/BlogArchiveLayout/BlogArchiveLayout";
+import {
+  GetPageBySlugDocument,
+  type GetPageBySlugQuery,
+} from "@/gql/sanity/codegen";
+import type { Metadata } from "next";
+import config from "@/config/config";
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const client = createApolloClient(fetch);
+    const { data } = await client.query<GetPageBySlugQuery>({
+      query: GetPageBySlugDocument,
+      variables: {
+        slug: "news",
+      },
+    });
+
+    const page = data.page[0];
+
+    return {
+      title: `${page?.seo?.metaTitle ? page?.seo?.metaTitle : page?.title} | ${config.COMPANY_NAME}`,
+      description: page?.seo?.metaDesc ?? "",
+      // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
+      openGraph: {
+        title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
+        description: page?.seo?.metaDesc ?? "",
+        siteName: page?.seo?.metaTitle ?? config.COMPANY_NAME,
+        images: [],
+      },
+    };
+  } catch (err) {
+    console.log("err", err);
+    return notFound();
+  }
+}
 
 const GetBlogPosts = async (): Promise<any> => {
   try {
@@ -14,7 +49,7 @@ const GetBlogPosts = async (): Promise<any> => {
     const { data } = await client.query<GetAllPostsQuery>({
       query: GetAllPostsDocument,
       variables: {
-        sort: [{ _createdAt: "DESC" }],
+        sort: [{ _createdAt: "ASC" }],
       },
       //   context: {
       //     fetchOptions: {
@@ -31,17 +66,5 @@ const GetBlogPosts = async (): Promise<any> => {
 export default async function Page() {
   const data = await GetBlogPosts();
 
-  return (
-    <>
-      {(data.allPost || []).map((post: Post) => (
-        <li key={post.title}>
-          <Link
-            href={`/news/${post?.category?.slug?.current}/${post?.slug?.current}`}
-          >
-            {post.title}
-          </Link>
-        </li>
-      ))}
-    </>
-  );
+  return <BlogArchiveLayout posts={data?.allPost || []} />;
 }

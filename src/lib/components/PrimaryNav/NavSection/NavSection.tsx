@@ -45,10 +45,14 @@ const NavSection = ({
 
   const pathname = usePathname();
   const slug = pathname.split("/").at(-1) as string;
-  const hasActiveChild =
-    children &&
-    slug !== "" &&
-    children.filter(child => child?.target?.slug?.current?.includes(slug));
+
+  const currentPath = pathname.replace(/^\/|\/$/g, ""); // remove leading/trailing slashes
+
+  const hasActiveChild = !!children?.some(child => {
+    const parentSlug = target?.slug?.current?.replace(/^\/|\/$/g, "");
+    const childSlug = child?.target?.slug?.current?.replace(/^\/|\/$/g, "");
+    return `${parentSlug}/${childSlug}` === currentPath;
+  });
 
   return (
     <>
@@ -73,7 +77,7 @@ const NavSection = ({
                 variant={TypeVariant.Button1}
                 classes={
                   (slug !== "" && target?.slug?.current.includes(slug)) ||
-                  (hasActiveChild && hasActiveChild.length > 0)
+                  hasActiveChild
                     ? "text-peach"
                     : ""
                 }
@@ -107,9 +111,8 @@ const NavSection = ({
                         classes={
                           slug !== "" &&
                           slug !== target?.slug?.current &&
-                          `${target?.slug?.current}/${child.target.slug.current}`.includes(
-                            slug,
-                          )
+                          `/${target?.slug?.current}/${child.target.slug.current}` ===
+                            pathname
                             ? "text-peach"
                             : ""
                         }
