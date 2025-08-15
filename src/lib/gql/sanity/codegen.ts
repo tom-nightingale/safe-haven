@@ -91,7 +91,7 @@ export type Block = {
   style?: Maybe<Scalars["String"]["output"]>;
 };
 
-export type BlockOrYoutube = Block | Youtube;
+export type BlockOrImageOrYoutube = Block | Image | Youtube;
 
 export type BooleanFilter = {
   /** Checks if the value is equal to the given input. */
@@ -153,9 +153,10 @@ export type CardListFilter = {
   title?: InputMaybe<StringFilter>;
 };
 
-export type CardListOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage =
+export type CardListOrDownloadsOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage =
 
     | CardList
+    | Downloads
     | Gallery
     | Hero
     | LocationDetails
@@ -289,7 +290,7 @@ export type ContentBlocks = {
   _type?: Maybe<Scalars["String"]["output"]>;
   contentblocks?: Maybe<
     Array<
-      Maybe<CardListOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage>
+      Maybe<CardListOrDownloadsOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage>
     >
   >;
 };
@@ -398,6 +399,23 @@ export type DocumentSorting = {
   _updatedAt?: InputMaybe<SortOrder>;
 };
 
+export type Downloads = {
+  __typename?: "Downloads";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  downloads?: Maybe<Array<Maybe<FileBlock>>>;
+};
+
+export type DownloadsFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+};
+
+export type DownloadsSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+};
+
 export type Feedback = Document & {
   __typename?: "Feedback";
   /** Date the document was created */
@@ -445,6 +463,29 @@ export type File = {
   _key?: Maybe<Scalars["String"]["output"]>;
   _type?: Maybe<Scalars["String"]["output"]>;
   asset?: Maybe<SanityFileAsset>;
+};
+
+export type FileBlock = {
+  __typename?: "FileBlock";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  file?: Maybe<File>;
+  /** Label to use for the file */
+  label?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type FileBlockFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  file?: InputMaybe<FileFilter>;
+  label?: InputMaybe<StringFilter>;
+};
+
+export type FileBlockSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  file?: InputMaybe<FileSorting>;
+  label?: InputMaybe<SortOrder>;
 };
 
 export type FileFilter = {
@@ -2078,6 +2119,33 @@ export type ContentBlockFragmentFragment = {
               | undefined;
           }
         | {
+            __typename?: "Downloads";
+            downloads?:
+              | Array<
+                  | {
+                      __typename?: "FileBlock";
+                      label?: string | null | undefined;
+                      file?:
+                        | {
+                            __typename?: "File";
+                            asset?:
+                              | {
+                                  __typename?: "SanityFileAsset";
+                                  url?: string | null | undefined;
+                                }
+                              | null
+                              | undefined;
+                          }
+                        | null
+                        | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+          }
+        | {
             __typename?: "Gallery";
             images?:
               | Array<
@@ -2979,6 +3047,33 @@ export type GetPageBySlugQuery = {
                       | undefined;
                   }
                 | {
+                    __typename?: "Downloads";
+                    downloads?:
+                      | Array<
+                          | {
+                              __typename?: "FileBlock";
+                              label?: string | null | undefined;
+                              file?:
+                                | {
+                                    __typename?: "File";
+                                    asset?:
+                                      | {
+                                          __typename?: "SanityFileAsset";
+                                          url?: string | null | undefined;
+                                        }
+                                      | null
+                                      | undefined;
+                                  }
+                                | null
+                                | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
                     __typename?: "Gallery";
                     images?:
                       | Array<
@@ -3454,6 +3549,33 @@ export type GetNurseryBySlugQuery = {
                                     __typename?: "Link";
                                     label?: string | null | undefined;
                                     href?: string | null | undefined;
+                                  }
+                                | null
+                                | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "Downloads";
+                    downloads?:
+                      | Array<
+                          | {
+                              __typename?: "FileBlock";
+                              label?: string | null | undefined;
+                              file?:
+                                | {
+                                    __typename?: "File";
+                                    asset?:
+                                      | {
+                                          __typename?: "SanityFileAsset";
+                                          url?: string | null | undefined;
+                                        }
+                                      | null
+                                      | undefined;
                                   }
                                 | null
                                 | undefined;
@@ -4745,6 +4867,53 @@ export const ContentBlockFragmentFragmentDoc = {
                     kind: "SelectionSet",
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "title" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "Downloads" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "downloads" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "file" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "asset" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "url" },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
                     ],
                   },
                 },
@@ -7143,6 +7312,53 @@ export const GetPageBySlugDocument = {
                   kind: "InlineFragment",
                   typeCondition: {
                     kind: "NamedType",
+                    name: { kind: "Name", value: "Downloads" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "downloads" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "file" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "asset" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "url" },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
                     name: { kind: "Name", value: "SimpleHero" },
                   },
                   selectionSet: {
@@ -8123,6 +8339,53 @@ export const GetNurseryBySlugDocument = {
                     kind: "SelectionSet",
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "title" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "Downloads" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "downloads" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "file" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "asset" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "url" },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
                     ],
                   },
                 },
