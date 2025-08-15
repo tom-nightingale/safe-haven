@@ -5,7 +5,7 @@ import ContentBlockDigester from "@/components/ContentBlockDigester/ContentBlock
 type Props = {
   page?: Page;
 };
-export const HomeLayout = ({ page }: Props) => {
+export const DefaultLayout = ({ page }: Props) => {
   const contentBlocks = page?.contentBlocks;
 
   return (
@@ -17,4 +17,4 @@ export const HomeLayout = ({ page }: Props) => {
   );
 };
 
-export default HomeLayout;
+export default DefaultLayout;

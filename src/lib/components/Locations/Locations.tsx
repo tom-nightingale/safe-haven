@@ -10,7 +10,6 @@ import CloudsVector from "@/components/CloudsVector/CloudsVector";
 import { type Nursery } from "@/gql/sanity/codegen";
 import { useGlobalContext } from "@/context/GlobalContext";
 import type { Maybe } from "@/gql/sanity/codegen";
-// import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
 import KiteSvg from "@/icons/kiteSvg";
 import StarsSvg from "@/icons/starsSvg";
@@ -20,7 +19,7 @@ type Props = {
   text?: TypedObject | TypedObject[];
 };
 
-const Locations = ({ title, text }: Props) => {
+const Locations = ({ title }: Props) => {
   const { nurseries } = useGlobalContext();
 
   return (
@@ -66,8 +65,11 @@ const Locations = ({ title, text }: Props) => {
                         variant={TypeVariant.H4}
                         component={TypeComponent.p}
                         bold
+                        classes="opacity-80 hover:opacity-100"
                       >
-                        {nursery.title}
+                        <a href={`our-nurseries/${nursery?.slug?.current}`}>
+                          {nursery.title}
+                        </a>
                       </Typography>
                       <Typography
                         variant={TypeVariant.H6}

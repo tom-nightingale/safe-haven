@@ -7,15 +7,12 @@ import Button from "@/components/Button/Button";
 import { Maybe } from "@/gql/sanity/codegen";
 import { toPlainText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
+import { truncateWords } from "@/utils/truncateWords";
 
 type Props = {
   review: PortableTextBlock[]; // or the correct type expected by toPlainText
   name: string | Maybe<string>;
   rating: 1 | 2 | 3 | 4 | 5 | Maybe<number>;
-};
-
-const truncateWords = (str: string, wordLimit: number) => {
-  return `${str.split(" ").splice(0, wordLimit).join(" ")}...`;
 };
 
 const ReviewCard = ({ review, name, rating }: Props) => {

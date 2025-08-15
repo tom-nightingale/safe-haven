@@ -10,12 +10,42 @@ import Typography, {
   TypeComponent,
 } from "@/components/Typography/Typography";
 import { FaStar } from "react-icons/fa";
+import ReactPlayer from "react-player";
+import { getImageDimensions } from "@sanity/asset-utils";
+import config from "@/config/config";
+import imageUrlBuilder from "@sanity/image-url";
+import Image from "next/image";
 
 type Props = {
   content: TypedObject | TypedObject[];
 };
 
 const BlockContent = ({ content }: Props) => {
+  const InlineImageComponent = ({ value }: { value: any }) => {
+    const builder = imageUrlBuilder();
+    const urlFor = (source: string, quality: number) => {
+      return builder
+        .image(source)
+        .dataset("production")
+        .projectId(config.SANITY_PROJECT_ID)
+        .quality(quality);
+    };
+
+    const { width, height } = getImageDimensions(value);
+    const imageUrl = urlFor(value, 100).url();
+    return (
+      <Image
+        src={imageUrl}
+        width={width ? width : undefined}
+        height={height ? height : undefined}
+        alt={value?.alt ?? value}
+        priority={true}
+        objectFit="cover"
+        className="mb-8 rounded-3xl"
+      />
+    );
+  };
+
   const components: PortableTextComponents = {
     block: {
       h1: ({ children }: PortableTextComponentProps<any>) => (
@@ -86,6 +116,15 @@ const BlockContent = ({ content }: Props) => {
           </Typography>
         </li>
       ),
+    },
+    types: {
+      youtube: ({ value }) => {
+        const { url } = value;
+        return (
+          <ReactPlayer url={url} width="100%" style={{ margin: "1rem 0" }} />
+        );
+      },
+      image: InlineImageComponent,
     },
   };
   return <PortableText value={content} components={components} />;

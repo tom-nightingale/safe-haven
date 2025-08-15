@@ -11,7 +11,7 @@ import Typography, {
   TypeComponent,
 } from "@/components/Typography/Typography";
 import { useGlobalContext } from "@/context/GlobalContext";
-import { FaPhone } from "react-icons/fa";
+import { FaPhone, FaMapPin } from "react-icons/fa";
 import WandSvg from "@/icons/wandSvg";
 import StarsSvg from "@/icons/starsSvg";
 import RocketSvg from "@/icons/rocketSvg";
@@ -22,9 +22,17 @@ type Props = {
   text: TypedObject | TypedObject[];
   image: Maybe<ImageBlock>;
   links: Maybe<Maybe<Link>[]>;
+  directionsLink?: Maybe<string>;
+  phoneNumber?: Maybe<string>;
 };
 
-const TextWithImageInner = ({ text, links, image }: Props) => {
+const TextWithImageInner = ({
+  text,
+  links,
+  image,
+  directionsLink,
+  phoneNumber,
+}: Props) => {
   const { nurseries } = useGlobalContext();
   const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
   return (
@@ -32,18 +40,37 @@ const TextWithImageInner = ({ text, links, image }: Props) => {
       <div className="block-content relative z-1 col-span-12 lg:col-span-6">
         <BlockContent content={text} />
         {links && links.length > 0 && (
-          <div className="mt-10 flex items-center gap-4">
-            {links.map(link => {
-              return (
+          <div
+            className={`mt-10 flex flex-wrap gap-4 ${directionsLink ? "flex-col" : "flex-row"}`}
+          >
+            <div className="flex gap-4">
+              {links.map(link => {
+                return (
+                  <Button
+                    key={link?.label}
+                    classes="inline-block button-primary button-peach"
+                    label={link?.label}
+                    href={link?.href}
+                  />
+                );
+              })}
+
+              {directionsLink && (
                 <Button
-                  key={link?.label}
-                  classes="inline-block button-primary button-peach"
-                  label={link?.label}
-                  href={link?.href}
+                  key={directionsLink}
+                  classes="inline-block button-primary button-green"
+                  label="Get Directions"
+                  href={directionsLink}
+                  newTab
+                  iconLeft={<FaMapPin />}
                 />
-              );
-            })}
-            <a href={`tel:${nurseryPhoneNumber}`} className="flex items-center">
+              )}
+            </div>
+
+            <a
+              href={`tel:${phoneNumber ?? nurseryPhoneNumber}`}
+              className={`flex items-center ${directionsLink ? "-order-2" : ""}`}
+            >
               <Typography
                 variant={TypeVariant.Button1}
                 component={TypeComponent.p}
@@ -53,7 +80,9 @@ const TextWithImageInner = ({ text, links, image }: Props) => {
                   <FaPhone />
                 </span>
                 Call us on
-                <span className="font-medium">{nurseryPhoneNumber}</span>
+                <span className="font-medium">
+                  {phoneNumber ?? nurseryPhoneNumber}
+                </span>
               </Typography>
             </a>
           </div>
@@ -69,18 +98,37 @@ const TextWithImageInner = ({ text, links, image }: Props) => {
   );
 };
 
-const TextWithImage = ({ scallopedTop, text, image, links }: Props) => {
+const TextWithImage = ({
+  scallopedTop,
+  text,
+  image,
+  links,
+  directionsLink,
+  phoneNumber,
+}: Props) => {
   return (
     <div className="relative">
       {scallopedTop ? (
         <ScallopedTop>
           <Container>
-            <TextWithImageInner text={text} links={links} image={image} />
+            <TextWithImageInner
+              text={text}
+              links={links}
+              image={image}
+              directionsLink={directionsLink}
+              phoneNumber={phoneNumber}
+            />
           </Container>
         </ScallopedTop>
       ) : (
         <Container>
-          <TextWithImageInner text={text} links={links} image={image} />
+          <TextWithImageInner
+            text={text}
+            links={links}
+            image={image}
+            directionsLink={directionsLink}
+            phoneNumber={phoneNumber}
+          />
         </Container>
       )}
 

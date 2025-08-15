@@ -10,10 +10,19 @@ import Gallery from "@/components/Gallery/Gallery";
 
 type Props = {
   contentBlocks: ContentBlocks | Maybe<ContentBlocks>;
+  nurseryDetails?: {
+    address: Maybe<string>;
+    directionsLink: Maybe<string>;
+    email: Maybe<string>;
+    location: Maybe<string>;
+    mapsLink: Maybe<string>;
+    phone: Maybe<string>;
+  };
 };
 
-const ContentBlockDigester = ({ contentBlocks }: Props) => {
+const ContentBlockDigester = ({ contentBlocks, nurseryDetails }: Props) => {
   const blocks = contentBlocks?.contentblocks;
+
   return (
     <>
       {blocks?.map((block, idx) => {
@@ -38,6 +47,7 @@ const ContentBlockDigester = ({ contentBlocks }: Props) => {
                 subtitle={block?.subtitle}
                 topLine={block?.topLine}
                 buttons={block?.buttons}
+                phoneNumber={nurseryDetails?.phone ?? null}
               />
             );
 
@@ -60,6 +70,8 @@ const ContentBlockDigester = ({ contentBlocks }: Props) => {
                 text={block?.textRaw}
                 image={block?.image}
                 links={block?.links}
+                directionsLink={nurseryDetails?.directionsLink ?? null}
+                phoneNumber={nurseryDetails?.phone ?? null}
               />
             );
 
@@ -80,6 +92,7 @@ const ContentBlockDigester = ({ contentBlocks }: Props) => {
                 text={block?.textRaw}
                 links={block?.links}
                 profiles={block?.staffProfiles}
+                layout={block?.layout}
               />
             );
 

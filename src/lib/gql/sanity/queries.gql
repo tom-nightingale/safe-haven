@@ -67,6 +67,161 @@ fragment NavigationSection on NavigationSection {
   }
 }
 
+fragment ContentBlockFragment on ContentBlocks {
+  contentblocks {
+    ... on Hero {
+      titleRaw
+      subtitleRaw
+      heroImage {
+        image {
+          asset {
+            ...imageAsset
+            metadata {
+              lqip
+            }
+          }
+          hotspot {
+            ...imageHotspot
+          }
+          crop {
+            ...imageCrop
+          }
+        }
+      }
+      heroCards {
+        title
+        subtitle
+        colourTheme
+        link {
+          label
+          href
+        }
+      }
+      buttons {
+        label
+        href
+      }
+    }
+    ... on CardList {
+      title
+      subtitle
+      scallopedTop
+      cards {
+        title
+        subtitle
+        image {
+          image {
+            asset {
+              ...imageAsset
+              metadata {
+                lqip
+              }
+            }
+            hotspot {
+              ...imageHotspot
+            }
+            crop {
+              ...imageCrop
+            }
+          }
+        }
+        link {
+          label
+          href
+        }
+      }
+    }
+    ... on TextWithImage {
+      scallopedTop
+      textRaw
+      links {
+        label
+        href
+      }
+      image {
+        image {
+          asset {
+            ...imageAsset
+            metadata {
+              lqip
+            }
+          }
+          hotspot {
+            ...imageHotspot
+          }
+          crop {
+            ...imageCrop
+          }
+        }
+      }
+    }
+    ... on ReviewsCarousel {
+      scallopedTop
+      scallopedBottom
+      title
+    }
+    ... on StaffCards {
+      title
+      textRaw
+      links {
+        label
+        href
+      }
+      layout
+      staffProfiles {
+        ... on Staff {
+          name
+          jobTitle
+          biographyRaw
+          profileImage {
+            image {
+              asset {
+                ...imageAsset
+              }
+              hotspot {
+                ...imageHotspot
+              }
+              crop {
+                ...imageCrop
+              }
+            }
+          }
+        }
+      }
+    }
+    ... on LocationDetails {
+      title
+    }
+    ... on SimpleHero {
+      topLine
+      title
+      subtitle
+      buttons {
+        label
+        href
+      }
+    }
+    ... on Gallery {
+      images {
+        label
+        altText
+        image {
+          _key
+          asset {
+            ...imageAsset
+          }
+          hotspot {
+            ...imageHotspot
+          }
+          crop {
+            ...imageCrop
+          }
+        }
+      }
+    }
+  }
+}
+
 query GetNavigationById($id: ID!) {
   Navigation(id: $id) {
     _id
@@ -101,6 +256,19 @@ query GetAllPosts(
     title
     contentRaw
     _createdAt
+    articleImage {
+      image {
+        asset {
+          ...imageAsset
+        }
+        hotspot {
+          ...imageHotspot
+        }
+        crop {
+          ...imageCrop
+        }
+      }
+    }
     slug {
       current
     }
@@ -127,6 +295,21 @@ query GetPostBySlug($slug: String) {
 query GetPostsByCategory($slug: String) {
   allPost(where: { category: { slug: { current: { eq: $slug } } } }) {
     title
+    contentRaw
+    _createdAt
+    articleImage {
+      image {
+        asset {
+          ...imageAsset
+        }
+        hotspot {
+          ...imageHotspot
+        }
+        crop {
+          ...imageCrop
+        }
+      }
+    }
     category {
       title
       slug {
@@ -204,168 +387,35 @@ query GetAllRooms {
 }
 
 query GetPageBySlug($slug: String) {
-  staff: allStaff(where: { name: { in: ["Sarah", "Shellby", "Paula"] } }) {
-    _id
-    name
-    jobTitle
-  }
   page: allPage(where: { slug: { current: { eq: $slug } } }) {
     _id
     _type
     title
     contentBlocks {
       ... on ContentBlocks {
-        contentblocks {
-          ... on Hero {
-            titleRaw
-            subtitleRaw
-            heroImage {
-              image {
-                asset {
-                  ...imageAsset
-                  metadata {
-                    lqip
-                  }
-                }
-                hotspot {
-                  ...imageHotspot
-                }
-                crop {
-                  ...imageCrop
-                }
-              }
-            }
-            heroCards {
-              title
-              subtitle
-              colourTheme
-              link {
-                label
-                href
-              }
-            }
-            buttons {
-              label
-              href
-            }
-          }
-          ... on CardList {
-            title
-            subtitle
-            scallopedTop
-            cards {
-              title
-              subtitle
-              image {
-                image {
-                  asset {
-                    ...imageAsset
-                    metadata {
-                      lqip
-                    }
-                  }
-                  hotspot {
-                    ...imageHotspot
-                  }
-                  crop {
-                    ...imageCrop
-                  }
-                }
-              }
-              link {
-                label
-                href
-              }
-            }
-          }
-          ... on TextWithImage {
-            scallopedTop
-            textRaw
-            links {
-              label
-              href
-            }
-            image {
-              image {
-                asset {
-                  ...imageAsset
-                  metadata {
-                    lqip
-                  }
-                }
-                hotspot {
-                  ...imageHotspot
-                }
-                crop {
-                  ...imageCrop
-                }
-              }
-            }
-          }
-          ... on ReviewsCarousel {
-            scallopedTop
-            scallopedBottom
-            title
-          }
-          ... on StaffCards {
-            title
-            textRaw
-            links {
-              label
-              href
-            }
-            staffProfiles {
-              ... on Staff {
-                name
-                jobTitle
-                biographyRaw
-                profileImage {
-                  image {
-                    asset {
-                      ...imageAsset
-                    }
-                    hotspot {
-                      ...imageHotspot
-                    }
-                    crop {
-                      ...imageCrop
-                    }
-                  }
-                }
-              }
-            }
-          }
-          ... on LocationDetails {
-            title
-          }
-          ... on SimpleHero {
-            topLine
-            title
-            subtitle
-            buttons {
-              label
-              href
-            }
-          }
-          ... on Gallery {
-            images {
-              label
-              altText
-              image {
-                _key
-                asset {
-                  ...imageAsset
-                }
-                hotspot {
-                  ...imageHotspot
-                }
-                crop {
-                  ...imageCrop
-                }
-              }
-            }
-          }
-        }
+        ...ContentBlockFragment
+      }
+    }
+    seo {
+      ...seoFragment
+    }
+  }
+}
+
+query GetNurseryBySlug($slug: String) {
+  page: allNursery(where: { slug: { current: { eq: $slug } } }) {
+    _id
+    _type
+    title
+    location
+    address
+    phoneNumber
+    email
+    directionsLink
+    mapsLink
+    contentBlocks {
+      ... on ContentBlocks {
+        ...ContentBlockFragment
       }
     }
     seo {

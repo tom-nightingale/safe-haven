@@ -13,8 +13,9 @@ import SanityImage from "@/components/SanityImage/SanityImage";
 import type { TypedObject } from "@portabletext/types";
 import { PortableText } from "@portabletext/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Scrollbar, A11y } from "swiper/modules";
+import { Scrollbar, A11y, Pagination } from "swiper/modules";
 import "swiper/css/scrollbar";
+import "swiper/css/pagination";
 import "swiper/css";
 import { useState } from "react";
 import { createPortal } from "react-dom";
@@ -26,6 +27,7 @@ type Props = {
   text?: TypedObject | TypedObject[];
   links?: Maybe<Maybe<Link>[]>;
   profiles?: Maybe<Maybe<Staff>[]> | undefined | null;
+  layout?: Maybe<string> | null;
 };
 
 type ProfileContent = {
@@ -40,12 +42,22 @@ const MeetTheTeam = ({
   text,
   links,
   profiles,
+  layout,
 }: Props) => {
   const buttonClasses = [
     "text-green",
     "text-lilac",
     "text-yellow",
     "text-blue",
+  ];
+
+  const bgColors = ["bg-green", "bg-lilac", "bg-yellow", "bg-blue", "bg-peach"];
+  const shadowClasses = [
+    "bg-green/40",
+    "bg-lilac/40",
+    "bg-yellow/40",
+    "bg-blue/40",
+    "bg-peach/40",
   ];
 
   const [showModal, setShowModal] = useState(false);
@@ -62,8 +74,6 @@ const MeetTheTeam = ({
     biography,
     image,
   }: ProfileContent): void => {
-    console.log(name, jobTitle, image);
-
     setProfileContent({ name, jobTitle, biography, image });
 
     setShowModal(!showModal);
@@ -76,9 +86,13 @@ const MeetTheTeam = ({
 
   return (
     <div className="mx-auto max-w-(--breakpoint-3xl)">
-      <div className="grid grid-cols-1 gap-10 py-10 md:grid-cols-12 md:gap-10">
+      <div
+        className={`grid grid-cols-1 ${layout !== "stacked" ? "gap-10" : "gap-4"} py-10 md:grid-cols-12`}
+      >
         {(title || text || links) && (
-          <div className="col-span-12 flex flex-col justify-center gap-6 px-6 text-center xl:col-span-4 xl:text-left">
+          <div
+            className={`col-span-12 flex flex-col justify-center gap-6 px-6 text-center ${layout !== "stacked" ? "xl:col-span-4 xl:text-left" : ""}`}
+          >
             <Typography
               variant={TypeVariant.H3}
               component={TypeComponent.p}
@@ -86,8 +100,7 @@ const MeetTheTeam = ({
             >
               {title}
             </Typography>
-
-            {text && (
+            {text && layout !== "stacked" && (
               <Typography
                 variant={TypeVariant.Body1}
                 component={TypeComponent.span}
@@ -114,25 +127,29 @@ const MeetTheTeam = ({
             </div>
           </div>
         )}
-        <div className="relative col-span-12 gap-6 pl-6 xl:col-span-8">
+        <div
+          className={`relative col-span-12 gap-6 ${layout !== "stacked" ? "xl:col-span-8" : "xl:col-span-12"}`}
+        >
           {profiles && profiles?.length > 0 && (
             <>
               <Swiper
-                modules={[Scrollbar, A11y]}
+                modules={[Scrollbar, A11y, Pagination]}
                 spaceBetween={20}
-                slidesPerView={1.2}
-                scrollbar={{ draggable: true }}
+                slidesPerView={layout !== "stacked" ? 1.2 : 2}
+                scrollbar={layout === "stacked" ? false : { draggable: true }}
+                pagination={layout === "stacked" && profiles.length > 2}
                 breakpoints={{
                   600: {
-                    slidesPerView: 2.2,
+                    slidesPerView: 2,
+                    slidesOffsetAfter: 36,
                   },
                   1024: {
-                    slidesPerView: 3.2,
-                    slidesOffsetAfter: 0,
+                    slidesPerView: layout !== "stacked" ? 3.2 : 4,
+                    spaceBetween: 40,
                   },
                 }}
-                wrapperClass="p-2"
-                slidesOffsetAfter={36}
+                wrapperClass={`py-2 ${profiles.length < 4 ? "lg:justify-center" : ""}`}
+                className="team-swiper"
               >
                 {profiles?.map((profile, i) => {
                   return (
@@ -148,20 +165,8 @@ const MeetTheTeam = ({
                           buttonClasses[i] || "button-outline-blue text-blue"
                         }
                         buttonStyle="icon-only"
-                        containerClass={
-                          i === 0
-                            ? "bg-green"
-                            : i === 1
-                              ? "bg-lilac"
-                              : "bg-yellow"
-                        }
-                        shadowClass={
-                          i === 0
-                            ? "bg-green/10"
-                            : i === 1
-                              ? "bg-lilac/10"
-                              : "bg-yellow/10"
-                        }
+                        containerClass={bgColors[i]}
+                        shadowClass={shadowClasses[i]}
                         imageFit="contain"
                         modalContent={profile?.biographyRaw}
                         toggleModal={() =>

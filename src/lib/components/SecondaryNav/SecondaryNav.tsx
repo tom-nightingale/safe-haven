@@ -9,6 +9,7 @@ import FancyLink from "@/components/FancyLink/FancyLink";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import config from "@/config/config";
+import { useParams } from "next/navigation";
 
 type Props = {
   nav: NavigationSection[] | Maybe<NavigationSection>[];
@@ -62,6 +63,9 @@ const SecondaryNav = ({ nav }: Props) => {
         setIsOpen(false);
       });
   };
+
+  const params = useParams<{ tag: string; item: string }>();
+  const { slug } = params;
 
   return (
     <>
@@ -124,7 +128,9 @@ const SecondaryNav = ({ nav }: Props) => {
                           onClick={closeNav}
                         >
                           <span className="flex items-center gap-3">
-                            <span className="text-dark-peach opacity-20 transition duration-200 group-hover:opacity-100">
+                            <span
+                              className={`text-dark-peach transition duration-200 group-hover:opacity-100 ${slug && sect?.target?.slug?.current === slug[0] ? "opacity-100" : "opacity-20"}`}
+                            >
                               <FaStar />
                             </span>
                             {sect?.target?.title}
@@ -138,7 +144,7 @@ const SecondaryNav = ({ nav }: Props) => {
                             return (
                               <div
                                 key={child?.target?.title}
-                                className="pl-2 text-sm opacity-70 transition-all duration-200 hover:pl-3 hover:opacity-100"
+                                className={`pl-2 text-sm transition-all duration-200 hover:pl-3 hover:opacity-100 ${slug && child?.target?.slug?.current === slug.at(-1) ? "opacity-100" : "opacity-70"}`}
                               >
                                 <FancyLink
                                   url={`/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}

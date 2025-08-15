@@ -113,7 +113,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                   label="Log in to ParentAdmin"
                   newTab
                   variant={TypeVariant.Body1}
-                  classes="text-pink !font-sans !font-bold"
+                  classes="text-pink !font-sans !font-bold opacity-90 hover:opacity-100"
                   href="https://uk.parentadmin.com/login.php"
                 />
               </div>
@@ -194,12 +194,12 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
               <Typography
                 variant={TypeVariant.Body1}
                 component={TypeComponent.p}
-                classes="flex items-center gap-2"
               >
                 <a
                   href="https://www.facebook.com/SafeHavenDayNursery"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex w-full items-center gap-2"
                 >
                   <FaFacebook /> Follow us on Facebook
                 </a>
