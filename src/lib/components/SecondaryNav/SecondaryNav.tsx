@@ -64,7 +64,7 @@ const SecondaryNav = ({ nav }: Props) => {
       });
   };
 
-  const params = useParams<{ tag: string; item: string }>();
+  const params = useParams<{ tag: string; item: string; slug: string }>();
   const { slug } = params;
 
   return (

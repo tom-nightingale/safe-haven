@@ -7,6 +7,7 @@ import ReviewCards from "@/components/ReviewCards/ReviewCards";
 import MeetTheTeam from "@/components/MeetTheTeam/MeetTheTeam";
 import Locations from "@/components/Locations/Locations";
 import Gallery from "@/components/Gallery/Gallery";
+import Downloads from "@/components/Downloads/Downloads";
 
 type Props = {
   contentBlocks: ContentBlocks | Maybe<ContentBlocks>;
@@ -61,6 +62,9 @@ const ContentBlockDigester = ({ contentBlocks, nurseryDetails }: Props) => {
                 scallopedTop={block?.scallopedTop}
               />
             );
+
+          case "Downloads":
+            return <Downloads key={idx} downloads={block?.downloads} />;
 
           case "TextWithImage":
             return (

@@ -78,7 +78,5 @@ export default async function Page({ params }: Props) {
     return notFound();
   }
 
-  console.log("page", page);
-
   return <NurseryLayout page={Array.isArray(page) && page[0]} />;
 }
