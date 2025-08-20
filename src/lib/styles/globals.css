@@ -272,6 +272,10 @@ body {
   @apply font-sans text-lg text-pretty;
 }
 
+.text-body-2 {
+  @apply font-sans text-pretty;
+}
+
 .text-button-1 {
   @apply font-serif leading-none font-light text-pretty 2xl:text-lg;
 }
@@ -367,4 +371,13 @@ body {
   aspect-ratio: 700 / 567;
   clip-path: polygon(18% 9.5%, 92.5% 26%, 82.7% 90.5%, 8.5% 73.5%);
   overflow: hidden;
+}
+
+input,
+textarea {
+  @apply text-dark-green w-full rounded-3xl border border-gray-200 p-3 font-sans outline-none focus:border-gray-400;
+}
+
+input[type="submit"] {
+  @apply mt-4 w-auto border border-none;
 }

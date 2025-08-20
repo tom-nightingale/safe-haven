@@ -13,6 +13,8 @@ import type { Maybe } from "@/gql/sanity/codegen";
 import type { TypedObject } from "@portabletext/types";
 import KiteSvg from "@/icons/kiteSvg";
 import StarsSvg from "@/icons/starsSvg";
+import { usePathname } from "next/navigation";
+import Form from "@/components/Form/Form";
 
 type Props = {
   title?: Maybe<string>;
@@ -21,6 +23,13 @@ type Props = {
 
 const Locations = ({ title }: Props) => {
   const { nurseries } = useGlobalContext();
+
+  const pathname = usePathname();
+  const slug = pathname.split("/").at(-1) as string;
+
+  const selectedNursery = nurseries?.find(
+    nursery => nursery?.slug?.current === slug,
+  );
 
   return (
     <div className="relative overflow-hidden pb-20 md:pb-40">
@@ -53,29 +62,22 @@ const Locations = ({ title }: Props) => {
             </div>
 
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-              {nurseries &&
-                nurseries.length > 0 &&
-                nurseries.map((nursery: Nursery, i: number) => (
-                  <div
-                    className="flex flex-col items-center rounded-3xl bg-white p-10 xl:p-14"
-                    key={nursery.title}
-                  >
+              {selectedNursery ? (
+                <>
+                  <div className="flex flex-col items-center justify-center rounded-3xl bg-white p-10 xl:p-14">
                     <div className="flex flex-col items-center gap-3 text-center">
                       <Typography
-                        variant={TypeVariant.H4}
+                        variant={TypeVariant.H3}
                         component={TypeComponent.p}
                         bold
-                        classes="opacity-80 hover:opacity-100"
                       >
-                        <a href={`our-nurseries/${nursery?.slug?.current}`}>
-                          {nursery.title}
-                        </a>
+                        {selectedNursery.title}
                       </Typography>
                       <Typography
                         variant={TypeVariant.H6}
                         component={TypeComponent.p}
                       >
-                        {nursery.location}
+                        {selectedNursery.location}
                       </Typography>
                     </div>
 
@@ -83,18 +85,88 @@ const Locations = ({ title }: Props) => {
                       <NurseryDetails
                         title=""
                         subtitle=""
-                        address={nursery.address ?? ""}
-                        phone={nursery.phoneNumber ?? ""}
-                        email={nursery.email ?? ""}
-                        buttonClasses={`${i === 0 ? "button-green" : "button-blue"} font-sans mx-auto md:mx-0`}
-                        mapsLink={nursery?.mapsLink}
-                        directionsLink={nursery?.directionsLink}
+                        address={selectedNursery.address ?? ""}
+                        phone={selectedNursery.phoneNumber ?? ""}
+                        email={selectedNursery.email ?? ""}
+                        buttonClasses="button-green font-sans mx-auto md:mx-0"
+                        mapsLink={selectedNursery?.mapsLink}
+                        directionsLink={selectedNursery?.directionsLink}
                         centered
                         showMapButton
                       />
                     </div>
                   </div>
-                ))}
+
+                  <div className="flex flex-col gap-2 rounded-3xl bg-white p-10 text-center xl:p-14">
+                    <Typography
+                      variant={TypeVariant.H3}
+                      component={TypeComponent.p}
+                      bold
+                    >
+                      Contact {selectedNursery.location}
+                    </Typography>
+
+                    <Typography
+                      variant={TypeVariant.Body2}
+                      component={TypeComponent.p}
+                    >
+                      Complete our short form and we&apos;ll get back to you as
+                      soon as possible.
+                    </Typography>
+
+                    <Form formId="replace-me" />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {nurseries &&
+                    nurseries.length > 0 &&
+                    nurseries.map((nursery: Nursery, i: number) => {
+                      return (
+                        <div
+                          className="flex flex-col items-center rounded-3xl bg-white p-10 xl:p-14"
+                          key={nursery.title}
+                        >
+                          <div className="flex flex-col items-center gap-3 text-center">
+                            <Typography
+                              variant={TypeVariant.H3}
+                              component={TypeComponent.p}
+                              bold
+                              classes="opacity-80 hover:opacity-100"
+                            >
+                              <a
+                                href={`our-nurseries/${nursery?.slug?.current}`}
+                              >
+                                {nursery.title}
+                              </a>
+                            </Typography>
+                            <Typography
+                              variant={TypeVariant.H6}
+                              component={TypeComponent.p}
+                            >
+                              {nursery.location}
+                            </Typography>
+                          </div>
+
+                          <div className="mt-6 flex flex-col md:max-w-4/5">
+                            <NurseryDetails
+                              title=""
+                              subtitle=""
+                              address={nursery.address ?? ""}
+                              phone={nursery.phoneNumber ?? ""}
+                              email={nursery.email ?? ""}
+                              buttonClasses={`${i === 0 ? "button-green" : "button-blue"} font-sans mx-auto md:mx-0`}
+                              mapsLink={nursery?.mapsLink}
+                              directionsLink={nursery?.directionsLink}
+                              centered
+                              showMapButton
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                </>
+              )}
             </div>
           </div>
         </Container>
