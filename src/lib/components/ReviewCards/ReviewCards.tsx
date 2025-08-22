@@ -62,9 +62,6 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                           slidesPerView: 4,
                         },
                       }}
-                      onReachEnd={() => {
-                        console.log("end");
-                      }}
                     >
                       {reviews.map(review => (
                         <SwiperSlide key={review.name} className="!h-auto">

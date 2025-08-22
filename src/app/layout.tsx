@@ -12,10 +12,13 @@ import {
   type GetAllFeedbackQuery,
   type GetAllStaffQuery,
   type GetAllNurseriesQuery,
+  GetAllBannersDocument,
+  type GetAllBannersQuery,
 } from "@/gql/sanity/codegen";
 import config from "@/config/config";
 import Header from "@/components/Header/Header";
-
+import { GoogleAnalytics } from "@next/third-parties/google";
+import BannerContainer from "@/components/BannerContainer/BannerContainer";
 import Footer from "@/components/Footer/Footer";
 import { GlobalContextProvider } from "@/context/GlobalContext";
 
@@ -74,6 +77,19 @@ const GetAllNurseries = async () => {
   }
 };
 
+const GetAllBanners = async () => {
+  try {
+    const client = createApolloClient(fetch);
+    const { data } = await client.query<GetAllBannersQuery>({
+      query: GetAllBannersDocument,
+    });
+    return data ?? undefined;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -85,6 +101,9 @@ export default async function RootLayout({
   const reviews = await GetReviews();
   const nurseries = await GetAllNurseries();
   const staff = await GetAllStaff();
+  const banners = await GetAllBanners();
+
+  console.log(banners);
 
   const primaryNav = primaryNavData?.Navigation ?? undefined;
   const secondaryNav = secondaryNavData?.Navigation ?? undefined;
@@ -100,6 +119,9 @@ export default async function RootLayout({
             staff={staff?.allStaff}
             nurseries={nurseries?.allNursery}
           >
+            {banners && banners?.allBanner?.length > 0 && (
+              <BannerContainer banners={banners.allBanner} />
+            )}
             <Header primaryNav={primaryNav} secondaryNav={secondaryNav} />
             {children}
 
@@ -109,6 +131,7 @@ export default async function RootLayout({
               nurseries={nurseries?.allNursery}
             />
           </GlobalContextProvider>
+          <GoogleAnalytics gaId={config.GOOGLE_ANALYTICS_ID} />
         </body>
       </html>
     </ViewTransitions>

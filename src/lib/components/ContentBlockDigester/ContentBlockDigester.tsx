@@ -8,6 +8,7 @@ import MeetTheTeam from "@/components/MeetTheTeam/MeetTheTeam";
 import Locations from "@/components/Locations/Locations";
 import Gallery from "@/components/Gallery/Gallery";
 import Downloads from "@/components/Downloads/Downloads";
+import GridGallery from "../GridGallery/GridGallery";
 
 type Props = {
   contentBlocks: ContentBlocks | Maybe<ContentBlocks>;
@@ -105,6 +106,11 @@ const ContentBlockDigester = ({ contentBlocks, nurseryDetails }: Props) => {
 
           case "Gallery":
             return <Gallery key={idx} images={block?.images} />;
+
+          case "GridGallery":
+            return (
+              <GridGallery key={idx} gallerySections={block?.gallerySections} />
+            );
 
           default:
             return null;

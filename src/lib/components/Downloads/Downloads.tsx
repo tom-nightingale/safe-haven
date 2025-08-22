@@ -65,6 +65,7 @@ const Downloads = ({ downloads }: Props) => {
                         <Button
                           classes={`p-3 button-outline button-icon-only`}
                           iconOnly
+                          label={`Download ${file?.label}`}
                           icon={<FaDownload />}
                         />
                       </span>

@@ -81,7 +81,13 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
     { scope: cardContainer },
   );
 
-  const widthClasses = ["w-1/4", "w-1/4", "w-1/4", "w-1/4", "w-1/5"];
+  const widthClasses = [
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(25%-2rem)]",
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(25%-2rem)]",
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(25%-2rem)]",
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(25%-2rem)]",
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(20%-2rem)]",
+  ];
 
   return (
     <div className="relative">
@@ -108,10 +114,13 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                   </div>
                 )}
                 {cards && (
-                  <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) justify-center gap-8 xl:mt-15">
+                  <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) flex-wrap justify-center gap-8 xl:mt-15">
                     {cards.map((card, i) => {
                       return (
-                        <div className="box" key={card?.title}>
+                        <div
+                          className={`box ${widthClasses[cards.length - 1]}`}
+                          key={card?.title}
+                        >
                           <Card
                             buttonText={card?.link?.label}
                             href={card?.link?.href}
@@ -156,7 +165,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
             )}
 
             {cards && (
-              <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) justify-center gap-8 xl:mt-15">
+              <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) flex-wrap justify-center gap-8 xl:mt-15">
                 {cards.map((card, i) => {
                   return (
                     <div

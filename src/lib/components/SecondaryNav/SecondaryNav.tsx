@@ -72,6 +72,7 @@ const SecondaryNav = ({ nav }: Props) => {
       <Button
         iconOnly
         icon={<FaBars />}
+        label="Open Navigation"
         classes="button-icon-only text-dark-peach before:border-peach/50"
         onClick={() => {
           openNav();
@@ -96,6 +97,7 @@ const SecondaryNav = ({ nav }: Props) => {
             <Button
               iconOnly
               icon={<FaTimes />}
+              label="Close Navigation"
               classes="button-icon-only"
               onClick={() => {
                 closeNav();

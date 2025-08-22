@@ -66,7 +66,7 @@ const Hero = ({
                     {buttons.map((button: Maybe<Link>, i: number) => {
                       return (
                         <Button
-                          key={button?.label}
+                          key={i}
                           classes={"button-primary button-peach inline-block"}
                           label={button?.label}
                           href={button?.href}

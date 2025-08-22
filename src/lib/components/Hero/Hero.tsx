@@ -23,6 +23,9 @@ import StarsSvg from "@/icons/starsSvg";
 import HorseSvg from "@/icons/horseSvg";
 import DuckSvg from "@/icons/duckSvg";
 import BlocksSvg from "@/icons/blocksSvg";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 type Props = {
   title: TypedObject | TypedObject[];
@@ -36,8 +39,27 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
   const { nurseries } = useGlobalContext();
   const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
 
+  const heroImageRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  gsap.registerPlugin(useGSAP);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      heroImageRef.current,
+      { opacity: 0, yPercent: 10 },
+      {
+        opacity: 1,
+        yPercent: 0,
+        duration: 0.3,
+        delay: 1,
+        ease: "back.out(2)",
+      },
+    ),
+      { scope: heroRef };
+  });
+
   return (
-    <div className="relative">
+    <div className="relative" ref={heroRef}>
       <Container>
         <div className="relative -mt-10 grid grid-cols-12 py-10 md:py-12 lg:py-16 xl:py-24">
           <div className="3xl:pr-20 relative z-10 col-span-12 grid gap-3 sm:col-span-8 lg:col-span-6 lg:pr-16 xl:pr-30">
@@ -99,8 +121,10 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
           </div>
 
           {image && (
-            // <div className="transiton-all 3xl:-right-16 pointer-events-none absolute -top-4 right-0 z-2 h-[120%] w-full opacity-50 duration-200 md:-right-8 md:h-[150%] md:w-2/3 md:opacity-100 lg:-top-12 lg:right-4 lg:h-[145%] xl:-top-12 2xl:h-[130%]">
-            <div className="transiton-all 3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full opacity-50 duration-200 md:-right-8 md:w-2/3 md:opacity-100 lg:right-4">
+            <div
+              ref={heroImageRef}
+              className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full opacity-50 md:-right-8 md:w-2/3 md:opacity-100 lg:right-4"
+            >
               <SanityImage
                 image={image?.image}
                 alt={image?.altText ?? config.COMPANY_NAME}

@@ -61,7 +61,11 @@ const Button = ({
         ) : (
           <FancyLink url={href}>
             <button className={`button ${classes ?? ""}`}>
-              {iconOnly && <span className="aspect-square">{icon}</span>}
+              {iconOnly && (
+                <span className="aspect-square">
+                  {icon} <span className="hidden">{label}</span>
+                </span>
+              )}
 
               {!iconOnly && (
                 <>

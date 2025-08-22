@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import type { Maybe } from "@/gql/sanity/codegen";
 
 type Props = {
-  formId: string;
+  formId: string | Maybe<string>;
 };
 
 type Setter<T> = React.Dispatch<React.SetStateAction<T>>;

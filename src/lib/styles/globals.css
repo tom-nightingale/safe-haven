@@ -273,7 +273,7 @@ body {
 }
 
 .text-body-2 {
-  @apply font-sans text-pretty;
+  @apply font-sans leading-tight text-pretty;
 }
 
 .text-button-1 {
@@ -350,14 +350,16 @@ body {
 }
 
 .block-content {
-  @apply grid gap-2;
+  /* @apply grid gap-2; */
 
-  p {
-    @apply my-3;
+  p,
+  h2,
+  h3 {
+    @apply my-4;
   }
 
   ul {
-    @apply my-3;
+    @apply my-4;
   }
 }
 
