@@ -3,6 +3,9 @@ import createApolloClient from "@/gql/apolloClient";
 import {
   GetPageBySlugDocument,
   type GetPageBySlugQuery,
+  GetAllPageDocument,
+  type GetAllPageQuery,
+  type Page,
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
@@ -20,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { data } = await client.query<GetPageBySlugQuery>({
       query: GetPageBySlugDocument,
       variables: {
-        // slug: slug.at(-1),
+        // slug: slug.at(-1)
         slug: slug.join("/"),
       },
     });
@@ -62,22 +65,38 @@ const GetPage = async (slug: string | undefined): Promise<any> => {
   }
 };
 
-// un-comment this to statically generate pages at build time.
-export async function generateStaticParams() {
-  // get pages
-  const slugs = [["our-rooms"]];
+const GetAllPage = async (): Promise<any> => {
+  try {
+    const client = createApolloClient(fetch);
+    const { data } = await client.query<GetAllPageQuery>({
+      query: GetAllPageDocument,
+    });
+    return data;
+  } catch (err) {
+    console.log("err", err);
+    return notFound();
+  }
+};
 
-  return slugs.map(slugArray => ({
+// STATICALLY GENERATE PAGES AT BUILD TIME
+// ISR one hour increments
+export const revalidate = 3600; // 1 hour seconds
+export async function generateStaticParams() {
+  const allPages = await GetAllPage();
+
+  const pageSlugArray =
+    allPages?.allPage?.map((page: Page) => [page?.slug?.current]) ?? [];
+
+  return pageSlugArray.map((slugArray: string[]) => ({
     slug: slugArray.map(String),
   }));
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
-  // console.log(slug.at(-1));
 
-  const { page } = await GetPage(slug.join("/"));
-  if (!page) {
+  const { page } = await GetPage(slug.at(-1));
+  if (!page[0]) {
     return notFound();
   }
 

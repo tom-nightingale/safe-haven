@@ -100,7 +100,8 @@ export default async function Page({
   const { slug } = await params;
   const { allPost } = await GetSingularBlogPost(slug.at(-1));
   const { allCategory } = await GetCategory(slug.at(-1));
-  if (allPost.length < 1 && allCategory.length < 0) {
+
+  if (!allPost[0] && !allCategory[0]) {
     return notFound();
   }
 
