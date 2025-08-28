@@ -46,12 +46,8 @@ const NavSection = ({
   const pathname = usePathname();
   const slug = pathname.split("/").at(-1) as string;
 
-  const currentPath = pathname.replace(/^\/|\/$/g, ""); // remove leading/trailing slashes
-
-  const hasActiveChild = !!children?.some(child => {
-    const parentSlug = target?.slug?.current?.replace(/^\/|\/$/g, "");
-    const childSlug = child?.target?.slug?.current?.replace(/^\/|\/$/g, "");
-    return `${parentSlug}/${childSlug}` === currentPath;
+  const hasActiveChild = children?.some(child => {
+    return `/${child?.target?.slug?.current}` === pathname;
   });
 
   return (
@@ -110,9 +106,7 @@ const NavSection = ({
                         variant={TypeVariant.Button2}
                         classes={
                           slug !== "" &&
-                          slug !== target?.slug?.current &&
-                          `/${target?.slug?.current}/${child.target.slug.current}` ===
-                            pathname
+                          `/${child?.target?.slug?.current}` === pathname
                             ? "text-peach"
                             : ""
                         }
