@@ -95,7 +95,8 @@ export async function generateStaticParams() {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
-  const { page } = await GetPage(slug.at(-1));
+  const { page } = await GetPage(slug.join("/"));
+
   if (!page[0]) {
     return notFound();
   }
