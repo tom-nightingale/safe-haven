@@ -94,7 +94,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
       {scallopedTop ? (
         <>
           <ScallopedTop>
-            <Container>
+            <Container classes="relative">
               <div className="relative z-1 py-4" ref={cardContainer}>
                 {(title || subtitle) && (
                   <div className="flex flex-col justify-center gap-6 text-center">
@@ -140,12 +140,21 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                   </div>
                 )}
               </div>
+
+              <JigsawSvg
+                stroke="white"
+                classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
+              />
+              <MobileSvg
+                stroke="white"
+                classes="absolute -top-20 right-[2.5%] pointer-events-none opacity-50"
+              />
             </Container>
           </ScallopedTop>
         </>
       ) : (
         <div className="relative z-10 pb-10 xl:pb-15" ref={cardContainer}>
-          <Container>
+          <Container classes="relative">
             {(title || subtitle) && (
               <div className="flex flex-col justify-center gap-6 text-center">
                 <Typography
@@ -190,18 +199,18 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                 })}
               </div>
             )}
+
+            <JigsawSvg
+              stroke="white"
+              classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
+            />
+            <MobileSvg
+              stroke="white"
+              classes="absolute -top-18 right-[2.5%] pointer-events-none opacity-50"
+            />
           </Container>
         </div>
       )}
-
-      <JigsawSvg
-        stroke="white"
-        classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
-      />
-      <MobileSvg
-        stroke="white"
-        classes="absolute top-0 right-[2.5%] pointer-events-none opacity-50"
-      />
     </div>
   );
 };

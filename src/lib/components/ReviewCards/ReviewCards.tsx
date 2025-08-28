@@ -32,24 +32,25 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
       {scallopedBottom ? (
         <>
           <ScallopedBottom>
-            <Container>
+            <Container classes="!px-0">
               <div className="relative z-10 mx-auto w-full py-12">
                 <Typography
                   variant={TypeVariant.H3}
                   component={TypeComponent.h2}
+                  classes="px-6"
                   bold
                 >
                   {title}
                 </Typography>
                 {reviews && reviews?.length > 0 && (
                   <div className="relative mt-10">
-                    {/* <div className="from-taupe via-taupe absolute top-0 right-0 z-10 h-[95%] w-1/12 bg-gradient-to-l to-transparent"></div> */}
                     <Swiper
                       modules={[Scrollbar, A11y]}
                       spaceBetween={20}
                       slidesPerView={1.2}
                       scrollbar={{ draggable: true }}
-                      slidesOffsetAfter={32}
+                      slidesOffsetBefore={24}
+                      slidesOffsetAfter={24}
                       breakpoints={{
                         600: {
                           slidesPerView: 2.2,
@@ -59,7 +60,7 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                           spaceBetween: 30,
                         },
                         1600: {
-                          slidesPerView: 4,
+                          slidesPerView: 4.1,
                         },
                       }}
                     >
@@ -82,52 +83,53 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
           </ScallopedBottom>
         </>
       ) : (
-        <Container>
-          <div className="relative z-1 mx-auto w-full py-12">
-            <Typography
-              variant={TypeVariant.H3}
-              component={TypeComponent.h2}
-              bold
-            >
-              {title}
-            </Typography>
-            {reviews && reviews?.length > 0 && (
-              <div className="mt-10">
-                <Swiper
-                  modules={[Scrollbar, A11y]}
-                  spaceBetween={20}
-                  slidesPerView={1.2}
-                  scrollbar={{ draggable: true }}
-                  breakpoints={{
-                    600: {
-                      slidesPerView: 2.2,
-                    },
-                    1024: {
-                      slidesPerView: 3.2,
-                      spaceBetween: 30,
-                    },
-                    1280: {
-                      slidesPerView: 4,
-                    },
-                  }}
-                >
-                  {reviews.map(review => (
-                    <SwiperSlide key={review.name} className="!h-auto">
-                      <ReviewCard
-                        name={review.name}
-                        rating={review.starRating}
-                        review={review.contentRaw}
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-            )}
-          </div>
-
-          <RabbitSvg classes="absolute z-0 top-[0%] right-[5%] pointer-events-none" />
-          <TrainSvg classes="absolute z-0 top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
-        </Container>
+        <>
+          <Container classes="!px-0">
+            <div className="relative z-1 mx-auto w-full py-12">
+              <Typography
+                variant={TypeVariant.H3}
+                component={TypeComponent.h2}
+                bold
+              >
+                {title}
+              </Typography>
+              {reviews && reviews?.length > 0 && (
+                <div className="mt-10">
+                  <Swiper
+                    modules={[Scrollbar, A11y]}
+                    spaceBetween={20}
+                    slidesPerView={1.2}
+                    scrollbar={{ draggable: true }}
+                    breakpoints={{
+                      600: {
+                        slidesPerView: 2.2,
+                      },
+                      1024: {
+                        slidesPerView: 3.2,
+                        spaceBetween: 30,
+                      },
+                      1280: {
+                        slidesPerView: 4,
+                      },
+                    }}
+                  >
+                    {reviews.map(review => (
+                      <SwiperSlide key={review.name} className="!h-auto">
+                        <ReviewCard
+                          name={review.name}
+                          rating={review.starRating}
+                          review={review.contentRaw}
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+              )}
+            </div>
+            <RabbitSvg classes="absolute z-0 top-[0%] right-[5%] pointer-events-none" />
+            <TrainSvg classes="absolute z-0 top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
+          </Container>
+        </>
       )}
     </div>
   );

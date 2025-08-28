@@ -153,10 +153,11 @@ export type CardListFilter = {
   title?: InputMaybe<StringFilter>;
 };
 
-export type CardListOrDownloadsOrGalleryOrGridGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage =
+export type CardListOrDownloadsOrFeesOrGalleryOrGridGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage =
 
     | CardList
     | Downloads
+    | Fees
     | Gallery
     | GridGallery
     | Hero
@@ -291,7 +292,7 @@ export type ContentBlocks = {
   _type?: Maybe<Scalars["String"]["output"]>;
   contentblocks?: Maybe<
     Array<
-      Maybe<CardListOrDownloadsOrGalleryOrGridGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage>
+      Maybe<CardListOrDownloadsOrFeesOrGalleryOrGridGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage>
     >
   >;
 };
@@ -417,6 +418,30 @@ export type DownloadsSorting = {
   _type?: InputMaybe<SortOrder>;
 };
 
+export type Fee = {
+  __typename?: "Fee";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Cost of the fee (e.g. '£74.50') */
+  cost?: Maybe<Scalars["String"]["output"]>;
+  /** Description of the fee (e.g. 'Full Day') */
+  label?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type FeeFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  cost?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+};
+
+export type FeeSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  cost?: InputMaybe<SortOrder>;
+  label?: InputMaybe<SortOrder>;
+};
+
 export type Feedback = Document & {
   __typename?: "Feedback";
   /** Date the document was created */
@@ -457,6 +482,42 @@ export type FeedbackSorting = {
   _updatedAt?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   starRating?: InputMaybe<SortOrder>;
+};
+
+export type Fees = {
+  __typename?: "Fees";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  fees?: Maybe<Array<Maybe<Fee>>>;
+  links?: Maybe<Array<Maybe<Link>>>;
+  /** Reverse the layout of the fees block? (Useful if one fee block follows another) */
+  reverseLayout?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Does this block need a scalloped bottom? */
+  scallopedBottom?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Does this block need a scalloped top? */
+  scallopedTop?: Maybe<Scalars["Boolean"]["output"]>;
+  subtitle?: Maybe<Scalars["String"]["output"]>;
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type FeesFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  reverseLayout?: InputMaybe<BooleanFilter>;
+  scallopedBottom?: InputMaybe<BooleanFilter>;
+  scallopedTop?: InputMaybe<BooleanFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type FeesSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  reverseLayout?: InputMaybe<SortOrder>;
+  scallopedBottom?: InputMaybe<SortOrder>;
+  scallopedTop?: InputMaybe<SortOrder>;
+  subtitle?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
 export type File = {
@@ -2171,6 +2232,7 @@ export type ContentBlockFragmentFragment = {
               | Array<
                   | {
                       __typename?: "FileBlock";
+                      _key?: string | null | undefined;
                       label?: string | null | undefined;
                       file?:
                         | {
@@ -2185,6 +2247,40 @@ export type ContentBlockFragmentFragment = {
                           }
                         | null
                         | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+          }
+        | {
+            __typename?: "Fees";
+            scallopedTop?: boolean | null | undefined;
+            scallopedBottom?: boolean | null | undefined;
+            title?: string | null | undefined;
+            subtitle?: string | null | undefined;
+            reverseLayout?: boolean | null | undefined;
+            fees?:
+              | Array<
+                  | {
+                      __typename?: "Fee";
+                      _key?: string | null | undefined;
+                      label?: string | null | undefined;
+                      cost?: string | null | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+            links?:
+              | Array<
+                  | {
+                      __typename?: "Link";
+                      _key?: string | null | undefined;
+                      label?: string | null | undefined;
+                      href?: string | null | undefined;
                     }
                   | null
                   | undefined
@@ -3171,6 +3267,7 @@ export type GetPageBySlugQuery = {
                       | Array<
                           | {
                               __typename?: "FileBlock";
+                              _key?: string | null | undefined;
                               label?: string | null | undefined;
                               file?:
                                 | {
@@ -3185,6 +3282,40 @@ export type GetPageBySlugQuery = {
                                   }
                                 | null
                                 | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "Fees";
+                    scallopedTop?: boolean | null | undefined;
+                    scallopedBottom?: boolean | null | undefined;
+                    title?: string | null | undefined;
+                    subtitle?: string | null | undefined;
+                    reverseLayout?: boolean | null | undefined;
+                    fees?:
+                      | Array<
+                          | {
+                              __typename?: "Fee";
+                              _key?: string | null | undefined;
+                              label?: string | null | undefined;
+                              cost?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                    links?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              _key?: string | null | undefined;
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
                             }
                           | null
                           | undefined
@@ -3786,6 +3917,7 @@ export type GetNurseryBySlugQuery = {
                       | Array<
                           | {
                               __typename?: "FileBlock";
+                              _key?: string | null | undefined;
                               label?: string | null | undefined;
                               file?:
                                 | {
@@ -3800,6 +3932,40 @@ export type GetNurseryBySlugQuery = {
                                   }
                                 | null
                                 | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "Fees";
+                    scallopedTop?: boolean | null | undefined;
+                    scallopedBottom?: boolean | null | undefined;
+                    title?: string | null | undefined;
+                    subtitle?: string | null | undefined;
+                    reverseLayout?: boolean | null | undefined;
+                    fees?:
+                      | Array<
+                          | {
+                              __typename?: "Fee";
+                              _key?: string | null | undefined;
+                              label?: string | null | undefined;
+                              cost?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                    links?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              _key?: string | null | undefined;
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
                             }
                           | null
                           | undefined
@@ -5228,6 +5394,77 @@ export const ContentBlockFragmentFragmentDoc = {
                   kind: "InlineFragment",
                   typeCondition: {
                     kind: "NamedType",
+                    name: { kind: "Name", value: "Fees" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedTop" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedBottom" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "subtitle" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "fees" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "cost" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "links" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "href" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "reverseLayout" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
                     name: { kind: "Name", value: "Downloads" },
                   },
                   selectionSet: {
@@ -5239,6 +5476,10 @@ export const ContentBlockFragmentFragmentDoc = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "label" },
@@ -7776,6 +8017,77 @@ export const GetPageBySlugDocument = {
                   kind: "InlineFragment",
                   typeCondition: {
                     kind: "NamedType",
+                    name: { kind: "Name", value: "Fees" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedTop" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedBottom" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "subtitle" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "fees" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "cost" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "links" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "href" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "reverseLayout" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
                     name: { kind: "Name", value: "Downloads" },
                   },
                   selectionSet: {
@@ -7787,6 +8099,10 @@ export const GetPageBySlugDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "label" },
@@ -8920,6 +9236,77 @@ export const GetNurseryBySlugDocument = {
                   kind: "InlineFragment",
                   typeCondition: {
                     kind: "NamedType",
+                    name: { kind: "Name", value: "Fees" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedTop" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedBottom" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "subtitle" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "fees" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "cost" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "links" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "href" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "reverseLayout" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
                     name: { kind: "Name", value: "Downloads" },
                   },
                   selectionSet: {
@@ -8931,6 +9318,10 @@ export const GetNurseryBySlugDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "label" },

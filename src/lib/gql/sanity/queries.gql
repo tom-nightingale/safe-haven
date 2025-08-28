@@ -192,8 +192,26 @@ fragment ContentBlockFragment on ContentBlocks {
     ... on LocationDetails {
       title
     }
+    ... on Fees {
+      scallopedTop
+      scallopedBottom
+      title
+      subtitle
+      fees {
+        _key
+        label
+        cost
+      }
+      links {
+        _key
+        label
+        href
+      }
+      reverseLayout
+    }
     ... on Downloads {
       downloads {
+        _key
         label
         file {
           asset {

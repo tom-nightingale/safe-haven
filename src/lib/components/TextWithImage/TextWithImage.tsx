@@ -69,18 +69,18 @@ const TextWithImageInner = ({
 
             <a
               href={`tel:${phoneNumber ?? nurseryPhoneNumber}`}
-              className={`flex items-center ${directionsLink ? "-order-2" : ""}`}
+              className={`group flex items-center p-0 ${directionsLink ? "-order-2" : ""}`}
             >
               <Typography
                 variant={TypeVariant.Button1}
-                component={TypeComponent.p}
+                component={TypeComponent.span}
                 classes="flex items-center gap-1"
               >
                 <span className="mr-1 rotate-90 text-[#7Da8A4]">
                   <FaPhone />
                 </span>
                 Call us on
-                <span className="font-medium">
+                <span className="group-hover:text-peach font-medium">
                   {phoneNumber ?? nurseryPhoneNumber}
                 </span>
               </Typography>

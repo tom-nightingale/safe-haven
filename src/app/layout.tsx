@@ -103,8 +103,6 @@ export default async function RootLayout({
   const staff = await GetAllStaff();
   const banners = await GetAllBanners();
 
-  console.log(banners);
-
   const primaryNav = primaryNavData?.Navigation ?? undefined;
   const secondaryNav = secondaryNavData?.Navigation ?? undefined;
 

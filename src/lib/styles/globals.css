@@ -242,6 +242,10 @@ body {
       @apply pointer-events-none absolute top-0 left-0 h-full w-full rounded-full border-2 border-dashed transition duration-200;
     }
   }
+
+  &.button-link {
+    @apply hover:text-peach relative overflow-hidden rounded-none p-0 !font-sans;
+  }
 }
 
 .text-h1 {
@@ -294,7 +298,7 @@ body {
 }
 
 .swiper-scrollbar {
-  @apply !bg-white;
+  @apply !right-6 !left-6 !w-[calc(100%-4rem)] !bg-white;
 }
 
 .swiper-pagination-bullet {

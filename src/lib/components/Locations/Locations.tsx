@@ -61,7 +61,10 @@ const Locations = ({ title }: Props) => {
               </Typography>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <div
+              className="grid scroll-m-20 grid-cols-1 gap-8 lg:grid-cols-2"
+              id="locationDetails"
+            >
               {selectedNursery ? (
                 <>
                   <div className="flex flex-col items-center justify-center rounded-3xl bg-white p-10 xl:p-14">

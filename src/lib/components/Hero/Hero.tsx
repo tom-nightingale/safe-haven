@@ -60,7 +60,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
 
   return (
     <div className="relative" ref={heroRef}>
-      <Container>
+      <Container classes="relative">
         <div className="relative -mt-10 grid grid-cols-12 py-10 md:py-12 lg:py-16 xl:py-24">
           <div className="3xl:pr-20 relative z-10 col-span-12 grid gap-3 sm:col-span-8 lg:col-span-6 lg:pr-16 xl:pr-30">
             <Typography
@@ -103,7 +103,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
 
               <a
                 href={`tel:${nurseryPhoneNumber}`}
-                className="flex items-center"
+                className="group flex items-center"
               >
                 <Typography
                   variant={TypeVariant.Button1}
@@ -114,7 +114,9 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
                     <FaPhone />
                   </span>
                   Call us on
-                  <span className="font-medium">{nurseryPhoneNumber}</span>
+                  <span className="group-hover:text-peach font-medium">
+                    {nurseryPhoneNumber}
+                  </span>
                 </Typography>
               </a>
             </div>
@@ -150,12 +152,12 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
             })}
           </div>
         )}
-      </Container>
 
-      <StarsSvg classes="absolute top-[16%] left-[32%] pointer-events-none" />
-      <DuckSvg classes="absolute top-[60%] left-0 pointer-events-none" />
-      <HorseSvg classes="absolute top-full left-[33%] pointer-events-none scale-[60%]" />
-      <BlocksSvg classes="absolute top-[90%] right-[12%] pointer-events-none" />
+        <StarsSvg classes="absolute top-[16%] left-[32%] pointer-events-none" />
+        <DuckSvg classes="absolute top-[60%] left-0 pointer-events-none" />
+        <HorseSvg classes="absolute top-full left-[33%] pointer-events-none scale-[60%]" />
+        <BlocksSvg classes="absolute top-[90%] right-[12%] pointer-events-none" />
+      </Container>
     </div>
   );
 };
