@@ -3151,6 +3151,19 @@ export type GetAllRoomsQuery = {
   }>;
 };
 
+export type GetAllPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllPageQuery = {
+  __typename?: "RootQuery";
+  allPage: Array<{
+    __typename?: "Page";
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+};
+
 export type GetPageBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars["String"]["input"]>;
 }>;
@@ -7210,6 +7223,43 @@ export const GetAllRoomsDocument = {
     },
   ],
 } as unknown as DocumentNode<GetAllRoomsQuery, GetAllRoomsQueryVariables>;
+export const GetAllPageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllPage" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allPage" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetAllPageQuery, GetAllPageQueryVariables>;
 export const GetPageBySlugDocument = {
   kind: "Document",
   definitions: [
