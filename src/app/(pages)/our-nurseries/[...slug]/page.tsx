@@ -77,10 +77,9 @@ const GetAllNurseries = async () => {
   }
 };
 
+// STATICALLY GENERATE PAGES AT BUILD TIME
 // ISR one hour increments
 export const revalidate = 3600; // 1 hour seconds
-
-// un-comment this to statically generate pages at build time.
 export async function generateStaticParams() {
   const nurseries = await GetAllNurseries();
 
@@ -98,7 +97,7 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
 
   const { page } = await GetNurseryBySlug(slug.at(-1));
-  if (!page) {
+  if (!page[0]) {
     return notFound();
   }
 

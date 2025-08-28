@@ -436,6 +436,14 @@ query GetAllRooms {
   }
 }
 
+query GetAllPage {
+  allPage {
+    slug {
+      current
+    }
+  }
+}
+
 query GetPageBySlug($slug: String) {
   page: allPage(where: { slug: { current: { eq: $slug } } }) {
     _id
