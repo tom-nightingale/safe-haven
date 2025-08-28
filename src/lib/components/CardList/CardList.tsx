@@ -81,14 +81,20 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
     { scope: cardContainer },
   );
 
-  const widthClasses = ["w-1/4", "w-1/4", "w-1/4", "w-1/4", "w-1/5"];
+  const widthClasses = [
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(25%-2rem)]",
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(25%-2rem)]",
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(25%-2rem)]",
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(25%-2rem)]",
+    "w-full xs:w-[calc(50%-1rem)] lg:w-[calc(20%-2rem)]",
+  ];
 
   return (
     <div className="relative">
       {scallopedTop ? (
         <>
           <ScallopedTop>
-            <Container>
+            <Container classes="relative">
               <div className="relative z-1 py-4" ref={cardContainer}>
                 {(title || subtitle) && (
                   <div className="flex flex-col justify-center gap-6 text-center">
@@ -108,10 +114,13 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                   </div>
                 )}
                 {cards && (
-                  <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) justify-center gap-8 xl:mt-15">
+                  <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) flex-wrap justify-center gap-8 xl:mt-15">
                     {cards.map((card, i) => {
                       return (
-                        <div className="box" key={card?.title}>
+                        <div
+                          className={`box ${widthClasses[cards.length - 1]}`}
+                          key={card?.title}
+                        >
                           <Card
                             buttonText={card?.link?.label}
                             href={card?.link?.href}
@@ -131,12 +140,21 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                   </div>
                 )}
               </div>
+
+              <JigsawSvg
+                stroke="white"
+                classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
+              />
+              <MobileSvg
+                stroke="white"
+                classes="absolute -top-20 right-[2.5%] pointer-events-none opacity-50"
+              />
             </Container>
           </ScallopedTop>
         </>
       ) : (
         <div className="relative z-10 pb-10 xl:pb-15" ref={cardContainer}>
-          <Container>
+          <Container classes="relative">
             {(title || subtitle) && (
               <div className="flex flex-col justify-center gap-6 text-center">
                 <Typography
@@ -156,7 +174,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
             )}
 
             {cards && (
-              <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) justify-center gap-8 xl:mt-15">
+              <div className="mx-auto mt-10 flex max-w-(--breakpoint-3xl) flex-wrap justify-center gap-8 xl:mt-15">
                 {cards.map((card, i) => {
                   return (
                     <div
@@ -181,18 +199,18 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                 })}
               </div>
             )}
+
+            <JigsawSvg
+              stroke="white"
+              classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
+            />
+            <MobileSvg
+              stroke="white"
+              classes="absolute -top-18 right-[2.5%] pointer-events-none opacity-50"
+            />
           </Container>
         </div>
       )}
-
-      <JigsawSvg
-        stroke="white"
-        classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
-      />
-      <MobileSvg
-        stroke="white"
-        classes="absolute top-0 right-[2.5%] pointer-events-none opacity-50"
-      />
     </div>
   );
 };

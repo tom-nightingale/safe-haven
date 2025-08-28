@@ -153,11 +153,13 @@ export type CardListFilter = {
   title?: InputMaybe<StringFilter>;
 };
 
-export type CardListOrDownloadsOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage =
+export type CardListOrDownloadsOrFeesOrGalleryOrGridGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage =
 
     | CardList
     | Downloads
+    | Fees
     | Gallery
+    | GridGallery
     | Hero
     | LocationDetails
     | ReviewsCarousel
@@ -290,7 +292,7 @@ export type ContentBlocks = {
   _type?: Maybe<Scalars["String"]["output"]>;
   contentblocks?: Maybe<
     Array<
-      Maybe<CardListOrDownloadsOrGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage>
+      Maybe<CardListOrDownloadsOrFeesOrGalleryOrGridGalleryOrHeroOrLocationDetailsOrReviewsCarouselOrSimpleHeroOrStaffCardsOrTextWithImage>
     >
   >;
 };
@@ -416,6 +418,30 @@ export type DownloadsSorting = {
   _type?: InputMaybe<SortOrder>;
 };
 
+export type Fee = {
+  __typename?: "Fee";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Cost of the fee (e.g. '£74.50') */
+  cost?: Maybe<Scalars["String"]["output"]>;
+  /** Description of the fee (e.g. 'Full Day') */
+  label?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type FeeFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  cost?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+};
+
+export type FeeSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  cost?: InputMaybe<SortOrder>;
+  label?: InputMaybe<SortOrder>;
+};
+
 export type Feedback = Document & {
   __typename?: "Feedback";
   /** Date the document was created */
@@ -456,6 +482,42 @@ export type FeedbackSorting = {
   _updatedAt?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   starRating?: InputMaybe<SortOrder>;
+};
+
+export type Fees = {
+  __typename?: "Fees";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  fees?: Maybe<Array<Maybe<Fee>>>;
+  links?: Maybe<Array<Maybe<Link>>>;
+  /** Reverse the layout of the fees block? (Useful if one fee block follows another) */
+  reverseLayout?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Does this block need a scalloped bottom? */
+  scallopedBottom?: Maybe<Scalars["Boolean"]["output"]>;
+  /** Does this block need a scalloped top? */
+  scallopedTop?: Maybe<Scalars["Boolean"]["output"]>;
+  subtitle?: Maybe<Scalars["String"]["output"]>;
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type FeesFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  reverseLayout?: InputMaybe<BooleanFilter>;
+  scallopedBottom?: InputMaybe<BooleanFilter>;
+  scallopedTop?: InputMaybe<BooleanFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type FeesSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  reverseLayout?: InputMaybe<SortOrder>;
+  scallopedBottom?: InputMaybe<SortOrder>;
+  scallopedTop?: InputMaybe<SortOrder>;
+  subtitle?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
 export type File = {
@@ -532,6 +594,31 @@ export type GalleryFilter = {
   _type?: InputMaybe<StringFilter>;
   scallopedBottom?: InputMaybe<BooleanFilter>;
   scallopedTop?: InputMaybe<BooleanFilter>;
+};
+
+export type GallerySection = {
+  __typename?: "GallerySection";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  images?: Maybe<Array<Maybe<ImageBlock>>>;
+  /** Subtitle */
+  subtitle?: Maybe<Scalars["String"]["output"]>;
+  /** Title */
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type GallerySectionFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type GallerySectionSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  subtitle?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
 export type GallerySorting = {
@@ -617,6 +704,23 @@ export type GlobalSorting = {
   registrationNumber?: InputMaybe<SortOrder>;
   seo?: InputMaybe<SeoSorting>;
   vatNumber?: InputMaybe<SortOrder>;
+};
+
+export type GridGallery = {
+  __typename?: "GridGallery";
+  _key?: Maybe<Scalars["String"]["output"]>;
+  _type?: Maybe<Scalars["String"]["output"]>;
+  gallerySections?: Maybe<Array<Maybe<GallerySection>>>;
+};
+
+export type GridGalleryFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+};
+
+export type GridGallerySorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
 };
 
 export type Hero = {
@@ -940,6 +1044,8 @@ export type Nursery = Document & {
   contentBlocks?: Maybe<ContentBlocks>;
   directionsLink?: Maybe<Scalars["String"]["output"]>;
   email?: Maybe<Scalars["String"]["output"]>;
+  /** The ID of the form in Formspree. Warning: Updating this may stop emails from sending. */
+  formId?: Maybe<Scalars["String"]["output"]>;
   location?: Maybe<Scalars["String"]["output"]>;
   mapsLink?: Maybe<Scalars["String"]["output"]>;
   orderRank?: Maybe<Scalars["String"]["output"]>;
@@ -962,6 +1068,7 @@ export type NurseryFilter = {
   contentBlocks?: InputMaybe<ContentBlocksFilter>;
   directionsLink?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
+  formId?: InputMaybe<StringFilter>;
   location?: InputMaybe<StringFilter>;
   mapsLink?: InputMaybe<StringFilter>;
   orderRank?: InputMaybe<StringFilter>;
@@ -982,6 +1089,7 @@ export type NurserySorting = {
   contentBlocks?: InputMaybe<ContentBlocksSorting>;
   directionsLink?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  formId?: InputMaybe<SortOrder>;
   location?: InputMaybe<SortOrder>;
   mapsLink?: InputMaybe<SortOrder>;
   orderRank?: InputMaybe<SortOrder>;
@@ -2124,6 +2232,7 @@ export type ContentBlockFragmentFragment = {
               | Array<
                   | {
                       __typename?: "FileBlock";
+                      _key?: string | null | undefined;
                       label?: string | null | undefined;
                       file?:
                         | {
@@ -2138,6 +2247,40 @@ export type ContentBlockFragmentFragment = {
                           }
                         | null
                         | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+          }
+        | {
+            __typename?: "Fees";
+            scallopedTop?: boolean | null | undefined;
+            scallopedBottom?: boolean | null | undefined;
+            title?: string | null | undefined;
+            subtitle?: string | null | undefined;
+            reverseLayout?: boolean | null | undefined;
+            fees?:
+              | Array<
+                  | {
+                      __typename?: "Fee";
+                      _key?: string | null | undefined;
+                      label?: string | null | undefined;
+                      cost?: string | null | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+            links?:
+              | Array<
+                  | {
+                      __typename?: "Link";
+                      _key?: string | null | undefined;
+                      label?: string | null | undefined;
+                      href?: string | null | undefined;
                     }
                   | null
                   | undefined
@@ -2193,6 +2336,77 @@ export type ContentBlockFragmentFragment = {
                               | null
                               | undefined;
                           }
+                        | null
+                        | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+          }
+        | {
+            __typename?: "GridGallery";
+            gallerySections?:
+              | Array<
+                  | {
+                      __typename?: "GallerySection";
+                      _key?: string | null | undefined;
+                      title?: string | null | undefined;
+                      subtitle?: string | null | undefined;
+                      images?:
+                        | Array<
+                            | {
+                                __typename?: "ImageBlock";
+                                image?:
+                                  | {
+                                      __typename?: "Image";
+                                      _key?: string | null | undefined;
+                                      asset?:
+                                        | {
+                                            __typename?: "SanityImageAsset";
+                                            url?: string | null | undefined;
+                                            altText?: string | null | undefined;
+                                            metadata?:
+                                              | {
+                                                  __typename?: "SanityImageMetadata";
+                                                  lqip?:
+                                                    | string
+                                                    | null
+                                                    | undefined;
+                                                }
+                                              | null
+                                              | undefined;
+                                          }
+                                        | null
+                                        | undefined;
+                                      hotspot?:
+                                        | {
+                                            __typename?: "SanityImageHotspot";
+                                            x?: number | null | undefined;
+                                            y?: number | null | undefined;
+                                            width?: number | null | undefined;
+                                            height?: number | null | undefined;
+                                          }
+                                        | null
+                                        | undefined;
+                                      crop?:
+                                        | {
+                                            __typename?: "SanityImageCrop";
+                                            top?: number | null | undefined;
+                                            bottom?: number | null | undefined;
+                                            left?: number | null | undefined;
+                                            right?: number | null | undefined;
+                                          }
+                                        | null
+                                        | undefined;
+                                    }
+                                  | null
+                                  | undefined;
+                              }
+                            | null
+                            | undefined
+                          >
                         | null
                         | undefined;
                     }
@@ -2891,6 +3105,7 @@ export type GetAllNurseriesQuery = {
     email?: string | null | undefined;
     directionsLink?: string | null | undefined;
     mapsLink?: string | null | undefined;
+    formId?: string | null | undefined;
     slug?:
       | { __typename?: "Slug"; current?: string | null | undefined }
       | null
@@ -3052,6 +3267,7 @@ export type GetPageBySlugQuery = {
                       | Array<
                           | {
                               __typename?: "FileBlock";
+                              _key?: string | null | undefined;
                               label?: string | null | undefined;
                               file?:
                                 | {
@@ -3066,6 +3282,40 @@ export type GetPageBySlugQuery = {
                                   }
                                 | null
                                 | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "Fees";
+                    scallopedTop?: boolean | null | undefined;
+                    scallopedBottom?: boolean | null | undefined;
+                    title?: string | null | undefined;
+                    subtitle?: string | null | undefined;
+                    reverseLayout?: boolean | null | undefined;
+                    fees?:
+                      | Array<
+                          | {
+                              __typename?: "Fee";
+                              _key?: string | null | undefined;
+                              label?: string | null | undefined;
+                              cost?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                    links?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              _key?: string | null | undefined;
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
                             }
                           | null
                           | undefined
@@ -3124,6 +3374,107 @@ export type GetPageBySlugQuery = {
                                       | null
                                       | undefined;
                                   }
+                                | null
+                                | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "GridGallery";
+                    gallerySections?:
+                      | Array<
+                          | {
+                              __typename?: "GallerySection";
+                              _key?: string | null | undefined;
+                              title?: string | null | undefined;
+                              subtitle?: string | null | undefined;
+                              images?:
+                                | Array<
+                                    | {
+                                        __typename?: "ImageBlock";
+                                        image?:
+                                          | {
+                                              __typename?: "Image";
+                                              _key?: string | null | undefined;
+                                              asset?:
+                                                | {
+                                                    __typename?: "SanityImageAsset";
+                                                    url?:
+                                                      | string
+                                                      | null
+                                                      | undefined;
+                                                    altText?:
+                                                      | string
+                                                      | null
+                                                      | undefined;
+                                                    metadata?:
+                                                      | {
+                                                          __typename?: "SanityImageMetadata";
+                                                          lqip?:
+                                                            | string
+                                                            | null
+                                                            | undefined;
+                                                        }
+                                                      | null
+                                                      | undefined;
+                                                  }
+                                                | null
+                                                | undefined;
+                                              hotspot?:
+                                                | {
+                                                    __typename?: "SanityImageHotspot";
+                                                    x?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    y?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    width?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    height?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                  }
+                                                | null
+                                                | undefined;
+                                              crop?:
+                                                | {
+                                                    __typename?: "SanityImageCrop";
+                                                    top?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    bottom?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    left?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    right?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                  }
+                                                | null
+                                                | undefined;
+                                            }
+                                          | null
+                                          | undefined;
+                                      }
+                                    | null
+                                    | undefined
+                                  >
                                 | null
                                 | undefined;
                             }
@@ -3460,6 +3811,7 @@ export type GetNurseryBySlugQuery = {
     email?: string | null | undefined;
     directionsLink?: string | null | undefined;
     mapsLink?: string | null | undefined;
+    formId?: string | null | undefined;
     contentBlocks?:
       | {
           __typename?: "ContentBlocks";
@@ -3565,6 +3917,7 @@ export type GetNurseryBySlugQuery = {
                       | Array<
                           | {
                               __typename?: "FileBlock";
+                              _key?: string | null | undefined;
                               label?: string | null | undefined;
                               file?:
                                 | {
@@ -3579,6 +3932,40 @@ export type GetNurseryBySlugQuery = {
                                   }
                                 | null
                                 | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "Fees";
+                    scallopedTop?: boolean | null | undefined;
+                    scallopedBottom?: boolean | null | undefined;
+                    title?: string | null | undefined;
+                    subtitle?: string | null | undefined;
+                    reverseLayout?: boolean | null | undefined;
+                    fees?:
+                      | Array<
+                          | {
+                              __typename?: "Fee";
+                              _key?: string | null | undefined;
+                              label?: string | null | undefined;
+                              cost?: string | null | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                    links?:
+                      | Array<
+                          | {
+                              __typename?: "Link";
+                              _key?: string | null | undefined;
+                              label?: string | null | undefined;
+                              href?: string | null | undefined;
                             }
                           | null
                           | undefined
@@ -3637,6 +4024,107 @@ export type GetNurseryBySlugQuery = {
                                       | null
                                       | undefined;
                                   }
+                                | null
+                                | undefined;
+                            }
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  }
+                | {
+                    __typename?: "GridGallery";
+                    gallerySections?:
+                      | Array<
+                          | {
+                              __typename?: "GallerySection";
+                              _key?: string | null | undefined;
+                              title?: string | null | undefined;
+                              subtitle?: string | null | undefined;
+                              images?:
+                                | Array<
+                                    | {
+                                        __typename?: "ImageBlock";
+                                        image?:
+                                          | {
+                                              __typename?: "Image";
+                                              _key?: string | null | undefined;
+                                              asset?:
+                                                | {
+                                                    __typename?: "SanityImageAsset";
+                                                    url?:
+                                                      | string
+                                                      | null
+                                                      | undefined;
+                                                    altText?:
+                                                      | string
+                                                      | null
+                                                      | undefined;
+                                                    metadata?:
+                                                      | {
+                                                          __typename?: "SanityImageMetadata";
+                                                          lqip?:
+                                                            | string
+                                                            | null
+                                                            | undefined;
+                                                        }
+                                                      | null
+                                                      | undefined;
+                                                  }
+                                                | null
+                                                | undefined;
+                                              hotspot?:
+                                                | {
+                                                    __typename?: "SanityImageHotspot";
+                                                    x?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    y?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    width?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    height?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                  }
+                                                | null
+                                                | undefined;
+                                              crop?:
+                                                | {
+                                                    __typename?: "SanityImageCrop";
+                                                    top?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    bottom?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    left?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                    right?:
+                                                      | number
+                                                      | null
+                                                      | undefined;
+                                                  }
+                                                | null
+                                                | undefined;
+                                            }
+                                          | null
+                                          | undefined;
+                                      }
+                                    | null
+                                    | undefined
+                                  >
                                 | null
                                 | undefined;
                             }
@@ -3951,6 +4439,38 @@ export type GetNurseryBySlugQuery = {
             | null
             | undefined;
         }
+      | null
+      | undefined;
+  }>;
+};
+
+export type GetAllBannersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllBannersQuery = {
+  __typename?: "RootQuery";
+  allBanner: Array<{
+    __typename?: "Banner";
+    _id?: string | null | undefined;
+    content?: string | null | undefined;
+    darkTextTheme?: boolean | null | undefined;
+    backgroundColour?:
+      | {
+          __typename?: "SimplerColor";
+          label?: string | null | undefined;
+          value?: string | null | undefined;
+        }
+      | null
+      | undefined;
+    links?:
+      | Array<
+          | {
+              __typename?: "Link";
+              label?: string | null | undefined;
+              href?: string | null | undefined;
+            }
+          | null
+          | undefined
+        >
       | null
       | undefined;
   }>;
@@ -4874,6 +5394,77 @@ export const ContentBlockFragmentFragmentDoc = {
                   kind: "InlineFragment",
                   typeCondition: {
                     kind: "NamedType",
+                    name: { kind: "Name", value: "Fees" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedTop" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedBottom" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "subtitle" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "fees" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "cost" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "links" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "href" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "reverseLayout" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
                     name: { kind: "Name", value: "Downloads" },
                   },
                   selectionSet: {
@@ -4885,6 +5476,10 @@ export const ContentBlockFragmentFragmentDoc = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "label" },
@@ -5031,6 +5626,115 @@ export const ContentBlockFragmentFragmentDoc = {
                                           name: {
                                             kind: "Name",
                                             value: "imageCrop",
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "GridGallery" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "gallerySections" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "subtitle" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "images" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "image" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "_key" },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "asset",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageAsset",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "hotspot",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageHotspot",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "crop" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageCrop",
+                                                },
+                                              },
+                                            ],
                                           },
                                         },
                                       ],
@@ -6361,6 +7065,7 @@ export const GetAllNurseriesDocument = {
                   name: { kind: "Name", value: "directionsLink" },
                 },
                 { kind: "Field", name: { kind: "Name", value: "mapsLink" } },
+                { kind: "Field", name: { kind: "Name", value: "formId" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "slug" },
@@ -7312,6 +8017,77 @@ export const GetPageBySlugDocument = {
                   kind: "InlineFragment",
                   typeCondition: {
                     kind: "NamedType",
+                    name: { kind: "Name", value: "Fees" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedTop" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedBottom" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "subtitle" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "fees" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "cost" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "links" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "href" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "reverseLayout" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
                     name: { kind: "Name", value: "Downloads" },
                   },
                   selectionSet: {
@@ -7323,6 +8099,10 @@ export const GetPageBySlugDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "label" },
@@ -7483,6 +8263,115 @@ export const GetPageBySlugDocument = {
                     ],
                   },
                 },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "GridGallery" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "gallerySections" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "subtitle" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "images" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "image" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "_key" },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "asset",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageAsset",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "hotspot",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageHotspot",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "crop" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageCrop",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -7603,6 +8492,7 @@ export const GetNurseryBySlugDocument = {
                   name: { kind: "Name", value: "directionsLink" },
                 },
                 { kind: "Field", name: { kind: "Name", value: "mapsLink" } },
+                { kind: "Field", name: { kind: "Name", value: "formId" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "contentBlocks" },
@@ -8346,6 +9236,77 @@ export const GetNurseryBySlugDocument = {
                   kind: "InlineFragment",
                   typeCondition: {
                     kind: "NamedType",
+                    name: { kind: "Name", value: "Fees" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedTop" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "scallopedBottom" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "subtitle" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "fees" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "cost" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "links" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "label" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "href" },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "reverseLayout" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
                     name: { kind: "Name", value: "Downloads" },
                   },
                   selectionSet: {
@@ -8357,6 +9318,10 @@ export const GetNurseryBySlugDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "label" },
@@ -8517,6 +9482,115 @@ export const GetNurseryBySlugDocument = {
                     ],
                   },
                 },
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "GridGallery" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "gallerySections" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "_key" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "title" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "subtitle" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "images" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "image" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "_key" },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "asset",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageAsset",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "hotspot",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageHotspot",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "crop" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "FragmentSpread",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "imageCrop",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -8567,3 +9641,55 @@ export const GetNurseryBySlugDocument = {
   GetNurseryBySlugQuery,
   GetNurseryBySlugQueryVariables
 >;
+export const GetAllBannersDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllBanners" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "allBanner" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "content" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "darkTextTheme" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "backgroundColour" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "label" } },
+                      { kind: "Field", name: { kind: "Name", value: "value" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "links" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "label" } },
+                      { kind: "Field", name: { kind: "Name", value: "href" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetAllBannersQuery, GetAllBannersQueryVariables>;

@@ -6,8 +6,6 @@ import {
   Maybe,
   type Image as SanityImageType,
   type SanityImageHotspot,
-  // type Image,
-  type ImageBlock,
 } from "@/gql/sanity/codegen";
 
 const builder = imageUrlBuilder();
@@ -43,7 +41,7 @@ export function getPositionFromHotspot(
   return `${hotspot.x * 100}% ${hotspot.y * 100}%`;
 }
 
-type ObjectFit = "contain" | "cover" | "fill" | "none" | "scale-down";
+// type ObjectFit = "contain" | "cover" | "fill" | "none" | "scale-down";
 
 const SanityImage = ({
   image,
@@ -80,6 +78,7 @@ const SanityImage = ({
       placeholder={placeholder}
       blurDataURL={blurData ?? undefined}
       sizes={sizes}
+      fetchPriority={loading === "eager" ? "high" : "auto"}
       style={{
         objectFit: objectFit as
           | "cover"

@@ -73,7 +73,7 @@ const NurseryDetails = ({
             newTab
             label={phone}
             variant={TypeVariant.Body1}
-            classes="!font-sans"
+            classes="button-link"
           />
         </Typography>
 
@@ -88,7 +88,7 @@ const NurseryDetails = ({
             newTab
             label={email}
             variant={TypeVariant.Body1}
-            classes="!font-sans"
+            classes="button-link"
           />
         </Typography>
 

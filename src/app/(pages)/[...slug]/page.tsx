@@ -9,7 +9,7 @@ import config from "@/config/config";
 import DefaultLayout from "@/layouts/DefaultLayout/DefaultLayout";
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { data } = await client.query<GetPageBySlugQuery>({
       query: GetPageBySlugDocument,
       variables: {
-        slug: slug.at(-1),
+        // slug: slug.at(-1),
+        slug: slug.join("/"),
       },
     });
 
@@ -63,6 +64,7 @@ const GetPage = async (slug: string | undefined): Promise<any> => {
 
 // un-comment this to statically generate pages at build time.
 export async function generateStaticParams() {
+  // get pages
   const slugs = [["our-rooms"]];
 
   return slugs.map(slugArray => ({
@@ -72,8 +74,9 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
+  // console.log(slug.at(-1));
 
-  const { page } = await GetPage(slug.at(-1));
+  const { page } = await GetPage(slug.join("/"));
   if (!page) {
     return notFound();
   }

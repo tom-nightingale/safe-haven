@@ -64,11 +64,9 @@ const CardInner = ({
       </div>
 
       <div
-        className={`z-2 ${slim ? "text-center" : "grid-cols-12"} grid items-center justify-between gap-3 p-6`}
+        className={`3xl:flex-row 3xl:text-left 3xl:justify-between z-2 flex ${buttonStyle !== "icon-only" ? "flex-col text-center" : "justify-between"} items-center gap-3 p-6`}
       >
-        <div
-          className={`${buttonStyle === "icon-only" ? "col-span-8" : "col-span-6"}`}
-        >
+        <div>
           {title && (
             <Typography
               variant={TypeVariant.H4}

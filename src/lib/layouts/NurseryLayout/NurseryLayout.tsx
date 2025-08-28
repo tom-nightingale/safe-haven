@@ -16,6 +16,7 @@ export const NurseryLayout = ({ page }: Props) => {
     location: page?.location,
     mapsLink: page?.mapsLink,
     phone: page?.phoneNumber,
+    formId: page?.formId,
   };
 
   return (

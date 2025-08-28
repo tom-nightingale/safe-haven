@@ -98,13 +98,13 @@ const NavSection = ({
             className="absolute top-full left-1/2 -translate-x-1/2 before:absolute before:top-0 before:left-1/2 before:h-4 before:w-4 before:-translate-x-1/2 before:rotate-45 before:bg-white before:content-['']"
             ref={subnav}
           >
-            <div className="mt-2 flex w-max flex-col gap-2 rounded-3xl bg-white p-4 shadow-lg">
+            <div className="mt-2 flex w-max flex-col gap-3 rounded-3xl bg-white p-4 shadow-lg">
               {children.map(
                 child =>
                   child?.target?.slug?.current && (
                     <FancyLink
                       key={child?.target?.slug?.current}
-                      url={`/${target?.slug?.current}/${child?.target?.slug.current}`}
+                      url={`/${child?.target?.slug.current}`}
                     >
                       <Typography
                         variant={TypeVariant.Button2}

@@ -192,8 +192,26 @@ fragment ContentBlockFragment on ContentBlocks {
     ... on LocationDetails {
       title
     }
+    ... on Fees {
+      scallopedTop
+      scallopedBottom
+      title
+      subtitle
+      fees {
+        _key
+        label
+        cost
+      }
+      links {
+        _key
+        label
+        href
+      }
+      reverseLayout
+    }
     ... on Downloads {
       downloads {
+        _key
         label
         file {
           asset {
@@ -225,6 +243,27 @@ fragment ContentBlockFragment on ContentBlocks {
           }
           crop {
             ...imageCrop
+          }
+        }
+      }
+    }
+    ... on GridGallery {
+      gallerySections {
+        _key
+        title
+        subtitle
+        images {
+          image {
+            _key
+            asset {
+              ...imageAsset
+            }
+            hotspot {
+              ...imageHotspot
+            }
+            crop {
+              ...imageCrop
+            }
           }
         }
       }
@@ -377,6 +416,7 @@ query GetAllNurseries {
     email
     directionsLink
     mapsLink
+    formId
     slug {
       current
     }
@@ -423,6 +463,7 @@ query GetNurseryBySlug($slug: String) {
     email
     directionsLink
     mapsLink
+    formId
     contentBlocks {
       ... on ContentBlocks {
         ...ContentBlockFragment
@@ -430,6 +471,22 @@ query GetNurseryBySlug($slug: String) {
     }
     seo {
       ...seoFragment
+    }
+  }
+}
+
+query GetAllBanners {
+  allBanner {
+    _id
+    content
+    darkTextTheme
+    backgroundColour {
+      label
+      value
+    }
+    links {
+      label
+      href
     }
   }
 }
