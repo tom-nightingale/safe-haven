@@ -68,6 +68,7 @@ const PostsByCategory = async (slug: string | undefined): Promise<any> => {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const { slug } = await params;
+
   const { allPost } = await GetSingularBlogPost(slug.at(-1));
   const { allCategory } = await GetCategory(slug.at(-1));
   if (allPost.length < 1 && allCategory.length < 0) {
@@ -119,7 +120,7 @@ export default async function Page({
     <>
       {type === "Category" && posts.allPost.length > 0 && (
         <BlogArchiveLayout
-          title={data.title}
+          title={data?.title}
           subtitle="News and updates from"
           posts={posts.allPost || []}
         />

@@ -3,6 +3,9 @@ import createApolloClient from "@/gql/apolloClient";
 import {
   GetNurseryBySlugDocument,
   type GetNurseryBySlugQuery,
+  GetAllNurseriesDocument,
+  type GetAllNurseriesQuery,
+  type Nursery,
 } from "@/gql/sanity/codegen";
 import type { Metadata } from "next";
 import config from "@/config/config";
@@ -45,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const GetPage = async (slug: string | undefined): Promise<any> => {
+const GetNurseryBySlug = async (slug: string | undefined): Promise<any> => {
   try {
     const client = createApolloClient(fetch);
     const { data } = await client.query<GetNurseryBySlugQuery>({
@@ -61,11 +64,32 @@ const GetPage = async (slug: string | undefined): Promise<any> => {
   }
 };
 
+const GetAllNurseries = async () => {
+  try {
+    const client = createApolloClient(fetch);
+    const { data } = await client.query<GetAllNurseriesQuery>({
+      query: GetAllNurseriesDocument,
+    });
+    return data ?? undefined;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};
+
+// ISR one hour increments
+export const revalidate = 3600; // 1 hour seconds
+
 // un-comment this to statically generate pages at build time.
 export async function generateStaticParams() {
-  const slugs = [["our-rooms"]];
+  const nurseries = await GetAllNurseries();
 
-  return slugs.map(slugArray => ({
+  const nurserySlugArray =
+    nurseries?.allNursery?.map((nursery: Nursery) => [
+      nursery?.slug?.current,
+    ]) ?? [];
+
+  return nurserySlugArray.map(slugArray => ({
     slug: slugArray.map(String),
   }));
 }
@@ -73,7 +97,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
-  const { page } = await GetPage(slug.at(-1));
+  const { page } = await GetNurseryBySlug(slug.at(-1));
   if (!page) {
     return notFound();
   }

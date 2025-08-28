@@ -104,7 +104,7 @@ const NavSection = ({
                   child?.target?.slug?.current && (
                     <FancyLink
                       key={child?.target?.slug?.current}
-                      url={`/${target?.slug?.current}/${child?.target?.slug.current}`}
+                      url={`/${child?.target?.slug.current}`}
                     >
                       <Typography
                         variant={TypeVariant.Button2}

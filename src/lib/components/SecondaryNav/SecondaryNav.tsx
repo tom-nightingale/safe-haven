@@ -148,8 +148,20 @@ const SecondaryNav = ({ nav }: Props) => {
                                 key={child?.target?.title}
                                 className={`pl-2 text-sm transition-all duration-200 hover:pl-3 hover:opacity-100 ${slug && child?.target?.slug?.current === slug.at(-1) ? "opacity-100" : "opacity-70"}`}
                               >
-                                <FancyLink
+                                {/* <FancyLink
                                   url={`/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}
+                                  onClick={closeNav}
+                                > */}
+                                <FancyLink
+                                  // url={`/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}
+                                  // url={`/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}
+                                  url={
+                                    child?.target?.slug?.current?.includes(
+                                      String(sect?.target?.slug?.current),
+                                    )
+                                      ? `/${child?.target?.slug?.current}`
+                                      : `/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`
+                                  }
                                   onClick={closeNav}
                                 >
                                   {child?.title
