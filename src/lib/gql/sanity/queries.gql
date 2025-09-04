@@ -469,6 +469,29 @@ query GetAllPage {
   }
 }
 
+query GetSitemap {
+  pages: allPage {
+    slug {
+      current
+    }
+  }
+  nurseries: allNursery {
+    slug {
+      current
+    }
+  }
+  blog: allPost {
+    category {
+      slug {
+        current
+      }
+    }
+    slug {
+      current
+    }
+  }
+}
+
 query GetPageBySlug($slug: String) {
   page: allPage(where: { slug: { current: { eq: $slug } } }) {
     _id

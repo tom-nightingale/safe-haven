@@ -16,19 +16,19 @@ const FancyLink = ({ children, url, onClick }: Props) => {
   // const pathname = usePathname();
   return (
     <Link
-      // onClick={e => {
-      //   e.preventDefault();
-      //   if (pathname !== url) {
-      //     if (url)
-      //       router.push(url, {
-      //         onTransitionReady: pageAnimation,
-      //       });
-      //   }
-      //   // pass the click function to parent component
-      //   if (onClick) {
-      //     onClick(); // Call the optional click function
-      //   }
-      // }}
+      onClick={() => {
+        //   e.preventDefault();
+        //   if (pathname !== url) {
+        //     if (url)
+        //       router.push(url, {
+        //         onTransitionReady: pageAnimation,
+        //       });
+        //   }
+        //   // pass the click function to parent component
+        if (onClick) {
+          onClick(); // Call the optional click function
+        }
+      }}
       href={url ?? ""}
     >
       {children}

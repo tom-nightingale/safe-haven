@@ -3310,6 +3310,43 @@ export type GetAllPageQuery = {
   }>;
 };
 
+export type GetSitemapQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetSitemapQuery = {
+  __typename?: "RootQuery";
+  pages: Array<{
+    __typename?: "Page";
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+  nurseries: Array<{
+    __typename?: "Nursery";
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+  blog: Array<{
+    __typename?: "Post";
+    category?:
+      | {
+          __typename?: "Category";
+          slug?:
+            | { __typename?: "Slug"; current?: string | null | undefined }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+  }>;
+};
+
 export type GetPageBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars["String"]["input"]>;
 }>;
@@ -7762,6 +7799,112 @@ export const GetAllPageDocument = {
     },
   ],
 } as unknown as DocumentNode<GetAllPageQuery, GetAllPageQueryVariables>;
+export const GetSitemapDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetSitemap" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "pages" },
+            name: { kind: "Name", value: "allPage" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "nurseries" },
+            name: { kind: "Name", value: "allNursery" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "blog" },
+            name: { kind: "Name", value: "allPost" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "category" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "slug" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "current" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "slug" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "current" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetSitemapQuery, GetSitemapQueryVariables>;
 export const GetPageBySlugDocument = {
   kind: "Document",
   definitions: [
