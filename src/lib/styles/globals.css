@@ -298,7 +298,7 @@ body {
 }
 
 .swiper-scrollbar {
-  @apply !right-6 !left-6 !w-[calc(100%-4rem)] !bg-white;
+  @apply !right-6 !left-6 !w-[calc(100%-3rem)] !bg-white;
 }
 
 .swiper-pagination-bullet {
@@ -386,4 +386,16 @@ textarea {
 
 input[type="submit"] {
   @apply mt-4 w-auto border border-none;
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }

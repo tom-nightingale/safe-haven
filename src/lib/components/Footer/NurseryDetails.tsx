@@ -5,6 +5,7 @@ import Typography, {
 import { FaPhone, FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import Button from "@/components/Button/Button";
 import { Maybe } from "@/gql/sanity/codegen";
+import FancyLink from "@/components/FancyLink/FancyLink";
 
 type Props = {
   title: string;
@@ -17,6 +18,7 @@ type Props = {
   showMapButton?: boolean;
   mapsLink?: string | Maybe<string>;
   directionsLink?: string | Maybe<string>;
+  slug?: string | Maybe<string>;
 };
 
 const NurseryDetails = ({
@@ -30,10 +32,23 @@ const NurseryDetails = ({
   showMapButton = false,
   mapsLink,
   directionsLink,
+  slug,
 }: Props) => {
   return (
     <>
-      {title && (
+      {slug && title && (
+        <FancyLink url={`our-nurseries/${slug}`}>
+          <Typography
+            variant={TypeVariant.H5}
+            component={TypeComponent.p}
+            classes="mb-4 xl:mb-7.5 hover:text-peach transition-all duration-200"
+            bold
+          >
+            {title}
+          </Typography>
+        </FancyLink>
+      )}
+      {!slug && title && (
         <Typography
           variant={TypeVariant.H5}
           component={TypeComponent.p}

@@ -90,7 +90,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                   ))}
               </div>
             </div>
-            <div className="grid grid-cols-12 items-center gap-4 rounded-3xl bg-white px-7 py-10 lg:col-span-1 xl:col-span-5 xl:col-start-7">
+            <div className="grid grid-cols-12 items-start gap-4 rounded-3xl bg-white px-7 py-10 md:items-center lg:col-span-1 xl:col-span-5 xl:col-start-7">
               <div className="col-span-8 grid gap-7 md:col-span-9">
                 <Typography
                   variant={TypeVariant.H4}
@@ -113,7 +113,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                   label="Log in to ParentAdmin"
                   newTab
                   variant={TypeVariant.Body1}
-                  classes="text-pink !font-sans !font-bold opacity-90 hover:opacity-100"
+                  classes="text-pink !text-left !font-sans !font-bold opacity-90 hover:opacity-100"
                   href="https://uk.parentadmin.com/login.php"
                 />
               </div>
@@ -224,6 +224,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                     buttonClasses={
                       i !== 0 ? "bg-peach text-white" : "bg-lilac text-white"
                     }
+                    slug={nursery.slug?.current}
                   />
                 </div>
               ))}

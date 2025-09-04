@@ -76,7 +76,7 @@ const ReviewCard = ({ review, name, rating }: Props) => {
       {showModal &&
         createPortal(
           <div className="fixed top-0 left-0 z-50 flex h-full w-full justify-center bg-black/80 p-8">
-            <div className="bg-cream relative flex max-h-min w-full max-w-130 flex-col items-center gap-6 overflow-scroll rounded-3xl p-12">
+            <div className="bg-cream relative flex max-h-min w-full max-w-130 flex-col items-center gap-6 overflow-auto rounded-3xl p-12">
               <button
                 className="absolute top-6 right-6 cursor-pointer"
                 onClick={() =>
