@@ -9,11 +9,11 @@ export const DefaultLayout = ({ page }: Props) => {
   const contentBlocks = page?.contentBlocks;
 
   return (
-    <PageWrapper>
-      <main>
-        <ContentBlockDigester contentBlocks={contentBlocks} />
-      </main>
-    </PageWrapper>
+    //<PageWrapper>
+    <main>
+      <ContentBlockDigester contentBlocks={contentBlocks} />
+    </main>
+    // </PageWrapper>
   );
 };
 
