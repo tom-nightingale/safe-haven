@@ -51,7 +51,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
         opacity: 1,
         yPercent: 0,
         duration: 0.3,
-        delay: 1,
+        delay: 0.3,
         ease: "back.out(2)",
       },
     ),

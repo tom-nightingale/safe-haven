@@ -34,44 +34,46 @@ const Gallery = ({ images }: Props) => {
     <>
       {images && images.length > 0 && (
         <div className="py-8">
-          <Container>
-            <Swiper
-              modules={[A11y]}
-              spaceBetween={20}
-              slidesPerView={2.4}
-              breakpoints={{
-                600: {
-                  slidesPerView: 3.5,
-                  spaceBetween: 20,
-                },
-                768: {
-                  slidesPerView: 4.2,
-                  spaceBetween: 20,
-                },
-                1024: {
-                  slidesPerView: 4.2,
-                  spaceBetween: 20,
-                },
-                1280: {
-                  slidesPerView: 5.05,
-                  spaceBetween: 30,
-                },
-              }}
-              wrapperClass="py-2 px-2"
-            >
-              {images.map((image: Maybe<ImageBlock>, index: number) => {
-                return (
-                  <SwiperSlide key={`${image?.image?.asset?.url}-${index}`}>
-                    <GalleryImage
-                      image={image}
-                      index={index}
-                      openLightboxOnSlide={openLightboxOnSlide}
-                    />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          </Container>
+          {/* <Container> */}
+          <Swiper
+            modules={[A11y]}
+            slidesOffsetBefore={20}
+            slidesOffsetAfter={40}
+            spaceBetween={20}
+            slidesPerView={2.4}
+            breakpoints={{
+              600: {
+                slidesPerView: 3.5,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 4.2,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 4.2,
+                spaceBetween: 20,
+              },
+              1280: {
+                slidesPerView: 5.05,
+                spaceBetween: 30,
+              },
+            }}
+            wrapperClass="py-2 px-2"
+          >
+            {images.map((image: Maybe<ImageBlock>, index: number) => {
+              return (
+                <SwiperSlide key={`${image?.image?.asset?.url}-${index}`}>
+                  <GalleryImage
+                    image={image}
+                    index={index}
+                    openLightboxOnSlide={openLightboxOnSlide}
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+          {/* </Container> */}
 
           <FsLightbox
             toggler={lightboxController.toggler}

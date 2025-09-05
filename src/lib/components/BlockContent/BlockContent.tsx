@@ -49,7 +49,12 @@ const BlockContent = ({ content }: Props) => {
   const components: PortableTextComponents = {
     block: {
       h1: ({ children }: PortableTextComponentProps<any>) => (
-        <Typography variant={TypeVariant.H2} component={TypeComponent.h1} bold>
+        <Typography
+          variant={TypeVariant.H2}
+          component={TypeComponent.h1}
+          bold
+          classes="mb-2"
+        >
           {children}
         </Typography>
       ),
@@ -64,7 +69,12 @@ const BlockContent = ({ content }: Props) => {
         </Typography>
       ),
       h4: ({ children }: PortableTextComponentProps<any>) => (
-        <Typography variant={TypeVariant.H4} component={TypeComponent.h4} bold>
+        <Typography
+          variant={TypeVariant.H4}
+          component={TypeComponent.h4}
+          bold
+          classes="text-peach"
+        >
           {children}
         </Typography>
       ),
@@ -93,11 +103,31 @@ const BlockContent = ({ content }: Props) => {
           {children}
         </Typography>
       ),
+      link: ({ value, children }) => {
+        const target = !(value?.href || "").includes("safehavennursery.co.uk")
+          ? "_blank"
+          : undefined;
+        return (
+          <a
+            className="text-peach font-serif font-semibold underline-offset-2 transition-all duration-200 hover:underline"
+            href={value?.href}
+            target={target}
+            rel={target === "_blank" ? "noindex nofollow" : ""}
+          >
+            {children}
+          </a>
+        );
+      },
     },
     list: {
       // Ex. 1: customizing common list types
       bullet: ({ children }) => (
-        <ul className="grid gap-3 font-sans">{children}</ul>
+        <div className="relative">
+          <span className="bg-peach/40 pointer-events-none absolute top-1 -left-1 z-0 block h-full w-full rounded-3xl"></span>
+          <ul className="bg-cream relative grid gap-3 rounded-3xl p-8">
+            {children}
+          </ul>
+        </div>
       ),
       number: ({ children }) => <ol className="">{children}</ol>,
     },
@@ -105,7 +135,7 @@ const BlockContent = ({ content }: Props) => {
       // Ex. 1: customizing common list types
       bullet: ({ children }) => (
         <li className="relative gap-2 pl-6">
-          <span className="text-lilac absolute top-1.25 left-0">
+          <span className="text-peach absolute top-1.25 left-0">
             <FaStar />
           </span>
           <Typography
@@ -121,7 +151,11 @@ const BlockContent = ({ content }: Props) => {
       youtube: ({ value }) => {
         const { url } = value;
         return (
-          <ReactPlayer url={url} width="100%" style={{ margin: "1rem 0" }} />
+          <ReactPlayer
+            url={url}
+            width="100%"
+            className="my-12 overflow-hidden rounded-3xl"
+          />
         );
       },
       image: InlineImageComponent,

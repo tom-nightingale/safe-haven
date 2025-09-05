@@ -36,7 +36,7 @@ const TextWithImageInner = ({
   const { nurseries } = useGlobalContext();
   const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
   return (
-    <div className="grid grid-cols-12 gap-8 py-10">
+    <div className="grid grid-cols-12 gap-y-8 py-10 lg:gap-x-16">
       <div className="block-content relative z-1 col-span-12 lg:col-span-6">
         <BlockContent content={text} />
         {links && links.length > 0 && (
@@ -90,7 +90,7 @@ const TextWithImageInner = ({
       </div>
 
       <div className="relative col-span-12 min-h-80 lg:col-span-6">
-        <div className="sticky top-10">
+        <div className="sticky top-10 max-w-full">
           <FramedImage image={image} />
         </div>
       </div>

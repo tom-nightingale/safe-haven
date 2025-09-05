@@ -105,7 +105,7 @@ const SecondaryNav = ({ nav }: Props) => {
             />
           </div>
 
-          <div className="p-6 xl:p-8">
+          <div className="bg-cream p-6 xl:p-8">
             <div className="mb-8 mix-blend-multiply">
               <FancyLink url="/">
                 <Image
@@ -115,6 +115,7 @@ const SecondaryNav = ({ nav }: Props) => {
                   loading="eager"
                   quality={100}
                   alt={config.COMPANY_NAME}
+                  className="mix-blend-multiply"
                 />
               </FancyLink>
             </div>
@@ -139,7 +140,8 @@ const SecondaryNav = ({ nav }: Props) => {
                           </span>
                         </FancyLink>
                       </div>
-                      <div className="flex flex-col gap-3 pt-3 pl-6">
+
+                      <div className="group flex flex-col gap-3 pt-3 pl-6">
                         {sect?.children &&
                           sect?.children.length > 0 &&
                           sect?.children.map(child => {
@@ -148,13 +150,7 @@ const SecondaryNav = ({ nav }: Props) => {
                                 key={child?.target?.title}
                                 className={`pl-2 text-sm transition-all duration-200 hover:pl-3 hover:opacity-100 ${slug && child?.target?.slug?.current === slug.at(-1) ? "opacity-100" : "opacity-70"}`}
                               >
-                                {/* <FancyLink
-                                  url={`/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}
-                                  onClick={closeNav}
-                                > */}
                                 <FancyLink
-                                  // url={`/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}
-                                  // url={`/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`}
                                   url={
                                     child?.target?.slug?.current?.includes(
                                       String(sect?.target?.slug?.current),
@@ -178,7 +174,7 @@ const SecondaryNav = ({ nav }: Props) => {
             </div>
           </div>
 
-          <div className="from-cream pointer-events-none sticky bottom-0 -mt-15 min-h-30 w-full bg-linear-to-t to-transparent" />
+          {/* <div className="from-cream pointer-events-none sticky bottom-0 -mt-15 min-h-30 w-full bg-linear-to-t to-transparent" /> */}
         </div>
       </div>
     </>

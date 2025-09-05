@@ -20,14 +20,14 @@ export const NurseryLayout = ({ page }: Props) => {
   };
 
   return (
-    <PageWrapper>
-      <main>
-        <ContentBlockDigester
-          contentBlocks={contentBlocks}
-          nurseryDetails={nurseryDetails}
-        />
-      </main>
-    </PageWrapper>
+    // <PageWrapper>
+    <main>
+      <ContentBlockDigester
+        contentBlocks={contentBlocks}
+        nurseryDetails={nurseryDetails}
+      />
+    </main>
+    // </PageWrapper>
   );
 };
 

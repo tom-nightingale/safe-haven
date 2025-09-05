@@ -66,7 +66,7 @@ const CardInner = ({
       <div
         className={`3xl:flex-row 3xl:text-left 3xl:justify-between z-2 flex ${buttonStyle !== "icon-only" ? "flex-col text-center" : "justify-between"} items-center gap-3 p-6`}
       >
-        <div>
+        <div className="text-left">
           {title && (
             <Typography
               variant={TypeVariant.H4}

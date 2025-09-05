@@ -1,11 +1,17 @@
-import Link from "next/link";
+import SimpleHero from "@/components/SimpleHero/SimpleHero";
 
 export default function NotFound() {
   return (
-    <div>
-      <h2>Not Found</h2>
-      <p>Could not find requested resource</p>
-      <Link href="/">Return Home</Link>
-    </div>
+    // <PageWrapper>
+    <main>
+      <SimpleHero
+        title={"Page not found"}
+        subtitle="404"
+        topLine=""
+        buttons={[{ href: "/", label: "Return Home" }]}
+        phoneNumber={null}
+      />
+    </main>
+    // </PageWrapper>
   );
 }

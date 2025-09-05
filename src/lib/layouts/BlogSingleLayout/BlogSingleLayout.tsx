@@ -16,29 +16,29 @@ type Props = {
 };
 export const BlogArchiveLayout = ({ post, title }: Props) => {
   return (
-    <PageWrapper>
-      <main>
-        <SimpleHero title={title ?? "Nursery news"} hideContactDetails={true} />
+    // <PageWrapper>
+    <main>
+      <SimpleHero title={title ?? "Nursery news"} hideContactDetails={true} />
 
-        <div className="relative overflow-hidden pb-20 md:pb-40">
-          <CloudsVector
-            fill="white"
-            classes="absolute w-[200%] lg:w-[150%] 3xl:w-full top-1"
-          />
-          <CloudsVector
-            classes="absolute top-4 w-[200%] lg:w-[150%] 3xl:w-full text-taupe"
-            fillOpacity={1}
-          />
-          <div className="from-taupe to-cream 3xl:top-30 4xl:top-40 5xl:top-44 xs:top-20 relative top-16 z-10 w-full bg-linear-to-b pt-20 sm:top-24 md:top-30 xl:top-40">
-            <Container classes="max-w-(--breakpoint-md)">
-              <BlockContent content={post?.contentRaw} />
-            </Container>
-          </div>
+      <div className="relative overflow-hidden pb-20 md:pb-40">
+        <CloudsVector
+          fill="white"
+          classes="absolute w-[200%] lg:w-[150%] 3xl:w-full top-1"
+        />
+        <CloudsVector
+          classes="absolute top-4 w-[200%] lg:w-[150%] 3xl:w-full text-taupe"
+          fillOpacity={1}
+        />
+        <div className="from-taupe to-cream 3xl:top-30 4xl:top-40 5xl:top-44 xs:top-20 relative top-16 z-10 w-full bg-linear-to-b pt-20 sm:top-24 md:top-30 xl:top-40">
+          <Container classes="max-w-(--breakpoint-md)">
+            <BlockContent content={post?.contentRaw} />
+          </Container>
         </div>
-        <ReviewCards />
-        <Locations />
-      </main>
-    </PageWrapper>
+      </div>
+      <ReviewCards />
+      <Locations />
+    </main>
+    // </PageWrapper>
   );
 };
 
