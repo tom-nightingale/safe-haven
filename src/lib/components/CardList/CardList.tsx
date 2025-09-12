@@ -143,11 +143,11 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
 
               <JigsawSvg
                 stroke="white"
-                classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
+                classes="absolute top-[5%] left-[3%] z-0 pointer-events-none opacity-50"
               />
               <MobileSvg
                 stroke="white"
-                classes="absolute -top-20 right-[2.5%] pointer-events-none opacity-50"
+                classes="absolute top-0 lg:-top-20 right-[2.5%] z-0 pointer-events-none opacity-50"
               />
             </Container>
           </ScallopedTop>
@@ -178,7 +178,7 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
                 {cards.map((card, i) => {
                   return (
                     <div
-                      className={`box ${widthClasses[cards.length - 1]}`}
+                      className={`box relative z-10 ${widthClasses[cards.length - 1]}`}
                       key={card?.title}
                     >
                       <Card
@@ -202,11 +202,11 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
 
             <JigsawSvg
               stroke="white"
-              classes="absolute top-[5%] left-[3%] pointer-events-none opacity-50"
+              classes="absolute top-[5%] left-[3%] z-0 pointer-events-none opacity-50"
             />
             <MobileSvg
               stroke="white"
-              classes="absolute -top-18 right-[2.5%] pointer-events-none opacity-50"
+              classes="absolute top-0 lg:-top-18 right-[2.5%] z-0 pointer-events-none opacity-50"
             />
           </Container>
         </div>

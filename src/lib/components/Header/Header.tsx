@@ -26,8 +26,8 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
   return (
     <div className="relative">
       <Container>
-        <div className="flex w-full justify-between gap-4 py-8 xl:pb-0">
-          <div className="w-20 mix-blend-multiply sm:w-30 xl:w-40">
+        <div className="flex w-full flex-wrap justify-between gap-4 py-8 xl:pb-0">
+          <div className="w-30 mix-blend-multiply sm:w-30 xl:w-40">
             <FancyLink url="/">
               <Image
                 src="/logo.png"
@@ -49,6 +49,8 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
                 iconLeft={<BsTelephone />}
                 href={`tel:${nurseryPhoneNumber}`}
                 classes="button-primary button-peach"
+                typeClasses="hidden xs:block !whitespace-nowrap"
+                iconClasses="-rotate-90 xs:rotate-0"
               />
             </div>
           </div>

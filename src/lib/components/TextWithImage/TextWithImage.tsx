@@ -39,12 +39,12 @@ const TextWithImageInner = ({
     <div className="grid grid-cols-12 gap-y-8 py-10 lg:gap-x-16">
       <div className="block-content relative z-1 col-span-12 lg:col-span-6">
         <BlockContent content={text} />
-        {links && links.length > 0 && (
-          <div
-            className={`mt-10 flex flex-wrap gap-4 ${directionsLink ? "flex-col" : "flex-row"}`}
-          >
-            <div className="flex gap-4">
-              {links.map(link => {
+        <div
+          className={`mt-10 flex flex-wrap gap-4 ${directionsLink ? "flex-col" : "flex-row"}`}
+        >
+          <div className="flex gap-4">
+            {links && links.length > 0 ? (
+              links.map(link => {
                 return (
                   <Button
                     key={link?.label}
@@ -53,40 +53,46 @@ const TextWithImageInner = ({
                     href={link?.href}
                   />
                 );
-              })}
+              })
+            ) : (
+              <Button
+                classes="inline-block button-primary button-peach"
+                label="Contact Us Online"
+                href="/our-nurseries"
+              />
+            )}
 
-              {directionsLink && (
-                <Button
-                  key={directionsLink}
-                  classes="inline-block button-primary button-green"
-                  label="Get Directions"
-                  href={directionsLink}
-                  newTab
-                  iconLeft={<FaMapPin />}
-                />
-              )}
-            </div>
-
-            <a
-              href={`tel:${phoneNumber ?? nurseryPhoneNumber}`}
-              className={`group flex items-center p-0 ${directionsLink ? "-order-2" : ""}`}
-            >
-              <Typography
-                variant={TypeVariant.Button1}
-                component={TypeComponent.span}
-                classes="flex items-center gap-1"
-              >
-                <span className="mr-1 rotate-90 text-[#7Da8A4]">
-                  <FaPhone />
-                </span>
-                Call us on
-                <span className="group-hover:text-peach font-medium">
-                  {phoneNumber ?? nurseryPhoneNumber}
-                </span>
-              </Typography>
-            </a>
+            {directionsLink && (
+              <Button
+                key={directionsLink}
+                classes="inline-block button-primary button-green"
+                label="Get Directions"
+                href={directionsLink}
+                newTab
+                iconLeft={<FaMapPin />}
+              />
+            )}
           </div>
-        )}
+
+          <a
+            href={`tel:${phoneNumber ?? nurseryPhoneNumber}`}
+            className={`group flex items-center p-0 ${directionsLink ? "-order-2" : ""}`}
+          >
+            <Typography
+              variant={TypeVariant.Button1}
+              component={TypeComponent.span}
+              classes="flex items-center gap-1"
+            >
+              <span className="mr-1 rotate-90 text-[#7Da8A4]">
+                <FaPhone />
+              </span>
+              Call us on
+              <span className="group-hover:text-peach font-medium">
+                {phoneNumber ?? nurseryPhoneNumber}
+              </span>
+            </Typography>
+          </a>
+        </div>
       </div>
 
       <div className="relative col-span-12 min-h-80 lg:col-span-6">

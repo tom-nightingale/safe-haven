@@ -125,7 +125,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
           {image && (
             <div
               ref={heroImageRef}
-              className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full opacity-50 md:-right-8 md:w-2/3 md:opacity-100 lg:right-4"
+              className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4"
             >
               <SanityImage
                 image={image?.image}

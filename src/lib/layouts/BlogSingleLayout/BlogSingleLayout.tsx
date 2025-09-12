@@ -30,12 +30,11 @@ export const BlogArchiveLayout = ({ post, title }: Props) => {
           fillOpacity={1}
         />
         <div className="from-taupe to-cream 3xl:top-30 4xl:top-40 5xl:top-44 xs:top-20 relative top-16 z-10 w-full bg-linear-to-b pt-20 sm:top-24 md:top-30 xl:top-40">
-          <Container classes="max-w-(--breakpoint-md)">
+          <Container classes="max-w-(--breakpoint-md) block-content">
             <BlockContent content={post?.contentRaw} />
           </Container>
         </div>
       </div>
-      <ReviewCards />
       <Locations />
     </main>
     // </PageWrapper>

@@ -19,9 +19,10 @@ type GallerySection = {
 type Props = {
   section: Maybe<GallerySection>;
   index?: number;
+  classes?: string;
 };
 
-const GallerySectionInner = ({ section }: Props) => {
+const GallerySectionInner = ({ section, classes }: Props) => {
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
     slide: 1,
@@ -42,25 +43,25 @@ const GallerySectionInner = ({ section }: Props) => {
     <Container>
       <div
         key={section?._key}
-        className="scroll-m-20 pb-16 text-center"
+        className={`scroll-m-20 pb-16 text-center ${classes}`}
         id={section?.title?.replaceAll(" ", "").toLowerCase()}
       >
         {section?.title && (
-          <Typography variant={TypeVariant.H3} component={TypeComponent.p} bold>
+          <Typography variant={TypeVariant.H2} component={TypeComponent.p} bold>
             {section?.title}
           </Typography>
         )}
 
         {section?.subtitle && (
           <Typography
-            variant={TypeVariant.Button1}
+            variant={TypeVariant.h4}
             component={TypeComponent.p}
             classes="mt-3"
           >
             {section?.subtitle}
           </Typography>
         )}
-        <div className="xs:grid-cols-2 mt-10 grid grid-cols-1 gap-12 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
+        <div className="mt-10 grid grid-cols-2 gap-12 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
           {section?.images?.map((image, index) => (
             <GalleryImage
               key={image?._key ?? index}
@@ -88,7 +89,7 @@ const GridGallerySection = ({ section, index }: Props) => {
         <GallerySectionInner section={section} />
       ) : (
         <ScallopedTop>
-          <GallerySectionInner section={section} />
+          <GallerySectionInner section={section} classes="pt-16 xl:pt-0" />
         </ScallopedTop>
       )}
     </>

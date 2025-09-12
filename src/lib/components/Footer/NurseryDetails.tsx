@@ -59,7 +59,7 @@ const NurseryDetails = ({
         </Typography>
       )}
 
-      <div className="grid gap-3 xl:gap-5">
+      <div className="grid w-full grid-cols-1 gap-3 xl:gap-5">
         {subtitle && (
           <Typography variant={TypeVariant.Body1} component={TypeComponent.p}>
             {subtitle}
@@ -103,7 +103,7 @@ const NurseryDetails = ({
             newTab
             label={email}
             variant={TypeVariant.Body1}
-            classes="button-link"
+            classes="button-link text-sm xs:text-body-1"
           />
         </Typography>
 

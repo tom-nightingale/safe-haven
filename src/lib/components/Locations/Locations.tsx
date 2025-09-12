@@ -46,7 +46,7 @@ const Locations = ({ title }: Props) => {
           <div className="relative z-1 py-10">
             <div className="flex flex-col justify-center gap-6 pb-10 text-center">
               <Typography
-                variant={TypeVariant.H3}
+                variant={TypeVariant.H2}
                 component={TypeComponent.p}
                 bold
               >
@@ -100,7 +100,7 @@ const Locations = ({ title }: Props) => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2 rounded-3xl bg-white p-10 text-center xl:p-14">
+                  <div className="flex flex-col gap-2 rounded-3xl bg-white p-6 text-center sm:p-10 xl:p-14">
                     <Typography
                       variant={TypeVariant.H3}
                       component={TypeComponent.p}
@@ -127,7 +127,7 @@ const Locations = ({ title }: Props) => {
                     nurseries.map((nursery: Nursery, i: number) => {
                       return (
                         <div
-                          className="flex flex-col items-center rounded-3xl bg-white p-10 xl:p-14"
+                          className="flex flex-col items-center rounded-3xl bg-white p-6 sm:p-10 xl:p-14"
                           key={nursery.title}
                         >
                           <div className="flex flex-col items-center gap-3 text-center">
@@ -151,7 +151,7 @@ const Locations = ({ title }: Props) => {
                             </Typography>
                           </div>
 
-                          <div className="mt-6 flex flex-col md:max-w-4/5">
+                          <div className="mt-6 flex max-w-full flex-col md:max-w-4/5">
                             <NurseryDetails
                               title=""
                               subtitle=""
