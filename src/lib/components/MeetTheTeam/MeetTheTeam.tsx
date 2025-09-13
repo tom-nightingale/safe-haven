@@ -91,7 +91,7 @@ const MeetTheTeam = ({
             className={`flex flex-col justify-center gap-6 px-6 text-center ${layout === "stacked" ? "xl:col-span-12" : "xl:col-span-4 xl:text-left"}`}
           >
             <Typography
-              variant={TypeVariant.H3}
+              variant={TypeVariant.H2}
               component={TypeComponent.p}
               bold
             >

@@ -17,7 +17,7 @@ import type { TypedObject } from "@portabletext/types";
 type Props = {
   href?: string | Maybe<string>;
   image?: Maybe<ImageBlock>;
-  imageFit?: string;
+  imageFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
   title: string | Maybe<string>;
   subtitle?: string | Maybe<string>;
   containerClass?: string;
@@ -50,7 +50,7 @@ const CardInner = ({
     >
       <div className="relative flex aspect-[2/1.5] items-start justify-center overflow-hidden bg-white">
         <div
-          className={`h-full w-full transition-all duration-200 ${href || modalContent ? "group-hover:scale-105" : ""}`}
+          className={`relative h-full w-full transition-all duration-200 ${href || modalContent ? "group-hover:scale-105" : ""}`}
         >
           {image && (
             <SanityImage

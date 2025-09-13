@@ -26,7 +26,7 @@ const FeesInner = ({ title, subtitle, fees, links, reverseLayout }: Props) => {
     <div
       className={`relative z-10 flex flex-col items-center py-10 xl:flex-row xl:justify-between ${reverseLayout && "xl:flex-row-reverse"}`}
     >
-      <div className={`flex flex-col items-center`}>
+      <div className="flex flex-col items-center">
         <Typography variant={TypeVariant.H3} component={TypeComponent.p} bold>
           {title}
         </Typography>
@@ -61,9 +61,9 @@ const FeesInner = ({ title, subtitle, fees, links, reverseLayout }: Props) => {
             className={`relative ${idx % 2 === 0 ? "-rotate-2" : "rotate-2"}`}
           >
             <span className="bg-peach/40 pointer-events-none absolute top-1 -left-1 z-0 block h-full w-full rounded-3xl"></span>
-            <div className="relative z-10 flex h-full w-full flex-col items-center overflow-hidden rounded-3xl bg-white p-4">
+            <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-3xl bg-white p-4 text-center">
               <Typography
-                variant={TypeVariant.H4}
+                variant={TypeVariant.Button2}
                 component={TypeComponent.p}
                 bold
               >

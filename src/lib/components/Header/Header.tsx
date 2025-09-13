@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import type { Navigation } from "@/gql/sanity/codegen";
 import Container from "@/components/Container/Container";
 import PrimaryNav from "@/components/PrimaryNav/PrimaryNav";

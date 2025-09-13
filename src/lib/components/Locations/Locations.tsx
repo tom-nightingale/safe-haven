@@ -138,7 +138,7 @@ const Locations = ({ title }: Props) => {
                               classes="opacity-80 hover:opacity-100"
                             >
                               <a
-                                href={`our-nurseries/${nursery?.slug?.current}`}
+                                href={`/our-nurseries/${nursery?.slug?.current}`}
                               >
                                 {nursery.title}
                               </a>

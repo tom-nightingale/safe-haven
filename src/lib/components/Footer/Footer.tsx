@@ -6,7 +6,7 @@ import Typography, {
   TypeComponent,
 } from "@/components/Typography/Typography";
 import { FaPhone, FaFacebook } from "react-icons/fa";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Copyright from "./Copyright";
 import NurseryDetails from "./NurseryDetails";
 import { type Navigation } from "@/gql/sanity/codegen";
@@ -36,7 +36,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
       <div className="from-taupe to-cream relative bg-gradient-to-b">
         <Container>
           <div className="border-taupe grid grid-cols-1 gap-10 border-b-2 py-12 pb-48 lg:grid-cols-2 lg:py-20 lg:pb-40 xl:grid-cols-12 xl:py-24">
-            <div className="3xl:col-span-3 grid gap-8 xl:col-span-5 2xl:col-span-4">
+            <div className="4xl:col-span-3 grid gap-8 xl:col-span-5 2xl:col-span-4">
               <div className="flex flex-col gap-4">
                 <Typography
                   variant={TypeVariant.H3}
@@ -158,7 +158,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                     return (
                       <Button
                         key={item?.target?.slug?.current}
-                        href={item?.target?.slug?.current ?? ""}
+                        href={`/${item?.target?.slug?.current ?? ""}`}
                         newTab
                         label={item?.target?.title}
                         variant={TypeVariant.Button2}
@@ -172,7 +172,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                     return (
                       <Button
                         key={item?.target?.slug?.current}
-                        href={item?.target?.slug?.current ?? ""}
+                        href={`/${item?.target?.slug?.current ?? ""}`}
                         newTab
                         label={item?.target?.title}
                         variant={TypeVariant.Button2}
