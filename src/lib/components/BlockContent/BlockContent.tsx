@@ -14,7 +14,7 @@ import ReactPlayer from "react-player";
 import { getImageDimensions } from "@sanity/asset-utils";
 import config from "@/config/config";
 import imageUrlBuilder from "@sanity/image-url";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 type Props = {
   content: TypedObject | TypedObject[];

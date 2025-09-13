@@ -6,7 +6,7 @@ import Typography, {
   TypeComponent,
 } from "@/components/Typography/Typography";
 import { FaPhone, FaFacebook } from "react-icons/fa";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Copyright from "./Copyright";
 import NurseryDetails from "./NurseryDetails";
 import { type Navigation } from "@/gql/sanity/codegen";

@@ -16,13 +16,13 @@ type Props = {
 export const BlogArchiveLayout = ({ post, title }: Props) => {
   return (
     // <PageWrapper>
+    // </PageWrapper>
     <main>
       <SimpleHero
         title={title ?? "Nursery news"}
         topLine={post?.category?.title ?? undefined}
         hideContactDetails={true}
       />
-
       <div className="relative overflow-hidden pb-20 md:pb-40">
         <CloudsVector
           fill="white"
@@ -40,7 +40,6 @@ export const BlogArchiveLayout = ({ post, title }: Props) => {
       </div>
       <Locations />
     </main>
-    // </PageWrapper>
   );
 };
 

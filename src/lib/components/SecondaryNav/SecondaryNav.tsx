@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import type { NavigationSection, Maybe } from "@/gql/sanity/codegen";
 import Button from "@/components/Button/Button";
 import { FaBars, FaTimes, FaStar } from "react-icons/fa";

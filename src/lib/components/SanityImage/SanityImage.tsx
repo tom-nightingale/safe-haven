@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import imageUrlBuilder from "@sanity/image-url";
 import type { FitMode } from "@sanity/image-url/lib/types/types";
 import config from "@/config/config";
@@ -31,7 +31,7 @@ type Props = {
   width?: number;
   height?: number;
   sizes?: string;
-  objectFit?: string;
+  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
 };
 
 export function getPositionFromHotspot(
@@ -67,7 +67,8 @@ const SanityImage = ({
 
   return imageUrl ? (
     <Image
-      fill={fill}
+      // fill={fill}
+      layout="fill"
       src={imageUrl}
       width={width ? width : undefined}
       height={height ? height : undefined}
@@ -79,14 +80,14 @@ const SanityImage = ({
       blurDataURL={blurData ?? undefined}
       sizes={sizes}
       fetchPriority={loading === "eager" ? "high" : "auto"}
-      style={{
-        objectFit: objectFit as
-          | "cover"
-          | "contain"
-          | "fill"
-          | "none"
-          | "scale-down",
-      }}
+      // style={{
+      //   objectFit: objectFit as
+      //     | "cover"
+      //     | "contain"
+      //     | "fill"
+      //     | "none"
+      //     | "scale-down",
+      // }}
       objectFit={objectFit}
       objectPosition={getPositionFromHotspot(hotspotData)}
     />
