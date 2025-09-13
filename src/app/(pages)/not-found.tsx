@@ -8,7 +8,6 @@ export default function NotFound() {
         title={"Page not found"}
         subtitle="404"
         topLine=""
-        buttons={[{ href: "/", label: "Return Home" }]}
         phoneNumber={null}
       />
     </main>

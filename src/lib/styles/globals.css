@@ -158,7 +158,7 @@ body {
   @apply relative flex items-center gap-2 rounded-full text-center font-serif font-light hover:cursor-pointer;
 
   &.button-primary {
-    @apply px-3 py-3 lg:px-6 lg:py-4 lg:pb-[1.05rem] opacity-90 transition-all duration-200 hover:opacity-100;
+    @apply px-3 py-3 opacity-90 transition-all duration-200 hover:opacity-100 lg:px-6 lg:py-4 lg:pb-[1.05rem];
   }
 
   &.button-blue {
@@ -235,7 +235,7 @@ body {
   }
 
   &.button-icon-only {
-    @apply rounded-full bg-white p-3 lg:p-4 hover:before:rotate-90;
+    @apply rounded-full bg-white p-3 hover:before:rotate-90 lg:p-4;
 
     &:before {
       content: "";
@@ -273,7 +273,7 @@ body {
 }
 
 .text-body-1 {
-  @apply font-sans sm:text-lg text-pretty;
+  @apply font-sans text-pretty sm:text-lg;
 }
 
 .text-body-2 {
@@ -281,7 +281,7 @@ body {
 }
 
 .text-button-1 {
-  @apply font-serif  leading-none font-light text-pretty 2xl:text-lg;
+  @apply font-serif leading-none font-light text-pretty 2xl:text-lg;
 }
 
 .text-button-2 {
@@ -306,7 +306,7 @@ body {
 }
 
 .swiper-pagination-bullet-active {
-  @apply !bg-dark-green;
+  @apply !bg-green;
 }
 
 .swiper-scrollbar-drag {

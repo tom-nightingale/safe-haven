@@ -51,7 +51,9 @@ const Button = ({
             {!iconOnly && (
               <>
                 {iconLeft && <span className={iconClasses}>{iconLeft}</span>}
-                <Typography variant={variant}>{label}</Typography>
+                <Typography variant={variant} classes={typeClasses}>
+                  {label}
+                </Typography>
                 {iconRight && (
                   <span
                     className={`text-dark-green block text-center ${{ iconClasses }}`}
@@ -99,7 +101,9 @@ const Button = ({
           {!iconOnly && (
             <>
               {iconLeft && <span className={iconClasses}>{iconLeft}</span>}
-              <Typography variant={variant}>{label}</Typography>
+              <Typography classes={typeClasses} variant={variant}>
+                {label}
+              </Typography>
               {iconRight && (
                 <span
                   className={`text-dark-green block text-center ${iconClasses}`}

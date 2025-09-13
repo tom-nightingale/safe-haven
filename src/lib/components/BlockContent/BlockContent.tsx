@@ -125,7 +125,7 @@ const BlockContent = ({ content }: Props) => {
       bullet: ({ children }) => (
         <div className="relative my-8">
           <span className="bg-peach/40 pointer-events-none absolute top-1 -left-1 z-0 block h-full w-full rounded-3xl"></span>
-          <ul className="bg-cream relative grid gap-3 rounded-3xl p-8">
+          <ul className="bg-cream border-peach/10 relative grid gap-3 rounded-3xl border p-8">
             {children}
           </ul>
         </div>
@@ -136,7 +136,7 @@ const BlockContent = ({ content }: Props) => {
       // Ex. 1: customizing common list types
       bullet: ({ children }) => (
         <li className="relative gap-2 pl-6">
-          <span className="text-peach absolute top-1.25 left-0">
+          <span className="text-lilac absolute top-1.25 left-0">
             <FaStar />
           </span>
           <Typography

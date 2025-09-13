@@ -54,7 +54,7 @@ const GallerySectionInner = ({ section, classes }: Props) => {
 
         {section?.subtitle && (
           <Typography
-            variant={TypeVariant.h4}
+            variant={TypeVariant.H4}
             component={TypeComponent.p}
             classes="mt-3"
           >

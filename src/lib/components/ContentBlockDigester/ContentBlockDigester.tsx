@@ -38,7 +38,6 @@ const ContentBlockDigester = ({ contentBlocks, nurseryDetails }: Props) => {
                 title={block?.titleRaw}
                 subtitle={block?.subtitleRaw}
                 cards={block?.heroCards}
-                buttons={block?.buttons}
                 image={block?.heroImage}
               />
             );
@@ -50,8 +49,8 @@ const ContentBlockDigester = ({ contentBlocks, nurseryDetails }: Props) => {
                 title={block?.title}
                 subtitle={block?.subtitle}
                 topLine={block?.topLine}
-                buttons={block?.buttons}
                 phoneNumber={nurseryDetails?.phone ?? null}
+                isNurseryPage={Boolean(nurseryDetails)}
               />
             );
 
@@ -76,7 +75,6 @@ const ContentBlockDigester = ({ contentBlocks, nurseryDetails }: Props) => {
                 scallopedTop={block?.scallopedTop}
                 text={block?.textRaw}
                 image={block?.image}
-                links={block?.links}
                 directionsLink={nurseryDetails?.directionsLink ?? null}
                 phoneNumber={nurseryDetails?.phone ?? null}
               />

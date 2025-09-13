@@ -527,7 +527,7 @@
       },
       {
         "kind": "UNION",
-        "name": "BlockOrImageOrYoutube",
+        "name": "BlockOrImageBlockOrYoutube",
         "description": null,
         "isOneOf": null,
         "fields": null,
@@ -542,7 +542,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "Image",
+            "name": "ImageBlock",
             "ofType": null
           },
           {

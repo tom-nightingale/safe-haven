@@ -2,7 +2,7 @@
 
 import Container from "@/components/Container/Container";
 import type { TypedObject } from "@portabletext/types";
-import type { Link, Maybe, ImageBlock } from "@/gql/sanity/codegen";
+import type { Maybe, ImageBlock } from "@/gql/sanity/codegen";
 import ScallopedTop from "@/components/ScallopedTop/ScallopedTop";
 import BlockContent from "@/components/BlockContent/BlockContent";
 import Button from "@/components/Button/Button";
@@ -16,19 +16,18 @@ import WandSvg from "@/icons/wandSvg";
 import StarsSvg from "@/icons/starsSvg";
 import RocketSvg from "@/icons/rocketSvg";
 import FramedImage from "@/components/FramedImage/FramedImage";
+import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
 
 type Props = {
   scallopedTop?: Maybe<boolean>;
   text: TypedObject | TypedObject[];
   image: Maybe<ImageBlock>;
-  links: Maybe<Maybe<Link>[]>;
   directionsLink?: Maybe<string>;
   phoneNumber?: Maybe<string>;
 };
 
 const TextWithImageInner = ({
   text,
-  links,
   image,
   directionsLink,
   phoneNumber,
@@ -36,31 +35,14 @@ const TextWithImageInner = ({
   const { nurseries } = useGlobalContext();
   const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
   return (
-    <div className="grid grid-cols-12 gap-y-8 py-10 lg:gap-x-16">
+    <div className="relative z-50 grid grid-cols-12 gap-y-8 py-10 lg:gap-x-16">
       <div className="block-content relative z-1 col-span-12 lg:col-span-6">
         <BlockContent content={text} />
         <div
           className={`mt-10 flex flex-wrap gap-4 ${directionsLink ? "flex-col" : "flex-row"}`}
         >
           <div className="flex gap-4">
-            {links && links.length > 0 ? (
-              links.map(link => {
-                return (
-                  <Button
-                    key={link?.label}
-                    classes="inline-block button-primary button-peach"
-                    label={link?.label}
-                    href={link?.href}
-                  />
-                );
-              })
-            ) : (
-              <Button
-                classes="inline-block button-primary button-peach"
-                label="Contact Us Online"
-                href="/our-nurseries"
-              />
-            )}
+            <NurserySelectButton buttonLabel="Contact Us Today" />
 
             {directionsLink && (
               <Button
@@ -108,7 +90,6 @@ const TextWithImage = ({
   scallopedTop,
   text,
   image,
-  links,
   directionsLink,
   phoneNumber,
 }: Props) => {
@@ -119,7 +100,6 @@ const TextWithImage = ({
           <Container>
             <TextWithImageInner
               text={text}
-              links={links}
               image={image}
               directionsLink={directionsLink}
               phoneNumber={phoneNumber}
@@ -130,7 +110,6 @@ const TextWithImage = ({
         <Container>
           <TextWithImageInner
             text={text}
-            links={links}
             image={image}
             directionsLink={directionsLink}
             phoneNumber={phoneNumber}

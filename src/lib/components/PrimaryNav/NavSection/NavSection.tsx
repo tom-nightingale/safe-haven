@@ -108,7 +108,7 @@ const NavSection = ({
                           slug !== "" &&
                           `/${child?.target?.slug?.current}` === pathname
                             ? "text-peach"
-                            : ""
+                            : "hover:text-peach"
                         }
                       >
                         <>{child?.target?.title}</>

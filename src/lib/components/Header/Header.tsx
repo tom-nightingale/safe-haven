@@ -3,12 +3,11 @@ import Image from "next/image";
 import type { Navigation } from "@/gql/sanity/codegen";
 import Container from "@/components/Container/Container";
 import PrimaryNav from "@/components/PrimaryNav/PrimaryNav";
-import Button from "@/components/Button/Button";
 import { BsTelephone } from "react-icons/bs";
 import SecondaryNav from "@/components/SecondaryNav/SecondaryNav";
 import config from "@/config/config";
 import FancyLink from "@/components/FancyLink/FancyLink";
-import { useGlobalContext } from "@/context/GlobalContext";
+import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
 
 type Props = {
   primaryNav?: Navigation;
@@ -21,8 +20,6 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
     ...(secondaryNav?.sections ?? []),
   ];
 
-  const { nurseries } = useGlobalContext();
-  const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
   return (
     <div className="relative">
       <Container>
@@ -42,16 +39,16 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
           </div>
           <div className="z-100 flex items-center justify-between gap-10 xl:items-start xl:py-12">
             <PrimaryNav navItems={primaryNav} />
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 pr-2 xl:pr-0">
               <SecondaryNav nav={combinedNav} />
-              <Button
-                label="Get In Touch"
-                iconLeft={<BsTelephone />}
-                href={`tel:${nurseryPhoneNumber}`}
-                classes="button-primary button-peach"
-                typeClasses="hidden xs:block !whitespace-nowrap"
-                iconClasses="-rotate-90 xs:rotate-0"
-              />
+              <span className="-order-1 xl:order-2">
+                <NurserySelectButton
+                  buttonIcon={<BsTelephone />}
+                  buttonLabel="Get In Touch"
+                  typeClasses="hidden xs:block !whitespace-nowrap"
+                  iconClasses=""
+                />
+              </span>
             </div>
           </div>
         </div>

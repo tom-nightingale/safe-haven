@@ -1,9 +1,8 @@
 "use client";
 
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import type { Post } from "@/gql/sanity/codegen";
 import SimpleHero from "@/components/SimpleHero/SimpleHero";
-import ReviewCards from "@/components/ReviewCards/ReviewCards";
+
 import Locations from "@/components/Locations/Locations";
 import Container from "@/components/Container/Container";
 import CloudsVector from "@/components/CloudsVector/CloudsVector";
@@ -18,7 +17,11 @@ export const BlogArchiveLayout = ({ post, title }: Props) => {
   return (
     // <PageWrapper>
     <main>
-      <SimpleHero title={title ?? "Nursery news"} hideContactDetails={true} />
+      <SimpleHero
+        title={title ?? "Nursery news"}
+        topLine={post?.category?.title ?? undefined}
+        hideContactDetails={true}
+      />
 
       <div className="relative overflow-hidden pb-20 md:pb-40">
         <CloudsVector

@@ -121,6 +121,7 @@ export default async function RootLayout({
               <BannerContainer banners={banners.allBanner} />
             )}
             <Header primaryNav={primaryNav} secondaryNav={secondaryNav} />
+
             {children}
 
             <Footer

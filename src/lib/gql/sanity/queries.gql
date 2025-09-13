@@ -363,6 +363,12 @@ query GetPostBySlug($slug: String) {
     seo {
       ...seoFragment
     }
+    category {
+      title
+      slug {
+        current
+      }
+    }
   }
 }
 
