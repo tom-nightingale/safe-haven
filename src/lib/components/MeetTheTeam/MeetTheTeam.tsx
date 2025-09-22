@@ -157,11 +157,12 @@ const MeetTheTeam = ({
                       title={profile?.name}
                       subtitle={profile?.jobTitle}
                       buttonClass={
-                        buttonClasses[i] || "button-outline-blue text-blue"
+                        buttonClasses[i % buttonClasses.length] ||
+                        "button-outline-blue text-blue"
                       }
                       buttonStyle="icon-only"
-                      containerClass={bgColors[i]}
-                      shadowClass={shadowClasses[i]}
+                      containerClass={bgColors[i % bgColors.length]}
+                      shadowClass={shadowClasses[i % shadowClasses.length]}
                       imageFit="contain"
                       modalContent={profile?.biographyRaw}
                       toggleModal={() =>

@@ -12,6 +12,7 @@ import FancyLink from "@/components/FancyLink/FancyLink";
 import { Maybe } from "@/gql/sanity/codegen";
 import config from "@/config/config";
 import type { TypedObject } from "@portabletext/types";
+import Image from "next/legacy/image";
 // import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -52,12 +53,21 @@ const CardInner = ({
         <div
           className={`relative h-full w-full transition-all duration-200 ${href || modalContent ? "group-hover:scale-105" : ""}`}
         >
-          {image && (
+          {image ? (
             <SanityImage
               image={image?.image}
               alt={title ?? config.COMPANY_NAME}
               loading="lazy"
               objectFit={imageFit}
+            />
+          ) : (
+            <Image
+              layout="fill"
+              src="/placeholder.png"
+              alt="Staff"
+              loading="lazy"
+              style={{ objectFit: "contain" }}
+              objectFit="contain"
             />
           )}
         </div>

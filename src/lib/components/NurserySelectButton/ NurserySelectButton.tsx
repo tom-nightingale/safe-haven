@@ -12,6 +12,7 @@ type Props = {
   buttonIcon?: ReactElement;
   typeClasses?: string;
   iconClasses?: string;
+  classes?: string;
 };
 
 const NurserySelectButton = ({
@@ -19,6 +20,7 @@ const NurserySelectButton = ({
   buttonIcon,
   typeClasses,
   iconClasses,
+  classes,
 }: Props) => {
   const { nurseries } = useGlobalContext();
   const [isViewingOptionsOpen, setIsViewingOptionsOpen] = useState(false);
@@ -47,7 +49,7 @@ const NurserySelectButton = ({
   return (
     <div className="relative">
       <Button
-        classes={"button-primary button-peach inline-block"}
+        classes={`button-primary button-peach inline-block ${classes}`}
         label={buttonLabel ?? "Book A Viewing"}
         iconLeft={buttonIcon ?? undefined}
         onClick={() => setIsViewingOptionsOpen(!isViewingOptionsOpen)}

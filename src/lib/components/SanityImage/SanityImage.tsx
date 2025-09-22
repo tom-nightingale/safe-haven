@@ -80,14 +80,6 @@ const SanityImage = ({
       blurDataURL={blurData ?? undefined}
       sizes={sizes}
       fetchPriority={loading === "eager" ? "high" : "auto"}
-      // style={{
-      //   objectFit: objectFit as
-      //     | "cover"
-      //     | "contain"
-      //     | "fill"
-      //     | "none"
-      //     | "scale-down",
-      // }}
       objectFit={objectFit}
       objectPosition={getPositionFromHotspot(hotspotData)}
     />
