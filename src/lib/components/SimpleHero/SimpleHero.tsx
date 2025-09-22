@@ -12,6 +12,9 @@ import DuckSvg from "@/icons/duckSvg";
 import BlocksSvg from "@/icons/blocksSvg";
 import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
 import Button from "@/components/Button/Button";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 type Props = {
   topLine?: string | Maybe<string>;
@@ -29,10 +32,32 @@ const Hero = ({
   hideContactDetails = false,
   isNurseryPage = false,
 }: Props) => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
+  gsap.registerPlugin(useGSAP);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      heroTextRef.current,
+      { opacity: 0, yPercent: 10 },
+      {
+        opacity: 1,
+        yPercent: 0,
+        duration: 0.6,
+        delay: 0.3,
+        ease: "back.out(2)",
+      },
+    ),
+      { scope: heroRef };
+  });
+
   return (
-    <div className="relative">
+    <div className="relative" ref={heroRef}>
       <Container classes="!max-w-(--breakpoint-xl)">
-        <div className="relative z-1 flex flex-col items-center justify-center gap-2 text-center">
+        <div
+          className="relative z-1 flex flex-col items-center justify-center gap-2 text-center"
+          ref={heroTextRef}
+        >
           <Typography
             variant={TypeVariant.H3}
             component={TypeComponent.p}
@@ -70,8 +95,7 @@ const Hero = ({
           )}
         </div>
       </Container>
-
-      <StarsSvg classes="absolute top-[16%] left-[32%] w-[20vw] pointer-events-none" />
+      <StarsSvg classes="pointer-events-none absolute top-[16%] left-[32%] w-[20vw]" />
       <DuckSvg classes="absolute top-[60%] left-0 w-[20vw] pointer-events-none" />
       <HorseSvg classes="absolute top-[60%] left-[63%] w-[20vw] pointer-events-none" />
       <BlocksSvg classes="absolute top-[20%] right-[0%] w-[20vw] pointer-events-none" />

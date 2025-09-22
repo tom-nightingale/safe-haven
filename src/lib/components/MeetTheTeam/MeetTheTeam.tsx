@@ -91,7 +91,7 @@ const MeetTheTeam = ({
             className={`flex flex-col justify-center gap-6 px-6 text-center ${layout === "stacked" ? "xl:col-span-12" : "xl:col-span-4 xl:text-left"}`}
           >
             <Typography
-              variant={TypeVariant.H3}
+              variant={TypeVariant.H2}
               component={TypeComponent.p}
               bold
             >
@@ -157,11 +157,12 @@ const MeetTheTeam = ({
                       title={profile?.name}
                       subtitle={profile?.jobTitle}
                       buttonClass={
-                        buttonClasses[i] || "button-outline-blue text-blue"
+                        buttonClasses[i % buttonClasses.length] ||
+                        "button-outline-blue text-blue"
                       }
                       buttonStyle="icon-only"
-                      containerClass={bgColors[i]}
-                      shadowClass={shadowClasses[i]}
+                      containerClass={bgColors[i % bgColors.length]}
+                      shadowClass={shadowClasses[i % shadowClasses.length]}
                       imageFit="contain"
                       modalContent={profile?.biographyRaw}
                       toggleModal={() =>

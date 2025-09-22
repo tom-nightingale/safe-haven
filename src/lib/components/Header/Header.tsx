@@ -43,6 +43,7 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
               <SecondaryNav nav={combinedNav} />
               <span className="-order-1 xl:order-2">
                 <NurserySelectButton
+                  classes="!px-3 xs:!px-5 lg:!px-6 lg:!py-4"
                   buttonIcon={<BsTelephone />}
                   buttonLabel="Get In Touch"
                   typeClasses="hidden xs:block !whitespace-nowrap"

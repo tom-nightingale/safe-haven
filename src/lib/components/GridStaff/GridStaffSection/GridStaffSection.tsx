@@ -100,7 +100,7 @@ const StaffSectionInner = ({ section, classes }: Props) => {
         <div className="mt-10 flex flex-wrap justify-center gap-12">
           {section?.staff?.map((profile, i) => (
             <div
-              className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4"
+              className="w-full md:w-[calc(50%-3rem)] lg:w-[calc(33.3%-3rem)] xl:w-[calc(25%-3rem)]"
               key={profile?.name}
             >
               <Card

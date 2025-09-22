@@ -37,7 +37,7 @@ const NurseryDetails = ({
   return (
     <>
       {slug && title && (
-        <FancyLink url={`our-nurseries/${slug}`}>
+        <FancyLink url={`/our-nurseries/${slug}`}>
           <Typography
             variant={TypeVariant.H5}
             component={TypeComponent.p}
