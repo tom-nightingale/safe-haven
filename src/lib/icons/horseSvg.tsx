@@ -1,9 +1,31 @@
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 type Props = {
   stroke?: string;
   classes?: string;
 };
 
-const horseSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
+const HorseSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
+  const ref = useRef<SVGSVGElement>(null);
+
+  gsap.registerPlugin(useGSAP);
+  useGSAP(() => {
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
+
+    const angle = 10;
+    tl.to(ref.current, {
+      rotate: angle,
+      duration: 1,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+    });
+  });
+
   return (
     <svg
       width="122"
@@ -12,6 +34,7 @@ const horseSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={classes}
+      ref={ref}
     >
       <g clipPath="url(#clip0_738_899)">
         <path
@@ -116,4 +139,5 @@ const horseSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
     </svg>
   );
 };
-export default horseSvg;
+
+export default HorseSvg;

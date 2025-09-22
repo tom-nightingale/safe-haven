@@ -160,6 +160,7 @@ const MeetTheTeam = ({
                         buttonClasses[i % buttonClasses.length] ||
                         "button-outline-blue text-blue"
                       }
+                      buttonText="View biography"
                       buttonStyle="icon-only"
                       containerClass={bgColors[i % bgColors.length]}
                       shadowClass={shadowClasses[i % shadowClasses.length]}

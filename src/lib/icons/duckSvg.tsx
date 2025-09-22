@@ -1,11 +1,32 @@
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 type Props = {
   stroke?: string;
   classes?: string;
 };
 
-const duckSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
+const DuckSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
+  const ref = useRef<SVGSVGElement>(null);
+
+  gsap.registerPlugin(useGSAP);
+  useGSAP(() => {
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
+
+    tl.to(ref.current, {
+      y: -10,
+      duration: 1,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+    });
+  });
   return (
     <svg
+      ref={ref}
       width="105"
       height="97"
       viewBox="0 0 105 97"
@@ -68,4 +89,4 @@ const duckSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
     </svg>
   );
 };
-export default duckSvg;
+export default DuckSvg;

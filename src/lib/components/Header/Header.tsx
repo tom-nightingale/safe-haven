@@ -28,7 +28,7 @@ const Header = ({ primaryNav, secondaryNav }: Props) => {
             <FancyLink url="/">
               <Image
                 src="/logo.png"
-                width={203}
+                width={201}
                 height={201}
                 loading="eager"
                 quality={100}
