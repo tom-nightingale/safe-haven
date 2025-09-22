@@ -1,9 +1,31 @@
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 type Props = {
   stroke?: string;
   classes?: string;
 };
 
-const blocksSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
+const BlocksSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
+  const ref = useRef<SVGSVGElement>(null);
+
+  gsap.registerPlugin(useGSAP);
+  useGSAP(() => {
+    gsap.to(ref.current, {
+      x: () => gsap.utils.random(-2, 2),
+      y: () => gsap.utils.random(-3, 3),
+      rotate: () => gsap.utils.random(-4, 4),
+      duration: 1,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      stagger: 0.1,
+    });
+  });
+
   return (
     <svg
       width="134"
@@ -12,6 +34,7 @@ const blocksSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={classes}
+      ref={ref}
     >
       <g clipPath="url(#clip0_738_889)">
         <path
@@ -76,4 +99,4 @@ const blocksSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
     </svg>
   );
 };
-export default blocksSvg;
+export default BlocksSvg;
