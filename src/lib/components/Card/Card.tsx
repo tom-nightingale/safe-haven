@@ -17,7 +17,7 @@ import type { TypedObject } from "@portabletext/types";
 type Props = {
   href?: string | Maybe<string>;
   image?: Maybe<ImageBlock>;
-  imageFit?: string;
+  imageFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
   title: string | Maybe<string>;
   subtitle?: string | Maybe<string>;
   containerClass?: string;
@@ -50,7 +50,7 @@ const CardInner = ({
     >
       <div className="relative flex aspect-[2/1.5] items-start justify-center overflow-hidden bg-white">
         <div
-          className={`h-full w-full transition-all duration-200 ${href || modalContent ? "group-hover:scale-105" : ""}`}
+          className={`relative h-full w-full transition-all duration-200 ${href || modalContent ? "group-hover:scale-105" : ""}`}
         >
           {image && (
             <SanityImage
@@ -64,9 +64,9 @@ const CardInner = ({
       </div>
 
       <div
-        className={`3xl:flex-row 3xl:text-left 3xl:justify-between z-2 flex ${buttonStyle !== "icon-only" ? "flex-col text-center" : "justify-between"} items-center gap-3 p-6`}
+        className={`3xl:flex-row 3xl:text-left 3xl:justify-between z-2 flex grow items-center justify-between ${buttonStyle !== "icon-only" ? "flex-col text-center" : "justify-between text-left"} items-center gap-3 p-6`}
       >
-        <div className="text-left">
+        <div className="">
           {title && (
             <Typography
               variant={TypeVariant.H4}
@@ -130,7 +130,7 @@ const Card = ({
   toggleModal,
 }: Props) => {
   return (
-    <div className="relative h-full">
+    <div className="relative z-2 h-full">
       <div
         className={`pointer-events-none absolute -top-2 -left-2 z-0 h-full w-full rounded-3xl ${shadowClass}`}
       ></div>

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import type { NavigationSection, Maybe } from "@/gql/sanity/codegen";
 import Button from "@/components/Button/Button";
 import { FaBars, FaTimes, FaStar } from "react-icons/fa";
@@ -27,7 +27,7 @@ const SecondaryNav = ({ nav }: Props) => {
 
   useGSAP(
     () => {
-      gsap.set(menuOverlay.current, { opacity: 0 });
+      gsap.set(menuOverlay.current, { opacity: 0, autoAlpha: 0 });
       gsap.set(menuContainer.current, {
         opacity: 0,
         xPercent: 100,
@@ -36,8 +36,9 @@ const SecondaryNav = ({ nav }: Props) => {
       tl.current = gsap
         .timeline({ paused: true })
         .to(menuOverlay.current, {
-          opacity: 1,
-          duration: 0.1,
+          autoAlpha: 1,
+          opacity: 0,
+          duration: 0.2,
           ease: "power2.out",
         })
         .to(menuContainer.current, {
@@ -81,7 +82,7 @@ const SecondaryNav = ({ nav }: Props) => {
 
       <div
         ref={animationScope}
-        className={`fixed top-0 left-0 z-50 h-screen w-full ${isOpen ? "block" : "hidden"}`}
+        className={`fixed top-0 left-0 z-50 h-screen w-full ${isOpen ? "pointer-events-auto" : "pointer-events-none opacity-0"}`}
       >
         <div
           ref={menuOverlay}
@@ -90,7 +91,7 @@ const SecondaryNav = ({ nav }: Props) => {
         ></div>
 
         <div
-          className="shadow-peach bg-cream absolute top-4 right-4 bottom-4 z-10 flex h-[calc(100%-32px)] w-4/5 flex-col overflow-y-scroll rounded-3xl xl:w-5/12"
+          className="shadow-peach bg-cream no-scrollbar absolute top-4 right-4 bottom-4 z-10 flex h-[calc(100%-32px)] w-4/5 flex-col overflow-y-scroll rounded-3xl xl:w-5/12"
           ref={menuContainer}
         >
           <div className="text-dark-peach absolute top-6 right-6 z-50 cursor-pointer">
@@ -173,8 +174,6 @@ const SecondaryNav = ({ nav }: Props) => {
                 })}
             </div>
           </div>
-
-          {/* <div className="from-cream pointer-events-none sticky bottom-0 -mt-15 min-h-30 w-full bg-linear-to-t to-transparent" /> */}
         </div>
       </div>
     </>

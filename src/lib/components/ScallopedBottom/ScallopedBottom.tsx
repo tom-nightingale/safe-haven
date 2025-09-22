@@ -6,7 +6,7 @@ type Props = {
 const ScallopedTop = ({ children }: Props) => {
   return (
     <div className="scalloped-bottom relative mb-20">
-      <div className="from-taupe to-cream relative bg-gradient-to-t py-20">
+      <div className="from-taupe to-cream relative bg-gradient-to-t pb-20">
         {children}
       </div>
     </div>

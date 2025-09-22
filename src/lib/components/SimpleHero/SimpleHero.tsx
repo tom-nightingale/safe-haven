@@ -4,39 +4,34 @@ import Typography, {
   TypeVariant,
   TypeComponent,
 } from "@/components/Typography/Typography";
-import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
-import { FaPhone } from "react-icons/fa";
-import type { Link, Maybe } from "@/gql/sanity/codegen";
-import { useGlobalContext } from "@/context/GlobalContext";
+import type { Maybe } from "@/gql/sanity/codegen";
 import StarsSvg from "@/icons/starsSvg";
 import HorseSvg from "@/icons/horseSvg";
 import DuckSvg from "@/icons/duckSvg";
 import BlocksSvg from "@/icons/blocksSvg";
+import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
+import Button from "@/components/Button/Button";
 
 type Props = {
   topLine?: string | Maybe<string>;
   title: string | Maybe<string>;
   subtitle?: string | Maybe<string>;
-  buttons?: Maybe<Maybe<Link>[]>;
   phoneNumber?: Maybe<string> | null;
   hideContactDetails?: boolean;
+  isNurseryPage?: boolean;
 };
 
 const Hero = ({
   topLine,
   title,
   subtitle,
-  buttons,
-  phoneNumber,
   hideContactDetails = false,
+  isNurseryPage = false,
 }: Props) => {
-  const { nurseries } = useGlobalContext();
-  const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
-
   return (
     <div className="relative">
-      <Container>
+      <Container classes="!max-w-(--breakpoint-xl)">
         <div className="relative z-1 flex flex-col items-center justify-center gap-2 text-center">
           <Typography
             variant={TypeVariant.H3}
@@ -46,9 +41,11 @@ const Hero = ({
             {topLine}
           </Typography>
 
-          <Typography variant={TypeVariant.H3} component={TypeComponent.p}>
-            {subtitle}
-          </Typography>
+          {subtitle && (
+            <Typography variant={TypeVariant.H3} component={TypeComponent.p}>
+              {subtitle}
+            </Typography>
+          )}
 
           <Typography
             variant={TypeVariant.H1}
@@ -59,54 +56,25 @@ const Hero = ({
           </Typography>
 
           {!hideContactDetails && (
-            <>
-              <div className="mt-6">
-                {buttons && buttons.length > 0 ? (
-                  <>
-                    {buttons.map((button: Maybe<Link>, i: number) => {
-                      return (
-                        <Button
-                          key={i}
-                          classes={"button-primary button-peach inline-block"}
-                          label={button?.label}
-                          href={button?.href}
-                        />
-                      );
-                    })}
-                  </>
-                ) : (
-                  <Button
-                    classes={"button-primary button-peach inline-block"}
-                    label="Book A Viewing"
-                    href="/our-nurseries"
-                  />
-                )}
-              </div>
-
-              <a href={`tel:${nurseryPhoneNumber}`} className="mt-6 mb-10">
-                <Typography
-                  variant={TypeVariant.Button1}
-                  component={TypeComponent.p}
-                  classes="flex items-center gap-1"
-                >
-                  <span className="mr-1 rotate-90 text-[#7Da8A4]">
-                    <FaPhone />
-                  </span>
-                  Call us on
-                  <span className="font-medium">
-                    {phoneNumber ?? nurseryPhoneNumber}
-                  </span>
-                </Typography>
-              </a>
-            </>
+            <div className="mt-6 mb-10">
+              {isNurseryPage ? (
+                <Button
+                  label="Book A Viewing"
+                  href="#locationDetails"
+                  classes="button button-primary button-peach"
+                />
+              ) : (
+                <NurserySelectButton />
+              )}
+            </div>
           )}
         </div>
       </Container>
 
-      <StarsSvg classes="absolute top-[16%] left-[32%] pointer-events-none" />
-      <DuckSvg classes="absolute top-[60%] left-0 pointer-events-none" />
-      <HorseSvg classes="absolute top-[60%] left-[63%] pointer-events-none" />
-      <BlocksSvg classes="absolute top-[40%] right-[2%] pointer-events-none" />
+      <StarsSvg classes="absolute top-[16%] left-[32%] w-[20vw] pointer-events-none" />
+      <DuckSvg classes="absolute top-[60%] left-0 w-[20vw] pointer-events-none" />
+      <HorseSvg classes="absolute top-[60%] left-[63%] w-[20vw] pointer-events-none" />
+      <BlocksSvg classes="absolute top-[20%] right-[0%] w-[20vw] pointer-events-none" />
     </div>
   );
 };

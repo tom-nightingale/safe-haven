@@ -23,6 +23,7 @@ type StaffSection = {
 type Props = {
   section: Maybe<StaffSection>;
   index?: number;
+  classes?: string;
 };
 
 type ProfileContent = {
@@ -32,7 +33,7 @@ type ProfileContent = {
   image: Maybe<ImageBlock>;
 };
 
-const StaffSectionInner = ({ section }: Props) => {
+const StaffSectionInner = ({ section, classes }: Props) => {
   const buttonClasses = [
     "text-green",
     "text-lilac",
@@ -77,11 +78,11 @@ const StaffSectionInner = ({ section }: Props) => {
     <Container>
       <div
         key={section?._key}
-        className="scroll-m-20 pb-16 text-center"
+        className={`scroll-m-20 pb-16 text-center ${classes}`}
         id={section?.title?.replaceAll(" ", "").toLowerCase()}
       >
         {section?.title && (
-          <Typography variant={TypeVariant.H3} component={TypeComponent.p} bold>
+          <Typography variant={TypeVariant.H2} component={TypeComponent.p} bold>
             {section?.title}
           </Typography>
         )}
@@ -193,7 +194,7 @@ const GridGallerySection = ({ section, index }: Props) => {
         <StaffSectionInner section={section} />
       ) : (
         <ScallopedTop>
-          <StaffSectionInner section={section} />
+          <StaffSectionInner section={section} classes="pt-16 xl:pt-0" />
         </ScallopedTop>
       )}
     </>

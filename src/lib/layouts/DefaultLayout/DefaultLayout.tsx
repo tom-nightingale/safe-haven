@@ -1,4 +1,4 @@
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
+// import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import type { Page } from "@/gql/sanity/codegen";
 import ContentBlockDigester from "@/components/ContentBlockDigester/ContentBlockDigester";
 
@@ -10,10 +10,10 @@ export const DefaultLayout = ({ page }: Props) => {
 
   return (
     //<PageWrapper>
+    // </PageWrapper>
     <main>
       <ContentBlockDigester contentBlocks={contentBlocks} />
     </main>
-    // </PageWrapper>
   );
 };
 

@@ -81,7 +81,7 @@ const NavSection = ({
                 {target?.title}
               </Typography>
               {children && children?.length > 0 && (
-                <span className="pointer-events-none absolute bottom-0 left-1/2 -mt-2 inline-block -translate-x-1/2">
+                <span className="pointer-events-none absolute -bottom-2 left-1/2 -mt-2 inline-block -translate-x-1/2">
                   &hellip;
                 </span>
               )}
@@ -108,7 +108,7 @@ const NavSection = ({
                           slug !== "" &&
                           `/${child?.target?.slug?.current}` === pathname
                             ? "text-peach"
-                            : ""
+                            : "hover:text-peach"
                         }
                       >
                         <>{child?.target?.title}</>

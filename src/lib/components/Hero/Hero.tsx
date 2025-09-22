@@ -4,19 +4,18 @@ import Typography, {
   TypeVariant,
   TypeComponent,
 } from "@/components/Typography/Typography";
-import Button from "@/components/Button/Button";
+
 import Container from "@/components/Container/Container";
-import { FaPhone } from "react-icons/fa";
+
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
 import type {
-  Link,
   Maybe,
   ImageBlock,
   HeroCard as HeroCardType,
 } from "@/gql/sanity/codegen";
-import { useGlobalContext } from "@/context/GlobalContext";
+
 import SanityImage from "@/components/SanityImage/SanityImage";
 import config from "@/config/config";
 import StarsSvg from "@/icons/starsSvg";
@@ -26,19 +25,16 @@ import BlocksSvg from "@/icons/blocksSvg";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
 
 type Props = {
   title: TypedObject | TypedObject[];
   subtitle: TypedObject | TypedObject[];
   image: Maybe<ImageBlock>;
   cards?: Maybe<Maybe<HeroCardType>[]>;
-  buttons?: Maybe<Maybe<Link>[]>;
 };
 
-const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
-  const { nurseries } = useGlobalContext();
-  const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
-
+const Hero = ({ title, subtitle, image, cards }: Props) => {
   const heroImageRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   gsap.registerPlugin(useGSAP);
@@ -76,56 +72,14 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
             </Typography>
 
             <div className="xs:flex-row xs:flex-wrap mt-3 flex flex-col gap-6 lg:mt-10">
-              {buttons && buttons.length > 0 ? (
-                <>
-                  {buttons.map((button: Maybe<Link>, i: number) => {
-                    return (
-                      <Button
-                        key={button?.label}
-                        classes={
-                          i === 0
-                            ? "button-primary button-peach inline-block"
-                            : "button-primary button-outline bg-white button-outline-blue"
-                        }
-                        label={button?.label}
-                        href={button?.href}
-                      />
-                    );
-                  })}
-                </>
-              ) : (
-                <Button
-                  classes={"button-primary button-peach inline-block"}
-                  label="Book A Viewing"
-                  href="/our-nurseries"
-                />
-              )}
-
-              <a
-                href={`tel:${nurseryPhoneNumber}`}
-                className="group flex items-center"
-              >
-                <Typography
-                  variant={TypeVariant.Button1}
-                  component={TypeComponent.p}
-                  classes="flex items-center gap-1"
-                >
-                  <span className="mr-1 rotate-90 text-[#7Da8A4]">
-                    <FaPhone />
-                  </span>
-                  Call us on
-                  <span className="group-hover:text-peach font-medium">
-                    {nurseryPhoneNumber}
-                  </span>
-                </Typography>
-              </a>
+              <NurserySelectButton />
             </div>
           </div>
 
           {image && (
             <div
               ref={heroImageRef}
-              className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full opacity-50 md:-right-8 md:w-2/3 md:opacity-100 lg:right-4"
+              className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4"
             >
               <SanityImage
                 image={image?.image}

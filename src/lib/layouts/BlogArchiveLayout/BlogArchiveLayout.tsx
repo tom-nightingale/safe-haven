@@ -1,7 +1,7 @@
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
+// import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import type { Post } from "@/gql/sanity/codegen";
 import SimpleHero from "@/components/SimpleHero/SimpleHero";
-import ReviewCards from "@/components/ReviewCards/ReviewCards";
+// import ReviewCards from "@/components/ReviewCards/ReviewCards";
 import Locations from "@/components/Locations/Locations";
 import Container from "@/components/Container/Container";
 import CloudsVector from "@/components/CloudsVector/CloudsVector";
@@ -40,14 +40,14 @@ export const BlogArchiveLayout = ({ posts, title, subtitle }: Props) => {
 
   return (
     // <PageWrapper>
+    // </PageWrapper>
     <main>
       <SimpleHero
-        title={title ?? "Nursery news"}
+        title={title ?? "Nursery News"}
         subtitle={subtitle ?? "Stay up to date with"}
         hideContactDetails={true}
       />
-
-      <div className="relative overflow-hidden pb-20 md:pb-40">
+      <div className="relative overflow-hidden pb-20 md:pb-60">
         <CloudsVector
           fill="white"
           classes="absolute w-[200%] lg:w-[150%] 3xl:w-full top-1"
@@ -123,10 +123,9 @@ export const BlogArchiveLayout = ({ posts, title, subtitle }: Props) => {
           </Container>
         </div>
       </div>
-      <ReviewCards />
+      {/* <ReviewCards /> */}
       <Locations />
     </main>
-    // </PageWrapper>
   );
 };
 

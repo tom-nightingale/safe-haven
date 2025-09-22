@@ -6,11 +6,10 @@ import Typography, {
   TypeComponent,
 } from "@/components/Typography/Typography";
 import { FaPhone, FaFacebook } from "react-icons/fa";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Copyright from "./Copyright";
 import NurseryDetails from "./NurseryDetails";
 import { type Navigation } from "@/gql/sanity/codegen";
-import FancyLink from "@/components/FancyLink/FancyLink";
 import Button from "@/components/Button/Button";
 import config from "@/config/config";
 import { type Nursery } from "@/gql/sanity/codegen";
@@ -22,7 +21,6 @@ type Props = {
   nurseries?: Nursery[];
 };
 
-// @TODO - Update with the nursery details from Sanity
 const Footer = ({ primaryNav, secondaryNav }: Props) => {
   const navColumn1 = [
     ...(primaryNav?.sections ?? []),
@@ -37,8 +35,8 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
     <div className="scalloped-top relative mt-8">
       <div className="from-taupe to-cream relative bg-gradient-to-b">
         <Container>
-          <div className="border-taupe grid grid-cols-1 gap-10 border-b-2 py-8 pb-48 lg:grid-cols-2 lg:py-20 lg:pb-40 xl:grid-cols-12 xl:py-24">
-            <div className="3xl:col-span-3 grid gap-8 xl:col-span-4">
+          <div className="border-taupe grid grid-cols-1 gap-10 border-b-2 py-12 pb-48 lg:grid-cols-2 lg:py-20 lg:pb-40 xl:grid-cols-12 xl:py-24">
+            <div className="3xl:col-span-3 grid gap-8 xl:col-span-5 2xl:col-span-4">
               <div className="flex flex-col gap-4">
                 <Typography
                   variant={TypeVariant.H3}
@@ -84,6 +82,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                           newTab
                           label={nursery.phoneNumber ?? ""}
                           variant={TypeVariant.Body1}
+                          classes="button button-link"
                         />
                       </Typography>
                     </div>
@@ -157,24 +156,28 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                 <div className="flex flex-col items-start gap-3 xl:gap-5">
                   {navColumn1.map(item => {
                     return (
-                      <FancyLink
+                      <Button
                         key={item?.target?.slug?.current}
-                        url={item?.target?.slug?.current ?? ""}
-                      >
-                        {item?.target?.title}
-                      </FancyLink>
+                        href={item?.target?.slug?.current ?? ""}
+                        newTab
+                        label={item?.target?.title}
+                        variant={TypeVariant.Button2}
+                        classes="button button-link text-sm"
+                      />
                     );
                   })}
                 </div>
                 <div className="flex flex-col items-start gap-3 xl:gap-5">
                   {navColumn2.map(item => {
                     return (
-                      <FancyLink
+                      <Button
                         key={item?.target?.slug?.current}
-                        url={item?.target?.slug?.current ?? ""}
-                      >
-                        {item?.target?.title}
-                      </FancyLink>
+                        href={item?.target?.slug?.current ?? ""}
+                        newTab
+                        label={item?.target?.title}
+                        variant={TypeVariant.Button2}
+                        classes="button button-link text-sm"
+                      />
                     );
                   })}
                 </div>
@@ -199,7 +202,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                   href="https://www.facebook.com/SafeHavenDayNursery"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center gap-2"
+                  className="button button-link flex w-full items-center gap-2"
                 >
                   <FaFacebook /> Follow us on Facebook
                 </a>

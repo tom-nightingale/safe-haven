@@ -40,7 +40,7 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                   classes="px-6"
                   bold
                 >
-                  {title}
+                  {title ?? "We come highly recommended..."}
                 </Typography>
                 {reviews && reviews?.length > 0 && (
                   <div className="relative mt-10">
@@ -84,12 +84,13 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
         </>
       ) : (
         <>
-          <Container classes="!px-0">
+          <Container classes="!p-0">
             <div className="relative z-1 mx-auto w-full py-12">
               <Typography
                 variant={TypeVariant.H3}
                 component={TypeComponent.h2}
                 bold
+                classes="px-6"
               >
                 {title}
               </Typography>
@@ -99,6 +100,8 @@ const ReviewCards = ({ title, scallopedBottom }: Props) => {
                     modules={[Scrollbar, A11y]}
                     spaceBetween={20}
                     slidesPerView={1.2}
+                    slidesOffsetBefore={24}
+                    slidesOffsetAfter={24}
                     scrollbar={{ draggable: true }}
                     breakpoints={{
                       600: {

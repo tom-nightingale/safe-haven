@@ -24,7 +24,7 @@ type Props = {
 const FeesInner = ({ title, subtitle, fees, links, reverseLayout }: Props) => {
   return (
     <div
-      className={`relative z-10 flex flex-col items-center xl:flex-row xl:justify-between ${reverseLayout && "xl:flex-row-reverse"}`}
+      className={`relative z-10 flex flex-col items-center py-10 xl:flex-row xl:justify-between ${reverseLayout && "xl:flex-row-reverse"}`}
     >
       <div className={`flex flex-col items-center`}>
         <Typography variant={TypeVariant.H3} component={TypeComponent.p} bold>

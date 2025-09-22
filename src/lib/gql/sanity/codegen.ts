@@ -91,7 +91,7 @@ export type Block = {
   style?: Maybe<Scalars["String"]["output"]>;
 };
 
-export type BlockOrImageOrYoutube = Block | Image | Youtube;
+export type BlockOrImageBlockOrYoutube = Block | ImageBlock | Youtube;
 
 export type BooleanFilter = {
   /** Checks if the value is equal to the given input. */
@@ -3056,6 +3056,17 @@ export type GetPostBySlugQuery = {
                   | null
                   | undefined;
               }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+    category?:
+      | {
+          __typename?: "Category";
+          title?: string | null | undefined;
+          slug?:
+            | { __typename?: "Slug"; current?: string | null | undefined }
             | null
             | undefined;
         }
@@ -7054,6 +7065,29 @@ export const GetPostBySlugDocument = {
                       {
                         kind: "FragmentSpread",
                         name: { kind: "Name", value: "seoFragment" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "category" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "slug" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "current" },
+                            },
+                          ],
+                        },
                       },
                     ],
                   },
