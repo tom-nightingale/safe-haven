@@ -61,22 +61,27 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
   useGSAP(
     () => {
       const boxes = gsap.utils.toArray(".box");
-      boxes.forEach((box: any, i: number) => {
-        gsap.fromTo(
-          box,
-          { y: 50 },
-          {
-            duration: 0.4,
-            delay: i / 20,
-            y: 0,
-            ease: "back.out(2)",
-            scrollTrigger: {
-              trigger: box,
-              toggleActions: "play none none none",
-            },
-          },
-        );
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: cardContainer.current,
+          start: "top bottom-=20",
+          toggleActions: "play none none none",
+        },
+        delay: 0.6,
       });
+
+      tl.fromTo(
+        boxes,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "back.out(2)",
+          stagger: 0.05,
+        },
+      );
     },
     { scope: cardContainer },
   );

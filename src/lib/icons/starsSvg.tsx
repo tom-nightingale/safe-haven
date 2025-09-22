@@ -1,11 +1,45 @@
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 type Props = {
   stroke?: string;
   classes?: string;
 };
 
-const starsSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
+const StarsSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
+  const ref = useRef<SVGSVGElement>(null);
+
+  gsap.registerPlugin(useGSAP);
+  useGSAP(() => {
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
+
+    const float = () => gsap.utils.random(-5, 5, true); // subtle offsets
+    tl.to(ref.current, {
+      x: float(),
+      y: float(),
+      duration: 2.5,
+      ease: "sine.inOut",
+    })
+      .to(ref.current, {
+        x: float(),
+        y: float(),
+        duration: 3,
+        ease: "sine.inOut",
+      })
+      .to(ref.current, {
+        x: float(),
+        y: float(),
+        duration: 2,
+        ease: "sine.inOut",
+      });
+  });
+
   return (
     <svg
+      ref={ref}
       width="181"
       height="181"
       viewBox="0 0 181 181"
@@ -144,4 +178,4 @@ const starsSvg = ({ stroke = "#D6CFC7", classes }: Props) => {
     </svg>
   );
 };
-export default starsSvg;
+export default StarsSvg;

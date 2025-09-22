@@ -36,6 +36,7 @@ type Props = {
 
 const Hero = ({ title, subtitle, image, cards }: Props) => {
   const heroImageRef = useRef<HTMLDivElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   gsap.registerPlugin(useGSAP);
 
@@ -51,6 +52,17 @@ const Hero = ({ title, subtitle, image, cards }: Props) => {
         ease: "back.out(2)",
       },
     ),
+      gsap.fromTo(
+        heroTextRef.current,
+        { opacity: 0, yPercent: 10 },
+        {
+          opacity: 1,
+          yPercent: 0,
+          duration: 0.6,
+          delay: 0.6,
+          ease: "back.out(2)",
+        },
+      ),
       { scope: heroRef };
   });
 
@@ -58,7 +70,10 @@ const Hero = ({ title, subtitle, image, cards }: Props) => {
     <div className="relative" ref={heroRef}>
       <Container classes="relative">
         <div className="relative -mt-10 grid grid-cols-12 py-10 md:py-12 lg:py-16 xl:py-24">
-          <div className="3xl:pr-20 relative z-10 col-span-12 grid gap-3 sm:col-span-8 lg:col-span-6 lg:pr-16 xl:pr-30">
+          <div
+            className="3xl:pr-20 relative z-10 col-span-12 grid gap-3 sm:col-span-8 lg:col-span-6 lg:pr-16 xl:pr-30"
+            ref={heroTextRef}
+          >
             <Typography
               variant={TypeVariant.H3}
               component={TypeComponent.span}
@@ -77,16 +92,15 @@ const Hero = ({ title, subtitle, image, cards }: Props) => {
           </div>
 
           {image && (
-            <div
-              ref={heroImageRef}
-              className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4"
-            >
-              <SanityImage
-                image={image?.image}
-                alt={image?.altText ?? config.COMPANY_NAME}
-                loading="eager"
-                objectFit="contain"
-              />
+            <div className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4">
+              <div className="absolute h-full w-full" ref={heroImageRef}>
+                <SanityImage
+                  image={image?.image}
+                  alt={image?.altText ?? config.COMPANY_NAME}
+                  loading="eager"
+                  objectFit="contain"
+                />
+              </div>
             </div>
           )}
         </div>
