@@ -51,7 +51,7 @@ const CardInner = ({
     >
       <div className="relative flex aspect-[2/1.5] items-start justify-center overflow-hidden bg-white">
         <div
-          className={`relative h-full w-full transition-all duration-200 ${href || modalContent ? "group-hover:scale-105" : ""}`}
+          className={`relative h-full w-full transition-all duration-500 ${href || modalContent ? "group-hover:scale-105" : ""}`}
         >
           {image ? (
             <SanityImage

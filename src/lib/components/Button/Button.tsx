@@ -47,7 +47,11 @@ const Button = ({
             className={`button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
             onClick={onClick}
           >
-            {iconOnly && <span className="aspect-square">{icon}</span>}
+            {iconOnly && (
+              <span className="aspect-square">
+                {icon} <span className="sr-only">{label}</span>
+              </span>
+            )}
             {!iconOnly && (
               <>
                 {iconLeft && <span className={iconClasses}>{iconLeft}</span>}
@@ -69,7 +73,7 @@ const Button = ({
             <button className={`button ${classes ?? ""}`}>
               {iconOnly && (
                 <span className="aspect-square">
-                  {icon} <span className="hidden">{label}</span>
+                  {icon} <span className="sr-only">{label}</span>
                 </span>
               )}
 
@@ -97,7 +101,9 @@ const Button = ({
           onClick={onClick}
           className={`group button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
         >
-          {iconOnly && <span className="block aspect-square">{icon}</span>}
+          <span className="block aspect-square">
+            {icon} <span className="sr-only">{label}</span>
+          </span>
           {!iconOnly && (
             <>
               {iconLeft && <span className={iconClasses}>{iconLeft}</span>}
