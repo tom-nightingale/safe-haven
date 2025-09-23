@@ -92,16 +92,15 @@ const Hero = ({ title, subtitle, image, cards }: Props) => {
           </div>
 
           {image && (
-            <div
-              ref={heroImageRef}
-              className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4"
-            >
-              <SanityImage
-                image={image?.image}
-                alt={image?.altText ?? config.COMPANY_NAME}
-                loading="eager"
-                objectFit="contain"
-              />
+            <div className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4">
+              <div className="absolute h-full w-full" ref={heroImageRef}>
+                <SanityImage
+                  image={image?.image}
+                  alt={image?.altText ?? config.COMPANY_NAME}
+                  loading="eager"
+                  objectFit="contain"
+                />
+              </div>
             </div>
           )}
         </div>
