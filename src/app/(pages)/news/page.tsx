@@ -51,11 +51,11 @@ const GetBlogPosts = async (): Promise<any> => {
       variables: {
         sort: [{ _createdAt: "ASC" }],
       },
-      //   context: {
-      //     fetchOptions: {
-      //       next: { revalidate: 5 },
-      //     },
-      //   },
+      context: {
+        fetchOptions: {
+          next: { revalidate: 5 },
+        },
+      },
     });
     return data;
   } catch (err) {

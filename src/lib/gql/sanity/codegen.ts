@@ -1131,7 +1131,6 @@ export type Page = Document & {
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   contentBlocks?: Maybe<ContentBlocks>;
-  pageType?: Maybe<Scalars["String"]["output"]>;
   seo?: Maybe<Seo>;
   slug?: Maybe<Slug>;
   title?: Maybe<Scalars["String"]["output"]>;
@@ -1147,7 +1146,6 @@ export type PageFilter = {
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
   contentBlocks?: InputMaybe<ContentBlocksFilter>;
-  pageType?: InputMaybe<StringFilter>;
   seo?: InputMaybe<SeoFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
@@ -1161,7 +1159,6 @@ export type PageSorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   contentBlocks?: InputMaybe<ContentBlocksSorting>;
-  pageType?: InputMaybe<SortOrder>;
   seo?: InputMaybe<SeoSorting>;
   slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
@@ -3288,21 +3285,6 @@ export type GetAllNurseriesQuery = {
             | null
             | undefined;
         }
-      | null
-      | undefined;
-  }>;
-};
-
-export type GetAllRoomsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetAllRoomsQuery = {
-  __typename?: "RootQuery";
-  allPage: Array<{
-    __typename?: "Page";
-    _id?: string | null | undefined;
-    title?: string | null | undefined;
-    slug?:
-      | { __typename?: "Slug"; current?: string | null | undefined }
       | null
       | undefined;
   }>;
@@ -7728,74 +7710,6 @@ export const GetAllNurseriesDocument = {
   GetAllNurseriesQuery,
   GetAllNurseriesQueryVariables
 >;
-export const GetAllRoomsDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "GetAllRooms" },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "allPage" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "pageType" },
-                      value: {
-                        kind: "ObjectValue",
-                        fields: [
-                          {
-                            kind: "ObjectField",
-                            name: { kind: "Name", value: "eq" },
-                            value: {
-                              kind: "StringValue",
-                              value: "room",
-                              block: false,
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "_id" } },
-                { kind: "Field", name: { kind: "Name", value: "title" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "slug" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "current" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetAllRoomsQuery, GetAllRoomsQueryVariables>;
 export const GetAllPageDocument = {
   kind: "Document",
   definitions: [

@@ -80,6 +80,7 @@ const GetAllNurseries = async () => {
 // STATICALLY GENERATE PAGES AT BUILD TIME
 // ISR one hour increments
 // export const revalidate = 3600; // 1 hour seconds
+export const revalidate = 5; // 5 seconds
 export async function generateStaticParams() {
   const nurseries = await GetAllNurseries();
 
