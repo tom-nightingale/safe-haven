@@ -98,7 +98,7 @@ const Hero = ({
       <StarsSvg classes="pointer-events-none absolute top-[16%] left-[32%] w-[20vw]" />
       <DuckSvg classes="absolute top-[60%] left-0 w-[20vw] pointer-events-none" />
       <HorseSvg classes="absolute top-[60%] left-[63%] w-[20vw] pointer-events-none" />
-      <BlocksSvg classes="absolute top-[20%] right-[0%] w-[20vw] pointer-events-none" />
+      <BlocksSvg classes="absolute top-[0%] right-[10%] w-[20vw] pointer-events-none" />
     </div>
   );
 };

@@ -39,6 +39,7 @@ const ContentBlockDigester = ({ contentBlocks, nurseryDetails }: Props) => {
                 subtitle={block?.subtitleRaw}
                 cards={block?.heroCards}
                 image={block?.heroImage}
+                buttons={block?.buttons}
               />
             );
 

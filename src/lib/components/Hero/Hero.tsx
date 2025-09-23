@@ -14,6 +14,7 @@ import type {
   Maybe,
   ImageBlock,
   HeroCard as HeroCardType,
+  Link,
 } from "@/gql/sanity/codegen";
 
 import SanityImage from "@/components/SanityImage/SanityImage";
@@ -26,15 +27,22 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
+import Button from "@/components/Button/Button";
 
 type Props = {
   title: TypedObject | TypedObject[];
   subtitle: TypedObject | TypedObject[];
   image: Maybe<ImageBlock>;
   cards?: Maybe<Maybe<HeroCardType>[]>;
+  buttons?: Maybe<Maybe<Link>[]>;
 };
 
-const Hero = ({ title, subtitle, image, cards }: Props) => {
+const buttonClasses = [
+  "button-primary button-peach",
+  "button-primary button-outline button-outline-blue",
+];
+
+const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
   const heroImageRef = useRef<HTMLDivElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -67,11 +75,11 @@ const Hero = ({ title, subtitle, image, cards }: Props) => {
   });
 
   return (
-    <div className="relative" ref={heroRef}>
-      <Container classes="relative">
+    <div className="relative !overflow-x-hidden" ref={heroRef}>
+      <Container>
         <div className="relative -mt-10 grid grid-cols-12 py-10 md:py-12 lg:py-16 xl:py-24">
           <div
-            className="3xl:pr-20 relative z-10 col-span-12 grid gap-3 sm:col-span-8 lg:col-span-6 lg:pr-16 xl:pr-30"
+            className="3xl:pr-20 relative z-20 col-span-12 grid gap-3 sm:col-span-8 lg:col-span-6 lg:pr-16 xl:pr-30"
             ref={heroTextRef}
           >
             <Typography
@@ -87,12 +95,30 @@ const Hero = ({ title, subtitle, image, cards }: Props) => {
             </Typography>
 
             <div className="xs:flex-row xs:flex-wrap mt-3 flex flex-col gap-6 lg:mt-10">
-              <NurserySelectButton />
+              {buttons && buttons.length > 0 ? (
+                <>
+                  {buttons.length < 2 && <NurserySelectButton />}
+                  {buttons.map((link, i) => (
+                    <Button
+                      key={link?.href}
+                      label={link?.label}
+                      href={`${link?.href}`}
+                      classes={
+                        buttons.length < 2
+                          ? buttonClasses[i + 1]
+                          : buttonClasses[i]
+                      }
+                    />
+                  ))}
+                </>
+              ) : (
+                <NurserySelectButton />
+              )}
             </div>
           </div>
 
           {image && (
-            <div className="3xl:-right-16 pointer-events-none absolute right-0 z-2 h-full w-full !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4">
+            <div className="3xl:-right-16 pointer-events-none absolute right-0 z-2 flex h-full w-full justify-end !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4">
               <div className="absolute h-full w-full" ref={heroImageRef}>
                 <SanityImage
                   image={image?.image}
