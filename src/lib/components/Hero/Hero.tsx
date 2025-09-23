@@ -4,9 +4,7 @@ import Typography, {
   TypeVariant,
   TypeComponent,
 } from "@/components/Typography/Typography";
-
 import Container from "@/components/Container/Container";
-
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
@@ -16,17 +14,16 @@ import type {
   HeroCard as HeroCardType,
   Link,
 } from "@/gql/sanity/codegen";
-
 import SanityImage from "@/components/SanityImage/SanityImage";
 import config from "@/config/config";
 import StarsSvg from "@/icons/starsSvg";
 import HorseSvg from "@/icons/horseSvg";
 import DuckSvg from "@/icons/duckSvg";
 import BlocksSvg from "@/icons/blocksSvg";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
+import NurserySelectButton from "@/components/NurserySelectButton/NurserySelectButton";
 import Button from "@/components/Button/Button";
 
 type Props = {
@@ -46,6 +43,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
   const heroImageRef = useRef<HTMLDivElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   gsap.registerPlugin(useGSAP);
 
   useGSAP(() => {
@@ -71,11 +69,35 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
           ease: "back.out(2)",
         },
       ),
+      gsap.fromTo(
+        heroTextRef.current,
+        { opacity: 0, yPercent: 10 },
+        {
+          opacity: 1,
+          yPercent: 0,
+          duration: 0.6,
+          delay: 0.6,
+          ease: "back.out(2)",
+        },
+      ),
       { scope: heroRef };
   });
 
+  useEffect(() => {
+    const heroCards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (!heroCards.length) return;
+
+    const tlCards = gsap.timeline({ defaults: { ease: "back.out(2)" } });
+
+    tlCards.fromTo(
+      heroCards,
+      { opacity: 0, yPercent: 20 },
+      { opacity: 1, yPercent: 0, stagger: 0.15, duration: 0.5, delay: 0.7 },
+    );
+  }, [cards]);
+
   return (
-    <div className="relative !overflow-x-hidden" ref={heroRef}>
+    <div className="relative" ref={heroRef}>
       <Container>
         <div className="relative -mt-10 grid grid-cols-12 py-10 md:py-12 lg:py-16 xl:py-24">
           <div
@@ -118,13 +140,14 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
           </div>
 
           {image && (
-            <div className="3xl:-right-16 pointer-events-none absolute right-0 z-2 flex h-full w-full justify-end !opacity-50 md:-right-8 md:w-2/3 md:!opacity-100 lg:right-4">
+            <div className="pointer-events-none absolute right-0 z-2 flex h-full w-full justify-end !opacity-50 md:w-2/3 md:!opacity-100">
               <div className="absolute h-full w-full" ref={heroImageRef}>
                 <SanityImage
                   image={image?.image}
                   alt={image?.altText ?? config.COMPANY_NAME}
                   loading="eager"
                   objectFit="contain"
+                  objectPosition="75% center"
                 />
               </div>
             </div>
@@ -133,7 +156,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
 
         {cards && cards.length > 0 && (
           <div className="relative z-3 mb-20 grid grid-cols-12 gap-y-10 sm:gap-x-8 md:mt-10 lg:mt-0 lg:pl-8 xl:mb-40 xl:gap-x-16">
-            {cards.map(card => {
+            {cards.map((card, index) => {
               return (
                 <HeroCard
                   key={card?.title}
@@ -141,6 +164,7 @@ const Hero = ({ title, subtitle, image, cards, buttons }: Props) => {
                   subtitle={card?.subtitle}
                   link={card?.link}
                   colourTheme={card?.colourTheme}
+                  ref={el => void (cardRefs.current[index] = el)}
                 />
               );
             })}

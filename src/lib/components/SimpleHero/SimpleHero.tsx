@@ -10,7 +10,7 @@ import StarsSvg from "@/icons/starsSvg";
 import HorseSvg from "@/icons/horseSvg";
 import DuckSvg from "@/icons/duckSvg";
 import BlocksSvg from "@/icons/blocksSvg";
-import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
+import NurserySelectButton from "@/components/NurserySelectButton/NurserySelectButton";
 import Button from "@/components/Button/Button";
 import { useRef } from "react";
 import gsap from "gsap";

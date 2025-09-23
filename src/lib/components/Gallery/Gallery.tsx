@@ -55,7 +55,7 @@ const Gallery = ({ images }: Props) => {
                 spaceBetween: 20,
               },
               1280: {
-                slidesPerView: 5.05,
+                slidesPerView: 5.2,
                 spaceBetween: 30,
               },
             }}

@@ -41,7 +41,8 @@ const Locations = ({ title }: Props) => {
         classes="absolute top-4 w-[200%] lg:w-[150%] 3xl:w-full text-taupe"
         fillOpacity={1}
       />
-      <div className="from-taupe to-cream 3xl:top-30 4xl:top-40 5xl:top-44 xs:top-20 relative top-16 z-10 w-full bg-linear-to-b sm:top-24 md:top-30 xl:top-40">
+      {/* <div className="from-taupe to-cream 3xl:top-30 4xl:top-40 5xl:top-44 xs:top-20 relative top-16 z-10 w-full bg-linear-to-b  md:top-30 xl:top-48"> */}
+      <div className="from-taupe to-cream 2xs:top-20 xs:top-24 relative top-18 w-full bg-linear-to-b sm:top-28 md:top-32 lg:top-35 xl:top-41 2xl:top-38">
         <Container classes="max-w-(--breakpoint-xl)">
           <div className="relative z-1 py-10">
             <div className="flex flex-col justify-center gap-6 pb-10 text-center">

@@ -102,6 +102,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                 <Typography
                   variant={TypeVariant.Body1}
                   component={TypeComponent.p}
+                  classes="hidden md:block"
                 >
                   It&lsquo;s important to us that you share your child&lsquo;s
                   learning experiences and that you get to be apart of their
@@ -128,7 +129,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
             </div>
           </div>
         </Container>
-        <div className="absolute bottom-0 left-1/2 z-0 -translate-x-1/2 xl:left-2/5">
+        <div className="absolute -bottom-[0.325rem] left-1/2 z-0 -translate-x-1/2 xl:left-2/5">
           <Image
             src="/house-blocks.png"
             width={155}
@@ -159,7 +160,6 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                       <Button
                         key={item?.target?.slug?.current}
                         href={`/${item?.target?.slug?.current ?? ""}`}
-                        newTab
                         label={item?.target?.title}
                         variant={TypeVariant.Button2}
                         classes="button button-link text-sm"
@@ -173,7 +173,6 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
                       <Button
                         key={item?.target?.slug?.current}
                         href={`/${item?.target?.slug?.current ?? ""}`}
-                        newTab
                         label={item?.target?.title}
                         variant={TypeVariant.Button2}
                         classes="button button-link text-sm"
@@ -213,7 +212,7 @@ const Footer = ({ primaryNav, secondaryNav }: Props) => {
               nurseries.length > 0 &&
               nurseries.map((nursery: any, i) => (
                 <div
-                  className={` ${i === 0 ? "sm:border-taupe sm:border-r" : ""} xl:col-span-4`}
+                  className={` ${i === 0 ? "sm:border-taupe sm:border-r" : ""} col-span-2 md:col-span-1 xl:col-span-4`}
                   key={nursery.title}
                 >
                   <NurseryDetails

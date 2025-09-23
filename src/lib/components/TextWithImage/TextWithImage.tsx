@@ -16,10 +16,22 @@ import WandSvg from "@/icons/wandSvg";
 import StarsSvg from "@/icons/starsSvg";
 import RocketSvg from "@/icons/rocketSvg";
 import FramedImage from "@/components/FramedImage/FramedImage";
-import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
+import NurserySelectButton from "@/components/NurserySelectButton/NurserySelectButton";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 type Props = {
   scallopedTop?: Maybe<boolean>;
+  text: TypedObject | TypedObject[];
+  image: Maybe<ImageBlock>;
+  directionsLink?: Maybe<string>;
+  phoneNumber?: Maybe<string>;
+  blockIndex: number;
+};
+
+type InnerProps = {
   text: TypedObject | TypedObject[];
   image: Maybe<ImageBlock>;
   directionsLink?: Maybe<string>;
@@ -31,7 +43,7 @@ const TextWithImageInner = ({
   image,
   directionsLink,
   phoneNumber,
-}: Props) => {
+}: InnerProps) => {
   const { nurseries } = useGlobalContext();
   const nurseryPhoneNumber = nurseries && nurseries[0]?.phoneNumber;
   return (
@@ -92,9 +104,38 @@ const TextWithImage = ({
   image,
   directionsLink,
   phoneNumber,
+  blockIndex,
 }: Props) => {
+  const containerRef = useRef(null);
+  gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom-=20",
+          toggleActions: "play none none none",
+        },
+      });
+
+      tl.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: blockIndex < 2 ? 0.6 : 0,
+          delay: blockIndex < 2 ? 0.6 : 0,
+          ease: "back.out(2)",
+        },
+      );
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <div className="relative">
+    <div className="relative" ref={containerRef}>
       {scallopedTop ? (
         <ScallopedTop>
           <Container>

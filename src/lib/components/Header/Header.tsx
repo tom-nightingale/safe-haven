@@ -7,7 +7,7 @@ import { BsTelephone } from "react-icons/bs";
 import SecondaryNav from "@/components/SecondaryNav/SecondaryNav";
 import config from "@/config/config";
 import FancyLink from "@/components/FancyLink/FancyLink";
-import NurserySelectButton from "@/components/NurserySelectButton/ NurserySelectButton";
+import NurserySelectButton from "@/components/NurserySelectButton/NurserySelectButton";
 
 type Props = {
   primaryNav?: Navigation;
