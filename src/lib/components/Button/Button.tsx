@@ -101,9 +101,11 @@ const Button = ({
           onClick={onClick}
           className={`group button ${outlined ? "outlined" : ""} ${classes ?? ""}`}
         >
-          <span className="block aspect-square">
-            {icon} <span className="sr-only">{label}</span>
-          </span>
+          {iconOnly && (
+            <span className="aspect-square">
+              {icon} <span className="sr-only">{label}</span>
+            </span>
+          )}
           {!iconOnly && (
             <>
               {iconLeft && <span className={iconClasses}>{iconLeft}</span>}
