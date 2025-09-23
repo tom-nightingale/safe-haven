@@ -244,7 +244,7 @@ body {
   }
 
   &.button-link {
-    @apply hover:text-peach relative overflow-hidden rounded-none p-0 !font-sans;
+    @apply hover:text-peach relative overflow-hidden rounded-none p-0 text-left !font-sans;
   }
 }
 

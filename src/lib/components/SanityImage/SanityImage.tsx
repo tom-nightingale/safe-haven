@@ -32,6 +32,7 @@ type Props = {
   height?: number;
   sizes?: string;
   objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
+  objectPosition?: string;
 };
 
 export function getPositionFromHotspot(
@@ -57,6 +58,7 @@ const SanityImage = ({
   height,
   sizes,
   objectFit = "contain",
+  objectPosition,
 }: Props) => {
   const sourceUrl = image?.asset?.url;
   const blurData = image?.asset?.metadata?.lqip;
@@ -81,7 +83,10 @@ const SanityImage = ({
       sizes={sizes}
       fetchPriority={loading === "eager" ? "high" : "auto"}
       objectFit={objectFit}
-      objectPosition={getPositionFromHotspot(hotspotData)}
+      objectPosition={
+        objectPosition ? objectPosition : getPositionFromHotspot(hotspotData)
+      }
+      // objectPosition={getPositionFromHotspot(hotspotData)}
     />
   ) : (
     <></>

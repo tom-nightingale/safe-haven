@@ -21,6 +21,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import BannerContainer from "@/components/BannerContainer/BannerContainer";
 import Footer from "@/components/Footer/Footer";
 import { GlobalContextProvider } from "@/context/GlobalContext";
+import BackToTop from "@/components/BackToTop/BackToTop";
 
 const GetNav = async (navId: string) => {
   try {
@@ -131,6 +132,7 @@ export default async function RootLayout({
             />
           </GlobalContextProvider>
           <GoogleAnalytics gaId={config.GOOGLE_ANALYTICS_ID} />
+          <BackToTop />
         </body>
       </html>
     </ViewTransitions>
