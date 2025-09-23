@@ -457,16 +457,6 @@ query GetAllNurseries {
   }
 }
 
-query GetAllRooms {
-  allPage(where: { pageType: { eq: "room" } }) {
-    _id
-    title
-    slug {
-      current
-    }
-  }
-}
-
 query GetAllPage {
   allPage {
     slug {
