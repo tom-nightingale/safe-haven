@@ -135,7 +135,7 @@ const TextWithImage = ({
   );
 
   return (
-    <div className="relative" ref={containerRef}>
+    <div className="relative z-10" ref={containerRef}>
       {scallopedTop ? (
         <ScallopedTop>
           <Container>

@@ -9,7 +9,7 @@ import FancyLink from "@/components/FancyLink/FancyLink";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import config from "@/config/config";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 type Props = {
   nav: NavigationSection[] | Maybe<NavigationSection>[];
@@ -67,6 +67,7 @@ const SecondaryNav = ({ nav }: Props) => {
 
   const params = useParams<{ tag: string; item: string; slug: string }>();
   const { slug } = params;
+  const pathname = usePathname();
 
   return (
     <>
@@ -124,6 +125,10 @@ const SecondaryNav = ({ nav }: Props) => {
             <div className="flex flex-col gap-5 font-serif">
               {nav?.length > 0 &&
                 nav.map(sect => {
+                  const isActive =
+                    (slug && sect?.target?.slug?.current === slug[0]) ||
+                    `/${sect?.target?.slug?.current}` === pathname;
+
                   return (
                     <div className="group" key={sect?.target?.slug?.current}>
                       <div className="group transition-all duration-200 hover:pl-1">
@@ -131,9 +136,11 @@ const SecondaryNav = ({ nav }: Props) => {
                           url={`/${sect?.target?.slug?.current ?? ""}`}
                           onClick={closeNav}
                         >
-                          <span className="flex items-center gap-3">
+                          <span
+                            className={`flex items-center gap-3 ${isActive ? "text-peach" : ""}`}
+                          >
                             <span
-                              className={`text-dark-peach transition duration-200 group-hover:opacity-100 ${slug && sect?.target?.slug?.current === slug[0] ? "opacity-100" : "opacity-20"}`}
+                              className={`text-dark-peach transition duration-200 group-hover:opacity-100 ${isActive ? "opacity-100" : "opacity-20"}`}
                             >
                               <FaStar />
                             </span>
@@ -146,10 +153,20 @@ const SecondaryNav = ({ nav }: Props) => {
                         {sect?.children &&
                           sect?.children.length > 0 &&
                           sect?.children.map(child => {
+                            const isActive =
+                              (pathname &&
+                                pathname ===
+                                  `/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`) ||
+                              pathname === `/${child?.target?.slug?.current}`;
+
                             return (
                               <div
                                 key={child?.target?.title}
-                                className={`pl-2 text-sm transition-all duration-200 hover:pl-3 hover:opacity-100 ${slug && child?.target?.slug?.current === slug.at(-1) ? "opacity-100" : "opacity-70"}`}
+                                className={`pl-2 text-sm transition-all duration-200 hover:pl-3 hover:opacity-100 ${
+                                  isActive
+                                    ? "text-peach opacity-100"
+                                    : "opacity-70"
+                                }`}
                               >
                                 <FancyLink
                                   url={

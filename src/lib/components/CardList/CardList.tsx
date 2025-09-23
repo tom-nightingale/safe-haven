@@ -68,7 +68,6 @@ const CardList = ({ title, subtitle, cards, scallopedTop }: Props) => {
           start: "top bottom-=20",
           toggleActions: "play none none none",
         },
-        delay: 0.6,
       });
 
       tl.fromTo(
