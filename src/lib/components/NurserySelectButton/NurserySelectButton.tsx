@@ -47,7 +47,7 @@ const NurserySelectButton = ({
   );
 
   return (
-    <div className="relative w-max">
+    <div className="relative z-10 w-max">
       <Button
         classes={`button-primary button-peach inline-block ${classes}`}
         label={buttonLabel ?? "Book A Viewing"}

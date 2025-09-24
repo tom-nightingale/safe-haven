@@ -52,7 +52,7 @@ const Hero = ({
   });
 
   return (
-    <div className="relative" ref={heroRef}>
+    <div className="relative z-20" ref={heroRef}>
       <Container classes="!max-w-(--breakpoint-xl)">
         <div
           className="relative z-1 flex flex-col items-center justify-center gap-2 text-center"
