@@ -7731,6 +7731,18 @@
             "deprecationReason": null
           },
           {
+            "name": "subtitle",
+            "description": "Optional subtitle for labeling room locations",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "target",
             "description": "Description",
             "args": [],
@@ -7792,6 +7804,18 @@
             "deprecationReason": null
           },
           {
+            "name": "subtitle",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "type": {
@@ -7829,6 +7853,18 @@
           },
           {
             "name": "_type",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subtitle",
             "description": null,
             "type": {
               "kind": "ENUM",

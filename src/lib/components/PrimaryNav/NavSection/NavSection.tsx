@@ -5,7 +5,10 @@ import FancyLink from "@/components/FancyLink/FancyLink";
 import { type NavigationSection, Maybe } from "@/gql/sanity/codegen";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Typography, { TypeVariant } from "@/components/Typography/Typography";
+import Typography, {
+  TypeVariant,
+  TypeComponent,
+} from "@/components/Typography/Typography";
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -104,14 +107,30 @@ const NavSection = ({
                     >
                       <Typography
                         variant={TypeVariant.Button2}
-                        classes={
-                          slug !== "" &&
-                          `/${child?.target?.slug?.current}` === pathname
-                            ? "text-peach"
-                            : "hover:text-peach"
-                        }
+                        classes={`grid gap-1
+                          ${
+                            slug !== "" &&
+                            `/${child?.target?.slug?.current}` === pathname
+                              ? "text-peach"
+                              : "hover:text-peach"
+                          }
+                        `}
                       >
-                        <>{child?.target?.title}</>
+                        {child?.title ? child?.title : child?.target?.title}
+
+                        <Typography
+                          component={TypeComponent.span}
+                          variant={TypeVariant.Button2}
+                          classes={`block !text-sm opacity-50
+                            ${
+                              slug !== "" &&
+                              `/${child?.target?.slug?.current}` === pathname
+                                ? "text-peach"
+                                : "hover:text-peach"
+                            }`}
+                        >
+                          {child?.subtitle}
+                        </Typography>
                       </Typography>
                     </FancyLink>
                   ),
