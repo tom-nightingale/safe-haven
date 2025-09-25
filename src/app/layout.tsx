@@ -23,6 +23,8 @@ import Footer from "@/components/Footer/Footer";
 import { GlobalContextProvider } from "@/context/GlobalContext";
 import BackToTop from "@/components/BackToTop/BackToTop";
 
+export const revalidate = 5; // 5 seconds
+
 const GetNav = async (navId: string) => {
   try {
     const client = createApolloClient(fetch);
