@@ -34,16 +34,17 @@ fragment imageAsset on SanityImageAsset {
 
 fragment NavigationSection on NavigationSection {
   target {
+    title
     ... on Page {
       title
       slug {
         current
       }
     }
-    title
   }
   children {
     title
+    subtitle
     target {
       ... on Page {
         title

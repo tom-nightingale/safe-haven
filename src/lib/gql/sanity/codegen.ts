@@ -993,6 +993,8 @@ export type NavigationLink = {
   _key?: Maybe<Scalars["String"]["output"]>;
   _type?: Maybe<Scalars["String"]["output"]>;
   children?: Maybe<Array<Maybe<NavigationLink>>>;
+  /** Optional subtitle for labeling room locations */
+  subtitle?: Maybe<Scalars["String"]["output"]>;
   /** Description */
   target?: Maybe<CategoryOrNurseryOrPage>;
   /** Override title from the target. */
@@ -1002,12 +1004,14 @@ export type NavigationLink = {
 export type NavigationLinkFilter = {
   _key?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
 export type NavigationLinkSorting = {
   _key?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
+  subtitle?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
 };
 
@@ -2145,6 +2149,7 @@ export type NavigationSectionFragment = {
         | {
             __typename?: "NavigationLink";
             title?: string | null | undefined;
+            subtitle?: string | null | undefined;
             target?:
               | {
                   __typename?: "Category";
@@ -2852,6 +2857,7 @@ export type GetNavigationByIdQuery = {
                         | {
                             __typename?: "NavigationLink";
                             title?: string | null | undefined;
+                            subtitle?: string | null | undefined;
                             target?:
                               | {
                                   __typename?: "Category";
@@ -4946,6 +4952,7 @@ export const NavigationSectionFragmentDoc = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
                 {
                   kind: "InlineFragment",
                   typeCondition: {
@@ -4972,7 +4979,6 @@ export const NavigationSectionFragmentDoc = {
                     ],
                   },
                 },
-                { kind: "Field", name: { kind: "Name", value: "title" } },
               ],
             },
           },
@@ -4983,6 +4989,7 @@ export const NavigationSectionFragmentDoc = {
               kind: "SelectionSet",
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "subtitle" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "target" },
@@ -6434,6 +6441,7 @@ export const GetNavigationByIdDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
                 {
                   kind: "InlineFragment",
                   typeCondition: {
@@ -6460,7 +6468,6 @@ export const GetNavigationByIdDocument = {
                     ],
                   },
                 },
-                { kind: "Field", name: { kind: "Name", value: "title" } },
               ],
             },
           },
@@ -6471,6 +6478,7 @@ export const GetNavigationByIdDocument = {
               kind: "SelectionSet",
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "subtitle" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "target" },

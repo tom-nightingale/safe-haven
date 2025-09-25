@@ -10,6 +10,10 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import config from "@/config/config";
 import { useParams, usePathname } from "next/navigation";
+import Typography, {
+  TypeVariant,
+  TypeComponent,
+} from "@/components/Typography/Typography";
 
 type Props = {
   nav: NavigationSection[] | Maybe<NavigationSection>[];
@@ -162,7 +166,7 @@ const SecondaryNav = ({ nav }: Props) => {
                             return (
                               <div
                                 key={child?.target?.title}
-                                className={`pl-2 text-sm transition-all duration-200 hover:pl-3 hover:opacity-100 ${
+                                className={`pl-3 text-sm transition-all duration-200 hover:pl-3 hover:opacity-100 ${
                                   isActive
                                     ? "text-peach opacity-100"
                                     : "opacity-70"
@@ -178,9 +182,37 @@ const SecondaryNav = ({ nav }: Props) => {
                                   }
                                   onClick={closeNav}
                                 >
-                                  {child?.title
-                                    ? child?.title
-                                    : child?.target?.title}
+                                  <Typography
+                                    variant={TypeVariant.Button2}
+                                    classes={`grid gap-1 !text-sm
+                                      ${
+                                        slug !== "" &&
+                                        `/${child?.target?.slug?.current}` ===
+                                          pathname
+                                          ? "text-peach"
+                                          : "hover:text-peach"
+                                      }
+                                    `}
+                                  >
+                                    {child?.title
+                                      ? child?.title
+                                      : child?.target?.title}
+
+                                    <Typography
+                                      component={TypeComponent.span}
+                                      variant={TypeVariant.Button2}
+                                      classes={`block !text-sm opacity-50
+                                        ${
+                                          slug !== "" &&
+                                          `/${child?.target?.slug?.current}` ===
+                                            pathname
+                                            ? "text-peach"
+                                            : "hover:text-peach"
+                                        }`}
+                                    >
+                                      {child?.subtitle}
+                                    </Typography>
+                                  </Typography>
                                 </FancyLink>
                               </div>
                             );
