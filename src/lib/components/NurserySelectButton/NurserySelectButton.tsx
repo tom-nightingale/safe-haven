@@ -6,6 +6,7 @@ import { useGlobalContext } from "@/context/GlobalContext";
 import Button from "@/components/Button/Button";
 import Typography, { TypeVariant } from "@/components/Typography/Typography";
 import { FaPhone } from "react-icons/fa";
+import useClickOutside from "@/hooks/useClickOutside";
 
 type Props = {
   buttonLabel?: string;
@@ -46,8 +47,10 @@ const NurserySelectButton = ({
     { dependencies: [isViewingOptionsOpen], scope: subnav },
   );
 
+  const ref = useClickOutside(() => setIsViewingOptionsOpen(false));
+
   return (
-    <div className="relative z-10 w-max">
+    <div className="relative z-10 w-max" ref={ref}>
       <Button
         classes={`button-primary button-peach inline-block ${classes}`}
         label={buttonLabel ?? "Book A Viewing"}
