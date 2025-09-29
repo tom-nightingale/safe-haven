@@ -23,7 +23,7 @@ import Footer from "@/components/Footer/Footer";
 import { GlobalContextProvider } from "@/context/GlobalContext";
 import BackToTop from "@/components/BackToTop/BackToTop";
 
-export const revalidate = 5; // 5 seconds
+export const revalidate = 3600; // 1 hour
 
 const GetNav = async (navId: string) => {
   try {
@@ -98,15 +98,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const primaryNavData = await GetNav(config.PRIMARY_NAV_ID);
-  const secondaryNavData = await GetNav(config.SECONDARY_NAV_ID);
-
-  const reviews = await GetReviews();
-  const nurseries = await GetAllNurseries();
-  const staff = await GetAllStaff();
-  const banners = await GetAllBanners();
-
-  console.log("primaryNavData", primaryNavData);
+  const [primaryNavData, secondaryNavData, reviews, nurseries, staff, banners] =
+    await Promise.all([
+      GetNav(config.PRIMARY_NAV_ID),
+      GetNav(config.SECONDARY_NAV_ID),
+      GetReviews(),
+      GetAllNurseries(),
+      GetAllStaff(),
+      GetAllBanners(),
+    ]);
 
   const primaryNav = primaryNavData?.Navigation ?? undefined;
   const secondaryNav = secondaryNavData?.Navigation ?? undefined;

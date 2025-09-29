@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       | undefined;
   }[] = [];
 
-  const BASE_URL = "https://www.safehavennurseryco.uk";
+  const BASE_URL = "https://www.safehavennursery.co.uk";
   const pages = data.pages;
   const blogs = data.blog;
   const nurseries = data.nurseries;

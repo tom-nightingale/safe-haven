@@ -34,7 +34,6 @@ const Gallery = ({ images }: Props) => {
     <>
       {images && images.length > 0 && (
         <div className="py-8">
-          {/* <Container> */}
           <Swiper
             modules={[A11y]}
             slidesOffsetBefore={20}
@@ -73,7 +72,6 @@ const Gallery = ({ images }: Props) => {
               );
             })}
           </Swiper>
-          {/* </Container> */}
 
           <FsLightbox
             toggler={lightboxController.toggler}

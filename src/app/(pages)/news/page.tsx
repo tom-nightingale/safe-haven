@@ -29,7 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       title: `${page?.seo?.metaTitle ? page?.seo?.metaTitle : page?.title} | ${config.COMPANY_NAME}`,
       description: page?.seo?.metaDesc ?? "",
-      // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
+      keywords: page?.seo?.keywords?.filter(
+        (kw): kw is string => typeof kw === "string" && !!kw,
+      ) || [config.COMPANY_NAME],
       openGraph: {
         title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
         description: page?.seo?.metaDesc ?? "",

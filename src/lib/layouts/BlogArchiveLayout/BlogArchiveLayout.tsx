@@ -39,8 +39,6 @@ export const BlogArchiveLayout = ({ posts, title, subtitle }: Props) => {
   ];
 
   return (
-    // <PageWrapper>
-    // </PageWrapper>
     <main>
       <SimpleHero
         title={title ?? "Nursery News"}
@@ -123,7 +121,6 @@ export const BlogArchiveLayout = ({ posts, title, subtitle }: Props) => {
           </Container>
         </div>
       </div>
-      {/* <ReviewCards /> */}
       <Locations />
     </main>
   );
