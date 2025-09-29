@@ -1,4 +1,5 @@
-import { notFound } from "next/navigation";
+// export const dynamic = "auto";
+
 import createApolloClient from "@/gql/apolloClient";
 import {
   GetAllPostsDocument,
@@ -39,7 +40,8 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   } catch (err) {
     console.log("err", err);
-    return notFound();
+    // return notFound();
+    return { title: "News | " + config.COMPANY_NAME };
   }
 }
 
