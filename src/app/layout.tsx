@@ -22,6 +22,7 @@ import BannerContainer from "@/components/BannerContainer/BannerContainer";
 import Footer from "@/components/Footer/Footer";
 import { GlobalContextProvider } from "@/context/GlobalContext";
 import BackToTop from "@/components/BackToTop/BackToTop";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const revalidate = 3600; // 1 hour
 
@@ -139,6 +140,7 @@ export default async function RootLayout({
           <BackToTop />
         </body>
       </html>
+      <SpeedInsights />
     </ViewTransitions>
   );
 }
