@@ -16,14 +16,12 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // read route params
   const { slug } = await params;
   try {
     const client = createApolloClient(fetch);
     const { data } = await client.query<GetPageBySlugQuery>({
       query: GetPageBySlugDocument,
       variables: {
-        // slug: slug.at(-1)
         slug: slug.join("/"),
       },
     });
@@ -35,7 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         page?.seo?.metaDesc ??
         "Safe Haven Day Nursery | Mansfield Woodhouse &amp; South Normanton",
-      // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
+      keywords: page?.seo?.keywords?.filter(
+        (kw): kw is string => typeof kw === "string" && !!kw,
+      ) || [config.COMPANY_NAME],
       openGraph: {
         title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
         description: page?.seo?.metaDesc ?? "",
@@ -78,10 +78,6 @@ const GetAllPage = async (): Promise<any> => {
   }
 };
 
-// STATICALLY GENERATE PAGES AT BUILD TIME
-// ISR one hour increments
-// export const revalidate = 3600; // 1 hour seconds
-export const revalidate = 5; // 5 seconds
 export async function generateStaticParams() {
   const allPages = await GetAllPage();
 

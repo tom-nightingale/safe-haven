@@ -1,4 +1,3 @@
-// import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import type { Page } from "@/gql/sanity/codegen";
 import ContentBlockDigester from "@/components/ContentBlockDigester/ContentBlockDigester";
 
@@ -9,8 +8,6 @@ export const DefaultLayout = ({ page }: Props) => {
   const contentBlocks = page?.contentBlocks;
 
   return (
-    //<PageWrapper>
-    // </PageWrapper>
     <main>
       <ContentBlockDigester contentBlocks={contentBlocks} />
     </main>

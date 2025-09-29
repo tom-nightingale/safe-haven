@@ -1,4 +1,3 @@
-// import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import type { Nursery } from "@/gql/sanity/codegen";
 import ContentBlockDigester from "@/components/ContentBlockDigester/ContentBlockDigester";
 
@@ -20,8 +19,6 @@ export const NurseryLayout = ({ page }: Props) => {
   };
 
   return (
-    // <PageWrapper>
-    // </PageWrapper>
     <main>
       <ContentBlockDigester
         contentBlocks={contentBlocks}

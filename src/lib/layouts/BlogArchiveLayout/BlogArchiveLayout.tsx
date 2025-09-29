@@ -1,7 +1,6 @@
-// import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import type { Post } from "@/gql/sanity/codegen";
 import SimpleHero from "@/components/SimpleHero/SimpleHero";
-// import ReviewCards from "@/components/ReviewCards/ReviewCards";
+
 import Locations from "@/components/Locations/Locations";
 import Container from "@/components/Container/Container";
 import CloudsVector from "@/components/CloudsVector/CloudsVector";
@@ -39,8 +38,6 @@ export const BlogArchiveLayout = ({ posts, title, subtitle }: Props) => {
   ];
 
   return (
-    // <PageWrapper>
-    // </PageWrapper>
     <main>
       <SimpleHero
         title={title ?? "Nursery News"}
@@ -123,7 +120,6 @@ export const BlogArchiveLayout = ({ posts, title, subtitle }: Props) => {
           </Container>
         </div>
       </div>
-      {/* <ReviewCards /> */}
       <Locations />
     </main>
   );

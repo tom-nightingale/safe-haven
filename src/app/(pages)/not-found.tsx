@@ -2,8 +2,6 @@ import SimpleHero from "@/components/SimpleHero/SimpleHero";
 
 export default function NotFound() {
   return (
-    // <PageWrapper>
-    // </PageWrapper>
     <main>
       <SimpleHero
         title={"Page not found"}

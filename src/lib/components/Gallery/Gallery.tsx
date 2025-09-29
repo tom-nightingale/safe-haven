@@ -1,6 +1,5 @@
 "use client";
 
-// import Container from "@/components/Container/Container";
 import type { Maybe, ImageBlock } from "@/gql/sanity/codegen";
 import React, { useState } from "react";
 import FsLightbox from "fslightbox-react";
@@ -34,7 +33,6 @@ const Gallery = ({ images }: Props) => {
     <>
       {images && images.length > 0 && (
         <div className="py-8">
-          {/* <Container> */}
           <Swiper
             modules={[A11y]}
             slidesOffsetBefore={20}
@@ -73,7 +71,6 @@ const Gallery = ({ images }: Props) => {
               );
             })}
           </Swiper>
-          {/* </Container> */}
 
           <FsLightbox
             toggler={lightboxController.toggler}

@@ -22,12 +22,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       | undefined;
   }[] = [];
 
-  const BASE_URL = "https://www.safehavennurseryco.uk";
+  const BASE_URL = "https://www.safehavennursery.co.uk";
   const pages = data.pages;
   const blogs = data.blog;
   const nurseries = data.nurseries;
 
-  // Pages | 1 prior
+  // Pages | 1 priority
   (pages || []).forEach(page => {
     if (page?.slug?.current) {
       urls.push({
@@ -38,7 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   });
 
-  // nurseries | 1 prior
+  // nurseries | 1 priority
   (nurseries || []).forEach(nursery => {
     if (nursery?.slug?.current) {
       urls.push({
@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   });
 
-  // Blog posts | 0.7 prior
+  // Blog posts | 0.7 priority
   (blogs || []).forEach(blog => {
     if (blog?.slug?.current) {
       urls.push({

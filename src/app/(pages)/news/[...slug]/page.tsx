@@ -66,7 +66,6 @@ const PostsByCategory = async (slug: string | undefined): Promise<any> => {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // read route params
   const { slug } = await params;
 
   const { allPost } = await GetSingularBlogPost(slug.at(-1));
@@ -82,7 +81,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description:
       page?.seo?.metaDesc ??
       "Safe Haven Day Nursery | Mansfield Woodhouse &amp; South Normanton",
-    // keywords: page?.seo?.keywords || [config.COMPANY_NAME],
     openGraph: {
       title: page?.seo?.metaTitle ?? config.COMPANY_NAME,
       description: page?.seo?.metaDesc ?? "",
@@ -98,8 +96,11 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { allPost } = await GetSingularBlogPost(slug.at(-1));
-  const { allCategory } = await GetCategory(slug.at(-1));
+
+  const [{ allPost }, { allCategory }] = await Promise.all([
+    GetSingularBlogPost(slug.at(-1)),
+    GetCategory(slug.at(-1)),
+  ]);
 
   if (!allPost[0] && !allCategory[0]) {
     return notFound();
@@ -114,8 +115,7 @@ export default async function Page({
     posts = await PostsByCategory(slug.at(-1));
   }
   if (type === "Post") {
-    const data = await GetSingularBlogPost(slug.at(-1));
-    post = data.allPost[0];
+    post = allPost[0];
   }
   return (
     <>

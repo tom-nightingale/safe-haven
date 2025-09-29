@@ -96,7 +96,6 @@ const StaffSectionInner = ({ section, classes }: Props) => {
             {section?.subtitle}
           </Typography>
         )}
-        {/* <div className="mt-10 grid grid-cols-1 gap-12 sm:grid-cols-3 md:grid-cols-4"> */}
         <div className="mt-10 flex flex-wrap justify-center gap-12">
           {section?.staff?.map((profile, i) => (
             <div

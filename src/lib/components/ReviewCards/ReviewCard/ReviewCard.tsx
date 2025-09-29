@@ -13,7 +13,7 @@ import { createPortal } from "react-dom";
 import { FaTimes } from "react-icons/fa";
 
 type Props = {
-  review: PortableTextBlock[]; // or the correct type expected by toPlainText
+  review: PortableTextBlock[];
   name: string | Maybe<string>;
   rating: 1 | 2 | 3 | 4 | 5 | Maybe<number>;
 };
