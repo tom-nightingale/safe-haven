@@ -13,7 +13,6 @@ import { Maybe } from "@/gql/sanity/codegen";
 import config from "@/config/config";
 import type { TypedObject } from "@portabletext/types";
 import Image from "next/legacy/image";
-// import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   href?: string | Maybe<string>;

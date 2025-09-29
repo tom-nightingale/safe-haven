@@ -16,14 +16,12 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // read route params
   const { slug } = await params;
   try {
     const client = createApolloClient(fetch);
     const { data } = await client.query<GetPageBySlugQuery>({
       query: GetPageBySlugDocument,
       variables: {
-        // slug: slug.at(-1)
         slug: slug.join("/"),
       },
     });
@@ -80,10 +78,6 @@ const GetAllPage = async (): Promise<any> => {
   }
 };
 
-// STATICALLY GENERATE PAGES AT BUILD TIME
-// ISR one hour increments
-// export const revalidate = 3600; // 1 hour seconds
-// export const revalidate = 5; // 5 seconds
 export async function generateStaticParams() {
   const allPages = await GetAllPage();
 

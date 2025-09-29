@@ -66,7 +66,6 @@ const PostsByCategory = async (slug: string | undefined): Promise<any> => {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // read route params
   const { slug } = await params;
 
   const { allPost } = await GetSingularBlogPost(slug.at(-1));

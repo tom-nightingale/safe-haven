@@ -13,7 +13,6 @@ type Props = {
 };
 
 const PrimaryNav = ({ navItems }: Props) => {
-  // Check if navItems is an object and has sections property
   const sections =
     navItems && typeof navItems === "object" && "sections" in navItems
       ? (navItems as Navigation).sections

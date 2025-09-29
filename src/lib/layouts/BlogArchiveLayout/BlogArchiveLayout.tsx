@@ -1,7 +1,6 @@
-// import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import type { Post } from "@/gql/sanity/codegen";
 import SimpleHero from "@/components/SimpleHero/SimpleHero";
-// import ReviewCards from "@/components/ReviewCards/ReviewCards";
+
 import Locations from "@/components/Locations/Locations";
 import Container from "@/components/Container/Container";
 import CloudsVector from "@/components/CloudsVector/CloudsVector";

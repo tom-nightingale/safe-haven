@@ -1,6 +1,5 @@
 "use client";
 
-// import Container from "@/components/Container/Container";
 import type { Maybe, ImageBlock } from "@/gql/sanity/codegen";
 import React, { useState } from "react";
 import FsLightbox from "fslightbox-react";

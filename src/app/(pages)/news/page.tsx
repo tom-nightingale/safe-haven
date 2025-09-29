@@ -1,5 +1,3 @@
-// export const dynamic = "force-dynamic";
-
 import { notFound } from "next/navigation";
 import createApolloClient from "@/gql/apolloClient";
 import {

@@ -6,7 +6,6 @@ import Typography, {
 } from "@/components/Typography/Typography";
 import ReviewCard from "@/components/ReviewCards/ReviewCard/ReviewCard";
 import { useGlobalContext } from "@/context/GlobalContext";
-// import ScallopedTop from "@/components/ScallopedTop/ScallopedTop";
 import ScallopedBottom from "@/components/ScallopedBottom/ScallopedBottom";
 import type { Maybe } from "@/gql/sanity/codegen";
 import Container from "@/components/Container/Container";

@@ -15,8 +15,6 @@ type Props = {
 };
 export const BlogArchiveLayout = ({ post, title }: Props) => {
   return (
-    // <PageWrapper>
-    // </PageWrapper>
     <main>
       <SimpleHero
         title={title ?? "Nursery news"}
