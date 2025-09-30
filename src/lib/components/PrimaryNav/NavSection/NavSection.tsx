@@ -47,7 +47,6 @@ const NavSection = ({
   );
 
   const pathname = usePathname();
-  const slug = pathname.split("/").at(-1) as string;
 
   const hasActiveChild = children?.some(child => {
     return `/${child?.target?.slug?.current}` === pathname;
@@ -75,8 +74,7 @@ const NavSection = ({
               <Typography
                 variant={TypeVariant.Button1}
                 classes={
-                  (slug !== "" && target?.slug?.current.includes(slug)) ||
-                  hasActiveChild
+                  pathname.includes(target?.slug?.current) || hasActiveChild
                     ? "text-peach"
                     : ""
                 }
@@ -109,22 +107,20 @@ const NavSection = ({
                         variant={TypeVariant.Button2}
                         classes={`grid gap-1
                           ${
-                            slug !== "" &&
-                            `/${child?.target?.slug?.current}` === pathname
+                            `/${child?.target?.slug?.current}/` === pathname
                               ? "text-peach"
                               : "hover:text-peach"
                           }
                         `}
                       >
                         {child?.title ? child?.title : child?.target?.title}
-
                         <Typography
                           component={TypeComponent.span}
                           variant={TypeVariant.Button2}
                           classes={`block !text-sm opacity-50
                             ${
-                              slug !== "" &&
-                              `/${child?.target?.slug?.current}` === pathname
+                              `/${target?.slug?.current}/${child?.target?.slug?.current}/` ===
+                              pathname
                                 ? "text-peach"
                                 : "hover:text-peach"
                             }`}

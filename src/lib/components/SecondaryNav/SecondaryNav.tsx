@@ -131,7 +131,8 @@ const SecondaryNav = ({ nav }: Props) => {
                 nav.map(sect => {
                   const isActive =
                     (slug && sect?.target?.slug?.current === slug[0]) ||
-                    `/${sect?.target?.slug?.current}` === pathname;
+                    `/${sect?.target?.slug?.current}/` === pathname ||
+                    pathname.includes(`${sect?.target?.slug?.current}/`);
 
                   return (
                     <div className="group" key={sect?.target?.slug?.current}>
@@ -160,8 +161,8 @@ const SecondaryNav = ({ nav }: Props) => {
                             const isActive =
                               (pathname &&
                                 pathname ===
-                                  `/${sect?.target?.slug?.current}/${child?.target?.slug?.current}`) ||
-                              pathname === `/${child?.target?.slug?.current}`;
+                                  `/${sect?.target?.slug?.current}/${child?.target?.slug?.current}/`) ||
+                              pathname === `/${child?.target?.slug?.current}/`;
 
                             return (
                               <div
