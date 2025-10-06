@@ -28,6 +28,7 @@ const Form = ({ formId }: Props) => {
       method="POST"
     >
       <input
+        name="Name"
         placeholder="Name *"
         type="text"
         required
@@ -35,6 +36,7 @@ const Form = ({ formId }: Props) => {
         onChange={handleChange(setName)}
       />
       <input
+        name="Phone Number"
         placeholder="Phone number *"
         type="number"
         required
@@ -42,6 +44,7 @@ const Form = ({ formId }: Props) => {
         onChange={handleChange(setPhoneNumber)}
       />
       <input
+        name="Email Address"
         placeholder="Email address *"
         type="email"
         required
@@ -49,6 +52,7 @@ const Form = ({ formId }: Props) => {
         onChange={handleChange(setEmail)}
       />
       <textarea
+        name="Message"
         placeholder="Your message *"
         required
         value={message}
