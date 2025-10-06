@@ -55,7 +55,7 @@ const GetBlogPosts = async (): Promise<any> => {
       },
       context: {
         fetchOptions: {
-          next: { revalidate: 5 },
+          next: { revalidate: 3600 },
         },
       },
     });

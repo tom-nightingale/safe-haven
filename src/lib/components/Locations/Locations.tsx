@@ -25,10 +25,9 @@ const Locations = ({ title }: Props) => {
   const { nurseries } = useGlobalContext();
 
   const pathname = usePathname();
-  const slug = pathname.split("/").at(-1) as string;
 
   const selectedNursery = nurseries?.find(
-    nursery => nursery?.slug?.current === slug,
+    nursery => `/our-nurseries/${nursery?.slug?.current}/` === pathname,
   );
 
   return (

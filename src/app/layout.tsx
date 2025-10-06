@@ -24,7 +24,7 @@ import { GlobalContextProvider } from "@/context/GlobalContext";
 import BackToTop from "@/components/BackToTop/BackToTop";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-export const revalidate = 3600; // 1 hour
+// export const revalidate = 3600; // 1 hour
 
 const GetNav = async (navId: string) => {
   try {
