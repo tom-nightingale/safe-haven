@@ -44,7 +44,7 @@ const Form = ({ formId }: Props) => {
         onChange={handleChange(setPhoneNumber)}
       />
       <input
-        name="Email Address"
+        name="email"
         placeholder="Email address *"
         type="email"
         required
