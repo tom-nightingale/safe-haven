@@ -10,18 +10,19 @@ import FancyLink from "@/components/FancyLink/FancyLink";
 import NurserySelectButton from "@/components/NurserySelectButton/NurserySelectButton";
 
 type Props = {
+  bannerLength: number;
   primaryNav?: Navigation;
   secondaryNav?: Navigation;
 };
 
-const Header = ({ primaryNav, secondaryNav }: Props) => {
+const Header = ({ primaryNav, secondaryNav, bannerLength }: Props) => {
   const combinedNav = [
     ...(primaryNav?.sections ?? []),
     ...(secondaryNav?.sections ?? []),
   ];
 
   return (
-    <div className="relative">
+    <div className={`relative ${bannerLength > 0 ? "pt-4" : ""}`}>
       <Container>
         <div className="flex w-full flex-wrap justify-between gap-4 py-8 xl:pb-0">
           <div className="w-30 mix-blend-multiply sm:w-30 xl:w-40">

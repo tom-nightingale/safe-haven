@@ -9,6 +9,7 @@ export enum TypeVariant {
   H6 = "text-h6",
   Body1 = "text-body-1",
   Body2 = "text-body-2",
+  Banner = "text-banner",
   Button1 = "text-button-1",
   Button2 = "text-button-2",
 }

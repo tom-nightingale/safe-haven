@@ -27,6 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
+    bannerLength: 0,
     primaryNav: primaryNav,
     secondaryNav: secondaryNav,
   },
